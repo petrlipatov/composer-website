@@ -2,7 +2,10 @@
 
 import "./App.css";
 
+const test = "test";
+
 function App() {
+  console.log(test);
   return <div>Lizik popochka</div>;
 }
 
