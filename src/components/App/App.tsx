@@ -1,12 +1,13 @@
-// import { useState } from "react";
-
+import { Routes, Route } from "react-router-dom";
 import "./App.css";
-
-const test = "test";
+import Home from "../../pages/Home";
 
 function App() {
-  console.log(test);
-  return <div>Lizik popochka</div>;
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+    </Routes>
+  );
 }
 
 export default App;
