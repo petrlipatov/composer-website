@@ -2,14 +2,14 @@
   box-sizing: border-box;
 }
 
-:root {
+body {
+  margin: 0;
   height: 100%;
+  min-width: 320px;
+  font-family: "Poppins", sans-serif;
+  background-color: #d6d6d6;
 }
 
-body {
-  position: relative;
-  height: 100vh;
-  min-width: 320px;
-  margin: 0;
-  background-color: green;
+#root {
+  height: 100%;
 }

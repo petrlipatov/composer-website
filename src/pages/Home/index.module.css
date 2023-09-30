@@ -1,14 +1,33 @@
 .page {
-  height: 100vh;
-  width: 100%;
-  background-color: aqua;
-  border: 3px solid red;
+  max-width: 428px;
+  background-color: #d6d6d6;
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
+  justify-content: space-between;
 }
 
-.caption {
-  font-size: 50px;
+.titleContainer {
+  margin-top: 200px;
+}
+
+.name {
+  margin: 0;
+  font-size: 25px;
+  color: #424144;
+  text-align: center;
+  font-weight: 600;
+}
+
+.title {
+  margin: 0;
+  font-size: 20px;
+  color: #be70fc;
+  text-align: center;
+  line-height: 20px;
+  font-weight: 600;
+}
+
+.image {
+  width: 100%;
+  height: auto;
 }
