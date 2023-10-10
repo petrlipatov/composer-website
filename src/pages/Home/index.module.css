@@ -1,33 +1,70 @@
 .page {
+  height: 100%;
   max-width: 428px;
   background-color: #d6d6d6;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  position: relative;
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
 }
 
-.titleContainer {
-  margin-top: 200px;
+.section {
+  height: 100vh;
+  scroll-snap-align: start;
 }
+
+/* .section1 {
+  background-color: blue;
+}
+
+.section2 {
+  background-color: orange;
+}
+
+.section3 {
+  background-color: green;
+} */
 
 .name {
-  margin: 0;
-  font-size: 25px;
-  color: #424144;
-  text-align: center;
-  font-weight: 600;
+  position: fixed;
+  left: 50%;
+  top: 220px;
+  z-index: 2;
 }
 
 .title {
-  margin: 0;
-  font-size: 20px;
-  color: #be70fc;
-  text-align: center;
-  line-height: 20px;
-  font-weight: 600;
+  position: fixed;
+  left: 50%;
+  top: 250px;
+  z-index: 2;
+}
+
+.playContainer {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  left: 50%;
+  top: 220px;
+}
+
+.showreel {
+  width: 100%;
+  will-change: transform;
+}
+
+.play {
+  /* opacity: 0; */
+  height: 60px;
+  will-change: transform;
 }
 
 .image {
+  position: fixed;
+  bottom: 0;
   width: 100%;
   height: auto;
+}
+
+.arrowBottom {
+  position: fixed;
+  top: 10%;
 }
