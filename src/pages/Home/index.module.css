@@ -52,7 +52,6 @@
 }
 
 .play {
-  /* opacity: 0; */
   height: 60px;
   will-change: transform;
 }
@@ -60,11 +59,18 @@
 .image {
   position: fixed;
   bottom: 0;
-  width: 100%;
+  max-width: 428px;
   height: auto;
 }
 
+.arrowTop {
+  height: 50px;
+  position: fixed;
+  top: 10%;
+}
+
 .arrowBottom {
+  height: 50px;
   position: fixed;
   top: 10%;
 }

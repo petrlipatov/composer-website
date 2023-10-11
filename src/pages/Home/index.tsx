@@ -1,9 +1,9 @@
 import styles from "./index.module.css";
-import { useRef, RefObject, useState, useEffect } from "react";
+import { useRef, RefObject } from "react";
 
 import imageSrc from "../../assets/images/logo.png";
 import nameSrc from "../../assets/images/name.svg";
-import arrowSrc from "../../assets/images/arrow.svg";
+import arrowSrc from "../../assets/images/play-icon.svg";
 import titleSrc from "../../assets/images/title.svg";
 import playSrc from "../../assets/images/play-icon.svg";
 import showreelSrc from "../../assets/images/showreel.svg";
@@ -13,9 +13,8 @@ import { Observer } from "gsap/Observer";
 import { useLayoutEffect } from "react";
 
 export default function Home() {
-  const [sectionHeight, setSectionHeight] = useState(window.innerHeight);
   const tlMain = gsap.timeline();
-  const tlArrows = gsap.timeline({ repeat: -1, easy: "power4.out" });
+  const tlArrows = gsap.timeline({ repeat: -1 });
   gsap.registerPlugin(Observer);
 
   const nameRef: RefObject<HTMLImageElement> = useRef(null),
@@ -24,20 +23,11 @@ export default function Home() {
     playRef: RefObject<HTMLImageElement> = useRef(null),
     showreelRef: RefObject<HTMLImageElement> = useRef(null),
     showreelContainerRef: RefObject<HTMLImageElement> = useRef(null),
-    arrowRef: RefObject<HTMLImageElement> = useRef(null);
-
-  useEffect(function calcViewportSize() {
-    const handleResize = () => {
-      setSectionHeight(window.innerHeight);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+    arrowBottomRef: RefObject<HTMLImageElement> = useRef(null),
+    arrowTopRef: RefObject<HTMLImageElement> = useRef(null);
 
   useLayoutEffect(() => {
-    gsap.set(arrowRef.current, {
+    gsap.set(arrowTopRef.current, {
       xPercent: -50,
       rotate: 90,
       left: "50%",
@@ -45,7 +35,51 @@ export default function Home() {
       opacity: 0,
     });
 
-    tlArrows.to(arrowRef.current, { y: "40px", opacity: 1, duration: 0.7 });
+    gsap.set(arrowBottomRef.current, {
+      xPercent: -50,
+      rotate: 90,
+      left: "50%",
+      top: "320px",
+      opacity: 0,
+    });
+
+    tlArrows.to(
+      arrowTopRef.current,
+      {
+        opacity: 1,
+        duration: 0.5,
+      },
+      2
+    );
+
+    tlArrows.to(
+      arrowTopRef.current,
+      {
+        opacity: 0,
+        ease: "none",
+        duration: 0,
+      },
+      2.7
+    );
+
+    tlArrows.to(
+      arrowBottomRef.current,
+      {
+        opacity: 0.5,
+        ease: "none",
+        duration: 0,
+      },
+      2.7
+    );
+
+    tlArrows.to(
+      arrowBottomRef.current,
+      {
+        opacity: 0,
+        duration: 0.5,
+      },
+      3
+    );
   }, []);
 
   useLayoutEffect(function mainAnimation() {
@@ -112,21 +146,13 @@ export default function Home() {
   }, []);
 
   return (
-    <div className={styles.page} style={{ height: `${sectionHeight}px` }}>
+    <div className={styles.page}>
       <div className={cn(styles.section, styles.section1)}></div>
       <div className={cn(styles.section, styles.section2)}></div>
       <div className={cn(styles.section, styles.section3)}></div>
 
       <img className={styles.name} src={nameSrc} alt="name" ref={nameRef} />
-      <img
-        className={styles.title}
-        src={titleSrc}
-        alt="title"
-        ref={titleRef}
-        onClick={() => {
-          tlMain.reverse();
-        }}
-      />
+      <img className={styles.title} src={titleSrc} alt="title" ref={titleRef} />
       <div className={styles.playContainer} ref={showreelContainerRef}>
         <img
           className={styles.showreel}
@@ -141,10 +167,18 @@ export default function Home() {
           ref={playRef}
         />
       </div>
+
+      <img
+        src={arrowSrc}
+        className={styles.arrowTop}
+        ref={arrowTopRef}
+        alt=""
+      />
+
       <img
         src={arrowSrc}
         className={styles.arrowBottom}
-        ref={arrowRef}
+        ref={arrowBottomRef}
         alt=""
       />
       {/* <iframe
@@ -163,9 +197,6 @@ export default function Home() {
         alt="logo"
         ref={logoRef}
         decoding="async"
-        onClick={() => {
-          tlMain.play();
-        }}
       />
     </div>
   );
