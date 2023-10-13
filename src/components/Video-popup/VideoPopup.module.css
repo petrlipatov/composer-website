@@ -1,0 +1,22 @@
+.container {
+  /* z-index: 2; */
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: #d6d6d6;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.closeIcon {
+  height: 70px;
+  width: 70px;
+  right: 0;
+  top: 20%;
+  border: none;
+  background-color: transparent;
+  align-self: flex-end;
+}
