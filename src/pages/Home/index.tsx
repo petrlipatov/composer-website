@@ -87,7 +87,6 @@ export default function Home() {
 
   useLayoutEffect(function startMainAnimation() {
     gsap.set([nameRef.current, titleRef.current], { xPercent: -50 });
-
     gsap.set(linksRef.current, {
       position: "absolute",
       xPercent: -50,
@@ -95,7 +94,6 @@ export default function Home() {
       left: "50%",
       opacity: 0,
     });
-
     gsap.set(showreelContainerRef.current, {
       xPercent: -50,
       y: 350,
@@ -205,16 +203,10 @@ export default function Home() {
           <img
             className={styles.featured}
             src={featuredSrc}
-            // ref={piecesRef}
             alt="featured-link"
           />
 
-          <img
-            className={styles.work}
-            src={workSrc}
-            // ref={piecesRef}
-            alt="work-link"
-          />
+          <img className={styles.work} src={workSrc} alt="work-link" />
         </div>
       </div>
 
@@ -230,6 +222,7 @@ export default function Home() {
         className={styles.arrowBottom}
         ref={arrowBottomRef}
         alt="arrow-icon"
+        decoding="async"
       />
 
       <img className={styles.image} src={imageSrc} alt="logo" ref={logoRef} />
