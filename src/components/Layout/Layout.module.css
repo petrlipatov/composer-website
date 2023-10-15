@@ -1,5 +1,5 @@
 .layoutContainer {
   max-width: 428px;
-  background-color: #d6d6d6;
   position: relative;
+  opacity: 0;
 }

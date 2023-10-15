@@ -2,6 +2,7 @@ import { createPortal } from "react-dom";
 import styles from "./VideoPopup.module.css";
 import closeIconSrc from "./../../assets/images/close-icon.svg";
 import { Dispatch, SetStateAction } from "react";
+import YouTube from "react-youtube";
 
 type VideoPopupProps = {
   closeFunc: Dispatch<SetStateAction<boolean>>;
@@ -13,6 +14,16 @@ function VideoPopup({ closeFunc }: VideoPopupProps) {
   const handlePopupTouch = (e: React.TouchEvent<HTMLDivElement>) => {
     e.stopPropagation();
     closeFunc(false);
+  };
+
+  const videoOptions = {
+    width: "100%",
+    height: "260",
+    playerVars: {
+      autoplay: 1,
+      rel: 0,
+      showinfo: 1,
+    },
   };
 
   return createPortal(
@@ -29,15 +40,9 @@ function VideoPopup({ closeFunc }: VideoPopupProps) {
           closeFunc(false);
         }}
       />
-      <iframe
-        id="player"
-        title="All In One Composer Showreel - Liza Tikhonova / Film Music, Experimental, Electronic, Neoclassical"
-        height={280}
-        src="https://www.youtube.com/embed/u0dBG0AL3Cs?enablejsapi=1&origin=https://example.com"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowFullScreen={true}
-        style={{ border: "none" }}
-      ></iframe>
+      <div className={styles.playerContainer}>
+        <YouTube videoId="u0dBG0AL3Cs" opts={videoOptions} />
+      </div>
     </div>,
     rootContainer
   );

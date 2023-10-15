@@ -11,6 +11,10 @@
   justify-content: center;
 }
 
+.playerContainer {
+  margin-bottom: 120px;
+}
+
 .closeIcon {
   height: 70px;
   width: 70px;
