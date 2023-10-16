@@ -1,5 +1,5 @@
 import styles from "./index.module.css";
-import { useRef, RefObject, useState } from "react";
+import { useRef, RefObject, useState, useEffect } from "react";
 import imageSrc from "../../assets/images/logo.png";
 import nameSrc from "../../assets/images/name.svg";
 import arrowSrc from "../../assets/images/play-icon.svg";
@@ -16,175 +16,192 @@ import VideoPopup from "../../components/Video-popup/VideoPopup";
 
 export default function Home() {
   const [isPopupOpen, setPopupState] = useState(false);
+  const pageRef: RefObject<HTMLDivElement> = useRef(null);
 
-  const tlMain = gsap.timeline();
-  const tlArrows = gsap.timeline({ repeat: -1 });
+  const tlSections = useRef(gsap.timeline({ paused: true }));
+  const tlArrows = useRef(gsap.timeline({ repeat: -1 }));
+
   gsap.registerPlugin(Observer);
 
-  const nameRef: RefObject<HTMLImageElement> = useRef(null),
-    titleRef: RefObject<HTMLImageElement> = useRef(null),
-    logoRef: RefObject<HTMLImageElement> = useRef(null),
-    showreelContainerRef: RefObject<HTMLDivElement> = useRef(null),
-    arrowBottomRef: RefObject<HTMLImageElement> = useRef(null),
-    arrowTopRef: RefObject<HTMLImageElement> = useRef(null),
-    linksRef: RefObject<HTMLDivElement> = useRef(null);
-
-  useLayoutEffect(function startArrowsAnimation() {
-    gsap.set(arrowTopRef.current, {
-      xPercent: -50,
-      rotate: 90,
-      left: "50%",
-      top: "300px",
-      opacity: 0,
-    });
-
-    gsap.set(arrowBottomRef.current, {
-      xPercent: -50,
-      rotate: 90,
-      left: "50%",
-      top: "320px",
-      opacity: 0,
-    });
-
-    tlArrows.to(
-      arrowTopRef.current,
-      {
-        opacity: 1,
-        duration: 0.3,
-      },
-      2
-    );
-
-    tlArrows.to(
-      arrowTopRef.current,
-      {
+  useLayoutEffect(function loopArrowsAnimation() {
+    const ctx = gsap.context(() => {
+      gsap.set("[data-animate='arrow-top']", {
+        xPercent: -50,
+        rotate: 90,
+        left: "50%",
+        top: "300px",
         opacity: 0,
-        ease: "none",
-        duration: 0,
-      },
-      2.3
-    );
+      });
 
-    tlArrows.to(
-      arrowBottomRef.current,
-      {
-        opacity: 0.5,
-        ease: "none",
-        duration: 0,
-      },
-      2.3
-    );
-
-    tlArrows.to(
-      arrowBottomRef.current,
-      {
+      gsap.set("[data-animate='arrow-bottom']", {
+        xPercent: -50,
+        rotate: 90,
+        left: "50%",
+        top: "320px",
         opacity: 0,
-        duration: 0.5,
-      },
-      2.8
-    );
+      });
+
+      tlArrows.current.to(
+        "[data-animate='arrow-top']",
+        {
+          opacity: 1,
+          duration: 0.3,
+        },
+        2
+      );
+
+      tlArrows.current.to(
+        "[data-animate='arrow-top']",
+        {
+          opacity: 0,
+          ease: "none",
+          duration: 0,
+        },
+        2.3
+      );
+
+      tlArrows.current.to(
+        "[data-animate='arrow-bottom']",
+        {
+          opacity: 0.5,
+          ease: "none",
+          duration: 0,
+        },
+        2.3
+      );
+
+      tlArrows.current.to(
+        "[data-animate='arrow-bottom']",
+        {
+          opacity: 0,
+          duration: 0.5,
+        },
+        2.8
+      );
+      return () => ctx.revert();
+    }, pageRef);
   }, []);
 
-  useLayoutEffect(function startMainAnimation() {
-    gsap.set([nameRef.current, titleRef.current], { xPercent: -50 });
-    gsap.set(linksRef.current, {
-      position: "absolute",
-      xPercent: -50,
-      top: "75%",
-      left: "50%",
-      opacity: 0,
-    });
-    gsap.set(showreelContainerRef.current, {
-      xPercent: -50,
-      y: 350,
-      opacity: 0,
-      duration: 0.5,
-    });
+  useLayoutEffect(function setSectionsTransitionsAnimations() {
+    const ctx = gsap.context(() => {
+      gsap.set(["[data-animate='name']", "[data-animate='title']"], {
+        xPercent: -50,
+      });
 
-    tlMain.paused(true);
-    tlMain.to(
-      nameRef.current,
-      {
-        xPercent: 0,
-        left: "5%",
-        top: "30px",
-        duration: 1,
-        ease: "power2.inOut",
-      },
-      0
-    );
-    tlMain.to(
-      titleRef.current,
-      {
-        xPercent: 0,
-        left: "5%",
-        top: "60px",
-        duration: 1,
-        ease: "power2.inOut",
-      },
-      0
-    );
-    tlMain.to(
-      showreelContainerRef.current,
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: "power3.inOut",
-      },
-      0
-    );
-    tlMain.addPause();
-    tlMain.to(
-      showreelContainerRef.current,
-      {
+      gsap.set("[data-animate='showreel']", {
+        xPercent: -50,
+        y: 350,
         opacity: 0,
-        y: -90,
-        duration: 1,
-        ease: "power3.inOut",
-      },
-      1
-    );
-    tlMain.to(
-      linksRef.current,
-      {
-        opacity: 1,
-        top: "30%",
-        duration: 1,
-        ease: "power3.inOut",
-      },
-      1
-    );
+        duration: 0.5,
+      });
 
+      gsap.set("[data-animate='links']", {
+        position: "absolute",
+        xPercent: -50,
+        top: "75%",
+        left: "50%",
+        opacity: 0,
+      });
+
+      // tlSections.current.paused(true);
+
+      tlSections.current.to(
+        "[data-animate='name']",
+        {
+          xPercent: 0,
+          left: "5%",
+          top: "30px",
+          duration: 1,
+          ease: "power2.inOut",
+        },
+        0
+      );
+      tlSections.current.to(
+        "[data-animate='title']",
+        {
+          xPercent: 0,
+          left: "5%",
+          top: "60px",
+          duration: 1,
+          ease: "power2.inOut",
+        },
+        0
+      );
+      tlSections.current.to(
+        "[data-animate='showreel']",
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: "power3.inOut",
+        },
+        0
+      );
+      tlSections.current.addPause();
+      tlSections.current.to(
+        "[data-animate='showreel']",
+        {
+          opacity: 0,
+          y: -90,
+          duration: 1,
+          ease: "power3.inOut",
+        },
+        1
+      );
+      tlSections.current.to(
+        "[data-animate='links']",
+        {
+          opacity: 1,
+          top: "30%",
+          duration: 1,
+          ease: "power3.inOut",
+        },
+        1
+      );
+    });
+    return () => ctx.revert();
+  }, []);
+
+  useEffect(function setControlersForAnimations() {
     Observer.create({
       type: "touch, scroll",
       onChange: () => {
-        tlArrows.revert();
+        tlArrows.current.revert();
       },
       onDown: () => {
-        tlMain.reverse();
+        tlSections.current.reverse();
       },
       onUp: () => {
-        tlMain.play();
+        tlSections.current.play();
       },
     });
   }, []);
 
   return (
-    <div className={styles.page}>
+    <div className={styles.page} ref={pageRef}>
       <div className={styles.section}></div>
       <div className={styles.section}></div>
       <div className={styles.section}></div>
 
-      <img className={styles.name} src={nameSrc} alt="name" ref={nameRef} />
-      <img className={styles.title} src={titleSrc} alt="title" ref={titleRef} />
+      <img
+        className={styles.name}
+        src={nameSrc}
+        alt="name"
+        data-animate="name"
+      />
+      <img
+        className={styles.title}
+        src={titleSrc}
+        alt="title"
+        data-animate="title"
+      />
 
       <div
         className={styles.playContainer}
+        data-animate="showreel"
         onClick={() => {
           setPopupState(true);
         }}
-        ref={showreelContainerRef}
       >
         <img
           className={styles.showreel}
@@ -194,7 +211,7 @@ export default function Home() {
         <img className={styles.play} src={playSrc} alt="play-icon" />
       </div>
 
-      <div className={styles.linksBlock} ref={linksRef}>
+      <div className={styles.linksBlock} data-animate="links">
         <img className={styles.pieces} src={piecesSrc} alt="pieces-link" />
 
         <div className={styles.divider} />
@@ -213,19 +230,18 @@ export default function Home() {
       <img
         src={arrowSrc}
         className={styles.arrowTop}
-        ref={arrowTopRef}
         alt="arrow-icon"
+        data-animate="arrow-top"
       />
 
       <img
         src={arrowSrc}
         className={styles.arrowBottom}
-        ref={arrowBottomRef}
         alt="arrow-icon"
-        decoding="async"
+        data-animate="arrow-bottom"
       />
 
-      <img className={styles.image} src={imageSrc} alt="logo" ref={logoRef} />
+      <img className={styles.image} src={imageSrc} alt="logo" decoding="sync" />
 
       {isPopupOpen && <VideoPopup closeFunc={setPopupState} />}
     </div>

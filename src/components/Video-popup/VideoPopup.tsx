@@ -20,7 +20,7 @@ function VideoPopup({ closeFunc }: VideoPopupProps) {
     width: "100%",
     height: "260",
     playerVars: {
-      autoplay: 1,
+      // autoplay: 1,
       rel: 0,
       showinfo: 1,
     },
