@@ -1,15 +1,14 @@
 .container {
-  /* z-index: 2; */
   position: absolute;
   left: 0;
   right: 0;
   top: 0;
   bottom: 0;
   background-color: #d6d6d6;
-  display: flex;
+  display: none;
   flex-direction: column;
   justify-content: center;
-  /* visibility: hidden; */
+  will-change: opacity;
 }
 
 .playerContainer {

@@ -5,6 +5,7 @@ import { LegacyRef, forwardRef } from "react";
 import YouTube from "react-youtube";
 
 type VideoPopupProps = {
+  // stateSetter: Dispatch<SetStateAction<boolean>>;
   tl: React.MutableRefObject<gsap.core.Timeline>;
 };
 
@@ -48,7 +49,7 @@ const VideoPopup = forwardRef(
           }}
         />
         <div className={styles.playerContainer}>
-          <YouTube videoId="u0dBG0AL3Cs" opts={videoOptions} />
+          <YouTube videoId="u0dBG0AL3Cs" opts={videoOptions} loading="lazy" />
         </div>
       </div>,
       rootContainer

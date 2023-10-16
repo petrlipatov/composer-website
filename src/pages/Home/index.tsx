@@ -1,5 +1,5 @@
 import styles from "./index.module.css";
-import { useRef, RefObject, useEffect } from "react";
+import { useRef, RefObject, useEffect, useState } from "react";
 import imageSrc from "../../assets/images/logo.png";
 import nameSrc from "../../assets/images/name.svg";
 import arrowSrc from "../../assets/images/play-icon.svg";
@@ -15,7 +15,7 @@ import { useLayoutEffect } from "react";
 import VideoPopup from "../../components/Video-popup/VideoPopup";
 
 export default function Home() {
-  // const [isPopupOpen, setPopupState] = useState(false);
+  const [isPopupOpen, setPopupState] = useState(false);
   const pageRef: RefObject<HTMLDivElement> = useRef(null);
   const popupRef: RefObject<HTMLDivElement> = useRef(null);
 
@@ -171,6 +171,7 @@ export default function Home() {
       });
 
       tlPopup.current.to(popupRef.current, {
+        display: "flex",
         autoAlpha: 1,
       });
     }, pageRef);
@@ -193,8 +194,13 @@ export default function Home() {
   }, []);
 
   function openPopup() {
+    setPopupState(true);
     tlPopup.current.play();
   }
+
+  useEffect(() => {
+    console.log(isPopupOpen);
+  }, [isPopupOpen]);
 
   return (
     <div className={styles.page} ref={pageRef}>
@@ -258,8 +264,13 @@ export default function Home() {
         data-animate="arrow-bottom"
       />
 
-      <img className={styles.image} src={imageSrc} alt="logo" decoding="sync" />
-
+      <img
+        rel="preload"
+        className={styles.image}
+        src={imageSrc}
+        alt="logo"
+        decoding="sync"
+      />
       <VideoPopup tl={tlPopup} ref={popupRef} />
     </div>
   );
