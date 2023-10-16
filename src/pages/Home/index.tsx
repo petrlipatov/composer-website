@@ -1,5 +1,5 @@
 import styles from "./index.module.css";
-import { useRef, RefObject, useState, useEffect } from "react";
+import { useRef, RefObject, useEffect } from "react";
 import imageSrc from "../../assets/images/logo.png";
 import nameSrc from "../../assets/images/name.svg";
 import arrowSrc from "../../assets/images/play-icon.svg";
@@ -15,11 +15,13 @@ import { useLayoutEffect } from "react";
 import VideoPopup from "../../components/Video-popup/VideoPopup";
 
 export default function Home() {
-  const [isPopupOpen, setPopupState] = useState(false);
+  // const [isPopupOpen, setPopupState] = useState(false);
   const pageRef: RefObject<HTMLDivElement> = useRef(null);
+  const popupRef: RefObject<HTMLDivElement> = useRef(null);
 
   const tlSections = useRef(gsap.timeline({ paused: true }));
   const tlArrows = useRef(gsap.timeline({ repeat: -1 }));
+  const tlPopup = useRef(gsap.timeline({ paused: true }));
 
   gsap.registerPlugin(Observer);
 
@@ -78,8 +80,8 @@ export default function Home() {
         },
         2.8
       );
-      return () => ctx.revert();
     }, pageRef);
+    return () => ctx.revert();
   }, []);
 
   useLayoutEffect(function setSectionsTransitionsAnimations() {
@@ -90,6 +92,8 @@ export default function Home() {
 
       gsap.set("[data-animate='showreel']", {
         xPercent: -50,
+        left: "50%",
+        top: "220px",
         y: 350,
         opacity: 0,
         duration: 0.5,
@@ -102,8 +106,6 @@ export default function Home() {
         left: "50%",
         opacity: 0,
       });
-
-      // tlSections.current.paused(true);
 
       tlSections.current.to(
         "[data-animate='name']",
@@ -158,11 +160,24 @@ export default function Home() {
         },
         1
       );
-    });
+    }, pageRef);
     return () => ctx.revert();
   }, []);
 
-  useEffect(function setControlersForAnimations() {
+  useLayoutEffect(function popupAnimations() {
+    const ctx = gsap.context(() => {
+      gsap.set(popupRef.current, {
+        autoAlpha: 0,
+      });
+
+      tlPopup.current.to(popupRef.current, {
+        autoAlpha: 1,
+      });
+    }, pageRef);
+    return () => ctx.revert();
+  }, []);
+
+  useEffect(function setListenersForAnimations() {
     Observer.create({
       type: "touch, scroll",
       onChange: () => {
@@ -176,6 +191,10 @@ export default function Home() {
       },
     });
   }, []);
+
+  function openPopup() {
+    tlPopup.current.play();
+  }
 
   return (
     <div className={styles.page} ref={pageRef}>
@@ -199,9 +218,7 @@ export default function Home() {
       <div
         className={styles.playContainer}
         data-animate="showreel"
-        onClick={() => {
-          setPopupState(true);
-        }}
+        onClick={openPopup}
       >
         <img
           className={styles.showreel}
@@ -243,7 +260,7 @@ export default function Home() {
 
       <img className={styles.image} src={imageSrc} alt="logo" decoding="sync" />
 
-      {isPopupOpen && <VideoPopup closeFunc={setPopupState} />}
+      <VideoPopup tl={tlPopup} ref={popupRef} />
     </div>
   );
 }
