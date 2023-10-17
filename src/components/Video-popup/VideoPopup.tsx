@@ -5,14 +5,13 @@ import { LegacyRef, forwardRef } from "react";
 import YouTube from "react-youtube";
 
 type VideoPopupProps = {
-  // stateSetter: Dispatch<SetStateAction<boolean>>;
   tl: React.MutableRefObject<gsap.core.Timeline>;
+  loadIframe: boolean;
 };
 
 const VideoPopup = forwardRef(
   (
-    { tl }: VideoPopupProps,
-
+    { tl, loadIframe = false }: VideoPopupProps,
     ref: LegacyRef<HTMLDivElement>
   ) => {
     const rootContainer = document.getElementById("modal");
@@ -26,7 +25,6 @@ const VideoPopup = forwardRef(
       width: "100%",
       height: "260",
       playerVars: {
-        // autoplay: 1,
         rel: 0,
         showinfo: 1,
       },
@@ -49,7 +47,9 @@ const VideoPopup = forwardRef(
           }}
         />
         <div className={styles.playerContainer}>
-          <YouTube videoId="u0dBG0AL3Cs" opts={videoOptions} loading="lazy" />
+          {loadIframe && (
+            <YouTube videoId="u0dBG0AL3Cs" opts={videoOptions} loading="lazy" />
+          )}
         </div>
       </div>,
       rootContainer
