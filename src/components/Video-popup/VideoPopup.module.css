@@ -25,3 +25,9 @@
   background-color: transparent;
   align-self: flex-end;
 }
+
+.emoji {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

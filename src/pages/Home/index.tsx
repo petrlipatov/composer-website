@@ -15,7 +15,7 @@ import { useLayoutEffect } from "react";
 import VideoPopup from "../../components/Video-popup/VideoPopup";
 
 export default function Home() {
-  const [loadIframe, setLoadIframe] = useState(false);
+  const [iframeUpload, setIframeUpload] = useState(false);
 
   const pageRef: RefObject<HTMLDivElement> = useRef(null);
   const popupRef: RefObject<HTMLDivElement> = useRef(null);
@@ -195,7 +195,7 @@ export default function Home() {
   }, []);
 
   function openPopup() {
-    setLoadIframe(true);
+    setIframeUpload(true);
     tlPopup.current.play();
   }
 
@@ -268,7 +268,7 @@ export default function Home() {
         alt="logo"
         decoding="sync"
       />
-      <VideoPopup tl={tlPopup} ref={popupRef} loadIframe={loadIframe} />
+      <VideoPopup tl={tlPopup} ref={popupRef} loadIframe={iframeUpload} />
     </div>
   );
 }
