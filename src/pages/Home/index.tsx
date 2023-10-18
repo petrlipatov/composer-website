@@ -1,5 +1,5 @@
 import styles from "./index.module.css";
-import { useRef, RefObject, useEffect, useState } from "react";
+import React, { useRef, RefObject, useEffect, useState, Suspense } from "react";
 import imageSrc from "../../assets/images/logo.png";
 import nameSrc from "../../assets/images/name.svg";
 import arrowSrc from "../../assets/images/play-icon.svg";
@@ -12,7 +12,12 @@ import workSrc from "../../assets/images/work-f20w6.svg";
 import { gsap } from "gsap";
 import { Observer } from "gsap/Observer";
 import { useLayoutEffect } from "react";
-import VideoPopup from "../../components/Video-popup/VideoPopup";
+import Modal from "../../components/Modal/Modal";
+import Preloader from "../../components/Preloader/Preloader";
+
+const YouTubePlayer = React.lazy(
+  () => import("../../components/Youtube-player/YoutubePlayer")
+);
 
 export default function Home() {
   const [isPopupOpened, setPopupState] = useState(false);
@@ -180,6 +185,11 @@ export default function Home() {
     setPopupState(true);
   }
 
+  const videoOptions = {
+    width: "100%",
+    height: "260",
+  };
+
   return (
     <div className={styles.page} ref={pageRef}>
       <div className={styles.section}></div>
@@ -249,7 +259,13 @@ export default function Home() {
         alt="logo"
         decoding="sync"
       />
-      {isPopupOpened && <VideoPopup setPopupState={setPopupState} />}
+      {isPopupOpened && (
+        <Modal setPopupState={setPopupState}>
+          <Suspense fallback={<Preloader content={"🐥"} />}>
+            <YouTubePlayer videoId="u0dBG0AL3Cs" options={videoOptions} />
+          </Suspense>
+        </Modal>
+      )}
     </div>
   );
 }

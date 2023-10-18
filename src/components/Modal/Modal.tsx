@@ -1,26 +1,22 @@
 import { createPortal } from "react-dom";
-import styles from "./VideoPopup.module.css";
+import styles from "./Modal.module.css";
 import closeIconSrc from "./../../assets/images/close-icon.svg";
 import React, {
-  Suspense,
   useLayoutEffect,
   useRef,
   RefObject,
   Dispatch,
   SetStateAction,
+  ReactNode,
 } from "react";
 import { gsap } from "gsap";
-import Preloader from "../Preloader/Preloader";
 
-const YouTubePlayer = React.lazy(
-  () => import("../Youtube-player/YoutubePlayer")
-);
-
-type VideoPopupProps = {
+type ModalProps = {
   setPopupState: Dispatch<SetStateAction<boolean>>;
+  children: ReactNode;
 };
 
-function VideoPopup({ setPopupState }: VideoPopupProps) {
+function Modal({ setPopupState, children }: ModalProps) {
   const rootContainer = document.getElementById("modal");
   const tlPopup = useRef(gsap.timeline());
   const popupRef: RefObject<HTMLDivElement> = useRef(null);
@@ -45,11 +41,6 @@ function VideoPopup({ setPopupState }: VideoPopupProps) {
     setPopupState(false);
   };
 
-  const videoOptions = {
-    width: "100%",
-    height: "260",
-  };
-
   return createPortal(
     <div
       className={styles.container}
@@ -66,14 +57,10 @@ function VideoPopup({ setPopupState }: VideoPopupProps) {
           tlPopup.current.reverse();
         }}
       />
-      <div className={styles.playerContainer}>
-        <Suspense fallback={<Preloader content={"🐥"} />}>
-          <YouTubePlayer videoId="u0dBG0AL3Cs" options={videoOptions} />
-        </Suspense>
-      </div>
+      {children}
     </div>,
     rootContainer
   );
 }
 
-export default VideoPopup;
+export default Modal;

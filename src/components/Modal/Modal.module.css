@@ -7,12 +7,8 @@
   will-change: opacity;
 }
 
-.playerContainer {
-  margin-bottom: 120px;
-  height: 260px;
-}
-
 .closeIcon {
+  position: absolute;
   height: 70px;
   width: 70px;
   right: 0;
