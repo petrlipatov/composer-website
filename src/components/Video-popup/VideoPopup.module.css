@@ -1,9 +1,6 @@
 .container {
   position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
+  inset: 0;
   background-color: #d6d6d6;
   flex-direction: column;
   justify-content: center;
@@ -23,10 +20,4 @@
   border: none;
   background-color: transparent;
   align-self: flex-end;
-}
-
-.emoji {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }

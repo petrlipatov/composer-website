@@ -10,6 +10,7 @@ import React, {
   SetStateAction,
 } from "react";
 import { gsap } from "gsap";
+import Preloader from "../Preloader/Preloader";
 
 const YouTubePlayer = React.lazy(
   () => import("../Youtube-player/YoutubePlayer")
@@ -66,13 +67,7 @@ function VideoPopup({ setPopupState }: VideoPopupProps) {
         }}
       />
       <div className={styles.playerContainer}>
-        <Suspense
-          fallback={
-            <h1 className={styles.emoji}>
-              <p>🐥</p>
-            </h1>
-          }
-        >
+        <Suspense fallback={<Preloader content={"🐥"} />}>
           <YouTubePlayer videoId="u0dBG0AL3Cs" options={videoOptions} />
         </Suspense>
       </div>
