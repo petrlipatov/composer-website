@@ -14,6 +14,7 @@ import { Observer } from "gsap/Observer";
 import { useLayoutEffect } from "react";
 import Modal from "../../components/Modal/Modal";
 import Preloader from "../../components/Preloader/Preloader";
+import { Link } from "react-router-dom";
 
 const YouTubePlayer = React.lazy(
   () => import("../../components/Youtube-player/YoutubePlayer")
@@ -222,7 +223,7 @@ export default function Home() {
         <img className={styles.play} src={playSrc} alt="play-icon" />
       </div>
 
-      <div className={styles.linksBlock} data-animate="links">
+      <Link to="/portfolio" className={styles.linksBlock} data-animate="links">
         <img className={styles.pieces} src={piecesSrc} alt="pieces-link" />
 
         <div className={styles.divider} />
@@ -236,7 +237,7 @@ export default function Home() {
 
           <img className={styles.work} src={workSrc} alt="work-link" />
         </div>
-      </div>
+      </Link>
 
       <img
         src={arrowSrc}
