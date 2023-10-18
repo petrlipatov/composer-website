@@ -15,15 +15,11 @@ import { useLayoutEffect } from "react";
 import VideoPopup from "../../components/Video-popup/VideoPopup";
 
 export default function Home() {
-  const [iframeUpload, setIframeUpload] = useState(false);
+  const [isPopupOpened, setPopupState] = useState(false);
 
   const pageRef: RefObject<HTMLDivElement> = useRef(null);
-  const popupRef: RefObject<HTMLDivElement> = useRef(null);
-
   const tlSections = useRef(gsap.timeline({ paused: true }));
   const tlArrows = useRef(gsap.timeline({ repeat: -1 }));
-  const tlPopup = useRef(gsap.timeline({ paused: true }));
-
   gsap.registerPlugin(Observer);
 
   useLayoutEffect(function loopArrowsAnimation() {
@@ -165,20 +161,6 @@ export default function Home() {
     return () => ctx.revert();
   }, []);
 
-  useLayoutEffect(function popupAnimations() {
-    const ctx = gsap.context(() => {
-      gsap.set(popupRef.current, {
-        autoAlpha: 0,
-      });
-
-      tlPopup.current.to(popupRef.current, {
-        display: "flex",
-        autoAlpha: 1,
-      });
-    }, pageRef);
-    return () => ctx.revert();
-  }, []);
-
   useEffect(function setListenersForAnimations() {
     Observer.create({
       type: "touch, scroll",
@@ -195,8 +177,7 @@ export default function Home() {
   }, []);
 
   function openPopup() {
-    setIframeUpload(true);
-    tlPopup.current.play();
+    setPopupState(true);
   }
 
   return (
@@ -268,7 +249,7 @@ export default function Home() {
         alt="logo"
         decoding="sync"
       />
-      <VideoPopup tl={tlPopup} ref={popupRef} loadIframe={iframeUpload} />
+      {isPopupOpened && <VideoPopup setPopupState={setPopupState} />}
     </div>
   );
 }

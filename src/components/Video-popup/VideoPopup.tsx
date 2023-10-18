@@ -1,74 +1,84 @@
 import { createPortal } from "react-dom";
 import styles from "./VideoPopup.module.css";
 import closeIconSrc from "./../../assets/images/close-icon.svg";
-import React, { LegacyRef, forwardRef, Suspense } from "react";
-// import YouTubePlayer from "../Youtube-player/YoutubePlayer";
+import React, {
+  Suspense,
+  useLayoutEffect,
+  useRef,
+  RefObject,
+  Dispatch,
+  SetStateAction,
+} from "react";
+import { gsap } from "gsap";
 
 const YouTubePlayer = React.lazy(
   () => import("../Youtube-player/YoutubePlayer")
 );
 
 type VideoPopupProps = {
-  tl: React.MutableRefObject<gsap.core.Timeline>;
-  loadIframe: boolean;
+  setPopupState: Dispatch<SetStateAction<boolean>>;
 };
 
-const VideoPopup = forwardRef(
-  (
-    { tl, loadIframe = false }: VideoPopupProps,
-    ref: LegacyRef<HTMLDivElement>
-  ) => {
-    const rootContainer = document.getElementById("modal");
+function VideoPopup({ setPopupState }: VideoPopupProps) {
+  const rootContainer = document.getElementById("modal");
+  const tlPopup = useRef(gsap.timeline());
+  const popupRef: RefObject<HTMLDivElement> = useRef(null);
 
-    const handlePopupTouch = (e: React.TouchEvent<HTMLDivElement>) => {
-      e.stopPropagation();
-      tl.current.reverse();
-    };
+  useLayoutEffect(function popupAnimation() {
+    // const ctx = gsap.context(() => {
+    gsap.set(popupRef.current, {
+      autoAlpha: 0,
+    });
 
-    const videoOptions = {
-      width: "100%",
-      height: "260",
+    tlPopup.current.to(popupRef.current, {
+      display: "flex",
+      autoAlpha: 1,
+    });
+    // }, pageRef);
+    // return () => ctx.revert();
+  }, []);
 
-      playerVars: {
-        rel: 0,
-        showinfo: 0,
-      },
-    };
+  const handlePopupTouch = async (e: React.TouchEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    await tlPopup.current.reverse();
+    setPopupState(false);
+  };
 
-    return createPortal(
-      <div
-        className={styles.container}
-        onTouchStart={handlePopupTouch}
-        onTouchMove={handlePopupTouch}
-        onTouchEnd={handlePopupTouch}
-        data-animate="popup"
-        ref={ref}
-      >
-        <button
-          className={styles.closeIcon}
-          style={{ backgroundImage: `url(${closeIconSrc})` }}
-          onClick={() => {
-            tl.current.reverse();
-          }}
-        />
-        <div className={styles.playerContainer}>
-          {loadIframe && (
-            <Suspense
-              fallback={
-                <h1 className={styles.emoji}>
-                  <p>🐥</p>
-                </h1>
-              }
-            >
-              <YouTubePlayer videoId="u0dBG0AL3Cs" options={videoOptions} />
-            </Suspense>
-            // <YouTube videoId="u0dBG0AL3Cs" opts={videoOptions} loading="lazy" />
-          )}
-        </div>
-      </div>,
-      rootContainer
-    );
-  }
-);
+  const videoOptions = {
+    width: "100%",
+    height: "260",
+  };
+
+  return createPortal(
+    <div
+      className={styles.container}
+      onTouchStart={handlePopupTouch}
+      onTouchMove={handlePopupTouch}
+      onTouchEnd={handlePopupTouch}
+      data-animate="popup"
+      ref={popupRef}
+    >
+      <button
+        className={styles.closeIcon}
+        style={{ backgroundImage: `url(${closeIconSrc})` }}
+        onClick={() => {
+          tlPopup.current.reverse();
+        }}
+      />
+      <div className={styles.playerContainer}>
+        <Suspense
+          fallback={
+            <h1 className={styles.emoji}>
+              <p>🐥</p>
+            </h1>
+          }
+        >
+          <YouTubePlayer videoId="u0dBG0AL3Cs" options={videoOptions} />
+        </Suspense>
+      </div>
+    </div>,
+    rootContainer
+  );
+}
 
 export default VideoPopup;

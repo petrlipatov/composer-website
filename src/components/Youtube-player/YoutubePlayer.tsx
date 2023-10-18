@@ -1,3 +1,4 @@
+// import { useEffect } from "react";
 import style from "./YoutubePlayer.module.css";
 
 const YouTubePlayer = ({ videoId, options }) => {
@@ -10,6 +11,7 @@ const YouTubePlayer = ({ videoId, options }) => {
       allowFullScreen
       loading="lazy"
       className={style.iframe}
+      id="youtubePlayer"
     />
   );
 };
