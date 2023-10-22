@@ -3,7 +3,7 @@ import styles from "./Portfolio.module.css";
 function Portfolio() {
   return (
     <div className={styles.container}>
-      <audio controls>
+      <audio preload="none" controls>
         <source
           src="https://www2.cs.uic.edu/~i101/SoundFiles/BabyElephantWalk60.wav"
           type="audio/mpeg"
