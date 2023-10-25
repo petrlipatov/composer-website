@@ -2,12 +2,12 @@ import styles from "./index.module.css";
 import React, { useRef, RefObject, useEffect, useState, Suspense } from "react";
 import imageSrc from "../../assets/images/logo.png";
 import nameSrc from "../../assets/images/name.svg";
-import arrowSrc from "../../assets/images/play-icon.svg";
 import titleSrc from "../../assets/images/title.svg";
+import arrowSrc from "../../assets/images/play-icon.svg";
 import playSrc from "../../assets/images/play-icon.svg";
 import showreelSrc from "../../assets/images/play-showreel.svg";
 import piecesSrc from "../../assets/images/pieces-f20w6.svg";
-import featuredSrc from "../../assets/images/featured-f20w6.svg";
+// import featuredSrc from "../../assets/images/featured-f20w6.svg";
 import workSrc from "../../assets/images/work-f20w6.svg";
 import { gsap } from "gsap";
 import { Observer } from "gsap/Observer";
@@ -87,7 +87,7 @@ export default function Home() {
     return () => ctx.revert();
   }, []);
 
-  useLayoutEffect(function setSectionsTransitionsAnimations() {
+  useLayoutEffect(function setSectionsAnimation() {
     const ctx = gsap.context(() => {
       gsap.set(["[data-animate='name']", "[data-animate='title']"], {
         xPercent: -50,
@@ -223,21 +223,24 @@ export default function Home() {
         <img className={styles.play} src={playSrc} alt="play-icon" />
       </div>
 
-      <Link to="/portfolio" className={styles.linksBlock} data-animate="links">
-        <img className={styles.pieces} src={piecesSrc} alt="pieces-link" />
-
+      <div className={styles.linksBlock} data-animate="links">
+        <Link to="/portfolio">
+          <img className={styles.pieces} src={piecesSrc} alt="pieces-link" />
+        </Link>
         <div className={styles.divider} />
 
-        <div className={styles.featuredWorkContainer}>
-          <img
-            className={styles.featured}
-            src={featuredSrc}
-            alt="featured-link"
-          />
+        <Link to="/portfolio">
+          <div className={styles.featuredWorkContainer}>
+            {/* <img
+              className={styles.featured}
+              src={featuredSrc}
+              alt="featured-link"
+            /> */}
 
-          <img className={styles.work} src={workSrc} alt="work-link" />
-        </div>
-      </Link>
+            <img className={styles.work} src={workSrc} alt="work-link" />
+          </div>
+        </Link>
+      </div>
 
       <img
         src={arrowSrc}
