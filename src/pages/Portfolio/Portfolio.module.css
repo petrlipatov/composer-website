@@ -1,6 +1,25 @@
-.container {
+.page {
+  position: relative;
   height: 100%;
+}
+
+.nameContainer {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.name {
+  margin-left: 5%;
+  margin-top: 30px;
+}
+
+.title {
+  margin-left: 5%;
+  margin-top: 12px;
+}
+
+.togglerSection {
+  margin-top: 70px;
 }
