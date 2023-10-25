@@ -7,8 +7,8 @@ import arrowSrc from "../../assets/images/play-icon.svg";
 import playSrc from "../../assets/images/play-icon.svg";
 import showreelSrc from "../../assets/images/play-showreel.svg";
 import piecesSrc from "../../assets/images/pieces-f20w6.svg";
-// import featuredSrc from "../../assets/images/featured-f20w6.svg";
 import workSrc from "../../assets/images/work-f20w6.svg";
+// import featuredSrc from "../../assets/images/featured-f20w6.svg";
 import { gsap } from "gsap";
 import { Observer } from "gsap/Observer";
 import { useLayoutEffect } from "react";
@@ -169,7 +169,7 @@ export default function Home() {
 
   useEffect(function setListenersForAnimations() {
     Observer.create({
-      type: "touch, scroll",
+      type: "touch, scroll, click",
       onChange: () => {
         tlArrows.current.revert();
       },
