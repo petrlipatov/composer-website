@@ -230,15 +230,13 @@ export default function Home() {
         <div className={styles.divider} />
 
         <Link to="/portfolio">
-          <div className={styles.featuredWorkContainer}>
-            {/* <img
+          {/* <img
               className={styles.featured}
               src={featuredSrc}
               alt="featured-link"
             /> */}
 
-            <img className={styles.work} src={workSrc} alt="work-link" />
-          </div>
+          <img className={styles.work} src={workSrc} alt="work-link" />
         </Link>
       </div>
 
