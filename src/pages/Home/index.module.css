@@ -62,7 +62,7 @@
   display: flex;
   align-items: start;
   justify-content: space-between;
-  width: 190px;
+  width: 150px;
   will-change: transform;
 }
 
@@ -74,7 +74,7 @@
 }
 
 .divider {
-  height: 33px;
+  height: 17px;
   width: 3px;
   background-color: #424144;
 }
