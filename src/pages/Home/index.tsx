@@ -1,5 +1,12 @@
 import styles from "./index.module.css";
-import React, { useRef, RefObject, useEffect, useState, Suspense } from "react";
+import React, {
+  useRef,
+  RefObject,
+  useEffect,
+  useState,
+  Suspense,
+  useLayoutEffect,
+} from "react";
 import imageSrc from "../../assets/images/logo.png";
 import nameSrc from "../../assets/images/name.svg";
 import titleSrc from "../../assets/images/title.svg";
@@ -7,13 +14,9 @@ import arrowSrc from "../../assets/images/play-icon.svg";
 import playSrc from "../../assets/images/play-icon.svg";
 import showreelSrc from "../../assets/images/play-showreel.svg";
 import piecesSrc from "../../assets/images/pieces-f20w6.svg";
-// import discoverSrc from "../../assets/images/discover_more-f20w6.svg";
-
 import workSrc from "../../assets/images/work-f20w6.svg";
-// import featuredSrc from "../../assets/images/featured-f20w6.svg";
 import { gsap } from "gsap";
 import { Observer } from "gsap/Observer";
-import { useLayoutEffect } from "react";
 import Modal from "../../components/Modal/Modal";
 import Preloader from "../../components/Preloader/Preloader";
 import { Link } from "react-router-dom";
@@ -57,7 +60,8 @@ export default function Home() {
         {
           opacity: 1,
           x: 0,
-          duration: 0.4,
+          duration: 0.5,
+          delay: 0.5,
         }
       );
     }, pageRef);
@@ -137,7 +141,7 @@ export default function Home() {
           top: "30px",
           duration: 1,
           ease: "power2.inOut",
-          onComplete: () => {
+          onStart: () => {
             tlMenu.current.play();
           },
         },
@@ -226,11 +230,6 @@ export default function Home() {
     setPopupState(true);
   }
 
-  const videoOptions = {
-    width: "100%",
-    height: "260",
-  };
-
   return (
     <div className={styles.page} ref={pageRef}>
       <div className={styles.section} data-animate="section1"></div>
@@ -278,10 +277,6 @@ export default function Home() {
         <Link to="/portfolio">
           <img className={styles.work} src={workSrc} alt="work-link" />
         </Link>
-
-        {/* <Link to="/portfolio">
-          <img className={styles.work} src={discoverSrc} alt="work-link" />
-        </Link> */}
       </div>
 
       <img
@@ -308,7 +303,7 @@ export default function Home() {
       {isPopupOpened && (
         <Modal setPopupState={setPopupState}>
           <Suspense fallback={<Preloader content={"🐥"} />}>
-            <YouTubePlayer videoId="u0dBG0AL3Cs" options={videoOptions} />
+            <YouTubePlayer videoId="u0dBG0AL3Cs" />
           </Suspense>
         </Modal>
       )}

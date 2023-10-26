@@ -5,8 +5,22 @@ import titleSrc from "../../assets/images/title.svg";
 import logoSrc from "../../assets/images/logo_vertical.png";
 
 import Toggler from "./Toggler/Toggler";
+import { useState } from "react";
+
+type Genres =
+  | "classical"
+  | "contemporary"
+  | "vintage"
+  | "electronic"
+  | "dark"
+  | "folk"
+  | "chamber"
+  | "borroque";
 
 function Portfolio() {
+  const [category, setCategory] = useState<Genres>(undefined);
+  const [genre, setGenre] = useState<Genres>(undefined);
+
   return (
     <div className={styles.page}>
       <div className={styles.headerSection}>
