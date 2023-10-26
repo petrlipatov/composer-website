@@ -7,6 +7,8 @@ import arrowSrc from "../../assets/images/play-icon.svg";
 import playSrc from "../../assets/images/play-icon.svg";
 import showreelSrc from "../../assets/images/play-showreel.svg";
 import piecesSrc from "../../assets/images/pieces-f20w6.svg";
+// import discoverSrc from "../../assets/images/discover_more-f20w6.svg";
+
 import workSrc from "../../assets/images/work-f20w6.svg";
 // import featuredSrc from "../../assets/images/featured-f20w6.svg";
 import { gsap } from "gsap";
@@ -15,6 +17,7 @@ import { useLayoutEffect } from "react";
 import Modal from "../../components/Modal/Modal";
 import Preloader from "../../components/Preloader/Preloader";
 import { Link } from "react-router-dom";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const YouTubePlayer = React.lazy(
   () => import("../../components/Youtube-player/YoutubePlayer")
@@ -24,9 +27,42 @@ export default function Home() {
   const [isPopupOpened, setPopupState] = useState(false);
 
   const pageRef: RefObject<HTMLDivElement> = useRef(null);
+  const tlMenu = useRef(gsap.timeline({ paused: true }));
   const tlSections = useRef(gsap.timeline({ paused: true }));
   const tlArrows = useRef(gsap.timeline({ repeat: -1 }));
+
   gsap.registerPlugin(Observer);
+  gsap.registerPlugin(ScrollTrigger);
+
+  useLayoutEffect(function menuAnimation() {
+    const ctx = gsap.context(() => {
+      gsap.set(
+        [
+          "[data-animate='line1']",
+          "[data-animate='line2']",
+          "[data-animate='line3']",
+        ],
+        { width: 6, opacity: 0 }
+      );
+
+      gsap.set(["[data-animate='line1']"], { x: "50px" });
+      gsap.set(["[data-animate='line3']"], { x: "-50px" });
+
+      tlMenu.current.to(
+        [
+          "[data-animate='line1']",
+          "[data-animate='line2']",
+          "[data-animate='line3']",
+        ],
+        {
+          opacity: 1,
+          x: 0,
+          duration: 0.4,
+        }
+      );
+    }, pageRef);
+    return () => ctx.revert();
+  }, []);
 
   useLayoutEffect(function loopArrowsAnimation() {
     const ctx = gsap.context(() => {
@@ -93,6 +129,32 @@ export default function Home() {
         xPercent: -50,
       });
 
+      tlSections.current.to(
+        "[data-animate='name']",
+        {
+          xPercent: 0,
+          left: "5%",
+          top: "30px",
+          duration: 1,
+          ease: "power2.inOut",
+          onComplete: () => {
+            tlMenu.current.play();
+          },
+        },
+        0
+      );
+      tlSections.current.to(
+        "[data-animate='title']",
+        {
+          xPercent: 0,
+          left: "5%",
+          top: "60px",
+          duration: 1,
+          ease: "power2.inOut",
+        },
+        0
+      );
+
       gsap.set("[data-animate='showreel']", {
         xPercent: -50,
         left: "50%",
@@ -110,28 +172,6 @@ export default function Home() {
         opacity: 0,
       });
 
-      tlSections.current.to(
-        "[data-animate='name']",
-        {
-          xPercent: 0,
-          left: "5%",
-          top: "30px",
-          duration: 1,
-          ease: "power2.inOut",
-        },
-        0
-      );
-      tlSections.current.to(
-        "[data-animate='title']",
-        {
-          xPercent: 0,
-          left: "5%",
-          top: "60px",
-          duration: 1,
-          ease: "power2.inOut",
-        },
-        0
-      );
       tlSections.current.to(
         "[data-animate='showreel']",
         {
@@ -193,9 +233,15 @@ export default function Home() {
 
   return (
     <div className={styles.page} ref={pageRef}>
-      <div className={styles.section}></div>
-      <div className={styles.section}></div>
-      <div className={styles.section}></div>
+      <div className={styles.section} data-animate="section1"></div>
+      <div className={styles.section} data-animate="section2"></div>
+      <div className={styles.section} data-animate="section3"></div>
+
+      <div className={styles.menu} data-animate="container">
+        <div className={styles.line} data-animate="line1"></div>
+        <div className={styles.line} data-animate="line2"></div>
+        <div className={styles.line} data-animate="line3"></div>
+      </div>
 
       <img
         className={styles.name}
@@ -230,14 +276,12 @@ export default function Home() {
         <div className={styles.divider} />
 
         <Link to="/portfolio">
-          {/* <img
-              className={styles.featured}
-              src={featuredSrc}
-              alt="featured-link"
-            /> */}
-
           <img className={styles.work} src={workSrc} alt="work-link" />
         </Link>
+
+        {/* <Link to="/portfolio">
+          <img className={styles.work} src={discoverSrc} alt="work-link" />
+        </Link> */}
       </div>
 
       <img

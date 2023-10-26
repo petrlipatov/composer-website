@@ -23,3 +23,41 @@
 .togglerSection {
   margin-top: 70px;
 }
+
+.menuContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.genresSection {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.genresContainer {
+  display: flex;
+}
+
+.genresList {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  row-gap: 5px;
+}
+
+.genreButton {
+  border: none;
+  background-color: transparent;
+  font-weight: 700;
+  font-size: 16px;
+  color: #424144;
+}
+
+.logo {
+  display: block;
+  height: 220px;
+  margin-left: 20px;
+}

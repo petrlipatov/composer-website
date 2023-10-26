@@ -10,6 +10,21 @@
   scroll-snap-align: start;
 }
 
+.menu {
+  position: absolute;
+  top: 37px;
+  right: 13%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.line {
+  height: 6px;
+  background-color: #424144;
+  border-radius: 100%;
+}
+
 .name {
   position: fixed;
   left: 50%;
@@ -22,7 +37,6 @@
   position: fixed;
   left: 50%;
   top: 250px;
-
   will-change: transform;
 }
 
@@ -59,19 +73,19 @@
 }
 
 .linksBlock {
+  width: 150px;
   display: flex;
   align-items: start;
   justify-content: space-between;
-  width: 150px;
   will-change: transform;
 }
 
-.featuredWorkContainer {
+/* .featuredWorkContainer {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   row-gap: 5px;
-}
+} */
 
 .divider {
   height: 17px;
