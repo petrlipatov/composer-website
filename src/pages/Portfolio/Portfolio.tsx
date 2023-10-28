@@ -6,6 +6,8 @@ import logoSrc from "../../assets/images/logo_vertical.png";
 
 import Toggler from "./Toggler/Toggler";
 import { useState } from "react";
+import AudioElement from "../../components/Audio-element/AudioElement";
+import mp3Src from "../../assets/Theory-of-Light-Master.mp3";
 
 type Genres =
   | "classical"
@@ -47,6 +49,23 @@ function Portfolio() {
           </div>
           <img className={styles.logo} src={logoSrc} alt="logo" />
         </div>
+      </div>
+      <div className={styles.trackListSection}>
+        <AudioElement
+          index={0}
+          name={"REVIVAL OF THE UNKNOWN"}
+          audio={mp3Src}
+        />
+        <AudioElement
+          index={1}
+          name={"REVIVAL OF THE UNKNOWN"}
+          audio={mp3Src}
+        />
+        <AudioElement
+          index={2}
+          name={"REVIVAL OF THE UNKNOWN"}
+          audio={mp3Src}
+        />
       </div>
     </div>
   );

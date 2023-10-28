@@ -1,41 +1,71 @@
-// import React, { useEffect, useRef } from "react";
-// import styles from "./Portfolio.module.css";
-// import mp3 from "../../assets/Theory-of-Light-Master.mp3";
+import styles from "./AudioPlayer.module.css";
+import React, { useRef, useState } from "react";
+import playSrc from "../../assets/images/play-button.svg";
+import pauseSrc from "../../assets/images/pause-icon.svg";
+import { formatTime } from "../../utils/formatTime";
 
-function Portfolio2() {
-  //   const audioRef = useRef(null);
+function AudioPlayer({ srcLink }) {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [duration, setDuration] = useState(0);
+  const [mediaTime, setMediaTime] = useState(0);
+  const ref = useRef<HTMLAudioElement>();
 
-  //   useEffect(() => {
-  //     if (audioRef.current && "MediaSource" in window) {
-  //       const mediaSource = new MediaSource();
-  //       audioRef.current.src = URL.createObjectURL(mediaSource);
+  const togglePlaying = () => {
+    setIsPlaying(!isPlaying);
+    if (ref.current) {
+      isPlaying ? ref.current.pause() : ref.current.play();
+    }
+  };
 
-  //       mediaSource.addEventListener("sourceopen", () => {
-  //         const sourceBuffer = mediaSource.addSourceBuffer(
-  //           'video/mp4; codecs="mp4a.40.2"'
-  //         );
-  //         const audioUrl = mp3; // URL вашего аудиофайла в формате MP4 с AAC аудио
+  const onLoadedMetadata = () => {
+    setDuration(ref.current.duration);
+  };
 
-  //         fetch(audioUrl)
-  //           .then((response) => response.arrayBuffer())
-  //           .then((data) => {
-  //             sourceBuffer.appendBuffer(data);
-  //             audioRef.current.play();
-  //           });
-  //       });
-  //     } else {
-  //       console.error("MediaSource not supported.");
-  //     }
-  //   }, []);
+  const onTimeUpdate = () => {
+    setMediaTime(ref.current.currentTime);
+  };
 
-  //   return (
-  //     <div className={styles.container}>
-  //       <audio ref={audioRef} controls>
-  //         Your browser does not support the audio element.
-  //       </audio>
-  //     </div>
-  //   );
-  return <div>Your browser does not support the audio element.</div>;
+  const onScrubberChange = (event) => {
+    const newTime = event.target.value;
+    setMediaTime(newTime);
+    ref.current.currentTime = newTime;
+  };
+
+  return (
+    <div className={styles.playerContainer}>
+      <button className={styles.playButton}>
+        <img
+          className={styles.playIcon}
+          onClick={togglePlaying}
+          src={isPlaying ? pauseSrc : playSrc}
+          alt="play-button"
+        />
+      </button>
+      <input
+        className={styles.timeScrubber}
+        type="range"
+        id="time-scrubber"
+        value={mediaTime}
+        min={0}
+        max={duration}
+        onChange={onScrubberChange}
+      />
+
+      {/* <div>{formatTime(mediaTime)}</div> */}
+      <audio
+        className={styles.audioPlayer}
+        onLoadedMetadata={onLoadedMetadata}
+        onTimeUpdate={onTimeUpdate}
+        onPlay={() => setIsPlaying(true)}
+        onPause={() => setIsPlaying(false)}
+        preload="metadata"
+        ref={ref}
+      >
+        <source src={srcLink} type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+  );
 }
 
-export default Portfolio2;
+export default AudioPlayer;
