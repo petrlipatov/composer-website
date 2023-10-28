@@ -2,7 +2,7 @@ import styles from "./AudioPlayer.module.css";
 import React, { useRef, useState } from "react";
 import playSrc from "../../assets/images/play-button.svg";
 import pauseSrc from "../../assets/images/pause-icon.svg";
-import { formatTime } from "../../utils/formatTime";
+// import { formatTime } from "../../utils/formatTime";
 
 function AudioPlayer({ srcLink }) {
   const [isPlaying, setIsPlaying] = useState(false);

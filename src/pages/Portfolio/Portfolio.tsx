@@ -5,23 +5,23 @@ import titleSrc from "../../assets/images/title.svg";
 import logoSrc from "../../assets/images/logo_vertical.png";
 
 import Toggler from "./Toggler/Toggler";
-import { useState } from "react";
+// import { useState } from "react";
 import AudioElement from "../../components/Audio-element/AudioElement";
 import mp3Src from "../../assets/Theory-of-Light-Master.mp3";
 
-type Genres =
-  | "classical"
-  | "contemporary"
-  | "vintage"
-  | "electronic"
-  | "dark"
-  | "folk"
-  | "chamber"
-  | "borroque";
+// type Genres =
+//   | "classical"
+//   | "contemporary"
+//   | "vintage"
+//   | "electronic"
+//   | "dark"
+//   | "folk"
+//   | "chamber"
+//   | "borroque";
 
 function Portfolio() {
-  const [category, setCategory] = useState<Genres>(undefined);
-  const [genre, setGenre] = useState<Genres>(undefined);
+  // const [category, setCategory] = useState<Genres>(undefined);
+  // const [genre, setGenre] = useState<Genres>(undefined);
 
   return (
     <div className={styles.page}>
