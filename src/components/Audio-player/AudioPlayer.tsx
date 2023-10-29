@@ -1,5 +1,5 @@
 import styles from "./AudioPlayer.module.css";
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import playSrc from "../../assets/images/play-button.svg";
 import pauseSrc from "../../assets/images/pause-icon.svg";
 // import { formatTime } from "../../utils/formatTime";
@@ -8,28 +8,38 @@ function AudioPlayer({ srcLink }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
   const [mediaTime, setMediaTime] = useState(0);
-  const ref = useRef<HTMLAudioElement>();
+  const audioRef = useRef<HTMLAudioElement>();
+  const mediaTimeRef = useRef(null);
 
   const togglePlaying = () => {
     setIsPlaying(!isPlaying);
-    if (ref.current) {
-      isPlaying ? ref.current.pause() : ref.current.play();
+    if (audioRef.current) {
+      isPlaying ? audioRef.current.pause() : audioRef.current.play();
     }
   };
 
   const onLoadedMetadata = () => {
-    setDuration(ref.current.duration);
+    setDuration(audioRef.current.duration);
   };
 
   const onTimeUpdate = () => {
-    setMediaTime(ref.current.currentTime);
+    setMediaTime(audioRef.current.currentTime);
   };
 
   const onScrubberChange = (event) => {
     const newTime = event.target.value;
     setMediaTime(newTime);
-    ref.current.currentTime = newTime;
+    audioRef.current.currentTime = newTime;
   };
+
+  useEffect(() => {
+    if (mediaTimeRef.current) {
+      const progressBar = mediaTimeRef.current;
+      const value = mediaTime;
+      const max = progressBar.max;
+      progressBar.style.backgroundSize = `${(value / max) * 100}% 100%`;
+    }
+  }, [mediaTime]);
 
   return (
     <div className={styles.playerContainer}>
@@ -49,6 +59,10 @@ function AudioPlayer({ srcLink }) {
         min={0}
         max={duration}
         onChange={onScrubberChange}
+        ref={mediaTimeRef}
+        onClick={() => {
+          console.log(mediaTimeRef.current);
+        }}
       />
 
       {/* <div>{formatTime(mediaTime)}</div> */}
@@ -59,7 +73,7 @@ function AudioPlayer({ srcLink }) {
         onPlay={() => setIsPlaying(true)}
         onPause={() => setIsPlaying(false)}
         preload="metadata"
-        ref={ref}
+        ref={audioRef}
       >
         <source src={srcLink} type="audio/mpeg" />
         Your browser does not support the audio element.

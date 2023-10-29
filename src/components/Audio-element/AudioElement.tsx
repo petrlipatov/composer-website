@@ -16,11 +16,10 @@ function AudioElement({ index, name, audio }) {
 
   return (
     <div className={styles.audioElementContainer}>
-      <div className={styles.track}>
+      <div className={styles.track} onClick={handleTrackClick}>
         <img
           className={styles.playButton}
           style={{ transform: isOpen ? "rotate(90deg)" : "rotate(0deg)" }}
-          onClick={handleTrackClick}
           src={playSrc}
           alt="play-logo"
         />
