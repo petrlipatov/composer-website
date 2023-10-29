@@ -8,8 +8,10 @@ function AudioPlayer({ srcLink }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
   const [mediaTime, setMediaTime] = useState(0);
+
   const audioRef = useRef<HTMLAudioElement>();
-  const mediaTimeRef = useRef(null);
+  const mediaTimeRef = useRef<HTMLInputElement>();
+  const playButtonRef = useRef<HTMLButtonElement>();
 
   const togglePlaying = () => {
     setIsPlaying(!isPlaying);
@@ -33,6 +35,14 @@ function AudioPlayer({ srcLink }) {
   };
 
   useEffect(() => {
+    const playButton = playButtonRef.current;
+    playButton.addEventListener("touchstart", togglePlaying);
+    return () => {
+      playButton.removeEventListener("touchstart", togglePlaying);
+    };
+  }, []);
+
+  useEffect(() => {
     if (mediaTimeRef.current) {
       const progressBar = mediaTimeRef.current;
       const value = mediaTime;
@@ -43,10 +53,9 @@ function AudioPlayer({ srcLink }) {
 
   return (
     <div className={styles.playerContainer}>
-      <button className={styles.playButton}>
+      <button className={styles.playButton} ref={playButtonRef}>
         <img
           className={styles.playIcon}
-          onClick={togglePlaying}
           src={isPlaying ? pauseSrc : playSrc}
           alt="play-button"
         />
@@ -60,9 +69,6 @@ function AudioPlayer({ srcLink }) {
         max={duration}
         onChange={onScrubberChange}
         ref={mediaTimeRef}
-        onClick={() => {
-          console.log(mediaTimeRef.current);
-        }}
       />
 
       {/* <div>{formatTime(mediaTime)}</div> */}
