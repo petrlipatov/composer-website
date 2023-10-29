@@ -11,7 +11,7 @@ function AudioPlayer({ srcLink }) {
 
   const audioRef = useRef<HTMLAudioElement>();
   const mediaTimeRef = useRef<HTMLInputElement>();
-  const playButtonRef = useRef<HTMLButtonElement>();
+  // const playButtonRef = useRef<HTMLButtonElement>();
 
   const togglePlaying = () => {
     setIsPlaying(!isPlaying);
@@ -34,13 +34,13 @@ function AudioPlayer({ srcLink }) {
     audioRef.current.currentTime = newTime;
   };
 
-  useEffect(() => {
-    const playButton = playButtonRef.current;
-    playButton.addEventListener("touchstart", togglePlaying);
-    return () => {
-      playButton.removeEventListener("touchstart", togglePlaying);
-    };
-  }, []);
+  // useEffect(() => {
+  //   const playButton = playButtonRef.current;
+  //   playButton.addEventListener("touchstart", togglePlaying);
+  //   return () => {
+  //     playButton.removeEventListener("touchstart", togglePlaying);
+  //   };
+  // }, []);
 
   useEffect(() => {
     if (mediaTimeRef.current) {
@@ -53,7 +53,7 @@ function AudioPlayer({ srcLink }) {
 
   return (
     <div className={styles.playerContainer}>
-      <button className={styles.playButton} ref={playButtonRef}>
+      <button className={styles.playButton} onClick={togglePlaying}>
         <img
           className={styles.playIcon}
           src={isPlaying ? pauseSrc : playSrc}
