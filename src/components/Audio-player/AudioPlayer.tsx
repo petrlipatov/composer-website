@@ -2,7 +2,7 @@ import styles from "./AudioPlayer.module.css";
 import React, { useRef, useState, useEffect } from "react";
 import playSrc from "../../assets/images/play-button.svg";
 import pauseSrc from "../../assets/images/pause-icon.svg";
-// import { formatTime } from "../../utils/formatTime";
+import { formatTime } from "../../utils/formatTime";
 
 function AudioPlayer({ srcLink }) {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -71,13 +71,11 @@ function AudioPlayer({ srcLink }) {
         ref={mediaTimeRef}
       />
 
-      {/* <div>{formatTime(mediaTime)}</div> */}
+      <div className={styles.timeValue}>{formatTime(mediaTime)}</div>
       <audio
         className={styles.audioPlayer}
         onLoadedMetadata={onLoadedMetadata}
         onTimeUpdate={onTimeUpdate}
-        onPlay={() => setIsPlaying(true)}
-        onPause={() => setIsPlaying(false)}
         preload="metadata"
         ref={audioRef}
       >
