@@ -47,7 +47,7 @@ function AudioPlayer({ srcLink }) {
       const progressBar = mediaTimeRef.current;
       const value = mediaTime;
       const max = progressBar.max;
-      progressBar.style.backgroundSize = `${(value / max) * 100}% 100%`;
+      progressBar.style.backgroundSize = `${(value / +max) * 100}% 100%`;
     }
   }, [mediaTime]);
 
