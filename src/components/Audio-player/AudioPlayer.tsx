@@ -52,9 +52,19 @@ function AudioPlayer({ srcLink }) {
       <p>{`${isPlaying}`}</p>
       <button className={styles.playButton} onClick={togglePlaying}>
         {isPlaying ? (
-          <img className={styles.playIcon} src={pauseSrc} alt="play-button" />
+          <img
+            className={styles.playIcon}
+            src={pauseSrc}
+            alt="play-button"
+            loading="eager"
+          />
         ) : (
-          <img className={styles.playIcon} src={playSrc} alt="play-button" />
+          <img
+            className={styles.playIcon}
+            src={playSrc}
+            alt="play-button"
+            loading="eager"
+          />
         )}
       </button>
       <input
