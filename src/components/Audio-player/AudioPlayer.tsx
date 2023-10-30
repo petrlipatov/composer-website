@@ -15,7 +15,6 @@ function AudioPlayer({ srcLink }) {
   const mediaTimeRef = useRef<HTMLInputElement>();
 
   const togglePlaying = () => {
-    setIsPlaying(!isPlaying);
     if (audioRef.current) {
       isPlaying ? audioRef.current.pause() : audioRef.current.play();
     }
@@ -47,8 +46,9 @@ function AudioPlayer({ srcLink }) {
   return (
     <div
       className={styles.playerContainer}
-      style={isReady ? { backgroundColor: "#93c4c1" } : null}
+      // style={isReady ? { backgroundColor: "#93c4c1" } : null}
     >
+      <p>{`${isPlaying}`}</p>
       <button className={styles.playButton} onClick={togglePlaying}>
         {isPlaying ? (
           <img className={styles.playIcon} src={pauseSrc} alt="play-button" />
@@ -68,14 +68,24 @@ function AudioPlayer({ srcLink }) {
       />
 
       <div className={styles.timeValue}>{formatTime(mediaTime)}</div>
+
       <audio
         className={styles.audioPlayer}
         onLoadedMetadata={onLoadedMetadata}
         onTimeUpdate={onTimeUpdate}
         preload="metadata"
         ref={audioRef}
-        onCanPlay={() => {
+        onCanPlayThrough={() => {
           setIsReady(true);
+        }}
+        onPlay={() => {
+          setIsPlaying(true);
+        }}
+        onPause={() => {
+          setIsPlaying(false);
+        }}
+        onEnded={() => {
+          setIsPlaying(false);
         }}
       >
         <source src={srcLink} type="audio/mpeg" />
