@@ -15,9 +15,10 @@ function AudioPlayer({ srcLink }) {
   const mediaTimeRef = useRef<HTMLInputElement>();
 
   const togglePlaying = () => {
-    if (audioRef.current) {
-      isPlaying ? audioRef.current.pause() : audioRef.current.play();
-    }
+    setIsPlaying(!isPlaying);
+    // if (audioRef.current) {
+    //   isPlaying ? audioRef.current.pause() : audioRef.current.play();
+    // }
   };
 
   const onLoadedMetadata = () => {
@@ -51,17 +52,9 @@ function AudioPlayer({ srcLink }) {
       <p>{`${isPlaying}`}</p>
       <button className={styles.playButton} onClick={togglePlaying}>
         {isPlaying ? (
-          <img
-            className={styles.playIcon}
-            src={`${pauseSrc}?v=${Math.random()}`}
-            alt="play-button"
-          />
+          <img className={styles.playIcon} src={pauseSrc} alt="play-button" />
         ) : (
-          <img
-            className={styles.playIcon}
-            src={`${playSrc}?v=${Math.random()}`}
-            alt="play-button"
-          />
+          <img className={styles.playIcon} src={playSrc} alt="play-button" />
         )}
       </button>
       <input
@@ -86,15 +79,15 @@ function AudioPlayer({ srcLink }) {
         onCanPlayThrough={() => {
           setIsReady(true);
         }}
-        onPlay={() => {
-          setIsPlaying(true);
-        }}
-        onPause={() => {
-          setIsPlaying(false);
-        }}
-        onEnded={() => {
-          setIsPlaying(false);
-        }}
+        // onPlay={() => {
+        //   setIsPlaying(true);
+        // }}
+        // onPause={() => {
+        //   setIsPlaying(false);
+        // }}
+        // onEnded={() => {
+        //   setIsPlaying(false);
+        // }}
       >
         <source src={srcLink} type="audio/mpeg" />
         Your browser does not support the audio element.
