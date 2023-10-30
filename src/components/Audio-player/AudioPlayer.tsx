@@ -6,12 +6,13 @@ import { formatTime } from "../../utils/formatTime";
 
 function AudioPlayer({ srcLink }) {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isReady, setIsReady] = useState(false);
+
   const [duration, setDuration] = useState(0);
   const [mediaTime, setMediaTime] = useState(0);
 
   const audioRef = useRef<HTMLAudioElement>();
   const mediaTimeRef = useRef<HTMLInputElement>();
-  // const playButtonRef = useRef<HTMLButtonElement>();
 
   const togglePlaying = () => {
     setIsPlaying(!isPlaying);
@@ -34,14 +35,6 @@ function AudioPlayer({ srcLink }) {
     audioRef.current.currentTime = newTime;
   };
 
-  // useEffect(() => {
-  //   const playButton = playButtonRef.current;
-  //   playButton.addEventListener("touchstart", togglePlaying);
-  //   return () => {
-  //     playButton.removeEventListener("touchstart", togglePlaying);
-  //   };
-  // }, []);
-
   useEffect(() => {
     if (mediaTimeRef.current) {
       const progressBar = mediaTimeRef.current;
@@ -52,13 +45,16 @@ function AudioPlayer({ srcLink }) {
   }, [mediaTime]);
 
   return (
-    <div className={styles.playerContainer}>
+    <div
+      className={styles.playerContainer}
+      style={isReady ? { backgroundColor: "#93c4c1" } : null}
+    >
       <button className={styles.playButton} onClick={togglePlaying}>
-        <img
-          className={styles.playIcon}
-          src={isPlaying ? pauseSrc : playSrc}
-          alt="play-button"
-        />
+        {isPlaying ? (
+          <img className={styles.playIcon} src={pauseSrc} alt="play-button" />
+        ) : (
+          <img className={styles.playIcon} src={playSrc} alt="play-button" />
+        )}
       </button>
       <input
         className={styles.timeScrubber}
@@ -78,6 +74,9 @@ function AudioPlayer({ srcLink }) {
         onTimeUpdate={onTimeUpdate}
         preload="metadata"
         ref={audioRef}
+        onCanPlay={() => {
+          setIsReady(true);
+        }}
       >
         <source src={srcLink} type="audio/mpeg" />
         Your browser does not support the audio element.

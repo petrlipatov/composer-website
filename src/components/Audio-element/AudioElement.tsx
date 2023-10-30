@@ -31,11 +31,9 @@ function AudioElement({ index, name, audio }) {
         style={{ display: isOpen ? "flex" : "none" }}
       >
         <div className={styles.content}>
-          <AudioPlayer srcLink={audio} />
-          {/* <audio preload="metadata" className={styles.audioPlayer} controls>
-            <source src={audio} type="audio/mpeg" />
-            Your browser does not support the audio element.
-          </audio> */}
+          <div className={styles.audioPlayerContainer}>
+            <AudioPlayer srcLink={audio} />
+          </div>
           <img className={styles.videoPlayer} src={imgSrc} />
         </div>
       </div>
