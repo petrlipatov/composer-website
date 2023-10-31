@@ -16,6 +16,7 @@ function AudioPlayer({ srcLink }) {
 
   const togglePlaying = () => {
     setIsPlaying(!isPlaying);
+    setIsReady(!isReady);
     // if (audioRef.current) {
     //   isPlaying ? audioRef.current.pause() : audioRef.current.play();
     // }
@@ -80,28 +81,30 @@ function AudioPlayer({ srcLink }) {
 
       <div className={styles.timeValue}>{formatTime(mediaTime)}</div>
 
-      <audio
-        className={styles.audioPlayer}
-        onLoadedMetadata={onLoadedMetadata}
-        onTimeUpdate={onTimeUpdate}
-        preload="metadata"
-        ref={audioRef}
-        onCanPlayThrough={() => {
-          setIsReady(true);
-        }}
-        // onPlay={() => {
-        //   setIsPlaying(true);
-        // }}
-        // onPause={() => {
-        //   setIsPlaying(false);
-        // }}
-        // onEnded={() => {
-        //   setIsPlaying(false);
-        // }}
-      >
-        <source src={srcLink} type="audio/mpeg" />
-        Your browser does not support the audio element.
-      </audio>
+      {isReady && (
+        <audio
+          className={styles.audioPlayer}
+          onLoadedMetadata={onLoadedMetadata}
+          onTimeUpdate={onTimeUpdate}
+          preload="metadata"
+          ref={audioRef}
+          // onCanPlayThrough={() => {
+          //   setIsReady(true);
+          // }}
+          onPlay={() => {
+            setIsPlaying(true);
+          }}
+          onPause={() => {
+            setIsPlaying(false);
+          }}
+          onEnded={() => {
+            setIsPlaying(false);
+          }}
+        >
+          <source src={srcLink} type="audio/mpeg" />
+          Your browser does not support the audio element.
+        </audio>
+      )}
     </div>
   );
 }
