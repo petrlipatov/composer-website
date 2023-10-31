@@ -4,7 +4,7 @@
 import styles from "./AudioElement.module.css";
 import playSrc from "../../assets/images/play-button.svg";
 import { useState } from "react";
-import imgSrc from "../../assets/images/imgPlayer.png";
+import imgSrc from "../../assets/images/imgPlayer.webp";
 import AudioPlayer from "../Audio-player/AudioPlayer";
 
 function AudioElement({ index, name, audio }) {
@@ -34,7 +34,7 @@ function AudioElement({ index, name, audio }) {
           <div className={styles.audioPlayerContainer}>
             <AudioPlayer srcLink={audio} />
           </div>
-          <img className={styles.videoPlayer} src={imgSrc} />
+          <img className={styles.videoPlayer} src={imgSrc} loading="lazy" />
         </div>
       </div>
     </div>
