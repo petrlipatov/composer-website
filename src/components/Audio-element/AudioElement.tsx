@@ -16,6 +16,8 @@ type AudioElementProps = {
   link: string;
   duration: number;
   elapsedTime: number;
+  isLoading: boolean;
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
   isActive: boolean;
   setActiveAudio: Dispatch<SetStateAction<number>>;
 };
@@ -28,6 +30,8 @@ const AudioElement = forwardRef(
       link,
       duration,
       elapsedTime,
+      isLoading,
+      setIsLoading,
       isActive,
       setActiveAudio,
     }: AudioElementProps,
@@ -62,6 +66,8 @@ const AudioElement = forwardRef(
                 link={link}
                 duration={duration}
                 elapsedTime={elapsedTime}
+                isLoading={isLoading}
+                setIsLoading={setIsLoading}
                 isActive={isActive}
                 setActiveAudio={setActiveAudio}
                 ref={ref}

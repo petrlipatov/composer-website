@@ -24,7 +24,7 @@ function Portfolio() {
   const [activeAudio, setActiveAudio] = useState(undefined);
   const [elapsedTime, setElapsedTime] = useState(0);
   const [duration, setDuration] = useState(0);
-
+  const [isLoading, setIsLoading] = useState(false);
   // const [category, setCategory] = useState<Genres>(undefined);
   // const [genre, setGenre] = useState<Genres>(undefined);
   const audioRef = useRef<HTMLAudioElement>();
@@ -76,6 +76,12 @@ function Portfolio() {
         ref={audioRef}
         onTimeUpdate={onTimeUpdate}
         onLoadedMetadata={onLoadedMetadata}
+        onCanPlay={() => {
+          setIsLoading(false);
+        }}
+        onWaiting={() => {
+          setIsLoading(true);
+        }}
       >
         <source src="" type="audio/mpeg" />
         Your browser does not support the audio element.
@@ -87,6 +93,8 @@ function Portfolio() {
           link={mp3Src}
           duration={duration}
           elapsedTime={elapsedTime}
+          isLoading={isLoading}
+          setIsLoading={setIsLoading}
           isActive={0 === activeAudio}
           setActiveAudio={setActiveAudio}
           ref={audioRef}
@@ -97,6 +105,8 @@ function Portfolio() {
           link={mp3Src2}
           duration={duration}
           elapsedTime={elapsedTime}
+          isLoading={isLoading}
+          setIsLoading={setIsLoading}
           isActive={1 === activeAudio}
           setActiveAudio={setActiveAudio}
           ref={audioRef}
