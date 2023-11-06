@@ -1,44 +1,78 @@
-// import React, { useEffect, useRef } from "react";
-// import cn from "classnames";
-
 import styles from "./AudioElement.module.css";
 import playSrc from "../../assets/images/play-button.svg";
-import { useState } from "react";
+import {
+  useState,
+  forwardRef,
+  RefObject,
+  Dispatch,
+  SetStateAction,
+} from "react";
 import imgSrc from "../../assets/images/imgPlayer.webp";
 import AudioPlayer from "../Audio-player/AudioPlayer";
 
-function AudioElement({ index, name, audio }) {
-  const [isOpen, setIsOpen] = useState(false);
+type AudioElementProps = {
+  index: number;
+  name: string;
+  link: string;
+  duration: number;
+  elapsedTime: number;
+  isActive: boolean;
+  setActiveAudio: Dispatch<SetStateAction<number>>;
+};
 
-  const handleTrackClick = () => {
-    setIsOpen(!isOpen);
-  };
+const AudioElement = forwardRef(
+  (
+    {
+      index,
+      name,
+      link,
+      duration,
+      elapsedTime,
+      isActive,
+      setActiveAudio,
+    }: AudioElementProps,
+    ref: RefObject<HTMLAudioElement>
+  ) => {
+    const [isOpen, setIsOpen] = useState(false);
 
-  return (
-    <div className={styles.audioElementContainer}>
-      <div className={styles.track} onClick={handleTrackClick}>
-        <img
-          className={styles.playButton}
-          style={{ transform: isOpen ? "rotate(90deg)" : "rotate(0deg)" }}
-          src={playSrc}
-          alt="play-logo"
-        />
-        <p className={styles.title}>{`${index + 1}. ${name}`}</p>
-      </div>
+    const handleTrackClick = () => {
+      setIsOpen(!isOpen);
+    };
 
-      <div
-        className={styles.contentContainer}
-        style={{ display: isOpen ? "flex" : "none" }}
-      >
-        <div className={styles.content}>
-          <div className={styles.audioPlayerContainer}>
-            <AudioPlayer srcLink={audio} />
+    return (
+      <div className={styles.audioElementContainer}>
+        <div className={styles.track} onClick={handleTrackClick}>
+          <img
+            className={styles.playButton}
+            style={{ transform: isOpen ? "rotate(90deg)" : "rotate(0deg)" }}
+            src={playSrc}
+            alt="play-logo"
+          />
+          <p className={styles.title}>{`${index + 1}. ${name}`}</p>
+        </div>
+
+        <div
+          className={styles.contentContainer}
+          style={{ display: isOpen ? "flex" : "none" }}
+        >
+          <div className={styles.content}>
+            <div className={styles.audioPlayerContainer}>
+              <AudioPlayer
+                index={index}
+                link={link}
+                duration={duration}
+                elapsedTime={elapsedTime}
+                isActive={isActive}
+                setActiveAudio={setActiveAudio}
+                ref={ref}
+              />
+            </div>
+            <img className={styles.videoPlayer} src={imgSrc} loading="lazy" />
           </div>
-          <img className={styles.videoPlayer} src={imgSrc} loading="lazy" />
         </div>
       </div>
-    </div>
-  );
-}
+    );
+  }
+);
 
 export default AudioElement;

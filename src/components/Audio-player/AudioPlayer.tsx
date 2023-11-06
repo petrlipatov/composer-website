@@ -1,112 +1,135 @@
 import styles from "./AudioPlayer.module.css";
-import React, { useRef, useState, useEffect } from "react";
+import React, {
+  useRef,
+  useState,
+  useEffect,
+  forwardRef,
+  RefObject,
+  Dispatch,
+  SetStateAction,
+} from "react";
 import playSrc from "../../assets/images/play-button.svg";
 import pauseSrc from "../../assets/images/pause-icon.svg";
 import { formatTime } from "../../utils/formatTime";
 
-function AudioPlayer({ srcLink }) {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isReady, setIsReady] = useState(false);
+type AudioPlayerProps = {
+  index: number;
+  link: string;
+  duration: number;
+  elapsedTime: number;
+  isActive: boolean;
+  setActiveAudio: Dispatch<SetStateAction<number>>;
+};
 
-  const [duration, setDuration] = useState(0);
-  const [mediaTime, setMediaTime] = useState(0);
+const AudioPlayer = forwardRef(
+  (
+    {
+      index,
+      link,
+      duration,
+      elapsedTime,
+      isActive,
+      setActiveAudio,
+    }: AudioPlayerProps,
+    ref: RefObject<HTMLAudioElement>
+  ) => {
+    const [isPlaying, setIsPlaying] = useState(false);
+    const [trackDuration, setTrackDuration] = useState(0);
+    const [trackElapsedTime, setTrackElapsedTime] = useState(0);
 
-  const audioRef = useRef<HTMLAudioElement>();
-  const mediaTimeRef = useRef<HTMLInputElement>();
+    const mediaTimeRef = useRef<HTMLInputElement>();
+    const currentAudioTrack = ref.current;
 
-  const togglePlaying = () => {
-    setIsPlaying(!isPlaying);
-    setIsReady(!isReady);
-    // if (audioRef.current) {
-    //   isPlaying ? audioRef.current.pause() : audioRef.current.play();
-    // }
-  };
+    const togglePlaying = () => {
+      if (!isActive) {
+        currentAudioTrack.src = link;
+        currentAudioTrack.load();
+        setActiveAudio(index);
+      }
 
-  const onLoadedMetadata = () => {
-    setDuration(audioRef.current.duration);
-  };
+      setIsPlaying(!isPlaying);
+      isPlaying ? ref.current.pause() : ref.current.play();
+    };
 
-  const onTimeUpdate = () => {
-    setMediaTime(audioRef.current.currentTime);
-  };
+    useEffect(
+      function activateOrDeactivateTrack() {
+        if (isActive) {
+          setTrackDuration(duration);
+          setTrackElapsedTime(elapsedTime);
+        } else {
+          setTrackDuration(0);
+          setTrackElapsedTime(0);
+        }
+      },
+      [isActive, duration, elapsedTime]
+    );
 
-  const onScrubberChange = (event) => {
-    const newTime = event.target.value;
-    setMediaTime(newTime);
-    audioRef.current.currentTime = newTime;
-  };
+    useEffect(
+      function clearControllersWhenSwitched() {
+        if (!isActive && isPlaying) {
+          setIsPlaying(false);
+          mediaTimeRef.current.style.backgroundSize = "0";
+        }
+      },
+      [isActive, isPlaying]
+    );
 
-  useEffect(() => {
-    if (mediaTimeRef.current) {
-      const progressBar = mediaTimeRef.current;
-      const value = mediaTime;
-      const max = progressBar.max;
-      progressBar.style.backgroundSize = `${(value / +max) * 100}% 100%`;
-    }
-  }, [mediaTime]);
+    useEffect(
+      function updateElapsedProgress() {
+        if (mediaTimeRef.current && isActive) {
+          const progressBar = mediaTimeRef.current;
+          const value = trackElapsedTime;
+          const max = progressBar.max;
+          progressBar.style.backgroundSize = `${(value / +max) * 100}% 100%`;
+        }
+      },
+      [trackElapsedTime]
+    );
 
-  return (
-    <div
-      className={styles.playerContainer}
-      // style={isReady ? { backgroundColor: "#93c4c1" } : null}
-    >
-      <p>{`${isPlaying}`}</p>
-      <button className={styles.playButton} onClick={togglePlaying}>
-        {isPlaying ? (
-          <img
-            className={styles.playIcon}
-            src={pauseSrc}
-            alt="play-button"
-            loading="eager"
-          />
-        ) : (
-          <img
-            className={styles.playIcon}
-            src={playSrc}
-            alt="play-button"
-            loading="eager"
-          />
-        )}
-      </button>
-      <input
-        className={styles.timeScrubber}
-        type="range"
-        id="time-scrubber"
-        value={mediaTime}
-        min={0}
-        max={duration}
-        onChange={onScrubberChange}
-        ref={mediaTimeRef}
-      />
+    // const onScrubberChange = (event) => {
+    //   const newTime = event.target.value;
+    //   setMediaTime(newTime);
+    //   audioRef.current.currentTime = newTime;
+    // };
 
-      <div className={styles.timeValue}>{formatTime(mediaTime)}</div>
+    return (
+      <div
+        className={styles.playerContainer}
+        // style={isReady ? { backgroundColor: "#93c4c1" } : null}
+      >
+        <p>{`${isPlaying}`}</p>
+        <button className={styles.playButton} onClick={togglePlaying}>
+          {isPlaying ? (
+            <img
+              className={styles.playIcon}
+              src={pauseSrc}
+              alt="play-button"
+              loading="eager"
+            />
+          ) : (
+            <img
+              className={styles.playIcon}
+              src={playSrc}
+              alt="play-button"
+              loading="eager"
+            />
+          )}
+        </button>
+        <input
+          className={styles.timeScrubber}
+          type="range"
+          id="time-scrubber"
+          value={trackElapsedTime}
+          min={0}
+          max={trackDuration}
+          // onChange={onScrubberChange}
+          ref={mediaTimeRef}
+        />
 
-      {isReady && (
-        <audio
-          className={styles.audioPlayer}
-          onLoadedMetadata={onLoadedMetadata}
-          onTimeUpdate={onTimeUpdate}
-          preload="metadata"
-          ref={audioRef}
-          // onCanPlayThrough={() => {
-          //   setIsReady(true);
-          // }}
-          onPlay={() => {
-            setIsPlaying(true);
-          }}
-          onPause={() => {
-            setIsPlaying(false);
-          }}
-          onEnded={() => {
-            setIsPlaying(false);
-          }}
-        >
-          <source src={srcLink} type="audio/mpeg" />
-          Your browser does not support the audio element.
-        </audio>
-      )}
-    </div>
-  );
-}
+        <div className={styles.timeValue}>{formatTime(trackElapsedTime)}</div>
+      </div>
+    );
+  }
+);
 
 export default AudioPlayer;
