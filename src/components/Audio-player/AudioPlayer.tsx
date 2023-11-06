@@ -75,7 +75,9 @@ const AudioPlayer = forwardRef(
       function clearControllersWhenSwitched() {
         if (!isActive && isPlaying) {
           setIsPlaying(false);
-          mediaTimeRef.current.style.backgroundSize = "0";
+          if (mediaTimeRef.current) {
+            mediaTimeRef.current.style.backgroundSize = "0";
+          }
         }
       },
       [isActive, isPlaying]
@@ -90,14 +92,15 @@ const AudioPlayer = forwardRef(
           progressBar.style.backgroundSize = `${(value / +max) * 100}% 100%`;
         }
       },
-      [trackElapsedTime]
+      [trackElapsedTime, isActive]
     );
 
-    // const onScrubberChange = (event) => {
-    //   const newTime = event.target.value;
-    //   setMediaTime(newTime);
-    //   audioRef.current.currentTime = newTime;
-    // };
+    const onScrubberChange = (event) => {
+      if (isActive) {
+        const newTime = event.target.value;
+        currentAudioTrack.currentTime = newTime;
+      }
+    };
 
     return (
       <div className={styles.playerContainer}>
@@ -129,7 +132,7 @@ const AudioPlayer = forwardRef(
               value={trackElapsedTime}
               min={0}
               max={trackDuration}
-              // onChange={onScrubberChange}
+              onChange={onScrubberChange}
               ref={mediaTimeRef}
             />
 

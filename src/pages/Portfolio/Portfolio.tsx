@@ -52,14 +52,7 @@ function Portfolio() {
       <div className={styles.genresSection}>
         <div className={styles.genresContainer}>
           <div className={styles.genresList}>
-            <button
-              className={styles.genreButton}
-              onClick={() => {
-                console.log(audioRef.current.currentSrc);
-              }}
-            >
-              CLASSICAL
-            </button>
+            <button className={styles.genreButton}>CLASSICAL</button>
             <button className={styles.genreButton}>CONTEMPORARY</button>
             <button className={styles.genreButton}>VINTAGE</button>
             <button className={styles.genreButton}>ELECTRONIC</button>
@@ -76,7 +69,7 @@ function Portfolio() {
         ref={audioRef}
         onTimeUpdate={onTimeUpdate}
         onLoadedMetadata={onLoadedMetadata}
-        onCanPlay={() => {
+        onPlaying={() => {
           setIsLoading(false);
         }}
         onWaiting={() => {
