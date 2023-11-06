@@ -104,7 +104,7 @@ const AudioPlayer = forwardRef(
 
     return (
       <div className={styles.playerContainer}>
-        {isLoading ? (
+        {isLoading && isActive ? (
           <Preloader content={"preloader"} />
         ) : (
           <>
