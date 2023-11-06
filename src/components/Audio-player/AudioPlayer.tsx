@@ -115,6 +115,8 @@ const AudioPlayer = forwardRef(
                   src={pauseSrc}
                   alt="play-button"
                   loading="eager"
+                  rel="preload"
+                  decoding="sync"
                 />
               ) : (
                 <img
