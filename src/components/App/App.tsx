@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { Suspense, lazy } from "react";
-import Home from "../../pages/Home";
+import Home from "../../pages/Home/Home";
 import Layout from "../Layout/Layout";
 import Preloader from "../Preloader/Preloader";
 
