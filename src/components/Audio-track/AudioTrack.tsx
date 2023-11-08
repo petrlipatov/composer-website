@@ -1,4 +1,4 @@
-import styles from "./AudioElement.module.css";
+import styles from "./AudioTrack.module.css";
 import playSrc from "../../assets/images/play-button.svg";
 import {
   useState,
@@ -8,33 +8,35 @@ import {
   SetStateAction,
 } from "react";
 import imgSrc from "../../assets/images/imgPlayer.webp";
-import AudioPlayer from "../Audio-player/AudioPlayer";
+import AudioPlayer from "../Audio-player-view/AudioPlayerView";
 
-type AudioElementProps = {
+type playerState = {
+  elapsedTime: number;
+  duration: number;
+  isLoading: boolean;
+};
+
+type AudioTrackProps = {
   index: number;
   name: string;
   link: string;
-  duration: number;
-  elapsedTime: number;
-  isLoading: boolean;
-  setIsLoading: Dispatch<SetStateAction<boolean>>;
-  isActive: boolean;
-  setActiveAudio: Dispatch<SetStateAction<number>>;
+  isAudioTrackPlaying: boolean;
+  setPlayingAudioTrack: Dispatch<SetStateAction<number>>;
+  playerState: playerState;
+  setPlayerState: Dispatch<SetStateAction<playerState>>;
 };
 
-const AudioElement = forwardRef(
+const AudioTrack = forwardRef(
   (
     {
       index,
       name,
       link,
-      duration,
-      elapsedTime,
-      isLoading,
-      setIsLoading,
-      isActive,
-      setActiveAudio,
-    }: AudioElementProps,
+      isAudioTrackPlaying,
+      setPlayingAudioTrack,
+      playerState,
+      setPlayerState,
+    }: AudioTrackProps,
     ref: RefObject<HTMLAudioElement>
   ) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -64,12 +66,10 @@ const AudioElement = forwardRef(
               <AudioPlayer
                 index={index}
                 link={link}
-                duration={duration}
-                elapsedTime={elapsedTime}
-                isLoading={isLoading}
-                setIsLoading={setIsLoading}
-                isActive={isActive}
-                setActiveAudio={setActiveAudio}
+                isAudioTrackPlaying={isAudioTrackPlaying}
+                setPlayingAudioTrack={setPlayingAudioTrack}
+                playerState={playerState}
+                setPlayerState={setPlayerState}
                 ref={ref}
               />
             </div>
@@ -81,4 +81,4 @@ const AudioElement = forwardRef(
   }
 );
 
-export default AudioElement;
+export default AudioTrack;

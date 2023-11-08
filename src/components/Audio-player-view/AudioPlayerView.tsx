@@ -1,4 +1,4 @@
-import styles from "./AudioPlayer.module.css";
+import styles from "./AudioPlayerView.module.css";
 import React, {
   useRef,
   useState,
@@ -13,15 +13,19 @@ import pauseSrc from "../../assets/images/pause-icon.svg";
 import { formatTime } from "../../utils/formatTime";
 import Preloader from "../Preloader/Preloader";
 
+type audioState = {
+  elapsedTime: number;
+  duration: number;
+  isLoading: boolean;
+};
+
 type AudioPlayerProps = {
   index: number;
   link: string;
-  duration: number;
-  elapsedTime: number;
-  isLoading: boolean;
-  setIsLoading: Dispatch<SetStateAction<boolean>>;
-  isActive: boolean;
-  setActiveAudio: Dispatch<SetStateAction<number>>;
+  isAudioTrackPlaying: boolean;
+  setPlayingAudioTrack: Dispatch<SetStateAction<number>>;
+  playerState: audioState;
+  setPlayerState: Dispatch<SetStateAction<audioState>>;
 };
 
 const AudioPlayer = forwardRef(
@@ -29,12 +33,10 @@ const AudioPlayer = forwardRef(
     {
       index,
       link,
-      duration,
-      elapsedTime,
-      isLoading,
-      setIsLoading,
-      isActive,
-      setActiveAudio,
+      isAudioTrackPlaying,
+      setPlayingAudioTrack,
+      playerState,
+      setPlayerState,
     }: AudioPlayerProps,
     ref: RefObject<HTMLAudioElement>
   ) => {
@@ -43,15 +45,17 @@ const AudioPlayer = forwardRef(
     const [trackDuration, setTrackDuration] = useState(0);
     const [trackElapsedTime, setTrackElapsedTime] = useState(0);
 
+    const { duration, elapsedTime, isLoading } = playerState;
+
     const mediaTimeRef = useRef<HTMLInputElement>();
     const currentAudioTrack = ref.current;
 
     const togglePlaying = () => {
-      if (!isActive) {
-        setIsLoading(true);
+      if (!isAudioTrackPlaying) {
+        setPlayerState({ ...playerState, isLoading: true });
         currentAudioTrack.src = link;
         currentAudioTrack.load();
-        setActiveAudio(index);
+        setPlayingAudioTrack(index);
       }
 
       setIsPlaying(!isPlaying);
@@ -60,7 +64,7 @@ const AudioPlayer = forwardRef(
 
     useEffect(
       function activateOrDeactivateTrack() {
-        if (isActive) {
+        if (isAudioTrackPlaying) {
           setTrackDuration(duration);
           setTrackElapsedTime(elapsedTime);
         } else {
@@ -68,35 +72,35 @@ const AudioPlayer = forwardRef(
           setTrackElapsedTime(0);
         }
       },
-      [isActive, duration, elapsedTime]
+      [isAudioTrackPlaying, duration, elapsedTime]
     );
 
     useEffect(
       function clearControllersWhenSwitched() {
-        if (!isActive && isPlaying) {
+        if (!isAudioTrackPlaying && isPlaying) {
           setIsPlaying(false);
           if (mediaTimeRef.current) {
             mediaTimeRef.current.style.backgroundSize = "0";
           }
         }
       },
-      [isActive, isPlaying]
+      [isAudioTrackPlaying, isPlaying]
     );
 
     useEffect(
       function updateElapsedProgress() {
-        if (mediaTimeRef.current && isActive) {
+        if (mediaTimeRef.current && isAudioTrackPlaying) {
           const progressBar = mediaTimeRef.current;
           const value = trackElapsedTime;
           const max = progressBar.max;
           progressBar.style.backgroundSize = `${(value / +max) * 100}% 100%`;
         }
       },
-      [trackElapsedTime, isActive]
+      [trackElapsedTime, isAudioTrackPlaying]
     );
 
     const onScrubberChange = (event) => {
-      if (isActive) {
+      if (isAudioTrackPlaying) {
         const newTime = event.target.value;
         currentAudioTrack.currentTime = newTime;
       }
@@ -104,7 +108,7 @@ const AudioPlayer = forwardRef(
 
     return (
       <div className={styles.playerContainer}>
-        {isLoading && isActive ? (
+        {isLoading && isAudioTrackPlaying ? (
           <Preloader content={"preloader"} />
         ) : (
           <>

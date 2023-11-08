@@ -6,7 +6,7 @@ import logoSrc from "../../assets/images/logo_vertical.png";
 
 import Toggler from "./Toggler/Toggler";
 import { useState, useRef } from "react";
-import AudioElement from "../../components/Audio-element/AudioElement";
+import AudioTrack from "../../components/Audio-track/AudioTrack";
 import mp3Src from "../../assets/Theory-of-Light-Master.mp3";
 import mp3Src2 from "../../assets/Free_Test_Data_2MB_MP3.mp3";
 
@@ -20,21 +20,33 @@ import mp3Src2 from "../../assets/Free_Test_Data_2MB_MP3.mp3";
 //   | "chamber"
 //   | "borroque";
 
+type playerState = {
+  elapsedTime: number;
+  duration: number;
+  isLoading: boolean;
+};
+
 function Portfolio() {
-  const [activeAudio, setActiveAudio] = useState(undefined);
-  const [elapsedTime, setElapsedTime] = useState(0);
-  const [duration, setDuration] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
+  const [playingAudioTrack, setPlayingAudioTrack] = useState(undefined);
+  const [playerState, setPlayerState] = useState<playerState>({
+    elapsedTime: 0,
+    duration: 0,
+    isLoading: false,
+  });
+
   // const [category, setCategory] = useState<Genres>(undefined);
   // const [genre, setGenre] = useState<Genres>(undefined);
   const audioRef = useRef<HTMLAudioElement>();
 
   const onTimeUpdate = () => {
-    setElapsedTime(audioRef.current.currentTime);
+    setPlayerState({
+      ...playerState,
+      elapsedTime: audioRef.current.currentTime,
+    });
   };
 
   const onLoadedMetadata = () => {
-    setDuration(audioRef.current.duration);
+    setPlayerState({ ...playerState, duration: audioRef.current.duration });
   };
 
   return (
@@ -69,39 +81,31 @@ function Portfolio() {
         ref={audioRef}
         onTimeUpdate={onTimeUpdate}
         onLoadedMetadata={onLoadedMetadata}
-        onPlaying={() => {
-          setIsLoading(false);
-        }}
-        onWaiting={() => {
-          setIsLoading(true);
-        }}
+        onPlaying={() => setPlayerState({ ...playerState, isLoading: false })}
+        onWaiting={() => setPlayerState({ ...playerState, isLoading: true })}
       >
         <source src="" type="audio/mpeg" />
         Your browser does not support the audio element.
       </audio>
       <div className={styles.trackListSection}>
-        <AudioElement
+        <AudioTrack
           index={0}
           name={"REVIVAL OF THE UNKNOWN"}
           link={mp3Src}
-          duration={duration}
-          elapsedTime={elapsedTime}
-          isLoading={isLoading}
-          setIsLoading={setIsLoading}
-          isActive={0 === activeAudio}
-          setActiveAudio={setActiveAudio}
+          playerState={playerState}
+          setPlayerState={setPlayerState}
+          isAudioTrackPlaying={0 === playingAudioTrack}
+          setPlayingAudioTrack={setPlayingAudioTrack}
           ref={audioRef}
         />
-        <AudioElement
+        <AudioTrack
           index={1}
-          name={"REVIVAL OF THE UNKNOWN"}
+          name={"Test"}
           link={mp3Src2}
-          duration={duration}
-          elapsedTime={elapsedTime}
-          isLoading={isLoading}
-          setIsLoading={setIsLoading}
-          isActive={1 === activeAudio}
-          setActiveAudio={setActiveAudio}
+          playerState={playerState}
+          setPlayerState={setPlayerState}
+          isAudioTrackPlaying={1 === playingAudioTrack}
+          setPlayingAudioTrack={setPlayingAudioTrack}
           ref={audioRef}
         />
       </div>
