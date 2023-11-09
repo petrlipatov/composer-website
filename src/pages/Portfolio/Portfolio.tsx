@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import nameSrc from "../../assets/images/name.svg";
 import titleSrc from "../../assets/images/title.svg";
 import logoSrc from "../../assets/images/logo_vertical.png";
-import { playerState } from "./types";
 import Toggler from "./Toggler/Toggler";
 import { useState, useRef, createContext } from "react";
 import AudioTrack from "../../components/Audio-Track/AudioTrack";
