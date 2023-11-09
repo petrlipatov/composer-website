@@ -23,7 +23,7 @@ import { Link } from "react-router-dom";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const YouTubePlayer = React.lazy(
-  () => import("../../components/Youtube-player/YoutubePlayer")
+  () => import("../../components/Youtube-Player/YoutubePlayer")
 );
 
 export default function Home() {

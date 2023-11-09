@@ -5,7 +5,7 @@ import titleSrc from "../../assets/images/title.svg";
 import logoSrc from "../../assets/images/logo_vertical.png";
 import Toggler from "./Toggler/Toggler";
 import { useState, useRef, createContext } from "react";
-import AudioTrack from "../../components/Audio-Track/AudioTrack.tsx";
+import AudioTrack from "../../components/Audio-Track/AudioTrack";
 import mp3Src from "../../assets/Theory-of-Light-Master.mp3";
 import mp3Src2 from "../../assets/Free_Test_Data_2MB_MP3.mp3";
 
