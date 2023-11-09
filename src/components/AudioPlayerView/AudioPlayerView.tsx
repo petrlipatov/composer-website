@@ -98,7 +98,6 @@ const AudioPlayerView = forwardRef(
                   className={styles.playIcon}
                   src={pauseSrc}
                   alt="play-button"
-                  loading="eager"
                   rel="preload"
                   decoding="sync"
                   style={isPlaying ? {} : { display: "none" }}
@@ -108,7 +107,6 @@ const AudioPlayerView = forwardRef(
                   className={styles.playIcon}
                   src={playSrc}
                   alt="play-button"
-                  loading="eager"
                   style={isPlaying ? { display: "none" } : {}}
                 />
               </button>
