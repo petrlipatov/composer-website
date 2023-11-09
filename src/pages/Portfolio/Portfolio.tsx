@@ -3,50 +3,36 @@ import { Link } from "react-router-dom";
 import nameSrc from "../../assets/images/name.svg";
 import titleSrc from "../../assets/images/title.svg";
 import logoSrc from "../../assets/images/logo_vertical.png";
-
+import { playerState } from "./types";
 import Toggler from "./Toggler/Toggler";
-import { useState, useRef } from "react";
-import AudioTrack from "../../components/Audio-track/AudioTrack";
+import { useState, useRef, createContext } from "react";
+import AudioTrack from "../../components/Audio-Track/AudioTrack";
 import mp3Src from "../../assets/Theory-of-Light-Master.mp3";
 import mp3Src2 from "../../assets/Free_Test_Data_2MB_MP3.mp3";
 
-// type Genres =
-//   | "classical"
-//   | "contemporary"
-//   | "vintage"
-//   | "electronic"
-//   | "dark"
-//   | "folk"
-//   | "chamber"
-//   | "borroque";
-
-type playerState = {
-  elapsedTime: number;
-  duration: number;
-  isLoading: boolean;
-};
+export const PlayerContext = createContext(undefined);
 
 function Portfolio() {
-  const [playingAudioTrack, setPlayingAudioTrack] = useState(undefined);
-  const [playerState, setPlayerState] = useState<playerState>({
-    elapsedTime: 0,
-    duration: 0,
-    isLoading: false,
-  });
+  const [selectedAudioTrack, setSelectedAudioTrack] = useState(undefined);
+  const [duration, setDuration] = useState(0);
+  const [elapsedTime, setElapsedTime] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
-  // const [category, setCategory] = useState<Genres>(undefined);
-  // const [genre, setGenre] = useState<Genres>(undefined);
+  const contextValues = {
+    duration,
+    elapsedTime,
+    isLoading,
+    setIsLoading,
+  };
+
   const audioRef = useRef<HTMLAudioElement>();
 
   const onTimeUpdate = () => {
-    setPlayerState({
-      ...playerState,
-      elapsedTime: audioRef.current.currentTime,
-    });
+    setElapsedTime(audioRef.current.currentTime);
   };
 
   const onLoadedMetadata = () => {
-    setPlayerState({ ...playerState, duration: audioRef.current.duration });
+    setDuration(audioRef.current.duration);
   };
 
   return (
@@ -64,14 +50,20 @@ function Portfolio() {
       <div className={styles.genresSection}>
         <div className={styles.genresContainer}>
           <div className={styles.genresList}>
-            <button className={styles.genreButton}>CLASSICAL</button>
-            <button className={styles.genreButton}>CONTEMPORARY</button>
-            <button className={styles.genreButton}>VINTAGE</button>
-            <button className={styles.genreButton}>ELECTRONIC</button>
-            <button className={styles.genreButton}>DARK</button>
-            <button className={styles.genreButton}>FOLK</button>
-            <button className={styles.genreButton}>CHAMBER</button>
-            <button className={styles.genreButton}>BORROQUE</button>
+            <button className={styles.genreButton}>Classic</button>
+            <button className={styles.genreButton}>Contemporary</button>
+            <button className={styles.genreButton}>Vintage</button>
+            <button className={styles.genreButton}>Electro</button>
+            <button className={styles.genreButton}>Dark</button>
+            <button className={styles.genreButton}>Folk</button>
+            <button className={styles.genreButton}>Chamber</button>
+            <button className={styles.genreButton}>Borroque</button>
+            {/* <div>{`selectedAudioTrack ${selectedAudioTrack}`}</div>
+            <div>{` playerState duration ${playerState.duration}`}</div>
+            <div>{` copy duration ${duration}`}</div>
+            <div>{`audioRef duration ${
+              audioRef.current && audioRef.current.duration
+            }`}</div> */}
           </div>
           <img className={styles.logo} src={logoSrc} alt="logo" />
         </div>
@@ -81,34 +73,32 @@ function Portfolio() {
         ref={audioRef}
         onTimeUpdate={onTimeUpdate}
         onLoadedMetadata={onLoadedMetadata}
-        onPlaying={() => setPlayerState({ ...playerState, isLoading: false })}
-        onWaiting={() => setPlayerState({ ...playerState, isLoading: true })}
+        onPlaying={() => setIsLoading(false)}
+        onWaiting={() => setIsLoading(true)}
       >
         <source src="" type="audio/mpeg" />
         Your browser does not support the audio element.
       </audio>
-      <div className={styles.trackListSection}>
-        <AudioTrack
-          index={0}
-          name={"REVIVAL OF THE UNKNOWN"}
-          link={mp3Src}
-          playerState={playerState}
-          setPlayerState={setPlayerState}
-          isAudioTrackPlaying={0 === playingAudioTrack}
-          setPlayingAudioTrack={setPlayingAudioTrack}
-          ref={audioRef}
-        />
-        <AudioTrack
-          index={1}
-          name={"Test"}
-          link={mp3Src2}
-          playerState={playerState}
-          setPlayerState={setPlayerState}
-          isAudioTrackPlaying={1 === playingAudioTrack}
-          setPlayingAudioTrack={setPlayingAudioTrack}
-          ref={audioRef}
-        />
-      </div>
+      <PlayerContext.Provider value={contextValues}>
+        <div className={styles.trackListSection}>
+          <AudioTrack
+            index={0}
+            name={"REVIVAL OF THE UNKNOWN"}
+            link={mp3Src}
+            isAudioTrackSelected={0 === selectedAudioTrack}
+            setSelectedAudioTrack={setSelectedAudioTrack}
+            ref={audioRef}
+          />
+          <AudioTrack
+            index={1}
+            name={"Test"}
+            link={mp3Src2}
+            isAudioTrackSelected={1 === selectedAudioTrack}
+            setSelectedAudioTrack={setSelectedAudioTrack}
+            ref={audioRef}
+          />
+        </div>
+      </PlayerContext.Provider>
     </div>
   );
 }

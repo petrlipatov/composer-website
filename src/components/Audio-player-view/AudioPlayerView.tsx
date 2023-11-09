@@ -5,151 +5,134 @@ import React, {
   useEffect,
   forwardRef,
   RefObject,
-  Dispatch,
-  SetStateAction,
+  useContext,
 } from "react";
 import playSrc from "../../assets/images/play-button.svg";
 import pauseSrc from "../../assets/images/pause-icon.svg";
 import { formatTime } from "../../utils/formatTime";
 import Preloader from "../Preloader/Preloader";
+import { AudioPlayerViewProps } from "./types";
+import { PlayerContext } from "../../pages/Portfolio/Portfolio";
+import PlayerLoader from "./Audio-Player-Preloader/AudioPlayerPreloader";
 
-type audioState = {
-  elapsedTime: number;
-  duration: number;
-  isLoading: boolean;
-};
-
-type AudioPlayerProps = {
-  index: number;
-  link: string;
-  isAudioTrackPlaying: boolean;
-  setPlayingAudioTrack: Dispatch<SetStateAction<number>>;
-  playerState: audioState;
-  setPlayerState: Dispatch<SetStateAction<audioState>>;
-};
-
-const AudioPlayer = forwardRef(
-  (
-    {
-      index,
-      link,
-      isAudioTrackPlaying,
-      setPlayingAudioTrack,
-      playerState,
-      setPlayerState,
-    }: AudioPlayerProps,
-    ref: RefObject<HTMLAudioElement>
-  ) => {
+const AudioPlayerView = forwardRef(
+  (props: AudioPlayerViewProps, ref: RefObject<HTMLAudioElement>) => {
     1;
+
     const [isPlaying, setIsPlaying] = useState(false);
-    const [trackDuration, setTrackDuration] = useState(0);
-    const [trackElapsedTime, setTrackElapsedTime] = useState(0);
+    const [trackViewDuration, setTrackViewDuration] = useState(0);
+    const [trackViewElapsedTime, setTrackViewElapsedTime] = useState(0);
 
-    const { duration, elapsedTime, isLoading } = playerState;
+    const { index, link, isAudioTrackSelected, setSelectedAudioTrack } = props;
+    const { duration, elapsedTime, isLoading, setIsLoading } =
+      useContext(PlayerContext);
 
-    const mediaTimeRef = useRef<HTMLInputElement>();
     const currentAudioTrack = ref.current;
-
-    const togglePlaying = () => {
-      if (!isAudioTrackPlaying) {
-        setPlayerState({ ...playerState, isLoading: true });
-        currentAudioTrack.src = link;
-        currentAudioTrack.load();
-        setPlayingAudioTrack(index);
-      }
-
-      setIsPlaying(!isPlaying);
-      isPlaying ? ref.current.pause() : ref.current.play();
-    };
+    const progressBarRef = useRef<HTMLInputElement>();
+    const progressBar = progressBarRef.current;
 
     useEffect(
-      function activateOrDeactivateTrack() {
-        if (isAudioTrackPlaying) {
-          setTrackDuration(duration);
-          setTrackElapsedTime(elapsedTime);
+      function activateOrDeactivateCurrentView() {
+        if (isAudioTrackSelected) {
+          setTrackViewDuration(duration);
+          setTrackViewElapsedTime(elapsedTime);
         } else {
-          setTrackDuration(0);
-          setTrackElapsedTime(0);
+          setTrackViewDuration(0);
+          setTrackViewElapsedTime(0);
         }
       },
-      [isAudioTrackPlaying, duration, elapsedTime]
+      [isAudioTrackSelected, duration, elapsedTime]
     );
 
     useEffect(
-      function clearControllersWhenSwitched() {
-        if (!isAudioTrackPlaying && isPlaying) {
+      function clearCurrentViewControllers() {
+        if (!isAudioTrackSelected && isPlaying) {
           setIsPlaying(false);
-          if (mediaTimeRef.current) {
-            mediaTimeRef.current.style.backgroundSize = "0";
+          if (progressBar) {
+            progressBar.style.backgroundSize = "0";
           }
         }
       },
-      [isAudioTrackPlaying, isPlaying]
+      [isAudioTrackSelected, isPlaying]
     );
 
     useEffect(
-      function updateElapsedProgress() {
-        if (mediaTimeRef.current && isAudioTrackPlaying) {
-          const progressBar = mediaTimeRef.current;
-          const value = trackElapsedTime;
+      function updateCurrentViewElapsedProgress() {
+        if (progressBar && isAudioTrackSelected) {
           const max = progressBar.max;
-          progressBar.style.backgroundSize = `${(value / +max) * 100}% 100%`;
+          const progressValue = trackViewElapsedTime;
+          const relativeProgressVal = ((progressValue / +max) * 100).toFixed(1);
+          progressBar.style.backgroundSize = `${relativeProgressVal}% 100%`;
         }
       },
-      [trackElapsedTime, isAudioTrackPlaying]
+      [trackViewElapsedTime, isAudioTrackSelected]
     );
 
+    const togglePlaying = () => {
+      if (!isAudioTrackSelected) {
+        setIsLoading(true);
+        currentAudioTrack.src = link;
+        currentAudioTrack.load();
+        setSelectedAudioTrack(index);
+      }
+      setIsPlaying(!isPlaying);
+
+      isPlaying ? ref.current.pause() : ref.current.play();
+    };
+
     const onScrubberChange = (event) => {
-      if (isAudioTrackPlaying) {
+      if (isAudioTrackSelected) {
         const newTime = event.target.value;
         currentAudioTrack.currentTime = newTime;
       }
     };
 
     return (
-      <div className={styles.playerContainer}>
-        {isLoading && isAudioTrackPlaying ? (
-          <Preloader content={"preloader"} />
-        ) : (
-          <>
-            <button className={styles.playButton} onClick={togglePlaying}>
-              {isPlaying ? (
-                <img
-                  className={styles.playIcon}
-                  src={pauseSrc}
-                  alt="play-button"
-                  loading="eager"
-                  rel="preload"
-                  decoding="sync"
-                />
-              ) : (
-                <img
-                  className={styles.playIcon}
-                  src={playSrc}
-                  alt="play-button"
-                  loading="eager"
-                />
-              )}
-            </button>
-            <input
-              className={styles.timeScrubber}
-              type="range"
-              id="time-scrubber"
-              value={trackElapsedTime}
-              min={0}
-              max={trackDuration}
-              onChange={onScrubberChange}
-              ref={mediaTimeRef}
-            />
+      <>
+        <div className={styles.playerContainer}>
+          {isLoading && isAudioTrackSelected ? (
+            <PlayerLoader />
+          ) : (
+            <>
+              <button className={styles.playButton} onClick={togglePlaying}>
+                {isPlaying ? (
+                  <img
+                    className={styles.playIcon}
+                    src={pauseSrc}
+                    alt="play-button"
+                    loading="eager"
+                    rel="preload"
+                    decoding="sync"
+                  />
+                ) : (
+                  <img
+                    className={styles.playIcon}
+                    src={playSrc}
+                    alt="play-button"
+                    loading="eager"
+                  />
+                )}
+              </button>
+              <input
+                className={styles.timeScrubber}
+                type="range"
+                id="time-scrubber"
+                value={trackViewElapsedTime}
+                min={0}
+                max={trackViewDuration}
+                onChange={onScrubberChange}
+                ref={progressBarRef}
+              />
 
-            <div className={styles.timeValue}>
-              {formatTime(trackElapsedTime)}
-            </div>
-          </>
-        )}
-      </div>
+              <div className={styles.timeValue}>
+                {formatTime(trackViewElapsedTime)}
+              </div>
+            </>
+          )}
+        </div>
+      </>
     );
   }
 );
 
-export default AudioPlayer;
+export default AudioPlayerView;

@@ -8,22 +8,14 @@ import {
   SetStateAction,
 } from "react";
 import imgSrc from "../../assets/images/imgPlayer.webp";
-import AudioPlayer from "../Audio-player-view/AudioPlayerView";
-
-type playerState = {
-  elapsedTime: number;
-  duration: number;
-  isLoading: boolean;
-};
+import AudioPlayerView from "../Audio-Player-View/AudioPlayerView";
 
 type AudioTrackProps = {
   index: number;
   name: string;
   link: string;
-  isAudioTrackPlaying: boolean;
-  setPlayingAudioTrack: Dispatch<SetStateAction<number>>;
-  playerState: playerState;
-  setPlayerState: Dispatch<SetStateAction<playerState>>;
+  isAudioTrackSelected: boolean;
+  setSelectedAudioTrack: Dispatch<SetStateAction<number>>;
 };
 
 const AudioTrack = forwardRef(
@@ -32,10 +24,8 @@ const AudioTrack = forwardRef(
       index,
       name,
       link,
-      isAudioTrackPlaying,
-      setPlayingAudioTrack,
-      playerState,
-      setPlayerState,
+      isAudioTrackSelected,
+      setSelectedAudioTrack,
     }: AudioTrackProps,
     ref: RefObject<HTMLAudioElement>
   ) => {
@@ -63,13 +53,11 @@ const AudioTrack = forwardRef(
         >
           <div className={styles.content}>
             <div className={styles.audioPlayerContainer}>
-              <AudioPlayer
+              <AudioPlayerView
                 index={index}
                 link={link}
-                isAudioTrackPlaying={isAudioTrackPlaying}
-                setPlayingAudioTrack={setPlayingAudioTrack}
-                playerState={playerState}
-                setPlayerState={setPlayerState}
+                isAudioTrackSelected={isAudioTrackSelected}
+                setSelectedAudioTrack={setSelectedAudioTrack}
                 ref={ref}
               />
             </div>
