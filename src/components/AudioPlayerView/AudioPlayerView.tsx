@@ -12,7 +12,7 @@ import pauseSrc from "../../assets/images/pause-icon.svg";
 import { formatTime } from "../../utils/formatTime";
 import { AudioPlayerViewProps } from "./types";
 import { PlayerContext } from "../../pages/Portfolio/Portfolio";
-import PlayerLoader from "./Audio-Player-Preloader/AudioPlayerPreloader";
+import PlayerLoader from "./AudioPlayerPreloader/AudioPlayerPreloader";
 
 const AudioPlayerView = forwardRef(
   (props: AudioPlayerViewProps, ref: RefObject<HTMLAudioElement>) => {
