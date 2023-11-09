@@ -8,7 +8,7 @@ import {
   SetStateAction,
 } from "react";
 import imgSrc from "../../assets/images/imgPlayer.webp";
-import AudioPlayerView from "../Audio-Player-View/AudioPlayerView";
+import AudioPlayerView from "../AudioPlayerView/AudioPlayerView";
 
 type AudioTrackProps = {
   index: number;
