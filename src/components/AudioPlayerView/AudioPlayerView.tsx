@@ -94,23 +94,23 @@ const AudioPlayerView = forwardRef(
           ) : (
             <>
               <button className={styles.playButton} onClick={togglePlaying}>
-                {isPlaying ? (
-                  <img
-                    className={styles.playIcon}
-                    src={pauseSrc}
-                    alt="play-button"
-                    loading="eager"
-                    rel="preload"
-                    decoding="sync"
-                  />
-                ) : (
-                  <img
-                    className={styles.playIcon}
-                    src={playSrc}
-                    alt="play-button"
-                    loading="eager"
-                  />
-                )}
+                <img
+                  className={styles.playIcon}
+                  src={pauseSrc}
+                  alt="play-button"
+                  loading="eager"
+                  rel="preload"
+                  decoding="sync"
+                  style={isPlaying ? {} : { display: "none" }}
+                />
+
+                <img
+                  className={styles.playIcon}
+                  src={playSrc}
+                  alt="play-button"
+                  loading="eager"
+                  style={isPlaying ? { display: "none" } : {}}
+                />
               </button>
               <input
                 className={styles.timeScrubber}
