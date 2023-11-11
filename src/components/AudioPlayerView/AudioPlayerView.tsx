@@ -1,5 +1,5 @@
 import styles from "./AudioPlayerView.module.css";
-import React, {
+import {
   useRef,
   useState,
   useEffect,
@@ -12,7 +12,7 @@ import pauseSrc from "../../assets/images/pause-icon.svg";
 import { formatTime } from "../../utils/formatTime";
 import { AudioPlayerViewProps } from "./types";
 import { PlayerContext } from "../../pages/Portfolio/Portfolio";
-import PlayerLoader from "./AudioPlayerPreloader/AudioPlayerPreloader";
+import PlayerLoader from "./AudioPlayerViewPreloader/AudioPlayerPreloader";
 
 const AudioPlayerView = forwardRef(
   (props: AudioPlayerViewProps, ref: RefObject<HTMLAudioElement>) => {
@@ -97,9 +97,7 @@ const AudioPlayerView = forwardRef(
                 <img
                   className={styles.playIcon}
                   src={pauseSrc}
-                  alt="play-button"
-                  rel="preload"
-                  decoding="sync"
+                  alt="pause-button"
                   style={isPlaying ? {} : { display: "none" }}
                 />
 
@@ -113,7 +111,6 @@ const AudioPlayerView = forwardRef(
               <input
                 className={styles.timeScrubber}
                 type="range"
-                id="time-scrubber"
                 value={trackViewElapsedTime}
                 min={0}
                 max={trackViewDuration}

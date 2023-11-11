@@ -51,8 +51,8 @@ function Portfolio() {
           <div className={styles.genresList}>
             <button className={styles.genreButton}>Classic</button>
             <button className={styles.genreButton}>Contemporary</button>
-            <button className={styles.genreButton}>Vintage</button>
             <button className={styles.genreButton}>Electro</button>
+
             <button className={styles.genreButton}>Dark</button>
             <button className={styles.genreButton}>Folk</button>
             <button className={styles.genreButton}>Chamber</button>
