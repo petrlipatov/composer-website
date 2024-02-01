@@ -10,8 +10,8 @@ import React, {
 import imageSrc from "../../assets/images/logo.png";
 import nameSrc from "../../assets/images/name.svg";
 import titleSrc from "../../assets/images/title.svg";
-import arrowSrc from "../../assets/images/play-icon.svg";
-import playSrc from "../../assets/images/play-icon.svg";
+import arrowSrc from "../../assets/images/play-button.svg";
+import playSrc from "../../assets/images/play-button.svg";
 import showreelSrc from "../../assets/images/play-showreel.svg";
 import piecesSrc from "../../assets/images/pieces-f20w6.svg";
 import workSrc from "../../assets/images/work-f20w6.svg";
@@ -68,7 +68,7 @@ export default function Home() {
     return () => ctx.revert();
   }, []);
 
-  useLayoutEffect(function loopArrowsAnimation() {
+  useEffect(function loopArrowsAnimation() {
     const ctx = gsap.context(() => {
       gsap.set("[data-animate='arrow-top']", {
         xPercent: -50,
@@ -92,7 +92,7 @@ export default function Home() {
           opacity: 1,
           duration: 0.3,
         },
-        2
+        0.4
       );
 
       tlArrows.current.to(
@@ -102,7 +102,7 @@ export default function Home() {
           ease: "none",
           duration: 0,
         },
-        2.3
+        1.7
       );
 
       tlArrows.current.to(
@@ -112,7 +112,7 @@ export default function Home() {
           ease: "none",
           duration: 0,
         },
-        2.3
+        1.7
       );
 
       tlArrows.current.to(
@@ -121,9 +121,10 @@ export default function Home() {
           opacity: 0,
           duration: 0.5,
         },
-        2.8
+        1.8
       );
     }, pageRef);
+
     return () => ctx.revert();
   }, []);
 
