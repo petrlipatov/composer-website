@@ -14,13 +14,15 @@
 }
 
 .playIcon {
+  margin-left: 30px;
+  position: absolute;
   height: 15px;
   width: 15px;
 }
 
 .timeScrubber {
+  margin-left: 30px;
   width: 192px;
-  margin-left: 10px;
 }
 
 .timeValue {
@@ -35,7 +37,7 @@
 input[type="range"] {
   -webkit-appearance: none;
   width: 100%;
-  height: 5px;
+  height: 4px;
   background-image: linear-gradient(#424144, #424144);
   background-size: 0% 100%;
   background-repeat: no-repeat;

@@ -30,6 +30,11 @@ const AudioPlayerView = forwardRef(
     const progressBarRef = useRef<HTMLInputElement>();
     const progressBar = progressBarRef.current;
 
+    // if (currentAudioTrack?.duration > 0) {
+    //   console.log(currentAudioTrack?.buffered.end(0));
+    //   console.log(currentAudioTrack?.duration);
+    // }
+
     useEffect(
       function activateOrDeactivateCurrentView() {
         if (isAudioTrackSelected) {
@@ -98,14 +103,14 @@ const AudioPlayerView = forwardRef(
                   className={styles.playIcon}
                   src={pauseSrc}
                   alt="pause-button"
-                  style={isPlaying ? {} : { display: "none" }}
+                  style={isPlaying ? {} : { visibility: "hidden" }}
                 />
 
                 <img
                   className={styles.playIcon}
                   src={playSrc}
                   alt="play-button"
-                  style={isPlaying ? { display: "none" } : {}}
+                  style={isPlaying ? { visibility: "hidden" } : {}}
                 />
               </button>
               <input
