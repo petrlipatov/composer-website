@@ -74,10 +74,10 @@ const AudioPlayerView = forwardRef(
 
     const togglePlaying = () => {
       if (!isAudioTrackSelected) {
-        setIsLoading(true);
         currentAudioTrack.src = link;
         currentAudioTrack.load();
         setSelectedAudioTrack(index);
+        setIsLoading(true);
       }
       setIsPlaying(!isPlaying);
 
