@@ -165,11 +165,13 @@ export default function Home() {
         left: "50%",
         top: "220px",
         y: 350,
-        opacity: 0,
+        display: "none",
+        autoAlpha: 0,
         duration: 0.5,
       });
 
       gsap.set("[data-animate='links']", {
+        display: "none",
         position: "absolute",
         xPercent: -50,
         top: "75%",
@@ -180,7 +182,8 @@ export default function Home() {
       tlSections.current.to(
         "[data-animate='showreel']",
         {
-          opacity: 1,
+          display: "flex",
+          autoAlpha: 1,
           y: 0,
           duration: 1,
           ease: "power3.inOut",
@@ -191,7 +194,7 @@ export default function Home() {
       tlSections.current.to(
         "[data-animate='showreel']",
         {
-          opacity: 0,
+          autoAlpha: 0,
           y: -90,
           duration: 1,
           ease: "power3.inOut",
@@ -201,6 +204,7 @@ export default function Home() {
       tlSections.current.to(
         "[data-animate='links']",
         {
+          display: "flex",
           opacity: 1,
           top: "30%",
           duration: 1,
