@@ -94,6 +94,7 @@ const AudioPlayerView = forwardRef(
     return (
       <>
         <div className={styles.playerContainer}>
+          <div>{`${isPlaying}`}</div>
           {isLoading && isAudioTrackSelected ? (
             <PlayerLoader />
           ) : (
