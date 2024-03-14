@@ -44,7 +44,7 @@ const AudioTrack = forwardRef(
             src={playSrc}
             alt="play-logo"
           />
-          <p className={styles.title}>{`${index + 1}. ${name}`}</p>
+          <p className={styles.title}>{`${name}`}</p>
         </div>
 
         <div

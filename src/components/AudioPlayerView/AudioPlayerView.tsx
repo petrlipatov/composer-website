@@ -91,47 +91,45 @@ const AudioPlayerView = forwardRef(
       }
     };
 
-    return (
-      <>
-        <div className={styles.playerContainer}>
-          <div>{`${isPlaying}`}</div>
-          {isLoading && isAudioTrackSelected ? (
-            <PlayerLoader />
-          ) : (
-            <>
-              <button className={styles.playButton} onClick={togglePlaying}>
-                <img
-                  className={styles.playIcon}
-                  src={pauseSrc}
-                  alt="pause-button"
-                  style={isPlaying ? {} : { visibility: "hidden" }}
-                />
+    return <PlayerLoader />;
+    // <div className={styles.playerContainer}>
+    //   {/* <div>{`${isPlaying}`}</div> */}
 
-                <img
-                  className={styles.playIcon}
-                  src={playSrc}
-                  alt="play-button"
-                  style={isPlaying ? { visibility: "hidden" } : {}}
-                />
-              </button>
-              <input
-                className={styles.timeScrubber}
-                type="range"
-                value={trackViewElapsedTime}
-                min={0}
-                max={trackViewDuration}
-                onChange={onScrubberChange}
-                ref={progressBarRef}
-              />
+    //   <button className={styles.playButton} onClick={togglePlaying}>
+    //     <img
+    //       className={styles.playIcon}
+    //       src={pauseSrc}
+    //       alt="pause-button"
+    //       style={isPlaying ? {} : { visibility: "hidden" }}
+    //     />
 
-              <div className={styles.timeValue}>
-                {formatTime(trackViewElapsedTime)}
-              </div>
-            </>
-          )}
-        </div>
-      </>
-    );
+    //     <img
+    //       className={styles.playIcon}
+    //       src={playSrc}
+    //       alt="play-button"
+    //       style={isPlaying ? { visibility: "hidden" } : {}}
+    //     />
+    //   </button>
+
+    //   {isLoading ? (
+    //     <input
+    //       className={styles.timeScrubber}
+    //       type="range"
+    //       value={trackViewElapsedTime}
+    //       min={0}
+    //       max={trackViewDuration}
+    //       onChange={onScrubberChange}
+    //       ref={progressBarRef}
+    //     />
+    //   ) : (
+    //     <PlayerLoader />
+    //   )}
+
+    //   <div className={styles.timeValue}>
+    //     {formatTime(trackViewElapsedTime)}
+    //   </div>
+    // </div>
+    // );
   }
 );
 
