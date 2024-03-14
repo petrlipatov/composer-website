@@ -1,19 +1,31 @@
 import { Outlet } from "react-router-dom";
 import styles from "./Layout.module.css";
-import { useState, useEffect, useRef, useLayoutEffect, RefObject } from "react";
-import { calcViewportSize } from "../../utils";
+import {
+  useState,
+  useEffect,
+  useRef,
+  useLayoutEffect,
+  RefObject,
+  createContext,
+} from "react";
+import { trackViewportSize } from "../../utils";
 import { gsap } from "gsap";
 
+export const ScreenSizeContext = createContext(null);
+
 function Layout() {
-  const [sectionHeight, setSectionHeight] = useState(window.innerHeight);
+  const [screenSize, setScreenSize] = useState({
+    height: window.innerHeight,
+    width: window.innerWidth,
+  });
 
   const layoutRef: RefObject<HTMLDivElement> = useRef(null);
 
   useEffect(() => {
-    calcViewportSize(setSectionHeight);
+    trackViewportSize(setScreenSize);
   }, []);
 
-  useLayoutEffect(() => {
+  useLayoutEffect(function revealWebsiteContent() {
     if (layoutRef.current) {
       gsap.fromTo(
         layoutRef.current,
@@ -26,10 +38,15 @@ function Layout() {
   return (
     <div
       className={styles.layoutContainer}
-      style={{ height: `${sectionHeight}px`, width: `${window.innerWidth}px` }}
+      style={{
+        height: `${screenSize.height}px`,
+        width: `${screenSize.width}px`,
+      }}
       ref={layoutRef}
     >
-      <Outlet />
+      <ScreenSizeContext.Provider value={screenSize}>
+        <Outlet />
+      </ScreenSizeContext.Provider>
     </div>
   );
 }

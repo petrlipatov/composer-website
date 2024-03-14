@@ -1,6 +1,7 @@
-export function calcViewportSize(stateSetter) {
+export function trackViewportSize(stateSetter) {
   const handleResize = () => {
-    stateSetter(window.innerHeight);
+    const { innerHeight, innerWidth } = window;
+    stateSetter({ height: innerHeight, width: innerWidth });
   };
   window.addEventListener("resize", handleResize);
   return () => {
