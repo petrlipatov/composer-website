@@ -1,6 +1,6 @@
 import styles from "./Toggler.module.css";
-import piecesSrc from "../../../assets/images/pieces-f20w6.svg";
-import workSrc from "../../../assets/images/work-f20w6.svg";
+import piecesSrc from "../../../../assets/images/pieces-f20w6.svg";
+import workSrc from "../../../../assets/images/work-f20w6.svg";
 // import cn from "classnames";
 
 function Toggler() {
