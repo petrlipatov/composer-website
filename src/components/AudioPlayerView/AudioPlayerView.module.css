@@ -3,6 +3,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  /* border: 1px solid red; */
 }
 
 .playButton {
@@ -14,15 +15,14 @@
 }
 
 .playIcon {
-  margin-left: 30px;
-  position: absolute;
+  margin-left: 15px;
   height: 15px;
   width: 15px;
 }
 
 .timeScrubber {
-  margin-left: 30px;
-  width: 192px;
+  margin-left: 8px;
+  /* width: 192px; */
 }
 
 .timeValue {

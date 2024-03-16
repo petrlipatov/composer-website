@@ -90,46 +90,46 @@ const AudioPlayerView = forwardRef(
         currentAudioTrack.currentTime = newTime;
       }
     };
+    console.log(isLoading);
+    return (
+      <div className={styles.playerContainer}>
+        {/* <div>{`${isPlaying}`}</div> */}
 
-    return <PlayerLoader />;
-    // <div className={styles.playerContainer}>
-    //   {/* <div>{`${isPlaying}`}</div> */}
+        <button className={styles.playButton} onClick={togglePlaying}>
+          <img
+            className={styles.playIcon}
+            src={pauseSrc}
+            alt="pause-button"
+            style={isPlaying ? {} : { display: "none" }}
+          />
 
-    //   <button className={styles.playButton} onClick={togglePlaying}>
-    //     <img
-    //       className={styles.playIcon}
-    //       src={pauseSrc}
-    //       alt="pause-button"
-    //       style={isPlaying ? {} : { visibility: "hidden" }}
-    //     />
+          <img
+            className={styles.playIcon}
+            src={playSrc}
+            alt="play-button"
+            style={isPlaying ? { display: "none" } : {}}
+          />
+        </button>
 
-    //     <img
-    //       className={styles.playIcon}
-    //       src={playSrc}
-    //       alt="play-button"
-    //       style={isPlaying ? { visibility: "hidden" } : {}}
-    //     />
-    //   </button>
+        {isLoading && isPlaying ? (
+          <PlayerLoader />
+        ) : (
+          <input
+            className={styles.timeScrubber}
+            type="range"
+            value={trackViewElapsedTime}
+            min={0}
+            max={trackViewDuration}
+            onChange={onScrubberChange}
+            ref={progressBarRef}
+          />
+        )}
 
-    //   {isLoading ? (
-    //     <input
-    //       className={styles.timeScrubber}
-    //       type="range"
-    //       value={trackViewElapsedTime}
-    //       min={0}
-    //       max={trackViewDuration}
-    //       onChange={onScrubberChange}
-    //       ref={progressBarRef}
-    //     />
-    //   ) : (
-    //     <PlayerLoader />
-    //   )}
-
-    //   <div className={styles.timeValue}>
-    //     {formatTime(trackViewElapsedTime)}
-    //   </div>
-    // </div>
-    // );
+        <div className={styles.timeValue}>
+          {formatTime(trackViewElapsedTime)}
+        </div>
+      </div>
+    );
   }
 );
 
