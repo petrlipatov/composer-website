@@ -93,8 +93,6 @@ const AudioPlayerView = forwardRef(
     console.log(isLoading);
     return (
       <div className={styles.playerContainer}>
-        {/* <div>{`${isPlaying}`}</div> */}
-
         <button className={styles.playButton} onClick={togglePlaying}>
           <img
             className={styles.playIcon}

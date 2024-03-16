@@ -1,22 +1,21 @@
 .playerContainer {
-  position: relative;
+  align-items: center;
   display: flex;
   justify-content: center;
-  align-items: center;
-  /* border: 1px solid red; */
+  position: relative;
 }
 
 .playButton {
-  display: flex;
-  justify-content: center;
   align-items: center;
   background-color: transparent;
   border: none;
+  display: flex;
+  justify-content: center;
 }
 
 .playIcon {
-  margin-left: 15px;
   height: 15px;
+  margin-left: 15px;
   width: 15px;
 }
 
@@ -26,21 +25,21 @@
 }
 
 .timeValue {
+  color: #424144;
+  font-size: 10px;
+  font-weight: 600;
   position: absolute;
   right: 2px;
   top: -8px;
-  font-size: 10px;
-  font-weight: 600;
-  color: #424144;
 }
 
 input[type="range"] {
-  -webkit-appearance: none;
-  width: 100%;
-  height: 4px;
   background-image: linear-gradient(#424144, #424144);
   background-size: 0% 100%;
   background-repeat: no-repeat;
+  height: 4px;
+  width: 100%;
+  -webkit-appearance: none;
 }
 
 input[type="range"]::-webkit-slider-thumb {
@@ -52,8 +51,8 @@ input[type="range"]::-moz-range-thumb {
 }
 
 input[type="range"]::-webkit-slider-runnable-track {
-  -webkit-appearance: none;
-  box-shadow: none;
-  border: none;
   background: transparent;
+  border: none;
+  box-shadow: none;
+  -webkit-appearance: none;
 }
