@@ -52,7 +52,6 @@ function PortfolioMobile() {
             <button className={styles.genreButton}>Classic</button>
             <button className={styles.genreButton}>Contemporary</button>
             <button className={styles.genreButton}>Electro</button>
-
             <button className={styles.genreButton}>Dark</button>
             <button className={styles.genreButton}>Folk</button>
             <button className={styles.genreButton}>Chamber</button>
@@ -61,6 +60,7 @@ function PortfolioMobile() {
           <img className={styles.logo} src={logoSrc} alt="logo" />
         </div>
       </div>
+
       <audio
         preload="none"
         ref={audioRef}
@@ -72,6 +72,7 @@ function PortfolioMobile() {
         <source src="" type="audio/mpeg" />
         Your browser does not support the audio element.
       </audio>
+
       <PlayerContext.Provider value={contextValues}>
         <div className={styles.trackListSection}>
           <AudioTrack
@@ -82,9 +83,10 @@ function PortfolioMobile() {
             setSelectedAudioTrack={setSelectedAudioTrack}
             ref={audioRef}
           />
+
           <AudioTrack
             index={1}
-            name={"Test"}
+            name={"REVIVAL OF THE UNKNOWN"}
             link={mp3Src2}
             isAudioTrackSelected={1 === selectedAudioTrack}
             setSelectedAudioTrack={setSelectedAudioTrack}
