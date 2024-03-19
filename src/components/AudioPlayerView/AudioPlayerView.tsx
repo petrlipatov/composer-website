@@ -90,7 +90,7 @@ const AudioPlayerView = forwardRef(
         currentAudioTrack.currentTime = newTime;
       }
     };
-    console.log(isLoading);
+
     return (
       <div className={styles.playerContainer}>
         <button className={styles.playButton} onClick={togglePlaying}>

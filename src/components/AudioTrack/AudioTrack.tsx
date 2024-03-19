@@ -1,4 +1,4 @@
-import styles from "./AudioTrack.module.css";
+import s from "./AudioTrack.module.css";
 import playSrc from "../../assets/images/play-button.svg";
 import {
   useState,
@@ -36,23 +36,23 @@ const AudioTrack = forwardRef(
     };
 
     return (
-      <div className={styles.audioElementContainer}>
-        <div className={styles.track} onClick={handleTrackClick}>
+      <div className={s.audioElementContainer}>
+        <div className={s.trackLabel} onClick={handleTrackClick}>
           <img
-            className={styles.playButton}
+            className={s.playButton}
             style={{ transform: isOpen ? "rotate(90deg)" : "rotate(0deg)" }}
             src={playSrc}
             alt="play-logo"
           />
-          <p className={styles.title}>{`${name}`}</p>
+          <p className={s.title}>{`${name}`}</p>
         </div>
 
         <div
-          className={styles.contentContainer}
+          className={s.contentContainer}
           style={{ display: isOpen ? "flex" : "none" }}
         >
-          <div className={styles.content}>
-            <div className={styles.audioPlayerContainer}>
+          <div className={s.content}>
+            <div className={s.audioPlayerContainer}>
               <AudioPlayerView
                 index={index}
                 link={link}
@@ -61,7 +61,7 @@ const AudioTrack = forwardRef(
                 ref={ref}
               />
             </div>
-            <img className={styles.videoPlayer} src={imgSrc} loading="lazy" />
+            <img className={s.videoPlayer} src={imgSrc} loading="lazy" />
           </div>
         </div>
       </div>

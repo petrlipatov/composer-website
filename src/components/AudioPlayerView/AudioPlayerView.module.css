@@ -3,6 +3,7 @@
   display: flex;
   justify-content: center;
   position: relative;
+  width: 100%;
 }
 
 .playButton {
@@ -21,7 +22,7 @@
 
 .timeScrubber {
   margin-left: 8px;
-  /* width: 192px; */
+  width: 192px;
 }
 
 .timeValue {
