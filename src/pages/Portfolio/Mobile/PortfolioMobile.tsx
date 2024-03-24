@@ -77,7 +77,7 @@ function PortfolioMobile() {
         <div className={styles.trackListSection}>
           <AudioTrack
             index={0}
-            name={"REVIVAL OF THE UNKNOWN"}
+            name={"Enumerating objects"}
             link={mp3Src}
             isAudioTrackSelected={0 === selectedAudioTrack}
             setSelectedAudioTrack={setSelectedAudioTrack}
@@ -86,7 +86,52 @@ function PortfolioMobile() {
 
           <AudioTrack
             index={1}
-            name={"REVIVAL OF THE UNKNOWN"}
+            name={"Counting objects"}
+            link={mp3Src2}
+            isAudioTrackSelected={1 === selectedAudioTrack}
+            setSelectedAudioTrack={setSelectedAudioTrack}
+            ref={audioRef}
+          />
+
+          <AudioTrack
+            index={1}
+            name={"Writing objects"}
+            link={mp3Src2}
+            isAudioTrackSelected={1 === selectedAudioTrack}
+            setSelectedAudioTrack={setSelectedAudioTrack}
+            ref={audioRef}
+          />
+
+          <AudioTrack
+            index={1}
+            name={"Resolving deltas"}
+            link={mp3Src2}
+            isAudioTrackSelected={1 === selectedAudioTrack}
+            setSelectedAudioTrack={setSelectedAudioTrack}
+            ref={audioRef}
+          />
+
+          <AudioTrack
+            index={1}
+            name={"Delta"}
+            link={mp3Src2}
+            isAudioTrackSelected={1 === selectedAudioTrack}
+            setSelectedAudioTrack={setSelectedAudioTrack}
+            ref={audioRef}
+          />
+
+          <AudioTrack
+            index={1}
+            name={"Compressing"}
+            link={mp3Src2}
+            isAudioTrackSelected={1 === selectedAudioTrack}
+            setSelectedAudioTrack={setSelectedAudioTrack}
+            ref={audioRef}
+          />
+
+          <AudioTrack
+            index={1}
+            name={"Revival"}
             link={mp3Src2}
             isAudioTrackSelected={1 === selectedAudioTrack}
             setSelectedAudioTrack={setSelectedAudioTrack}

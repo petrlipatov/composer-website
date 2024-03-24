@@ -5,6 +5,17 @@
   overflow-y: scroll;
 }
 
+.image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
 ::-webkit-scrollbar {
   opacity: 0;
 }
@@ -63,13 +74,13 @@
   height: 50px;
 }
 
-.image {
+/* .image {
   position: fixed;
   bottom: 0;
   width: 106%;
   height: auto;
   transform: translate(-3%, 3%);
-}
+} */
 
 .arrowTop {
   height: 15px;
