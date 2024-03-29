@@ -1,72 +1,49 @@
 .page {
-  position: relative;
   height: 100%;
-  overflow: scroll;
+  width: 100%;
 }
 
-.nameContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
+.content {
+  margin: 16px;
 }
 
-.name {
-  margin-left: 5%;
-  margin-top: 30px;
-}
-
-.title {
-  margin-left: 5%;
-  margin-top: 12px;
-}
-
-.togglerSection {
-  margin-top: 50px;
-}
-
-.menuContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.genresSection {
+.tagsSection {
+  gap: 16px;
   margin-top: 40px;
-  display: flex;
-  justify-content: center;
+  position: relative;
 }
 
-.genresContainer {
+.tagsList {
   display: flex;
+  font-weight: 600;
+  gap: 8px;
+  row-gap: 8px;
+  flex-wrap: wrap;
 }
 
-.genresList {
+.tracksSection {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: max-content;
+  height: 500px;
+  margin-top: 32px;
+  gap: 8px;
+  row-gap: 8px;
+  overflow-y: scroll;
+}
+
+.track {
+  height: 180px;
+  display: inline;
+  padding: 5px;
+  font-size: 24px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.trackContainer {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  row-gap: 7px;
-}
-
-.genreButton {
-  border: none;
-  background-color: transparent;
-  font-weight: 700;
-  font-size: 16px;
-  color: #424144;
-  text-transform: uppercase;
-}
-
-.logo {
-  display: block;
-  height: 220px;
-  margin-left: 20px;
-}
-
-.trackListSection {
-  margin-top: 30px;
-  display: flex;
-  flex-direction: column;
-  row-gap: 25px;
 }

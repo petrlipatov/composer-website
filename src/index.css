@@ -3,7 +3,7 @@
 }
 
 html {
-  overscroll-behavior: none;
+  /* overscroll-behavior: none; */
   overflow: hidden;
 }
 
@@ -11,10 +11,10 @@ body {
   margin: 0;
   height: 100%;
   min-width: 320px;
-  font-family: "Poppins", sans-serif;
+  font-family: "IBM Plex Mono", monospace;
   background-color: #d6d6d6;
   -webkit-text-size-adjust: none;
-  overscroll-behavior: none;
+  /* overscroll-behavior: none; */
 }
 
 #root {

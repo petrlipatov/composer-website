@@ -1,6 +1,6 @@
 import { createPortal } from "react-dom";
 import styles from "./Modal.module.css";
-import closeIconSrc from "./../../assets/images/close-icon.svg";
+import closeIconSrc from "./../../../assets/images/close-icon.svg";
 import React, {
   useLayoutEffect,
   useRef,
