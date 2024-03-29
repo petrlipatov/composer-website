@@ -1,4 +1,4 @@
-export const GENRES_WORK = {};
+export const GENRES_WORK = ["Art", "Action", "Comedy", "Drama", "Thriller"];
 
 export const GENRES_PIECES = [
   "Piano",
