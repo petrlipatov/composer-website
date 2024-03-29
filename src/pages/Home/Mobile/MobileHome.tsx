@@ -1,9 +1,9 @@
 import s from "./MobileHome.module.css";
 import React, { useRef, RefObject, useState, Suspense } from "react";
 
-import flower1_src from "../../../../assets/images/flower1.png";
-import flower2_src from "../../../../assets/images/flower2.png";
-import flower3_src from "../../../../assets/images/flower3.png";
+import flower1_src from "../../../assets/images/flower1.png";
+import flower2_src from "../../../assets/images/flower2.png";
+import flower3_src from "../../../assets/images/flower3.png";
 
 import { gsap } from "gsap";
 import { Observer } from "gsap/Observer";

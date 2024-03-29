@@ -53,12 +53,8 @@ function PiecesMobile() {
 
           <div className={s.tracksSection}>
             {filteredPieces.map((track, i) => (
-              <div className={s.trackContainer}>
-                <div
-                  className={s.track}
-                  key={i}
-                  style={{ backgroundImage: `url(${track.src})` }}
-                />
+              <div className={s.trackContainer} key={i}>
+                <img className={s.track} src={track.src} />
                 <div>{track.name}</div>
               </div>
             ))}
