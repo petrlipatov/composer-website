@@ -9,9 +9,9 @@ import {
 } from "react";
 import playSrc from "../../assets/images/play-button.svg";
 import pauseSrc from "../../assets/images/pause-icon.svg";
-import { formatTime } from "../../utils/formatTime";
+import { formatTime } from "../../utils/helpers/formatTime";
 import { AudioPlayerViewProps } from "./types";
-import { PlayerContext } from "../../pages/Albums/Mobile/PortfolioMobile";
+import { PlayerContext } from "../../pages/Pieces/Mobile/PortfolioMobile";
 import PlayerLoader from "./AudioPlayerViewPreloader/AudioPlayerPreloader";
 
 const AudioPlayerView = forwardRef(

@@ -1,21 +1,20 @@
-// import PortfolioMobile from "./Mobile/PortfolioMobile";
+import PiecesMobile from "./Mobile/PiecesMobile";
 // import { useContext } from "react";
 // import { ScreenSizeContext } from "../../components/Layout/Layout";
 
-import Logo from "../../components/Logo/Logo";
+// import Logo from "../../components/Logo/Logo";
 
-function Albums() {
+function Pieces() {
   // const screenSize = useContext(ScreenSizeContext);
 
   return (
     <div>
-      <Logo />
-      <div>Albums</div>
+      <PiecesMobile />
     </div>
   );
 }
 
-export default Albums;
+export default Pieces;
 
 // return (
 //   <>

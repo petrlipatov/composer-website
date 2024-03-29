@@ -38,8 +38,8 @@ function MobileHome() {
           Featured Work
         </Link>
 
-        <Link to="albums" className={s.link}>
-          Albums
+        <Link to="pieces" className={s.link}>
+          Pieces
         </Link>
 
         <Link to="info" className={s.link}>
