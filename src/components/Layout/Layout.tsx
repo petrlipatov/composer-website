@@ -8,7 +8,7 @@ import {
   RefObject,
   createContext,
 } from "react";
-import { trackViewportSize } from "../../utils";
+import { trackViewportSize } from "../../utils/helpers/trackViewportSize";
 import { gsap } from "gsap";
 
 export const ScreenSizeContext = createContext(null);
