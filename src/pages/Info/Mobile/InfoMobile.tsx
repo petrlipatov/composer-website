@@ -1,7 +1,7 @@
 import Logo from "../../../components/Logo/Logo";
 import s from "./InfoMobile.module.css";
 // import React, { useRef, RefObject, useState, Suspense } from "react";
-import portraitImage from "../../../../assets/images/portrait.jpg";
+import portraitImage from "../../../assets/images/portrait.jpg";
 
 function InfoMobile() {
   return (
