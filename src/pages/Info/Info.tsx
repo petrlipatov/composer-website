@@ -2,17 +2,12 @@
 // import { useContext } from "react";
 // import { ScreenSizeContext } from "../../components/Layout/Layout";
 
-import Logo from "../../components/Logo/Logo";
+import InfoMobile from "./Mobile/InfoMobile";
 
 function Info() {
   // const screenSize = useContext(ScreenSizeContext);
 
-  return (
-    <div>
-      <Logo />
-      <div>Info page</div>
-    </div>
-  );
+  return <InfoMobile />;
 }
 
 export default Info;
