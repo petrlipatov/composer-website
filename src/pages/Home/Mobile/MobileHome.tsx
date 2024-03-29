@@ -30,41 +30,43 @@ function MobileHome() {
 
   return (
     <div className={s.page} ref={pageRef}>
-      <Logo />
-      <div className={s.nav}>
-        <div className={s.button}>Showreel</div>
+      <div className={s.content} ref={pageRef}>
+        <Logo />
+        <div className={s.nav}>
+          <div className={s.button}>Showreel</div>
 
-        <Link to="work" className={s.link}>
-          Featured Work
-        </Link>
+          <Link to="work" className={s.link}>
+            Featured Work
+          </Link>
 
-        <Link to="pieces" className={s.link}>
-          Pieces
-        </Link>
+          <Link to="pieces" className={s.link}>
+            Pieces
+          </Link>
 
-        <Link to="info" className={s.link}>
-          Info
-        </Link>
+          <Link to="info" className={s.link}>
+            Info
+          </Link>
+        </div>
+        <div
+          className={s.image}
+          style={{ backgroundImage: `url(${flower1_src})` }}
+        />{" "}
+        <div
+          className={s.image}
+          style={{ backgroundImage: `url(${flower2_src})` }}
+        />{" "}
+        <div
+          className={s.image}
+          style={{ backgroundImage: `url(${flower3_src})` }}
+        />
+        {isPopupOpened && (
+          <Modal setPopupState={setPopupState}>
+            <Suspense fallback={<Preloader content={"🐥"} />}>
+              <YouTubePlayer videoId="u0dBG0AL3Cs" />
+            </Suspense>
+          </Modal>
+        )}
       </div>
-      <div
-        className={s.image}
-        style={{ backgroundImage: `url(${flower1_src})` }}
-      />{" "}
-      <div
-        className={s.image}
-        style={{ backgroundImage: `url(${flower2_src})` }}
-      />{" "}
-      <div
-        className={s.image}
-        style={{ backgroundImage: `url(${flower3_src})` }}
-      />
-      {isPopupOpened && (
-        <Modal setPopupState={setPopupState}>
-          <Suspense fallback={<Preloader content={"🐥"} />}>
-            <YouTubePlayer videoId="u0dBG0AL3Cs" />
-          </Suspense>
-        </Modal>
-      )}
     </div>
   );
 }

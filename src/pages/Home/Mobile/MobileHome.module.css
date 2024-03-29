@@ -1,8 +1,10 @@
 .page {
   height: 100%;
   width: 100%;
-  /* scroll-snap-type: y mandatory;
-  overflow-y: scroll; */
+}
+
+.content {
+  margin: 16px;
 }
 
 .image {
@@ -22,7 +24,6 @@
   font-family: "IBM Plex Mono", monospace;
   font-size: 32px;
   font-weight: 600;
-  margin-left: 16px;
   margin-top: 40vh;
 }
 
