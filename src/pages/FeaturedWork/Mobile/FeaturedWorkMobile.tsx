@@ -3,7 +3,7 @@ import { GENRES_WORK } from "../../../utils/constants";
 import s from "./FeaturedWork.module.css";
 // import React, { useRef, RefObject, useState, Suspense } from "react";
 
-import compilationImage from "../../../../assets/images/imgPlayer.webp";
+import compilationImage from "../../../assets/images/imgPlayer.webp";
 
 function FeaturedWorkMobile() {
   return (
