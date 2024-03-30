@@ -34,16 +34,58 @@
 }
 
 .track {
-  height: 180px;
-  display: inline;
-  padding: 5px;
-  font-size: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.trackImageContainer {
+  position: relative;
+}
+
+.trackImage {
+  height: auto;
+  width: 100%;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
 }
 
-.trackContainer {
+.trackImageMask {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding-top: 100%;
+}
+
+.imageMaskButtonLeft {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 4%;
+  left: 4%;
+  width: 44%;
+  height: 92%;
+  background-color: rgba(231, 57, 121, 0.85);
+}
+
+.imageMaskButtonRight {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 4%;
+  right: 4%;
+  width: 44%;
+  height: 92%;
+  background-color: rgba(231, 57, 121, 0.85);
+}
+
+.imageMaskIcon {
+  width: 40px;
+  height: 40px;
 }

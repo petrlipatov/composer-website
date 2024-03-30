@@ -3,7 +3,8 @@ import Logo from "../../../components/Logo/Logo";
 import { GENRES_PIECES, PIECES } from "../../../utils/constants";
 import s from "./PiecesMobile.module.css";
 import Tag from "../../../components/Tag/Tag";
-import img from "./../../../../public/images/track.webp";
+import tvIconSrc from "../../../assets/images/tv.svg";
+import hedphonesIconSrc from "../../../assets/images/headphones.svg";
 
 function PiecesMobile() {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
@@ -46,8 +47,20 @@ function PiecesMobile() {
 
           <div className={s.tracksSection}>
             {filteredPieces.map((track, i) => (
-              <div className={s.trackContainer} key={i}>
-                <img className={s.track} src={track.src} />
+              <div className={s.track} key={i}>
+                <div className={s.trackImageContainer}>
+                  <img className={s.trackImage} src={track.src} />
+                  <div className={s.trackImageMask}>
+                    <div className={s.imageMaskButtonLeft}>
+                      <img className={s.imageMaskIcon} src={hedphonesIconSrc} />
+                      <div>Listen</div>
+                    </div>
+                    <div className={s.imageMaskButtonRight}>
+                      <img className={s.imageMaskIcon} src={tvIconSrc} />
+                      <div>Watch</div>
+                    </div>
+                  </div>
+                </div>
                 <div>{track.name}</div>
               </div>
             ))}
