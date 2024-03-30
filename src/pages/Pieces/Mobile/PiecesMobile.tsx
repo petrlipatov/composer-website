@@ -1,11 +1,16 @@
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import Logo from "../../../components/Logo/Logo";
 import { GENRES_PIECES, PIECES } from "../../../utils/constants";
 import s from "./PiecesMobile.module.css";
 import Tag from "../../../components/Tag/Tag";
 import AudioTrack from "../../../components/AudioTrack/AudioTrack";
+import Modal from "../../../components/Modal/Modal";
+import YouTubePlayer from "../../../components/YoutubePlayer/YoutubePlayer";
+import Preloader from "../../../components/Preloader/Preloader";
 
 function PiecesMobile() {
+  const [isPopupOpened, setPopupState] = useState(false);
+  const [videoId, setVideoId] = useState<string>("");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [selectedTrack, setSelectedTrack] = useState<number>(null);
 
@@ -29,6 +34,10 @@ function PiecesMobile() {
 
   function clearTags() {
     setSelectedTags([]);
+  }
+
+  function openPopup() {
+    setPopupState(true);
   }
 
   const filteredPieces = filterPiecesByTags(selectedTags, PIECES);
@@ -59,12 +68,22 @@ function PiecesMobile() {
               imageSource={track.src}
               setSelectedTrack={setSelectedTrack}
               selectedTrack={selectedTrack}
+              setVideoId={setVideoId}
+              openPopup={openPopup}
               index={index}
               key={index}
+              youtubeId={"u0dBG0AL3Cs"}
             />
           ))}
         </div>
       </div>
+      {isPopupOpened && (
+        <Modal setPopupState={setPopupState}>
+          <Suspense fallback={<Preloader content={"🐥"} />}>
+            <YouTubePlayer videoId={videoId} />
+          </Suspense>
+        </Modal>
+      )}
     </div>
   );
 }
