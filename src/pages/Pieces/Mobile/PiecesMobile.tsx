@@ -48,7 +48,7 @@ function PiecesMobile() {
               />
             ))}
             <button className={s.tagsButton} onClick={clearTags}>
-              Clear All
+              Clear all
             </button>
           </div>
         </div>

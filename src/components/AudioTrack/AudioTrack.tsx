@@ -14,12 +14,13 @@ const AudioTrack = ({
     [s.trackImageMaskSelected]: selectedTrack === index,
   });
 
+  function handleClick() {
+    setSelectedTrack(index);
+  }
+
   return (
     <div className={s.track}>
-      <div
-        className={s.trackImageContainer}
-        onClick={() => setSelectedTrack(index)}
-      >
+      <div className={s.trackImageContainer} onClick={handleClick}>
         <img className={s.trackImage} src={imageSource} />
         <div className={trackImageMaskClasses}>
           {selectedTrack === index && (
