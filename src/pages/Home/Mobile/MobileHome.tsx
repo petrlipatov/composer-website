@@ -24,16 +24,24 @@ function MobileHome() {
 
   const pageRef: RefObject<HTMLDivElement> = useRef(null);
 
-  // function openPopup() {
-  //   setPopupState(true);
-  // }
+  function openPopup() {
+    setPopupState(true);
+  }
 
   return (
     <div className={s.page} ref={pageRef}>
-      <div className={s.content} ref={pageRef}>
+      <div
+        className={s.content}
+        onClick={() => {
+          console.log(isPopupOpened);
+        }}
+        ref={pageRef}
+      >
         <Logo />
         <div className={s.nav}>
-          <div className={s.button}>Showreel</div>
+          <div className={s.button} onClick={openPopup}>
+            Showreel
+          </div>
 
           <Link to="work" className={s.link}>
             Featured Work
