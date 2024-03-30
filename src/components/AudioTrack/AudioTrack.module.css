@@ -1,51 +1,60 @@
-.audioElementContainer {
-  align-items: center;
+.track {
+  display: flex;
+  flex-direction: column;
+}
+
+.trackImageContainer {
+  position: relative;
+}
+
+.trackImage {
+  height: auto;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.trackImageMask {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding-top: 100%;
+}
+
+.trackImageMaskSelected {
+  display: block;
+}
+
+.imageMaskButtonLeft {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 100%;
+  align-items: center;
+  position: absolute;
+  top: 4%;
+  left: 4%;
+  width: 44%;
+  height: 92%;
+  background-color: rgba(231, 57, 121, 0.85);
 }
 
-.trackLabel {
-  align-items: center;
+.imageMaskButtonRight {
   display: flex;
-  width: 65%;
-}
-
-.playButton {
-  height: 15px;
-  width: 15px;
-}
-
-.title {
-  display: block;
-  color: #424144;
-  font-weight: 600;
-  height: 15px;
-  line-height: 14px;
-  margin: 0;
-  margin-left: 12px;
-  padding: 0;
-}
-
-.contentContainer {
-  align-items: center;
   flex-direction: column;
-  overflow: hidden;
-  position: relative;
-  width: 60%;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 4%;
+  right: 4%;
+  width: 44%;
+  height: 92%;
+  background-color: rgba(231, 57, 121, 0.85);
 }
 
-.content {
-  width: 100%;
-}
-
-.audioPlayerContainer {
-  margin-top: 35px;
-}
-
-.videoPlayer {
-  display: block;
-  margin-top: 35px;
-  width: 100%;
+.imageMaskIcon {
+  width: 40px;
+  height: 40px;
 }

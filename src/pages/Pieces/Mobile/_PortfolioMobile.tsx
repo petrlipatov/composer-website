@@ -1,4 +1,4 @@
-import styles from "./PortfolioMobile.module.css";
+import styles from "./_PortfolioMobile.module.css";
 import { Link } from "react-router-dom";
 import nameSrc from "../../../assets/images/name.svg";
 import titleSrc from "../../../assets/images/title.svg";

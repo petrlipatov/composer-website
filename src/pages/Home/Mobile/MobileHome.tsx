@@ -30,13 +30,7 @@ function MobileHome() {
 
   return (
     <div className={s.page} ref={pageRef}>
-      <div
-        className={s.content}
-        onClick={() => {
-          console.log(isPopupOpened);
-        }}
-        ref={pageRef}
-      >
+      <div className={s.content} ref={pageRef}>
         <Logo />
         <div className={s.nav}>
           <div className={s.button} onClick={openPopup}>

@@ -1,24 +1,24 @@
 export const GENRES_WORK = ["Art", "Action", "Comedy", "Drama", "Thriller"];
 
 export const GENRES_PIECES = [
-  "Distorted",
-  "Easy",
-  "Eccentric",
-  "Electronic",
-  "Intense",
-  "Liquid",
-  "Misty",
-  "No vocals",
-  "Orchestral",
-  "Perplexing",
   "Piano",
-  "Punchy",
+  "Orchestral",
+  "Vintage",
+  "Electronic",
+  "Vocals",
+  "No vocals",
+  "Eccentric",
   "Solid",
+  "Intense",
   "Subtle",
+  "Punchy",
+  "Liquid",
   "Translucent",
   "Vibrant",
-  "Vintage",
-  "Vocals",
+  "Misty",
+  "Distorted",
+  "Perplexing",
+  "Easy",
 ];
 
 export const PIECES = [
