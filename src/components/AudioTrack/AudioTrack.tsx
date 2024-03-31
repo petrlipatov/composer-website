@@ -7,11 +7,14 @@ const AudioTrack = ({
   index,
   name,
   imageSource,
+  // audioSource,
   youtubeId,
   setSelectedTrack,
+  setIsPlayerOpened,
   selectedTrack,
   openPopup,
   setVideoId,
+  setSelectedTrackAudioSrc,
 }) => {
   const trackImageMaskClasses = cn(s.trackImageMask, {
     [s.trackImageMaskSelected]: selectedTrack === index,
@@ -21,9 +24,17 @@ const AudioTrack = ({
     setSelectedTrack(index);
   }
 
-  function handleVideoClick() {
+  function handleWatchClick(event) {
+    event.stopPropagation();
+    setIsPlayerOpened(false);
     setVideoId(youtubeId);
     openPopup();
+  }
+
+  function handleListenClick(event) {
+    event.stopPropagation();
+    setSelectedTrackAudioSrc("/audio/Theory-of-Light-Master.mp3");
+    setIsPlayerOpened(true);
   }
 
   return (
@@ -33,13 +44,16 @@ const AudioTrack = ({
         <div className={trackImageMaskClasses}>
           {selectedTrack === index && (
             <>
-              <div className={s.imageMaskButtonLeft}>
+              <div
+                className={s.imageMaskButtonLeft}
+                onClick={handleListenClick}
+              >
                 <img className={s.imageMaskIcon} src={hedphonesIconSrc} />
                 <div>Listen</div>
               </div>
               <div
                 className={s.imageMaskButtonRight}
-                onClick={handleVideoClick}
+                onClick={handleWatchClick}
               >
                 <img className={s.imageMaskIcon} src={tvIconSrc} />
                 <div>Watch</div>

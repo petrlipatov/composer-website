@@ -1,6 +1,6 @@
 export const GENRES_WORK = [
   "Film",
-  "Ads",
+  "Ad",
   "Videogame",
   "Fantasy",
   "Mystery",
@@ -21,7 +21,7 @@ export const GENRES_PIECES = [
   "Eccentric",
   "Solid",
   "Intense",
-  "Subtle",
+  "Serene",
   "Punchy",
   "Liquid",
   "Translucent",

@@ -3,6 +3,7 @@ import { GENRES_WORK, PIECES } from "../../../utils/constants";
 import s from "./FeaturedWork.module.css";
 // import React, { useRef, RefObject, useState, Suspense } from "react";
 import { Suspense, useState } from "react";
+import closeIconSrc from "../../../assets/images/close-icon.svg";
 
 import Tag from "../../../components/Tag/Tag";
 import AudioTrack from "../../../components/AudioTrack/AudioTrack";
@@ -11,6 +12,7 @@ import YouTubePlayer from "../../../components/YoutubePlayer/YoutubePlayer";
 import Preloader from "../../../components/Preloader/Preloader";
 
 function FeaturedWorkMobile() {
+  const [isPlayerOpened, setPlayerState] = useState(false);
   const [isPopupOpened, setPopupState] = useState(false);
   const [videoId, setVideoId] = useState<string>("");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
@@ -59,7 +61,8 @@ function FeaturedWorkMobile() {
               />
             ))}
             <button className={s.tagsButton} onClick={clearTags}>
-              Clear all
+              <img className={s.closeIcon} src={closeIconSrc} />
+              No filter
             </button>
           </div>
         </div>
@@ -71,6 +74,7 @@ function FeaturedWorkMobile() {
               imageSource={track.src}
               openPopup={openPopup}
               setSelectedTrack={setSelectedTrack}
+              setPlayerState={setPlayerState}
               selectedTrack={selectedTrack}
               index={index}
               key={index}

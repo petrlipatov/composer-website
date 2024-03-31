@@ -7,12 +7,17 @@ import AudioTrack from "../../../components/AudioTrack/AudioTrack";
 import Modal from "../../../components/Modal/Modal";
 import YouTubePlayer from "../../../components/YoutubePlayer/YoutubePlayer";
 import Preloader from "../../../components/Preloader/Preloader";
+import AudioPlayer from "../../../components/AudioPlayer/AudioPlayer";
+import closeIconSrc from "../../../assets/images/close-icon.svg";
 
 function PiecesMobile() {
+  const [isPlayerOpened, setIsPlayerOpened] = useState(false);
   const [isPopupOpened, setPopupState] = useState(false);
   const [videoId, setVideoId] = useState<string>("");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [selectedTrack, setSelectedTrack] = useState<number>(null);
+  const [selectedTrackAudioSrc, setSelectedTrackAudioSrc] =
+    useState<number>(null);
 
   const handleTagClick = (tag: string) => {
     if (selectedTags.includes(tag)) {
@@ -33,6 +38,7 @@ function PiecesMobile() {
   }
 
   function clearTags() {
+    setSelectedTrack(null);
     setSelectedTags([]);
   }
 
@@ -57,7 +63,8 @@ function PiecesMobile() {
               />
             ))}
             <button className={s.tagsButton} onClick={clearTags}>
-              Clear all
+              <img className={s.closeIcon} src={closeIconSrc} />
+              No filter
             </button>
           </div>
         </div>
@@ -67,16 +74,23 @@ function PiecesMobile() {
               name={track.name}
               imageSource={track.src}
               setSelectedTrack={setSelectedTrack}
+              setIsPlayerOpened={setIsPlayerOpened}
               selectedTrack={selectedTrack}
               setVideoId={setVideoId}
               openPopup={openPopup}
               index={index}
               key={index}
               youtubeId={"u0dBG0AL3Cs"}
+              setSelectedTrackAudioSrc={setSelectedTrackAudioSrc}
             />
           ))}
         </div>
       </div>
+      <AudioPlayer
+        isPlayerOpened={isPlayerOpened}
+        setIsPlayerOpened={setIsPlayerOpened}
+        audioSrc={selectedTrackAudioSrc}
+      />
       {isPopupOpened && (
         <Modal setPopupState={setPopupState}>
           <Suspense fallback={<Preloader content={"🐥"} />}>

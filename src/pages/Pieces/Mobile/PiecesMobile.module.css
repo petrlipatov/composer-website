@@ -27,6 +27,15 @@
   font-family: "IBM Plex Mono", monospace;
   font-weight: 600;
   color: #e7397a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.closeIcon {
+  margin-right: 6px;
+  height: 12px;
+  width: 12px;
 }
 
 .tracksSection {
