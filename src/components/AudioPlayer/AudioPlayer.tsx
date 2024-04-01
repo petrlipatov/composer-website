@@ -39,6 +39,8 @@ const AudioPlayer = forwardRef(
     const audioPlayerRef = ref.current;
     const progressBarRef = useRef<HTMLInputElement>();
     const progressBar = progressBarRef.current;
+    // const bufferBarRef = useRef<HTMLDivElement>();
+    // const bufferBar = progressBarRef.current;
 
     useEffect(
       function updateElapsedProgressOnScrubber() {
@@ -78,6 +80,7 @@ const AudioPlayer = forwardRef(
 
     return (
       <div className={playerClasses}>
+        <div className={s.title}>Track name</div>
         <button className={s.playButton} onClick={togglePlaying}>
           <img
             className={s.playIcon}
@@ -95,7 +98,7 @@ const AudioPlayer = forwardRef(
         </button>
 
         <div className={s.timeScrubberContainer}>
-          <div>{formatTime(elapsedTime)}</div>
+          <div className={s.timeValue}>{formatTime(elapsedTime)}</div>
           <input
             className={s.timeScrubber}
             type="range"
@@ -105,7 +108,8 @@ const AudioPlayer = forwardRef(
             onChange={onScrubberChange}
             ref={progressBarRef}
           />
-          <div>{formatTime(duration)}</div>
+          {/* <div className={s.bufferedTimeline} ref={bufferBarRef} /> */}
+          <div className={s.timeValue}>{formatTime(duration)}</div>
         </div>
         <img className={s.closeIcon} src={closeIcon} onClick={onClose} />
       </div>
