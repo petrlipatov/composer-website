@@ -38,7 +38,7 @@
   left: 4%;
   width: 44%;
   height: 92%;
-  background-color: rgba(231, 57, 121, 0.85);
+  background-color: rgba(231, 57, 121, 1);
 }
 
 .imageMaskButtonRight {
@@ -51,7 +51,7 @@
   right: 4%;
   width: 44%;
   height: 92%;
-  background-color: rgba(231, 57, 121, 0.85);
+  background-color: rgba(231, 57, 121, 1);
 }
 
 .imageMaskIcon {
