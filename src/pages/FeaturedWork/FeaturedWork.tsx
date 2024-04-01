@@ -2,10 +2,10 @@
 // import { useContext } from "react";
 // import { ScreenSizeContext } from "../../components/Layout/Layout";
 
-import FeaturedWorkMobile from "./Mobile/FeaturedWorkMobile";
+// import FeaturedWorkMobile from "./Mobile/FeaturedWorkMobile";
 
 function FeaturedWork() {
-  return <FeaturedWorkMobile />;
+  return <div>test</div>;
 }
 
 export default FeaturedWork;
