@@ -11,6 +11,7 @@ import playSrc from "../../assets/images/play.svg";
 import playNextSrc from "../../assets/images/play-next.svg";
 import pauseSrc from "../../assets/images/pause.svg";
 import closeIcon from "../../assets/images/close-icon_black.svg";
+import artworkIcon from "../../assets/images/track.webp";
 import cn from "classnames";
 import { formatTime } from "../../utils/helpers/formatTime";
 // import test from "/audio/Theory-of-Light-Master.mp3";
@@ -128,6 +129,7 @@ const AudioPlayer = forwardRef(
           <div className={s.timeValue}>{formatTime(duration)}</div>
         </div>
         <img className={s.closeIcon} src={closeIcon} onClick={onClose} />
+        <img className={s.artwork} src={artworkIcon} />
       </div>
     );
   }
