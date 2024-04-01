@@ -13,13 +13,14 @@ import closeIconSrc from "../../../assets/images/close-icon.svg";
 export const PlayerContext = createContext(undefined);
 
 function PiecesMobile() {
-  const [isPlayerOpened, setIsPlayerOpened] = useState(false);
-  const [isPopupOpened, setPopupState] = useState(false);
   const [videoId, setVideoId] = useState<string>("");
+  const [isPopupOpened, setPopupState] = useState(false);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [selectedTrack, setSelectedTrack] = useState<number>(null);
 
+  const [isPlayerOpened, setIsPlayerOpened] = useState(false);
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
+  const [playingAudioTitle, setPlayingAudioTitle] = useState<string>("");
   const [duration, setDuration] = useState(0);
   const [elapsedTime, setElapsedTime] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
@@ -126,6 +127,7 @@ function PiecesMobile() {
               audioSource={track.audioSrc}
               videoSource={track.videoSrc}
               setSelectedTrack={setSelectedTrack}
+              setPlayingAudioTitle={setPlayingAudioTitle}
               setIsPlayerOpened={setIsPlayerOpened}
               selectedTrack={selectedTrack}
               setVideoId={setVideoId}
@@ -139,17 +141,16 @@ function PiecesMobile() {
         </div>
       </div>
 
-      <PlayerContext.Provider value={contextValues}>
-        <AudioPlayer
-          duration={duration}
-          elapsedTime={elapsedTime}
-          isPlayerOpened={isPlayerOpened}
-          setIsPlayerOpened={setIsPlayerOpened}
-          isAudioPlaying={isAudioPlaying}
-          setIsAudioPlaying={setIsAudioPlaying}
-          ref={audioPlayerRef}
-        />
-      </PlayerContext.Provider>
+      <AudioPlayer
+        duration={duration}
+        elapsedTime={elapsedTime}
+        playingAudioTitle={playingAudioTitle}
+        isPlayerOpened={isPlayerOpened}
+        setIsPlayerOpened={setIsPlayerOpened}
+        isAudioPlaying={isAudioPlaying}
+        setIsAudioPlaying={setIsAudioPlaying}
+        ref={audioPlayerRef}
+      />
 
       {isPopupOpened && (
         <Modal setPopupState={setPopupState}>

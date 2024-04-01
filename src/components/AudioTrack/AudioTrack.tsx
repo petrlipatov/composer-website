@@ -16,6 +16,7 @@ type AudioTrackProps = {
   setVideoId: Dispatch<SetStateAction<string>>;
   setIsPlayerOpened: Dispatch<SetStateAction<boolean>>;
   setIsAudioPlaying: Dispatch<SetStateAction<boolean>>;
+  setPlayingAudioTitle: Dispatch<SetStateAction<string>>;
 };
 
 const AudioTrack = forwardRef(
@@ -31,6 +32,7 @@ const AudioTrack = forwardRef(
       setVideoId,
       setIsPlayerOpened,
       setIsAudioPlaying,
+      setPlayingAudioTitle,
       openPopup,
     }: AudioTrackProps,
     ref: RefObject<HTMLAudioElement>
@@ -59,6 +61,7 @@ const AudioTrack = forwardRef(
       audioPlayerRef.play();
       setIsPlayerOpened(true);
       setIsAudioPlaying(true);
+      setPlayingAudioTitle(name);
     }
 
     return (

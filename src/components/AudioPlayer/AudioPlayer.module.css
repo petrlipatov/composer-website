@@ -13,11 +13,27 @@
 
 .playerSectionActive {
   display: flex;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .title {
-  margin-top: 16px;
+  margin-top: 12px;
+}
+
+.buttonsContainer {
+  width: 40%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.playNextIcon {
+  height: 28px;
+  width: 28px;
+}
+
+.playNextIconLeft {
+  transform: rotate(180deg);
 }
 
 .playButton {

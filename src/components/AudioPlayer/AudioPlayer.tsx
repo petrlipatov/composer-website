@@ -1,7 +1,6 @@
 import {
   useRef,
   useEffect,
-  useContext,
   forwardRef,
   RefObject,
   Dispatch,
@@ -9,6 +8,7 @@ import {
 } from "react";
 import s from "./AudioPlayer.module.css";
 import playSrc from "../../assets/images/play.svg";
+import playNextSrc from "../../assets/images/play-next.svg";
 import pauseSrc from "../../assets/images/pause.svg";
 import closeIcon from "../../assets/images/close-icon_black.svg";
 import cn from "classnames";
@@ -18,6 +18,7 @@ import { formatTime } from "../../utils/helpers/formatTime";
 type AudioPlayerProps = {
   duration: number;
   elapsedTime: number;
+  playingAudioTitle: string;
   isPlayerOpened: boolean;
   setIsPlayerOpened: Dispatch<SetStateAction<boolean>>;
   isAudioPlaying: boolean;
@@ -29,6 +30,7 @@ const AudioPlayer = forwardRef(
     {
       duration,
       elapsedTime,
+      playingAudioTitle,
       isPlayerOpened,
       setIsPlayerOpened,
       isAudioPlaying,
@@ -80,22 +82,36 @@ const AudioPlayer = forwardRef(
 
     return (
       <div className={playerClasses}>
-        <div className={s.title}>Track name</div>
-        <button className={s.playButton} onClick={togglePlaying}>
+        <div className={s.title}>{playingAudioTitle}</div>
+
+        <div className={s.buttonsContainer}>
           <img
-            className={s.playIcon}
-            src={pauseSrc}
-            alt="pause-button"
-            style={isAudioPlaying ? {} : { display: "none" }}
+            className={cn(s.playNextIcon, s.playNextIconLeft)}
+            src={playNextSrc}
+            alt="play-next-button"
           />
+          <button className={s.playButton} onClick={togglePlaying}>
+            <img
+              className={s.playIcon}
+              src={pauseSrc}
+              alt="pause-button"
+              style={isAudioPlaying ? {} : { display: "none" }}
+            />
+
+            <img
+              className={s.playIcon}
+              src={playSrc}
+              alt="play-button"
+              style={isAudioPlaying ? { display: "none" } : {}}
+            />
+          </button>
 
           <img
-            className={s.playIcon}
-            src={playSrc}
-            alt="play-button"
-            style={isAudioPlaying ? { display: "none" } : {}}
+            className={s.playNextIcon}
+            src={playNextSrc}
+            alt="play-next-button"
           />
-        </button>
+        </div>
 
         <div className={s.timeScrubberContainer}>
           <div className={s.timeValue}>{formatTime(elapsedTime)}</div>
