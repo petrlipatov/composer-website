@@ -2,7 +2,13 @@ import cn from "classnames";
 import s from "./AudioTrack.module.css";
 import tvIconSrc from "../../assets/images/tv.svg";
 import hedphonesIconSrc from "../../assets/images/headphones.svg";
-import { Dispatch, RefObject, SetStateAction, forwardRef } from "react";
+import {
+  Dispatch,
+  RefObject,
+  SetStateAction,
+  forwardRef,
+  useEffect,
+} from "react";
 import AudioPlayingLoader from "./AudioPlayingLoader/AudioPlayingLoader";
 
 type AudioTrackProps = {
@@ -43,6 +49,16 @@ const AudioTrack = forwardRef(
     ref: RefObject<HTMLAudioElement>
   ) => {
     const audioPlayerRef = ref.current;
+
+    useEffect(() => {
+      if (selectedTrack === index) {
+        const timer = setTimeout(() => {
+          setSelectedTrack(null);
+        }, 5000);
+
+        return () => clearTimeout(timer);
+      }
+    }, [selectedTrack]);
 
     function handleTrackClick() {
       setSelectedTrack(index);
