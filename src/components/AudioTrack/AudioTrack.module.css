@@ -58,3 +58,22 @@
   width: 40px;
   height: 40px;
 }
+
+.titleContainer {
+  max-width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-size: 12px;
+  margin-bottom: 8px;
+  word-spacing: -2px;
+  text-wrap: pretty;
+}
+
+.titlePlaying {
+  color: rgba(231, 57, 121, 1);
+  font-weight: 600;
+}

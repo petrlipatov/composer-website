@@ -34,6 +34,13 @@ export const GENRES_PIECES = [
 
 export const PIECES = [
   {
+    name: "I Thought It Would Be Fun",
+    tags: ["Piano", "Orchestral", "Vintage"],
+    imageSrc: "/images/track.webp",
+    audioSrc: "/audio/Theory-of-Light-Master.mp3",
+    videoSrc: "u0dBG0AL3Cs",
+  },
+  {
     name: "Worn Out",
     tags: ["Piano", "Orchestral", "Vintage"],
     imageSrc: "/images/track.webp",
@@ -86,7 +93,7 @@ export const PIECES = [
     videoSrc: "u0dBG0AL3Cs",
   },
   {
-    name: "Going Far Away (Vintage Harmony)",
+    name: "Going Far Away",
     tags: ["Thriller", "Rap", "Rock"],
     imageSrc: "/images/track.webp",
     audioSrc: "/audio/Theory-of-Light-Master.mp3",

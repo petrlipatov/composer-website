@@ -3,6 +3,7 @@ import s from "./AudioTrack.module.css";
 import tvIconSrc from "../../assets/images/tv.svg";
 import hedphonesIconSrc from "../../assets/images/headphones.svg";
 import { Dispatch, RefObject, SetStateAction, forwardRef } from "react";
+import AudioPlayingLoader from "./AudioPlayingLoader/AudioPlayingLoader";
 
 type AudioTrackProps = {
   name: string;
@@ -10,6 +11,8 @@ type AudioTrackProps = {
   audioSource: string;
   videoSource: string;
   selectedTrack: number;
+  playingAudioTitle: string;
+  isAudioPlaying: boolean;
   index: number;
   openPopup: () => void;
   setSelectedTrack: Dispatch<SetStateAction<number>>;
@@ -28,6 +31,8 @@ const AudioTrack = forwardRef(
       audioSource,
       videoSource,
       selectedTrack,
+      isAudioPlaying,
+      playingAudioTitle,
       setSelectedTrack,
       setVideoId,
       setIsPlayerOpened,
@@ -38,9 +43,6 @@ const AudioTrack = forwardRef(
     ref: RefObject<HTMLAudioElement>
   ) => {
     const audioPlayerRef = ref.current;
-    const trackImageMaskClasses = cn(s.trackImageMask, {
-      [s.trackImageMaskSelected]: selectedTrack === index,
-    });
 
     function handleTrackClick() {
       setSelectedTrack(index);
@@ -63,6 +65,16 @@ const AudioTrack = forwardRef(
       setIsAudioPlaying(true);
       setPlayingAudioTitle(name);
     }
+
+    const trackImageMaskClasses = cn(s.trackImageMask, {
+      [s.trackImageMaskSelected]: selectedTrack === index,
+    });
+
+    const titleClasses = cn(s.title, {
+      [s.titlePlaying]: playingAudioTitle === name && isAudioPlaying,
+    });
+
+    // console.log(audioPlayerRef.currentSrc);
 
     return (
       <div className={s.track}>
@@ -89,7 +101,13 @@ const AudioTrack = forwardRef(
             )}
           </div>
         </div>
-        <div>{name}</div>
+        <div className={s.titleContainer}>
+          <p className={titleClasses}>{name}</p>
+
+          <AudioPlayingLoader
+            isActive={playingAudioTitle === name && isAudioPlaying}
+          />
+        </div>
       </div>
     );
   }

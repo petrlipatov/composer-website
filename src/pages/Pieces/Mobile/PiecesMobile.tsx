@@ -125,6 +125,8 @@ function PiecesMobile() {
               selectedTrack={selectedTrack}
               setVideoId={setVideoId}
               openPopup={openPopup}
+              isAudioPlaying={isAudioPlaying}
+              playingAudioTitle={playingAudioTitle}
               setIsAudioPlaying={setIsAudioPlaying}
               index={index}
               key={index}

@@ -60,7 +60,7 @@
 
 .timeScrubberContainer {
   display: grid;
-  justify-items: center; /* Горизонтальное выравнивание по центру */
+  justify-items: center;
   align-items: center;
   grid-template-columns: 10% 70% 10%;
   gap: 16px;
