@@ -27,13 +27,6 @@ function PiecesMobile() {
 
   const audioPlayerRef = useRef<HTMLAudioElement>();
 
-  const contextValues = {
-    duration,
-    elapsedTime,
-    isLoading,
-    setIsLoading,
-  };
-
   // tags controllers
 
   const handleTagClick = (tag: string) => {
@@ -144,6 +137,7 @@ function PiecesMobile() {
       <AudioPlayer
         duration={duration}
         elapsedTime={elapsedTime}
+        isLoading={isLoading}
         playingAudioTitle={playingAudioTitle}
         isPlayerOpened={isPlayerOpened}
         setIsPlayerOpened={setIsPlayerOpened}
