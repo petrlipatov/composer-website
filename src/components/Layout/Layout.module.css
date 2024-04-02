@@ -1,7 +1,6 @@
 .layoutContainer {
-  max-height: 100vh;
   position: relative;
   opacity: 0;
-  /* border: 1px solid red; */
+  border: 1px solid red;
   /* overflow: hidden; */
 }
