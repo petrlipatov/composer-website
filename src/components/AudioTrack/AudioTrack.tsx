@@ -50,15 +50,15 @@ const AudioTrack = forwardRef(
   ) => {
     const audioPlayerRef = ref.current;
 
-    useEffect(() => {
-      if (selectedTrack === index) {
-        const timer = setTimeout(() => {
-          setSelectedTrack(null);
-        }, 5000);
+    // useEffect(() => {
+    //   if (selectedTrack === index) {
+    //     const timer = setTimeout(() => {
+    //       setSelectedTrack(null);
+    //     }, 5000);
 
-        return () => clearTimeout(timer);
-      }
-    }, [selectedTrack]);
+    //     return () => clearTimeout(timer);
+    //   }
+    // }, [selectedTrack]);
 
     function handleTrackClick() {
       setSelectedTrack(index);
@@ -99,15 +99,18 @@ const AudioTrack = forwardRef(
                   className={s.imageMaskButtonLeft}
                   onClick={handleListenClick}
                 >
-                  <img className={s.imageMaskIcon} src={hedphonesIconSrc} />
-                  <div>Listen</div>
+                  <img
+                    className={cn(s.imageMaskIcon, s.imageMaskIconLeft)}
+                    src={hedphonesIconSrc}
+                  />
+                  <div className={s.imageMaskCaption}>Listen</div>
                 </div>
                 <div
                   className={s.imageMaskButtonRight}
                   onClick={handleWatchClick}
                 >
-                  <img className={s.imageMaskIcon} src={tvIconSrc} />
-                  <div>Watch</div>
+                  <img className={cn(s.imageMaskIcon)} src={tvIconSrc} />
+                  <div className={s.imageMaskCaption}>Watch</div>
                 </div>
               </>
             )}
