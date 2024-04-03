@@ -78,17 +78,26 @@ function PiecesMobile() {
 
   const filteredPieces = filterPiecesByTags(selectedTags, PIECES);
 
+  const isTagDisables = (tag: string) => {
+    for (const piece of filteredPieces) {
+      if (piece.tags.includes(tag)) {
+        return false;
+      }
+    }
+    return true;
+  };
+
   return (
     <div className={s.page}>
       <div className={s.content}>
         <div className={s.nav}>
           <div className={s.pageTitleContainer}>
             <div className={s.pageTitle}>Pieces</div>
-            <img
+            {/* <img
               className={s.pageTitleIcon}
               src={chevronIconSrc}
               alt="chevron-down"
-            />
+            /> */}
           </div>
           <Logo />
         </div>
@@ -99,6 +108,7 @@ function PiecesMobile() {
               <Tag
                 name={genre}
                 isSelected={isTagSelected(genre)}
+                isDisabled={isTagDisables(genre)}
                 onClick={() => handleTagClick(genre)}
                 key={i}
               />
