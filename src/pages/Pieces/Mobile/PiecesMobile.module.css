@@ -47,7 +47,7 @@
   grid-template-columns: 1fr 1fr;
   grid-template-rows: max-content;
   flex-direction: column;
-  height: 60vh;
+  max-height: 50vh;
   margin-top: 32px;
   gap: 8px;
   row-gap: 8px;
