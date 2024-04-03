@@ -43,9 +43,12 @@
 }
 
 .title {
+  width: 94%;
   font-size: 12px;
   word-spacing: -2px;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .titlePlaying {
