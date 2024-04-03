@@ -44,12 +44,12 @@
 
 .title {
   font-size: 12px;
-  word-spacing: -2px;
+  /* word-spacing: -2px; */
 }
 
 .titlePlaying {
   color: rgba(231, 57, 121, 1);
   font-weight: 600;
   font-size: 12px;
-  word-spacing: -2px;
+  /* word-spacing: -2px; */
 }
