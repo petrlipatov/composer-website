@@ -1,5 +1,4 @@
 import s from "./AudioTitle.module.css";
-import cn from "classnames";
 import AudioPlayingLoader from "../AudioPlayingLoader/AudioPlayingLoader";
 
 const AudioTitle = ({ isAudioPlaying, playingAudioTitle, name }) => {

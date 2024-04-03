@@ -21,7 +21,9 @@ type AudioPlayerProps = {
   duration: number;
   elapsedTime: number;
   isLoading: boolean;
+  filteredPieces: any;
   playingAudioTitle: string;
+  setPlayingAudioTitle: Dispatch<SetStateAction<string>>;
   isPlayerOpened: boolean;
   setIsPlayerOpened: Dispatch<SetStateAction<boolean>>;
   isAudioPlaying: boolean;
@@ -34,7 +36,9 @@ const AudioPlayer = forwardRef(
       duration,
       elapsedTime,
       isLoading,
+      filteredPieces,
       playingAudioTitle,
+      setPlayingAudioTitle,
       isPlayerOpened,
       setIsPlayerOpened,
       isAudioPlaying,
@@ -69,6 +73,34 @@ const AudioPlayer = forwardRef(
       setIsAudioPlaying(!isAudioPlaying);
     };
 
+    // audio player controllers
+
+    const playNextTrack = (playingTrackName, prevOrNext) => {
+      if (isAudioPlaying) {
+        const playingTrackIndex = filteredPieces.findIndex(
+          (piece) => piece.name === playingTrackName
+        );
+
+        let nextSongIndex = 0;
+
+        switch (prevOrNext) {
+          case "next":
+            nextSongIndex = playingTrackIndex + 1;
+            break;
+          case "prev":
+            nextSongIndex = playingTrackIndex - 1;
+            break;
+        }
+
+        const nextTrack = filteredPieces[nextSongIndex];
+        if (nextTrack) {
+          setPlayingAudioTitle(nextTrack.name);
+          audioPlayerRef.src = nextTrack.audioSrc;
+          audioPlayerRef.play();
+        }
+      }
+    };
+
     const onScrubberChange = (e) => {
       const newTime = e.target.value;
       audioPlayerRef.currentTime = newTime;
@@ -93,7 +125,9 @@ const AudioPlayer = forwardRef(
             className={cn(s.playNextIcon, s.playNextIconLeft)}
             src={playNextSrc}
             alt="play-next-button"
+            onClick={() => playNextTrack(playingAudioTitle, "prev")}
           />
+
           <button className={s.playButton} onClick={togglePlaying}>
             <img
               className={s.playIcon}
@@ -114,6 +148,7 @@ const AudioPlayer = forwardRef(
             className={s.playNextIcon}
             src={playNextSrc}
             alt="play-next-button"
+            onClick={() => playNextTrack(playingAudioTitle, "next")}
           />
         </div>
 

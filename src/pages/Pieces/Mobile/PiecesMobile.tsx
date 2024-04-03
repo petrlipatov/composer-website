@@ -9,7 +9,7 @@ import YouTubePlayer from "../../../components/YoutubePlayer/YoutubePlayer";
 import Preloader from "../../../components/Preloader/Preloader";
 import AudioPlayer from "../../../components/AudioPlayer/AudioPlayer";
 import closeIconSrc from "../../../assets/images/close-icon.svg";
-import chevronIconSrc from "../../../assets/images/chevron-down.svg";
+// import chevronIconSrc from "../../../assets/images/chevron-down.svg";
 
 export const PlayerContext = createContext(undefined);
 
@@ -42,24 +42,29 @@ function PiecesMobile() {
     return selectedTags.includes(tag);
   };
 
+  function clearTags() {
+    setSelectedTrack(null);
+    setSelectedTags([]);
+  }
+
   function filterPiecesByTags(selectedTags, pieces) {
     return pieces.filter((piece) => {
       return selectedTags.every((tag) => piece.tags.includes(tag));
     });
   }
 
-  function clearTags() {
-    setSelectedTrack(null);
-    setSelectedTags([]);
-  }
+  const filteredPieces = filterPiecesByTags(selectedTags, PIECES);
 
-  // video popup
+  const isTagDisables = (tag: string) => {
+    for (const piece of filteredPieces) {
+      if (piece.tags.includes(tag)) {
+        return false;
+      }
+    }
+    return true;
+  };
 
-  function openPopup() {
-    setPopupState(true);
-  }
-
-  // audio player controllers
+  // audio player event-listeners
 
   const onLoadedMetadata = () => {
     setDuration(audioPlayerRef.current.duration);
@@ -76,16 +81,11 @@ function PiecesMobile() {
     // setIsPlaying(!isPlaying);
   };
 
-  const filteredPieces = filterPiecesByTags(selectedTags, PIECES);
+  // video popup
 
-  const isTagDisables = (tag: string) => {
-    for (const piece of filteredPieces) {
-      if (piece.tags.includes(tag)) {
-        return false;
-      }
-    }
-    return true;
-  };
+  function openPopup() {
+    setPopupState(true);
+  }
 
   return (
     <div className={s.page}>
@@ -161,7 +161,9 @@ function PiecesMobile() {
         duration={duration}
         elapsedTime={elapsedTime}
         isLoading={isLoading}
+        filteredPieces={filteredPieces}
         playingAudioTitle={playingAudioTitle}
+        setPlayingAudioTitle={setPlayingAudioTitle}
         isPlayerOpened={isPlayerOpened}
         setIsPlayerOpened={setIsPlayerOpened}
         isAudioPlaying={isAudioPlaying}

@@ -29,11 +29,11 @@
     transform: translateX(100%);
   }
 
-  25% {
+  50% {
     transform: translate(0, 0);
   }
 
-  50% {
+  65% {
     transform: translate(0, 0);
   }
 

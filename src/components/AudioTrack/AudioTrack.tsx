@@ -77,9 +77,9 @@ const AudioTrack = forwardRef(
       e.stopPropagation();
       audioPlayerRef.src = audioSource;
       audioPlayerRef.play();
+      setPlayingAudioTitle(name);
       setIsPlayerOpened(true);
       setIsAudioPlaying(true);
-      setPlayingAudioTitle(name);
     }
 
     const trackImageMaskClasses = cn(s.trackImageMask, {
