@@ -22,7 +22,6 @@ export const GENRES_PIECES = [
   "Punchy",
   "Epic",
   "Eccentric",
-  "Easy",
   "Intense",
   "Smooth",
   "Dark",

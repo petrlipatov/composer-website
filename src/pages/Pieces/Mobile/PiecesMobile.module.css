@@ -46,7 +46,7 @@
 .tagsList {
   display: flex;
   font-weight: 600;
-  gap: 6px;
+  gap: 8px;
   row-gap: 8px;
   flex-wrap: wrap;
 }
