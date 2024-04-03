@@ -103,7 +103,11 @@ const AudioTrack = forwardRef(
                     className={cn(s.imageMaskIcon, s.imageMaskIconLeft)}
                     src={hedphonesIconSrc}
                   />
-                  <div className={s.imageMaskCaption}>Listen</div>
+                  <div
+                    className={cn(s.imageMaskCaption, s.imageMaskCaptionLeft)}
+                  >
+                    Listen
+                  </div>
                 </div>
                 <div
                   className={s.imageMaskButtonRight}
