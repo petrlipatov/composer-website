@@ -6,7 +6,6 @@ import PiecesMobile from "./Mobile/PiecesMobile";
 
 function Pieces() {
   // const screenSize = useContext(ScreenSizeContext);
-
   return <PiecesMobile />;
 }
 
