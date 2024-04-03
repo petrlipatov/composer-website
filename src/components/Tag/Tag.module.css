@@ -2,11 +2,17 @@
   display: inline;
   border: 1px solid black;
   cursor: pointer;
+  font: inherit;
   font-size: 12px;
   font-weight: 600;
   padding: 8px;
   text-align: center;
-  background-color: transparent;
+  background: none;
+  color: inherit;
+  line-height: normal;
+  overflow: visible;
+  cursor: pointer;
+  outline: none;
 }
 
 .tagSelected {

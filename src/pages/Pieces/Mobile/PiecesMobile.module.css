@@ -53,9 +53,12 @@
 }
 
 .tagsButton {
+  line-height: normal;
+  outline: none;
+  padding: 0;
   border: none;
   background-color: transparent;
-  font-family: "IBM Plex Mono", monospace;
+  font: inherit;
   font-weight: 600;
   color: #e7397a;
   display: flex;

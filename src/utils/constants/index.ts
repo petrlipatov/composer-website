@@ -89,14 +89,14 @@ export const PIECES = [
   },
   {
     name: "Full of Wondering",
-    tags: ["Art", "Action", "Drama", "Comedy", "Thriller", "Rap"],
+    tags: ["Folkish", "Lyrics", "No lyrics"],
     imageSrc: "/images/track1.webp",
     audioSrc: "/audio/Free_Test_Data_2MB_MP3.mp3",
     videoSrc: "u0dBG0AL3Cs",
   },
   {
     name: "Cats and Dogs",
-    tags: ["Distorted", "Perplexing", "Easy"],
+    tags: ["Vintage", "Electronic", "Intense", "Smooth"],
     imageSrc: "/images/track2.webp",
     audioSrc: "/audio/Theory-of-Light-Master.mp3",
     videoSrc: "u0dBG0AL3Cs",
