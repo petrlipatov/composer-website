@@ -48,7 +48,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: max-content;
-  height: 500px;
+  height: 60vh;
   margin-top: 32px;
   gap: 8px;
   row-gap: 8px;
