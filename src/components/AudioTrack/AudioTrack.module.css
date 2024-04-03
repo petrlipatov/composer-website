@@ -60,7 +60,10 @@
 }
 
 .imageMaskIconLeft {
-  padding-bottom: 4px;
+  width: 37px;
+  height: 37px;
+  padding-bottom: -1px;
+  margin-bottom: 9px;
 }
 
 .imageMaskCaption {

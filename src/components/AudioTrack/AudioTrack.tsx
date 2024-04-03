@@ -1,7 +1,7 @@
 import cn from "classnames";
 import s from "./AudioTrack.module.css";
 import tvIconSrc from "../../assets/images/tv.svg";
-import hedphonesIconSrc from "../../assets/images/headphones.svg";
+import hedphonesIconSrc from "../../assets/images/headphone50.svg";
 import {
   Dispatch,
   RefObject,
