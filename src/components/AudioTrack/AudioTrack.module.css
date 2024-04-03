@@ -55,12 +55,12 @@
 }
 
 .imageMaskIcon {
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
 }
 
 .imageMaskIconLeft {
-  margin-bottom: 4px;
+  padding-bottom: 4px;
 }
 
 .imageMaskCaption {
