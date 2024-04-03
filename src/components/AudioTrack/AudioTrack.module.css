@@ -62,6 +62,7 @@
 .imageMaskIconLeft {
   width: 37px;
   height: 37px;
+  transform: translateY(-0.5px);
 }
 
 .imageMaskCaption {
