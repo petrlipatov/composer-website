@@ -7,11 +7,7 @@ import PiecesMobile from "./Mobile/PiecesMobile";
 function Pieces() {
   // const screenSize = useContext(ScreenSizeContext);
 
-  return (
-    <div>
-      <PiecesMobile />
-    </div>
-  );
+  return <PiecesMobile />;
 }
 
 export default Pieces;
