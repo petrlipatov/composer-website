@@ -9,6 +9,7 @@ import YouTubePlayer from "../../../components/YoutubePlayer/YoutubePlayer";
 import Preloader from "../../../components/Preloader/Preloader";
 import AudioPlayer from "../../../components/AudioPlayer/AudioPlayer";
 import closeIconSrc from "../../../assets/images/close-icon.svg";
+import chevronIconSrc from "../../../assets/images/chevron-down.svg";
 
 export const PlayerContext = createContext(undefined);
 
@@ -80,7 +81,17 @@ function PiecesMobile() {
   return (
     <div className={s.page}>
       <div className={s.content}>
-        <Logo />
+        <div className={s.nav}>
+          <div className={s.pageTitleContainer}>
+            <div className={s.pageTitle}>Pieces</div>
+            <img
+              className={s.pageTitleIcon}
+              src={chevronIconSrc}
+              alt="chevron-down"
+            />
+          </div>
+          <Logo />
+        </div>
 
         <div className={s.tagsSection}>
           <div className={s.tagsList}>

@@ -16,9 +16,30 @@
   grid-template-rows: max-content max-content;
 }
 
+.nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+.pageTitleContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 12px;
+}
+
+.pageTitle {
+  font-size: 12px;
+}
+
+.pageTitleIcon {
+  height: 18px;
+  width: 18px;
+}
+
 .tagsSection {
   gap: 16px;
-  margin-top: 40px;
+  margin-top: 28px;
   position: relative;
 }
 
