@@ -103,10 +103,10 @@ function PiecesMobile() {
                 key={i}
               />
             ))}
-            <button className={s.tagsButton} onClick={clearTags}>
+            <div className={s.tagsButton} onClick={clearTags}>
               <img className={s.closeIcon} src={closeIconSrc} />
               No filter
-            </button>
+            </div>
           </div>
         </div>
 

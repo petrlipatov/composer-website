@@ -24,10 +24,10 @@ export const GENRES_PIECES = [
   "Easy",
   "Intense",
   "Smooth",
-  "Dark",
-  "Misty",
-  "Vibrant",
   "Translucent",
+  "Vibrant",
+  "Misty",
+  "Dark",
 ];
 
 export const PIECES = [
