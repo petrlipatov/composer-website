@@ -77,8 +77,8 @@
   grid-row: span 3;
   position: relative;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: max-content;
+  grid-template-columns: 48% 48%;
+  grid-template-rows: 1fr;
   flex-direction: column;
   margin-top: 24px;
   gap: 8px;

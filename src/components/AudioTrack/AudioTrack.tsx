@@ -9,7 +9,7 @@ import {
   forwardRef,
   useEffect,
 } from "react";
-import AudioPlayingLoader from "./AudioPlayingLoader/AudioPlayingLoader";
+import AudioTitle from "./AudioTitle/AudioTitle";
 
 type AudioTrackProps = {
   name: string;
@@ -86,10 +86,6 @@ const AudioTrack = forwardRef(
       [s.trackImageMaskSelected]: selectedTrack === index,
     });
 
-    const titleClasses = cn(s.title, {
-      [s.titlePlaying]: playingAudioTitle === name && isAudioPlaying,
-    });
-
     // console.log(audioPlayerRef.currentSrc);
 
     return (
@@ -117,13 +113,11 @@ const AudioTrack = forwardRef(
             )}
           </div>
         </div>
-        <div className={s.titleContainer}>
-          <p className={titleClasses}>{name}</p>
-
-          <AudioPlayingLoader
-            isActive={playingAudioTitle === name && isAudioPlaying}
-          />
-        </div>
+        <AudioTitle
+          isAudioPlaying={isAudioPlaying}
+          playingAudioTitle={playingAudioTitle}
+          name={name}
+        />
       </div>
     );
   }

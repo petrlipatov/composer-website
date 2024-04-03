@@ -60,15 +60,51 @@
 }
 
 .titleContainer {
-  max-width: 100%;
+  position: relative;
+  width: 100%;
   display: flex;
+  align-items: end;
   justify-content: space-between;
-  align-items: center;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.titleTextContainer {
+  height: 16px;
+  width: 80%;
+  overflow: hidden;
+}
+
+.titleTextContainer p {
+  color: rgba(231, 57, 121, 1);
+  font-weight: 600;
+  padding: 0;
+  margin: 0;
+  text-align: start;
+  animation: text 7s infinite linear;
+  white-space: nowrap;
+}
+
+@keyframes text {
+  0% {
+    transform: translateX(100%);
+  }
+
+  25% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(0, 0);
+  }
+
+  100% {
+    transform: translate(-100%, 0);
+  }
 }
 
 .title {
   font-size: 12px;
-  margin-bottom: 8px;
   word-spacing: -2px;
   text-wrap: pretty;
 }

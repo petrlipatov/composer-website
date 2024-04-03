@@ -1,17 +1,13 @@
 .equalizer {
-  visibility: hidden;
+  visibility: visible;
   display: flex;
-  width: 1rem;
-  height: 1rem;
+  width: 16px;
+  height: 16px;
   justify-content: space-between;
   align-items: flex-end;
   box-sizing: border-box;
   margin-left: 4px;
   margin-right: 4px;
-}
-
-.equalizerActive {
-  visibility: visible;
 }
 
 .playing__bar {

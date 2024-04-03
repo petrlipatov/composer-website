@@ -1,5 +1,5 @@
-import styles from "./AudioPlayerPreloader.module.css";
+import s from "./AudioPlayerPreloader.module.css";
 
-const AudioPlayerPreloader = () => <div className={styles.loader}></div>;
+const AudioPlayerPreloader = () => <div className={s.loader}></div>;
 
 export default AudioPlayerPreloader;
