@@ -9,12 +9,12 @@
   height: 16px;
 }
 
-.bitTitleTextContainer {
-  width: 80%;
+.bigTitleTextContainer {
+  width: 90%;
   overflow: hidden;
 }
 
-.bitTitleTextContainer p {
+.bigTitleTextContainer p {
   color: rgba(231, 57, 121, 1);
   font-weight: 600;
   padding: 0;
@@ -43,7 +43,7 @@
 }
 
 .title {
-  width: 94%;
+  width: 96%;
   font-size: 12px;
   word-spacing: -2px;
   white-space: nowrap;

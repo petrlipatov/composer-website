@@ -11,7 +11,6 @@ import playSrc from "../../assets/images/play.svg";
 import playNextSrc from "../../assets/images/play-next.svg";
 import pauseSrc from "../../assets/images/pause.svg";
 import closeIcon from "../../assets/images/close-icon_black.svg";
-import artworkIcon from "../../assets/images/track.webp";
 import cn from "classnames";
 import { formatTime } from "../../utils/helpers/formatTime";
 import s from "./AudioPlayer.module.css";
@@ -115,12 +114,16 @@ const AudioPlayer = forwardRef(
         <div className={s.title}>{playerState.playingAudioTitle}</div>
 
         <div className={s.buttonsContainer}>
-          <img
-            className={cn(s.playNextIcon, s.playNextIconLeft)}
-            src={playNextSrc}
-            alt="play-next-button"
-            onClick={() => playNextTrack(playerState.playingAudioTitle, "prev")}
-          />
+          <button className={s.playNextButton}>
+            <img
+              className={cn(s.playNextIcon, s.playNextIconLeft)}
+              src={playNextSrc}
+              alt="play-next-button"
+              onClick={() =>
+                playNextTrack(playerState.playingAudioTitle, "prev")
+              }
+            />
+          </button>
 
           <button className={s.playButton} onClick={togglePlaying}>
             <img
@@ -138,12 +141,16 @@ const AudioPlayer = forwardRef(
             />
           </button>
 
-          <img
-            className={s.playNextIcon}
-            src={playNextSrc}
-            alt="play-next-button"
-            onClick={() => playNextTrack(playerState.playingAudioTitle, "next")}
-          />
+          <button className={s.playNextButton}>
+            <img
+              className={s.playNextIcon}
+              src={playNextSrc}
+              alt="play-next-button"
+              onClick={() =>
+                playNextTrack(playerState.playingAudioTitle, "next")
+              }
+            />
+          </button>
         </div>
 
         <div className={s.timeScrubberContainer}>

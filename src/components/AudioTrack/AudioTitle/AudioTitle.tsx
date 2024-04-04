@@ -20,7 +20,7 @@ const AudioTitle = ({ playerState, name }: AudioTitleProps) => {
       {playerState.isAudioPlaying && playerState.playingAudioTitle === name ? (
         isLongName(name) ? (
           <>
-            <div className={s.bitTitleTextContainer}>
+            <div className={s.bigTitleTextContainer}>
               <p className={s.titlePlaying}>{name}</p>
             </div>
             {playerState.isLoading ? "" : <AudioPlayingLoader />}

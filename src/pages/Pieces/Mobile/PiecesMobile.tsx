@@ -10,6 +10,7 @@ import Preloader from "../../../components/Preloader/Preloader";
 import AudioPlayer from "../../../components/AudioPlayer/AudioPlayer";
 import closeIconSrc from "../../../assets/images/close-icon.svg";
 import { AudioTrackData } from "../../../types";
+import { Link } from "react-router-dom";
 
 export type PlayerState = {
   isPlayerOpened: boolean;
@@ -113,9 +114,9 @@ function PiecesMobile() {
     <div className={s.page}>
       <div className={s.content}>
         <div className={s.nav}>
-          <div className={s.pageTitleContainer}>
-            <div className={s.pageTitle}>Pieces</div>
-          </div>
+          <Link to="/" className={s.pageTitle}>
+            Pieces
+          </Link>
           <Logo />
         </div>
 

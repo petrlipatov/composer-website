@@ -27,6 +27,15 @@
   align-items: center;
 }
 
+.playNextButton {
+  background-color: transparent;
+  border: 0;
+}
+
+.playNextButton :active {
+  opacity: 0;
+}
+
 .playNextIcon {
   height: 40px;
   width: 40px;
@@ -43,6 +52,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  transform: translateY(-2px);
+}
+
+.playbutton :active {
+  opacity: 0;
 }
 
 .playIcon {
