@@ -23,12 +23,12 @@ const AudioTitle = ({ playerState, name }: AudioTitleProps) => {
             <div className={s.bitTitleTextContainer}>
               <p className={s.titlePlaying}>{name}</p>
             </div>
-            <AudioPlayingLoader />
+            {playerState.isLoading ? "" : <AudioPlayingLoader />}
           </>
         ) : (
           <>
             <div className={s.titlePlaying}>{name}</div>
-            <AudioPlayingLoader />
+            {playerState.isLoading ? "" : <AudioPlayingLoader />}
           </>
         )
       ) : (
