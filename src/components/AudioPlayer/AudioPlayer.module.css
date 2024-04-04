@@ -77,8 +77,8 @@
   position: absolute;
   width: 40px;
   height: 40px;
-  right: 24px;
-  top: 32px;
+  right: 40px;
+  top: 29px;
 }
 
 .timeScrubberContainer {
@@ -141,6 +141,6 @@ input[type="range"]::-webkit-slider-runnable-track {
   position: absolute;
   width: 55px;
   height: 55px;
-  top: 14px;
-  left: 14px;
+  top: 8px;
+  left: 12px;
 }
