@@ -1,4 +1,4 @@
-import { Suspense, useState, useRef, createContext } from "react";
+import { Suspense, useState, useRef } from "react";
 import Logo from "../../../components/Logo/Logo";
 import { GENRES_PIECES, PIECES } from "../../../utils/constants";
 import s from "./PiecesMobile.module.css";
@@ -9,9 +9,18 @@ import YouTubePlayer from "../../../components/YoutubePlayer/YoutubePlayer";
 import Preloader from "../../../components/Preloader/Preloader";
 import AudioPlayer from "../../../components/AudioPlayer/AudioPlayer";
 import closeIconSrc from "../../../assets/images/close-icon.svg";
-// import chevronIconSrc from "../../../assets/images/chevron-down.svg";
+import { AudioTrackData } from "../../../types";
 
-export const PlayerContext = createContext(undefined);
+export type PlayerState = {
+  isPlayerOpened: boolean;
+  isLoading: boolean;
+  isAudioPlaying: boolean;
+  duration: number;
+  elapsedTime: number;
+  playingAudioTitle: string;
+  playingAudioIndex: number;
+  playingAudioImageSrc: string;
+};
 
 function PiecesMobile() {
   const [videoId, setVideoId] = useState<string>("");
@@ -19,16 +28,20 @@ function PiecesMobile() {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [selectedTrack, setSelectedTrack] = useState<number>(null);
 
-  const [isPlayerOpened, setIsPlayerOpened] = useState(false);
-  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
-  const [playingAudioTitle, setPlayingAudioTitle] = useState<string>("");
-  const [duration, setDuration] = useState(0);
-  const [elapsedTime, setElapsedTime] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
+  const [playerState, setPlayerState] = useState<PlayerState>({
+    isPlayerOpened: false,
+    isLoading: false,
+    isAudioPlaying: false,
+    duration: 0,
+    elapsedTime: 0,
+    playingAudioTitle: "",
+    playingAudioIndex: 0,
+    playingAudioImageSrc: "",
+  });
 
   const audioPlayerRef = useRef<HTMLAudioElement>();
 
-  // tags controllers
+  // tags handlers & methods
 
   const handleTagClick = (tag: string) => {
     if (selectedTags.includes(tag)) {
@@ -47,7 +60,10 @@ function PiecesMobile() {
     setSelectedTags([]);
   }
 
-  function filterPiecesByTags(selectedTags, pieces) {
+  function filterPiecesByTags(
+    selectedTags: string[],
+    pieces: AudioTrackData[]
+  ) {
     return pieces.filter((piece) => {
       return selectedTags.every((tag) => piece.tags.includes(tag));
     });
@@ -55,7 +71,7 @@ function PiecesMobile() {
 
   const filteredPieces = filterPiecesByTags(selectedTags, PIECES);
 
-  const isTagDisables = (tag: string) => {
+  const isTagDisabled = (tag: string) => {
     for (const piece of filteredPieces) {
       if (piece.tags.includes(tag)) {
         return false;
@@ -64,21 +80,27 @@ function PiecesMobile() {
     return true;
   };
 
-  // audio player event-listeners
+  // audio player event handlers
 
   const onLoadedMetadata = () => {
-    setDuration(audioPlayerRef.current.duration);
+    setPlayerState({
+      ...playerState,
+      duration: audioPlayerRef.current.duration,
+    });
   };
 
   const onTimeUpdate = () => {
-    if (elapsedTime <= duration) {
-      setElapsedTime(audioPlayerRef.current.currentTime);
-    }
+    setPlayerState({
+      ...playerState,
+      elapsedTime: audioPlayerRef.current.currentTime,
+    });
   };
 
   const onEnded = () => {
-    setElapsedTime(0);
-    // setIsPlaying(!isPlaying);
+    setPlayerState({
+      ...playerState,
+      elapsedTime: 0,
+    });
   };
 
   // video popup
@@ -93,11 +115,6 @@ function PiecesMobile() {
         <div className={s.nav}>
           <div className={s.pageTitleContainer}>
             <div className={s.pageTitle}>Pieces</div>
-            {/* <img
-              className={s.pageTitleIcon}
-              src={chevronIconSrc}
-              alt="chevron-down"
-            /> */}
           </div>
           <Logo />
         </div>
@@ -108,7 +125,7 @@ function PiecesMobile() {
               <Tag
                 name={genre}
                 isSelected={isTagSelected(genre)}
-                isDisabled={isTagDisables(genre)}
+                isDisabled={isTagDisabled(genre)}
                 onClick={() => handleTagClick(genre)}
                 key={i}
               />
@@ -125,11 +142,21 @@ function PiecesMobile() {
           ref={audioPlayerRef}
           onTimeUpdate={onTimeUpdate}
           onLoadedMetadata={onLoadedMetadata}
-          onPlaying={() => setIsLoading(false)}
-          onWaiting={() => setIsLoading(true)}
+          onPlaying={() =>
+            setPlayerState({
+              ...playerState,
+              isLoading: false,
+            })
+          }
+          onWaiting={() =>
+            setPlayerState({
+              ...playerState,
+              isLoading: true,
+            })
+          }
           onEnded={onEnded}
         >
-          <source src={"/audio/Theory-of-Light-Master.mp3"} type="audio/mpeg" />
+          <source src={""} type="audio/mpeg" />
           Your browser does not support the audio element.
         </audio>
 
@@ -141,14 +168,11 @@ function PiecesMobile() {
               audioSource={track.audioSrc}
               videoSource={track.videoSrc}
               setSelectedTrack={setSelectedTrack}
-              setPlayingAudioTitle={setPlayingAudioTitle}
-              setIsPlayerOpened={setIsPlayerOpened}
               selectedTrack={selectedTrack}
               setVideoId={setVideoId}
               openPopup={openPopup}
-              isAudioPlaying={isAudioPlaying}
-              playingAudioTitle={playingAudioTitle}
-              setIsAudioPlaying={setIsAudioPlaying}
+              playerState={playerState}
+              setPlayerState={setPlayerState}
               index={index}
               key={index}
               ref={audioPlayerRef}
@@ -158,16 +182,9 @@ function PiecesMobile() {
       </div>
 
       <AudioPlayer
-        duration={duration}
-        elapsedTime={elapsedTime}
-        isLoading={isLoading}
+        playerState={playerState}
+        setPlayerState={setPlayerState}
         filteredPieces={filteredPieces}
-        playingAudioTitle={playingAudioTitle}
-        setPlayingAudioTitle={setPlayingAudioTitle}
-        isPlayerOpened={isPlayerOpened}
-        setIsPlayerOpened={setIsPlayerOpened}
-        isAudioPlaying={isAudioPlaying}
-        setIsAudioPlaying={setIsAudioPlaying}
         ref={audioPlayerRef}
       />
 

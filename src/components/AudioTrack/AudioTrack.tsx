@@ -10,22 +10,20 @@ import {
   useEffect,
 } from "react";
 import AudioTitle from "./AudioTitle/AudioTitle";
+import { PlayerState } from "../../pages/Pieces/Mobile/PiecesMobile";
 
 type AudioTrackProps = {
+  index: number;
   name: string;
   imageSource: string;
   audioSource: string;
   videoSource: string;
   selectedTrack: number;
-  playingAudioTitle: string;
-  isAudioPlaying: boolean;
-  index: number;
+  playerState;
   openPopup: () => void;
   setSelectedTrack: Dispatch<SetStateAction<number>>;
   setVideoId: Dispatch<SetStateAction<string>>;
-  setIsPlayerOpened: Dispatch<SetStateAction<boolean>>;
-  setIsAudioPlaying: Dispatch<SetStateAction<boolean>>;
-  setPlayingAudioTitle: Dispatch<SetStateAction<string>>;
+  setPlayerState: Dispatch<SetStateAction<PlayerState>>;
 };
 
 const AudioTrack = forwardRef(
@@ -37,28 +35,25 @@ const AudioTrack = forwardRef(
       audioSource,
       videoSource,
       selectedTrack,
-      isAudioPlaying,
-      playingAudioTitle,
+      playerState,
       setSelectedTrack,
       setVideoId,
-      setIsPlayerOpened,
-      setIsAudioPlaying,
-      setPlayingAudioTitle,
+      setPlayerState,
       openPopup,
     }: AudioTrackProps,
     ref: RefObject<HTMLAudioElement>
   ) => {
     const audioPlayerRef = ref.current;
 
-    // useEffect(() => {
-    //   if (selectedTrack === index) {
-    //     const timer = setTimeout(() => {
-    //       setSelectedTrack(null);
-    //     }, 5000);
+    useEffect(() => {
+      if (selectedTrack === index) {
+        const timer = setTimeout(() => {
+          setSelectedTrack(null);
+        }, 5000);
 
-    //     return () => clearTimeout(timer);
-    //   }
-    // }, [selectedTrack]);
+        return () => clearTimeout(timer);
+      }
+    }, [selectedTrack]);
 
     function handleTrackClick() {
       setSelectedTrack(index);
@@ -66,7 +61,7 @@ const AudioTrack = forwardRef(
 
     function handleWatchClick(e) {
       e.stopPropagation();
-      setIsPlayerOpened(false);
+      setPlayerState({ ...playerState, isPlayerOpened: false });
       audioPlayerRef.pause();
       audioPlayerRef.src = "";
       setVideoId(videoSource);
@@ -77,16 +72,19 @@ const AudioTrack = forwardRef(
       e.stopPropagation();
       audioPlayerRef.src = audioSource;
       audioPlayerRef.play();
-      setPlayingAudioTitle(name);
-      setIsPlayerOpened(true);
-      setIsAudioPlaying(true);
+      setPlayerState({
+        ...playerState,
+        playingAudioTitle: name,
+        playingAudioIndex: index,
+        playingAudioImageSrc: imageSource,
+        isPlayerOpened: true,
+        isAudioPlaying: true,
+      });
     }
 
     const trackImageMaskClasses = cn(s.trackImageMask, {
       [s.trackImageMaskSelected]: selectedTrack === index,
     });
-
-    // console.log(audioPlayerRef.currentSrc);
 
     return (
       <div className={s.track}>
@@ -120,11 +118,7 @@ const AudioTrack = forwardRef(
             )}
           </div>
         </div>
-        <AudioTitle
-          isAudioPlaying={isAudioPlaying}
-          playingAudioTitle={playingAudioTitle}
-          name={name}
-        />
+        <AudioTitle playerState={playerState} name={name} />
       </div>
     );
   }

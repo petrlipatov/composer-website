@@ -1,7 +1,13 @@
 import s from "./AudioTitle.module.css";
 import AudioPlayingLoader from "../AudioPlayingLoader/AudioPlayingLoader";
+import { PlayerState } from "../../../pages/Pieces/Mobile/PiecesMobile";
 
-const AudioTitle = ({ isAudioPlaying, playingAudioTitle, name }) => {
+type AudioTitleProps = {
+  name: string;
+  playerState: PlayerState;
+};
+
+const AudioTitle = ({ playerState, name }: AudioTitleProps) => {
   //   const titleClasses = cn(, {
   //     [s.titlePlaying]: playingAudioTitle === name && isAudioPlaying,
   //   });
@@ -11,7 +17,7 @@ const AudioTitle = ({ isAudioPlaying, playingAudioTitle, name }) => {
   };
   return (
     <div className={s.titleContainer}>
-      {isAudioPlaying && name == playingAudioTitle ? (
+      {playerState.isAudioPlaying && playerState.playingAudioTitle === name ? (
         isLongName(name) ? (
           <>
             <div className={s.bitTitleTextContainer}>
