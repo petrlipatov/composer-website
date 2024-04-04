@@ -25,7 +25,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid green;
 }
 
 .playNextButton {
@@ -71,8 +70,8 @@
   position: absolute;
   top: 8px;
   right: 8px;
-  height: 12px;
-  width: 12px;
+  height: 14px;
+  width: 14px;
 }
 .videoIcon {
   position: absolute;
