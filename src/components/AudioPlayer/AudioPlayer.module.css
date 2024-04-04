@@ -13,11 +13,11 @@
 
 .playerSectionActive {
   display: flex;
-  font-size: 14px;
 }
 
 .title {
   margin-top: 12px;
+  font-size: 14px;
 }
 
 .buttonsContainer {
@@ -25,11 +25,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border: 1px solid green;
 }
 
 .playNextButton {
   background-color: transparent;
   border: 0;
+  padding: 0;
 }
 
 .playNextButton :active {
@@ -53,6 +55,7 @@
   justify-content: center;
   align-items: center;
   transform: translateY(-2px);
+  padding: 0;
 }
 
 .playbutton :active {
@@ -68,8 +71,15 @@
   position: absolute;
   top: 8px;
   right: 8px;
-  height: 24px;
-  width: 24px;
+  height: 12px;
+  width: 12px;
+}
+.videoIcon {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  right: 24px;
+  top: 32px;
 }
 
 .timeScrubberContainer {
@@ -130,8 +140,8 @@ input[type="range"]::-webkit-slider-runnable-track {
 
 .artwork {
   position: absolute;
-  width: 50px;
-  height: 50px;
+  width: 55px;
+  height: 55px;
   top: 14px;
   left: 14px;
 }
