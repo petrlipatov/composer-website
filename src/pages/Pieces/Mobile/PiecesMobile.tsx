@@ -1,4 +1,4 @@
-import { Suspense, useState, useRef } from "react";
+import { Suspense, useState, useRef, useMemo } from "react";
 import Logo from "../../../components/Logo/Logo";
 import { GENRES_PIECES, PIECES } from "../../../utils/constants";
 import s from "./PiecesMobile.module.css";
@@ -70,7 +70,10 @@ function PiecesMobile() {
     });
   }
 
-  const filteredPieces = filterPiecesByTags(selectedTags, PIECES);
+  const filteredPieces = useMemo(
+    () => filterPiecesByTags(selectedTags, PIECES),
+    [selectedTags]
+  );
 
   const isTagDisabled = (tag: string) => {
     for (const piece of filteredPieces) {

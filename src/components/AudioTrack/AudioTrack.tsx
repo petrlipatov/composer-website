@@ -2,7 +2,7 @@ import cn from "classnames";
 import s from "./AudioTrack.module.css";
 import tvIconSrc from "../../assets/images/tv.svg";
 import hedphonesIconSrc from "../../assets/images/headphone50.svg";
-import {
+import React, {
   Dispatch,
   RefObject,
   SetStateAction,
@@ -26,7 +26,7 @@ type AudioTrackProps = {
   setPlayerState: Dispatch<SetStateAction<PlayerState>>;
 };
 
-const AudioTrack = forwardRef(
+const AudioTrackUnmemoized = forwardRef(
   (
     {
       index,
@@ -124,4 +124,5 @@ const AudioTrack = forwardRef(
   }
 );
 
+const AudioTrack = React.memo(AudioTrackUnmemoized);
 export default AudioTrack;
