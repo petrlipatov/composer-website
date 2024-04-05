@@ -115,11 +115,11 @@ const AudioPlayer = forwardRef(
       <div className={playerClasses}>
         <div className={s.title}>{playerState.playingAudioTitle}</div>
 
-        <div
-          className={s.buttonsContainer}
-          onClick={() => playNextTrack(playerState.playingAudioTitle, "prev")}
-        >
-          <button className={s.playNextButton}>
+        <div className={s.buttonsContainer}>
+          <button
+            className={s.playNextButton}
+            onClick={() => playNextTrack(playerState.playingAudioTitle, "prev")}
+          >
             <img
               className={cn(s.playNextIcon, s.playNextIconLeft)}
               src={playNextSrc}
