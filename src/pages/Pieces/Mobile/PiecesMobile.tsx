@@ -122,7 +122,7 @@ function PiecesMobile() {
           </Link>
           <Logo />
         </div>
-        <div>{`${playerState.isAudioPlaying}`}</div>
+        <div>{playerState.playingAudioIndex}</div>
         <div className={s.tagsSection}>
           <div className={s.tagsList}>
             {GENRES_PIECES.map((genre, i) => (

@@ -62,18 +62,14 @@ const AudioPlayer = forwardRef(
 
     const playNextTrack = (playingTrackName, prevOrNext) => {
       if (playerState.isAudioPlaying) {
-        const playingTrackIndex = filteredPieces.findIndex(
-          (piece) => piece.name === playingTrackName
-        );
-
         let nextSongIndex = 0;
 
         switch (prevOrNext) {
           case "next":
-            nextSongIndex = playingTrackIndex + 1;
+            nextSongIndex = playerState.playingAudioIndex + 1;
             break;
           case "prev":
-            nextSongIndex = playingTrackIndex - 1;
+            nextSongIndex = playerState.playingAudioIndex - 1;
             break;
         }
 
