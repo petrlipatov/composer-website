@@ -30,12 +30,25 @@
 .playNextButton {
   background-color: transparent;
   padding: 0;
+  border: 0;
   width: 40px;
   height: 40px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100%;
   background-image: url("../../assets//images/play-next.svg");
+}
+
+.playPreviousButton {
+  border: 0;
+  background-color: transparent;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-image: url("../../assets//images/play-previous.svg");
 }
 
 .playNextButton :active {
@@ -49,7 +62,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  transform: translateY(-2px);
   padding: 0;
 }
 

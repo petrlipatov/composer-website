@@ -114,7 +114,7 @@ const AudioPlayer = forwardRef(
         <div className={s.buttonsContainer}>
           <button
             type="button"
-            className={s.playNextButton}
+            className={s.playPreviousButton}
             onClick={() => playNextTrack("prev")}
           />
 
