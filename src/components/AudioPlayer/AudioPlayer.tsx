@@ -22,12 +22,18 @@ import { AudioTrackData } from "../../types";
 type AudioPlayerProps = {
   playerState: PlayerState;
   setPlayerState: Dispatch<SetStateAction<PlayerState>>;
+  setSelectedTrack: Dispatch<SetStateAction<number>>;
   filteredPieces: AudioTrackData[];
 };
 
 const AudioPlayer = forwardRef(
   (
-    { filteredPieces, playerState, setPlayerState }: AudioPlayerProps,
+    {
+      filteredPieces,
+      playerState,
+      setPlayerState,
+      setSelectedTrack,
+    }: AudioPlayerProps,
     ref: RefObject<HTMLAudioElement>
   ) => {
     const audioPlayerRef = ref.current;
@@ -60,32 +66,31 @@ const AudioPlayer = forwardRef(
       });
     };
 
-    const playNextTrack = (playingTrackName, prevOrNext) => {
-      if (playerState.isAudioPlaying) {
-        let nextSongIndex = 0;
+    const playNextTrack = (prevOrNext) => {
+      let nextSongIndex = 0;
 
-        switch (prevOrNext) {
-          case "next":
-            nextSongIndex = playerState.playingAudioIndex + 1;
-            break;
-          case "prev":
-            nextSongIndex = playerState.playingAudioIndex - 1;
-            break;
-        }
-
-        const nextTrack = filteredPieces[nextSongIndex];
-
-        if (nextTrack) {
-          setPlayerState({
-            ...playerState,
-            playingAudioTitle: nextTrack.name,
-            playingAudioImageSrc: nextTrack.imageSrc,
-            playingAudioIndex: nextSongIndex,
-          });
-          audioPlayerRef.src = nextTrack.audioSrc;
-          audioPlayerRef.play();
-        }
+      switch (prevOrNext) {
+        case "next":
+          nextSongIndex = playerState.playingAudioIndex + 1;
+          break;
+        case "prev":
+          nextSongIndex = playerState.playingAudioIndex - 1;
+          break;
       }
+
+      const nextTrack = filteredPieces[nextSongIndex];
+
+      if (nextTrack) {
+        setPlayerState({
+          ...playerState,
+          playingAudioTitle: nextTrack.name,
+          playingAudioImageSrc: nextTrack.imageSrc,
+          playingAudioIndex: nextSongIndex,
+        });
+        setSelectedTrack(nextSongIndex);
+        audioPlayerRef.src = nextTrack.audioSrc;
+      }
+      if (playerState.isAudioPlaying) audioPlayerRef.play();
     };
 
     const onScrubberChange = (e) => {
@@ -114,7 +119,7 @@ const AudioPlayer = forwardRef(
         <div className={s.buttonsContainer}>
           <button
             className={s.playNextButton}
-            onClick={() => playNextTrack(playerState.playingAudioTitle, "prev")}
+            onClick={() => playNextTrack("prev")}
           >
             <img
               className={cn(s.playNextIcon, s.playNextIconLeft)}
@@ -141,7 +146,7 @@ const AudioPlayer = forwardRef(
 
           <button
             className={s.playNextButton}
-            onClick={() => playNextTrack(playerState.playingAudioTitle, "next")}
+            onClick={() => playNextTrack("next")}
           >
             <img
               className={s.playNextIcon}
