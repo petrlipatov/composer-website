@@ -69,14 +69,9 @@ const AudioPlayer = forwardRef(
     const playNextTrack = (prevOrNext) => {
       let nextSongIndex = 0;
 
-      switch (prevOrNext) {
-        case "next":
-          nextSongIndex = playerState.playingAudioIndex + 1;
-          break;
-        case "prev":
-          nextSongIndex = playerState.playingAudioIndex - 1;
-          break;
-      }
+      prevOrNext === "next"
+        ? (nextSongIndex = playerState.playingAudioIndex + 1)
+        : (nextSongIndex = playerState.playingAudioIndex - 1);
 
       const nextTrack = filteredPieces[nextSongIndex];
 
@@ -90,7 +85,7 @@ const AudioPlayer = forwardRef(
         setSelectedTrack(nextSongIndex);
         audioPlayerRef.src = nextTrack.audioSrc;
       }
-      if (playerState.isAudioPlaying) audioPlayerRef.play();
+      if (nextTrack && playerState.isAudioPlaying) audioPlayerRef.play();
     };
 
     const onScrubberChange = (e) => {
