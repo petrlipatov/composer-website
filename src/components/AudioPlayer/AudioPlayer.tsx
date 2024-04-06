@@ -116,13 +116,7 @@ const AudioPlayer = forwardRef(
             type="button"
             className={s.playNextButton}
             onClick={() => playNextTrack("prev")}
-          >
-            <img
-              className={cn(s.playNextIcon, s.playNextIconLeft)}
-              src={playNextSrc}
-              alt="play-next-button"
-            />
-          </button>
+          />
 
           <button
             type="button"
@@ -148,13 +142,7 @@ const AudioPlayer = forwardRef(
             type="button"
             className={s.playNextButton}
             onClick={() => playNextTrack("next")}
-          >
-            <img
-              className={s.playNextIcon}
-              src={playNextSrc}
-              alt="play-next-button"
-            />
-          </button>
+          />
         </div>
 
         <div className={s.timeScrubberContainer}>

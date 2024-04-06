@@ -29,23 +29,17 @@
 
 .playNextButton {
   background-color: transparent;
-  /* border: 0; */
   padding: 0;
   width: 40px;
   height: 40px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-image: url("../../assets//images/play-next.svg");
 }
 
 .playNextButton :active {
   opacity: 0;
-}
-
-.playNextIcon {
-  height: 40px;
-  width: 40px;
-}
-
-.playNextIconLeft {
-  transform: rotate(180deg);
 }
 
 .playButton {
