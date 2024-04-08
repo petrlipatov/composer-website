@@ -28,7 +28,6 @@ function PiecesMobile() {
   const [isPopupOpened, setPopupState] = useState(false);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [selectedTrack, setSelectedTrack] = useState<number>(null);
-
   const [playerState, setPlayerState] = useState<PlayerState>({
     isPlayerOpened: false,
     isLoading: false,
@@ -39,10 +38,13 @@ function PiecesMobile() {
     playingAudioIndex: 0,
     playingAudioImageSrc: "",
   });
+  const [isPlayerOpened, setIsPlayerOpened] = useState(false);
 
+  const filteredPieces = useMemo(
+    () => filterPiecesByTags(selectedTags, PIECES),
+    [selectedTags]
+  );
   const audioPlayerRef = useRef<HTMLAudioElement>();
-
-  // tags handlers & methods
 
   const handleTagClick = (tag: string) => {
     if (selectedTags.includes(tag)) {
@@ -70,11 +72,6 @@ function PiecesMobile() {
     });
   }
 
-  const filteredPieces = useMemo(
-    () => filterPiecesByTags(selectedTags, PIECES),
-    [selectedTags]
-  );
-
   const isTagDisabled = (tag: string) => {
     for (const piece of filteredPieces) {
       if (piece.tags.includes(tag)) {
@@ -83,31 +80,6 @@ function PiecesMobile() {
     }
     return true;
   };
-
-  // audio player event handlers
-
-  const onLoadedMetadata = () => {
-    setPlayerState({
-      ...playerState,
-      duration: audioPlayerRef.current.duration,
-    });
-  };
-
-  const onTimeUpdate = () => {
-    setPlayerState({
-      ...playerState,
-      elapsedTime: audioPlayerRef.current.currentTime,
-    });
-  };
-
-  const onEnded = () => {
-    setPlayerState({
-      ...playerState,
-      elapsedTime: 0,
-    });
-  };
-
-  // video popup
 
   function openPopup() {
     setPopupState(true);
@@ -141,25 +113,7 @@ function PiecesMobile() {
           </div>
         </div>
 
-        <audio
-          preload="none"
-          ref={audioPlayerRef}
-          onTimeUpdate={onTimeUpdate}
-          onLoadedMetadata={onLoadedMetadata}
-          onPlaying={() =>
-            setPlayerState({
-              ...playerState,
-              isLoading: false,
-            })
-          }
-          onWaiting={() =>
-            setPlayerState({
-              ...playerState,
-              isLoading: true,
-            })
-          }
-          onEnded={onEnded}
-        >
+        <audio preload="none" ref={audioPlayerRef}>
           <source src={""} type="audio/mpeg" />
           Your browser does not support the audio element.
         </audio>
@@ -177,6 +131,7 @@ function PiecesMobile() {
               openPopup={openPopup}
               playerState={playerState}
               setPlayerState={setPlayerState}
+              setIsPlayerOpened={setIsPlayerOpened}
               index={index}
               key={index}
               ref={audioPlayerRef}
@@ -186,8 +141,8 @@ function PiecesMobile() {
       </div>
 
       <AudioPlayer
-        playerState={playerState}
-        setPlayerState={setPlayerState}
+        isPlayerOpened={isPlayerOpened}
+        setIsPlayerOpened={setIsPlayerOpened}
         setSelectedTrack={setSelectedTrack}
         filteredPieces={filteredPieces}
         ref={audioPlayerRef}

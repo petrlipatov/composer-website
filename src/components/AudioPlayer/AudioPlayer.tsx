@@ -1,27 +1,24 @@
 import {
-  useRef,
-  useEffect,
   forwardRef,
   RefObject,
   Dispatch,
   SetStateAction,
+  useEffect,
+  useState,
 } from "react";
-import AudioPlayerPreloader from "./AudioPlayerPreloader/AudioPlayerPreloader";
 import playSrc from "../../assets/images/play.svg";
-import playNextSrc from "../../assets/images/play-next.svg";
 import pauseSrc from "../../assets/images/pause.svg";
 import closeIcon from "../../assets/images/close-icon_black.svg";
 import videoIcon from "../../assets/images/tv.svg";
 
 import cn from "classnames";
-import { formatTime } from "../../utils/helpers/formatTime";
 import s from "./AudioPlayer.module.css";
-import { PlayerState } from "../../pages/Pieces/Mobile/PiecesMobile";
 import { AudioTrackData } from "../../types";
+import ProgressBar from "./ProgressBar/ProgressBar";
 
 type AudioPlayerProps = {
-  playerState: PlayerState;
-  setPlayerState: Dispatch<SetStateAction<PlayerState>>;
+  isPlayerOpened: boolean;
+  setIsPlayerOpened: Dispatch<SetStateAction<boolean>>;
   setSelectedTrack: Dispatch<SetStateAction<number>>;
   filteredPieces: AudioTrackData[];
 };
@@ -30,86 +27,91 @@ const AudioPlayer = forwardRef(
   (
     {
       filteredPieces,
-      playerState,
-      setPlayerState,
+      isPlayerOpened,
+      setIsPlayerOpened,
       setSelectedTrack,
     }: AudioPlayerProps,
     ref: RefObject<HTMLAudioElement>
   ) => {
-    const audioPlayerRef = ref.current;
-    const progressBarRef = useRef<HTMLInputElement>();
-    const progressBar = progressBarRef.current;
-    // const bufferBarRef = useRef<HTMLDivElement>();
-    // const bufferBar = progressBarRef.current;
+    const [isAudioPlaying, setIsAudioPlaying] = useState(false);
+    const [playingTrack, setPlayingTrack] = useState<AudioTrackData>();
+    const [playingTrackName, setPlayingTrackName] = useState<string>();
 
-    useEffect(
-      function updateElapsedProgressOnScrubber() {
-        if (progressBar) {
-          const max = progressBar.max;
-          const progressValue = playerState.elapsedTime;
-          const relativeProgressVal = ((progressValue / +max) * 100).toFixed(1);
-          progressBar.style.backgroundSize = `${relativeProgressVal}% 100%`;
+    const audioPlayerRef = ref.current;
+
+    useEffect(() => {
+      const onPlayingHandler = () => {
+        setIsAudioPlaying(true);
+      };
+
+      if (audioPlayerRef) {
+        audioPlayerRef.addEventListener("playing", onPlayingHandler);
+      }
+
+      return () => {
+        if (audioPlayerRef) {
+          audioPlayerRef.removeEventListener("playing", onPlayingHandler);
         }
-      },
-      [playerState.elapsedTime]
-    );
+      };
+    }, [audioPlayerRef]);
+
+    useEffect(() => {
+      if (audioPlayerRef) {
+        const track = filteredPieces.find((track) =>
+          audioPlayerRef.src.includes(track.audioSrc)
+        );
+
+        if (track) {
+          setPlayingTrack(track);
+          setPlayingTrackName(track.name);
+        } else {
+          setPlayingTrack(null);
+          setPlayingTrackName("");
+        }
+      }
+    }, [audioPlayerRef, audioPlayerRef?.src, filteredPieces]);
 
     const togglePlaying = () => {
-      if (playerState.isAudioPlaying) {
+      if (isAudioPlaying) {
         audioPlayerRef.pause();
       } else {
         audioPlayerRef.play();
       }
-      setPlayerState({
-        ...playerState,
-        isAudioPlaying: !playerState.isAudioPlaying,
-      });
+      setIsAudioPlaying(!isAudioPlaying);
     };
 
     const playNextTrack = (prevOrNext) => {
       let nextSongIndex = 0;
 
+      const playingTrackIndex = filteredPieces.indexOf(playingTrack);
+
       prevOrNext === "next"
-        ? (nextSongIndex = playerState.playingAudioIndex + 1)
-        : (nextSongIndex = playerState.playingAudioIndex - 1);
+        ? (nextSongIndex = playingTrackIndex + 1)
+        : (nextSongIndex = playingTrackIndex - 1);
 
       const nextTrack = filteredPieces[nextSongIndex];
 
       if (nextTrack) {
-        setPlayerState({
-          ...playerState,
-          playingAudioTitle: nextTrack.name,
-          playingAudioImageSrc: nextTrack.imageSrc,
-          playingAudioIndex: nextSongIndex,
-        });
-        setSelectedTrack(nextSongIndex);
         audioPlayerRef.src = nextTrack.audioSrc;
+        setSelectedTrack(nextSongIndex);
       }
-      if (nextTrack && playerState.isAudioPlaying) audioPlayerRef.play();
-    };
-
-    const onScrubberChange = (e) => {
-      const newTime = e.target.value;
-      audioPlayerRef.currentTime = newTime;
+      if (nextTrack && isAudioPlaying) audioPlayerRef.play();
     };
 
     const onClose = () => {
       audioPlayerRef.pause();
       audioPlayerRef.src = "";
-      setPlayerState({
-        ...playerState,
-        isPlayerOpened: false,
-        isAudioPlaying: false,
-      });
+      setIsAudioPlaying(false);
+      setIsPlayerOpened(false);
     };
 
     const playerClasses = cn(s.playerSection, {
-      [s.playerSectionActive]: playerState.isPlayerOpened == true,
+      [s.playerSectionActive]: isPlayerOpened == true,
     });
 
     return (
       <div className={playerClasses}>
-        <div className={s.title}>{playerState.playingAudioTitle}</div>
+        <div className={s.title}>{playingTrackName}</div>
 
         <div className={s.buttonsContainer}>
           <button
@@ -127,14 +129,14 @@ const AudioPlayer = forwardRef(
               className={s.playIcon}
               src={pauseSrc}
               alt="pause-button"
-              style={playerState.isAudioPlaying ? {} : { display: "none" }}
+              style={isAudioPlaying ? {} : { display: "none" }}
             />
 
             <img
               className={s.playIcon}
               src={playSrc}
               alt="play-button"
-              style={playerState.isAudioPlaying ? { display: "none" } : {}}
+              style={isAudioPlaying ? { display: "none" } : {}}
             />
           </button>
 
@@ -145,30 +147,11 @@ const AudioPlayer = forwardRef(
           />
         </div>
 
-        <div className={s.timeScrubberContainer}>
-          <div className={s.timeValue}>
-            {formatTime(playerState.elapsedTime)}
-          </div>
-          {playerState.isLoading ? (
-            <AudioPlayerPreloader />
-          ) : (
-            <input
-              className={s.timeScrubber}
-              type="range"
-              value={playerState.elapsedTime}
-              min={0}
-              max={playerState.duration}
-              onChange={onScrubberChange}
-              ref={progressBarRef}
-            />
-          )}
-          {/* <div className={s.bufferedTimeline} ref={bufferBarRef} /> */}
-          <div className={s.timeValue}>{formatTime(playerState.duration)}</div>
-        </div>
+        <ProgressBar ref={ref} />
 
         <img className={s.videoIcon} src={videoIcon} />
         <img className={s.closeIcon} src={closeIcon} onClick={onClose} />
-        <img className={s.artwork} src={playerState.playingAudioImageSrc} />
+        <img className={s.artwork} src={playingTrack?.imageSrc} />
       </div>
     );
   }

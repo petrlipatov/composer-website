@@ -24,6 +24,7 @@ type AudioTrackProps = {
   setSelectedTrack: Dispatch<SetStateAction<number>>;
   setVideoId: Dispatch<SetStateAction<string>>;
   setPlayerState: Dispatch<SetStateAction<PlayerState>>;
+  setIsPlayerOpened: Dispatch<SetStateAction<boolean>>;
 };
 
 const AudioTrackUnmemoized = forwardRef(
@@ -39,6 +40,7 @@ const AudioTrackUnmemoized = forwardRef(
       setSelectedTrack,
       setVideoId,
       setPlayerState,
+      setIsPlayerOpened,
       openPopup,
     }: AudioTrackProps,
     ref: RefObject<HTMLAudioElement>
@@ -72,14 +74,7 @@ const AudioTrackUnmemoized = forwardRef(
       e.stopPropagation();
       audioPlayerRef.src = audioSource;
       audioPlayerRef.play();
-      setPlayerState({
-        ...playerState,
-        playingAudioTitle: name,
-        playingAudioIndex: index,
-        playingAudioImageSrc: imageSource,
-        isPlayerOpened: true,
-        isAudioPlaying: true,
-      });
+      setIsPlayerOpened(true);
     }
 
     const trackImageMaskClasses = cn(s.trackImageMask, {
