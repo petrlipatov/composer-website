@@ -23,22 +23,32 @@ export type PlayerState = {
   playingAudioImageSrc: string;
 };
 
+export type PlayingAudioData = {
+  index: number;
+  name: string;
+  imageSource: string;
+  videoSource: string;
+};
+
 function PiecesMobile() {
   const [videoId, setVideoId] = useState<string>("");
   const [isPopupOpened, setPopupState] = useState(false);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [selectedTrack, setSelectedTrack] = useState<number>(null);
+
+  const [isPlayerOpened, setIsPlayerOpened] = useState(false);
+  const [playingAudioData, setPlayingAudioData] = useState<PlayingAudioData>();
+
   const [playerState, setPlayerState] = useState<PlayerState>({
     isPlayerOpened: false,
     isLoading: false,
     isAudioPlaying: false,
     duration: 0,
     elapsedTime: 0,
-    playingAudioTitle: "",
     playingAudioIndex: 0,
+    playingAudioTitle: "",
     playingAudioImageSrc: "",
   });
-  const [isPlayerOpened, setIsPlayerOpened] = useState(false);
 
   const filteredPieces = useMemo(
     () => filterPiecesByTags(selectedTags, PIECES),
@@ -125,13 +135,14 @@ function PiecesMobile() {
               imageSource={track.imageSrc}
               audioSource={track.audioSrc}
               videoSource={track.videoSrc}
-              setSelectedTrack={setSelectedTrack}
-              selectedTrack={selectedTrack}
+              setPlayingAudioData={setPlayingAudioData}
               setVideoId={setVideoId}
               openPopup={openPopup}
               playerState={playerState}
               setPlayerState={setPlayerState}
               setIsPlayerOpened={setIsPlayerOpened}
+              selectedTrack={selectedTrack}
+              setSelectedTrack={setSelectedTrack}
               index={index}
               key={index}
               ref={audioPlayerRef}
@@ -143,6 +154,8 @@ function PiecesMobile() {
       <AudioPlayer
         isPlayerOpened={isPlayerOpened}
         setIsPlayerOpened={setIsPlayerOpened}
+        playingAudioData={playingAudioData}
+        setPlayingAudioData={setPlayingAudioData}
         setSelectedTrack={setSelectedTrack}
         filteredPieces={filteredPieces}
         ref={audioPlayerRef}

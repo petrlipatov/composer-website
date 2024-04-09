@@ -11,6 +11,7 @@ import React, {
 } from "react";
 import AudioTitle from "./AudioTitle/AudioTitle";
 import { PlayerState } from "../../pages/Pieces/Mobile/PiecesMobile";
+import { PlayingAudioData } from "../../pages/Pieces/Mobile/PiecesMobile";
 
 type AudioTrackProps = {
   index: number;
@@ -25,6 +26,7 @@ type AudioTrackProps = {
   setVideoId: Dispatch<SetStateAction<string>>;
   setPlayerState: Dispatch<SetStateAction<PlayerState>>;
   setIsPlayerOpened: Dispatch<SetStateAction<boolean>>;
+  setPlayingAudioData: Dispatch<SetStateAction<PlayingAudioData>>;
 };
 
 const AudioTrackUnmemoized = forwardRef(
@@ -42,6 +44,7 @@ const AudioTrackUnmemoized = forwardRef(
       setPlayerState,
       setIsPlayerOpened,
       openPopup,
+      setPlayingAudioData,
     }: AudioTrackProps,
     ref: RefObject<HTMLAudioElement>
   ) => {
@@ -75,6 +78,7 @@ const AudioTrackUnmemoized = forwardRef(
       audioPlayerRef.src = audioSource;
       audioPlayerRef.play();
       setIsPlayerOpened(true);
+      setPlayingAudioData({ index, name, imageSource, videoSource });
     }
 
     const trackImageMaskClasses = cn(s.trackImageMask, {

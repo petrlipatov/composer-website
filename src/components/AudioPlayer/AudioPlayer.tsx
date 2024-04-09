@@ -15,9 +15,12 @@ import cn from "classnames";
 import s from "./AudioPlayer.module.css";
 import { AudioTrackData } from "../../types";
 import ProgressBar from "./ProgressBar/ProgressBar";
+import { PlayingAudioData } from "../../pages/Pieces/Mobile/PiecesMobile";
 
 type AudioPlayerProps = {
   isPlayerOpened: boolean;
+  playingAudioData: PlayingAudioData;
+  setPlayingAudioData: Dispatch<SetStateAction<PlayingAudioData>>;
   setIsPlayerOpened: Dispatch<SetStateAction<boolean>>;
   setSelectedTrack: Dispatch<SetStateAction<number>>;
   filteredPieces: AudioTrackData[];
@@ -28,14 +31,14 @@ const AudioPlayer = forwardRef(
     {
       filteredPieces,
       isPlayerOpened,
+      playingAudioData,
+      setPlayingAudioData,
       setIsPlayerOpened,
       setSelectedTrack,
     }: AudioPlayerProps,
     ref: RefObject<HTMLAudioElement>
   ) => {
     const [isAudioPlaying, setIsAudioPlaying] = useState(false);
-    const [playingTrack, setPlayingTrack] = useState<AudioTrackData>();
-    const [playingTrackName, setPlayingTrackName] = useState<string>();
 
     const audioPlayerRef = ref.current;
 
@@ -55,22 +58,6 @@ const AudioPlayer = forwardRef(
       };
     }, [audioPlayerRef]);
 
-    useEffect(() => {
-      if (audioPlayerRef) {
-        const track = filteredPieces.find((track) =>
-          audioPlayerRef.src.includes(track.audioSrc)
-        );
-
-        if (track) {
-          setPlayingTrack(track);
-          setPlayingTrackName(track.name);
-        } else {
-          setPlayingTrack(null);
-          setPlayingTrackName("");
-        }
-      }
-    }, [audioPlayerRef, audioPlayerRef?.src, filteredPieces]);
-
     const togglePlaying = () => {
       if (isAudioPlaying) {
         audioPlayerRef.pause();
@@ -83,17 +70,21 @@ const AudioPlayer = forwardRef(
     const playNextTrack = (prevOrNext) => {
       let nextSongIndex = 0;
 
-      const playingTrackIndex = filteredPieces.indexOf(playingTrack);
-
       prevOrNext === "next"
-        ? (nextSongIndex = playingTrackIndex + 1)
-        : (nextSongIndex = playingTrackIndex - 1);
+        ? (nextSongIndex = playingAudioData.index + 1)
+        : (nextSongIndex = playingAudioData.index - 1);
 
       const nextTrack = filteredPieces[nextSongIndex];
 
       if (nextTrack) {
         audioPlayerRef.src = nextTrack.audioSrc;
         setSelectedTrack(nextSongIndex);
+        setPlayingAudioData({
+          index: filteredPieces.indexOf(nextTrack),
+          name: nextTrack.name,
+          imageSource: nextTrack.imageSrc,
+          videoSource: nextTrack.videoSrc,
+        });
       }
       if (nextTrack && isAudioPlaying) audioPlayerRef.play();
     };
@@ -111,7 +102,7 @@ const AudioPlayer = forwardRef(
 
     return (
       <div className={playerClasses}>
-        <div className={s.title}>{playingTrackName}</div>
+        <div className={s.title}>{playingAudioData?.name}</div>
 
         <div className={s.buttonsContainer}>
           <button
@@ -151,7 +142,7 @@ const AudioPlayer = forwardRef(
 
         <img className={s.videoIcon} src={videoIcon} />
         <img className={s.closeIcon} src={closeIcon} onClick={onClose} />
-        <img className={s.artwork} src={playingTrack?.imageSrc} />
+        <img className={s.artwork} src={playingAudioData?.imageSource} />
       </div>
     );
   }
