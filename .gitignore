@@ -24,4 +24,4 @@ dist-ssr
 *.sw?
 
 # audio files
-/public/audio/
+# /public/audio/
