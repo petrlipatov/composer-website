@@ -23,6 +23,8 @@ type AudioPlayerProps = {
   setPlayingAudioData: Dispatch<SetStateAction<PlayingAudioData>>;
   setIsPlayerOpened: Dispatch<SetStateAction<boolean>>;
   setSelectedTrack: Dispatch<SetStateAction<number>>;
+  openPopup: () => void;
+  setVideoId: Dispatch<SetStateAction<string>>;
   filteredPieces: AudioTrackData[];
 };
 
@@ -35,30 +37,34 @@ const AudioPlayer = forwardRef(
       setPlayingAudioData,
       setIsPlayerOpened,
       setSelectedTrack,
+      setVideoId,
+      openPopup,
     }: AudioPlayerProps,
     ref: RefObject<HTMLAudioElement>
   ) => {
     const [isAudioPlaying, setIsAudioPlaying] = useState(false);
-
     const audioPlayerRef = ref.current;
 
-    useEffect(() => {
-      const onPlayingHandler = () => {
-        setIsAudioPlaying(true);
-      };
+    useEffect(
+      function togglePlayingStatus() {
+        const onPlayingHandler = () => {
+          setIsAudioPlaying(true);
+        };
 
-      if (audioPlayerRef) {
-        audioPlayerRef.addEventListener("playing", onPlayingHandler);
-      }
-
-      return () => {
         if (audioPlayerRef) {
-          audioPlayerRef.removeEventListener("playing", onPlayingHandler);
+          audioPlayerRef.addEventListener("playing", onPlayingHandler);
         }
-      };
-    }, [audioPlayerRef]);
 
-    const togglePlaying = () => {
+        return () => {
+          if (audioPlayerRef) {
+            audioPlayerRef.removeEventListener("playing", onPlayingHandler);
+          }
+        };
+      },
+      [audioPlayerRef]
+    );
+
+    const handlePlayPauseClick = () => {
       if (isAudioPlaying) {
         audioPlayerRef.pause();
       } else {
@@ -67,7 +73,7 @@ const AudioPlayer = forwardRef(
       setIsAudioPlaying(!isAudioPlaying);
     };
 
-    const playNextTrack = (prevOrNext) => {
+    const handlePlayNextClick = (prevOrNext) => {
       let nextSongIndex = 0;
 
       prevOrNext === "next"
@@ -89,7 +95,16 @@ const AudioPlayer = forwardRef(
       if (nextTrack && isAudioPlaying) audioPlayerRef.play();
     };
 
-    const onClose = () => {
+    const handleVideoClick = (e) => {
+      e.stopPropagation();
+      setIsPlayerOpened(false);
+      setVideoId(playingAudioData.videoSource);
+      audioPlayerRef.pause();
+      audioPlayerRef.src = "";
+      openPopup();
+    };
+
+    const handleCloseClick = () => {
       audioPlayerRef.pause();
       audioPlayerRef.src = "";
       setIsAudioPlaying(false);
@@ -108,13 +123,13 @@ const AudioPlayer = forwardRef(
           <button
             type="button"
             className={s.playPreviousButton}
-            onClick={() => playNextTrack("prev")}
+            onClick={() => handlePlayNextClick("prev")}
           />
 
           <button
             type="button"
             className={s.playButton}
-            onClick={togglePlaying}
+            onClick={handlePlayPauseClick}
           >
             <img
               className={s.playIcon}
@@ -134,14 +149,22 @@ const AudioPlayer = forwardRef(
           <button
             type="button"
             className={s.playNextButton}
-            onClick={() => playNextTrack("next")}
+            onClick={() => handlePlayNextClick("next")}
           />
         </div>
 
         <ProgressBar ref={ref} />
 
-        <img className={s.videoIcon} src={videoIcon} />
-        <img className={s.closeIcon} src={closeIcon} onClick={onClose} />
+        <img
+          className={s.videoIcon}
+          src={videoIcon}
+          onClick={handleVideoClick}
+        />
+        <img
+          className={s.closeIcon}
+          src={closeIcon}
+          onClick={handleCloseClick}
+        />
         <img className={s.artwork} src={playingAudioData?.imageSource} />
       </div>
     );

@@ -5,7 +5,7 @@ const YouTubePlayer = ({ videoId }) => {
     <iframe
       title="YouTube Player"
       width="100%"
-      height="260"
+      height="220"
       src={`https://www.youtube.com/embed/${videoId}`}
       allowFullScreen
       loading="lazy"

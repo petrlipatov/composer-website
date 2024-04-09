@@ -8,57 +8,102 @@ import React, {
   SetStateAction,
   forwardRef,
   useEffect,
+  useState,
 } from "react";
 import AudioTitle from "./AudioTitle/AudioTitle";
-import { PlayerState } from "../../pages/Pieces/Mobile/PiecesMobile";
 import { PlayingAudioData } from "../../pages/Pieces/Mobile/PiecesMobile";
+import { AudioTrackData } from "../../types";
 
 type AudioTrackProps = {
   index: number;
-  name: string;
-  imageSource: string;
-  audioSource: string;
-  videoSource: string;
-  selectedTrack: number;
-  playerState;
+  data: AudioTrackData;
+  isSelected: boolean;
   openPopup: () => void;
   setSelectedTrack: Dispatch<SetStateAction<number>>;
   setVideoId: Dispatch<SetStateAction<string>>;
-  setPlayerState: Dispatch<SetStateAction<PlayerState>>;
   setIsPlayerOpened: Dispatch<SetStateAction<boolean>>;
   setPlayingAudioData: Dispatch<SetStateAction<PlayingAudioData>>;
 };
 
-const AudioTrackUnmemoized = forwardRef(
+const AudioTrack = forwardRef(
   (
     {
       index,
-      name,
-      imageSource,
-      audioSource,
-      videoSource,
-      selectedTrack,
-      playerState,
+      data,
+      isSelected,
       setSelectedTrack,
       setVideoId,
-      setPlayerState,
       setIsPlayerOpened,
       openPopup,
       setPlayingAudioData,
     }: AudioTrackProps,
     ref: RefObject<HTMLAudioElement>
   ) => {
+    const [isPaused, setIsPaused] = useState(false);
+    const [isPlaying, setIsPlaying] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+
     const audioPlayerRef = ref.current;
 
+    useEffect(
+      function mountPlayerListeners() {
+        const onPlayingHandler = () => {
+          if (audioPlayerRef.src.includes(data.audioSrc)) {
+            setIsPlaying(true);
+            setIsLoading(false);
+            setIsPaused(false);
+          }
+        };
+
+        const onLoadingHandler = () => {
+          if (audioPlayerRef.src.includes(data.audioSrc)) {
+            setIsLoading(true);
+          }
+        };
+
+        const onPauseHandler = () => {
+          if (audioPlayerRef.src.includes(data.audioSrc)) {
+            setIsPaused(true);
+          }
+        };
+
+        if (audioPlayerRef) {
+          audioPlayerRef.addEventListener("playing", onPlayingHandler);
+          audioPlayerRef.addEventListener("waiting", onLoadingHandler);
+          audioPlayerRef.addEventListener("pause", onPauseHandler);
+        }
+
+        return () => {
+          if (audioPlayerRef) {
+            audioPlayerRef.removeEventListener("playing", onPlayingHandler);
+            audioPlayerRef.removeEventListener("waiting", onLoadingHandler);
+            audioPlayerRef.removeEventListener("pause", onLoadingHandler);
+          }
+        };
+      },
+      [audioPlayerRef, audioPlayerRef?.src, data.audioSrc]
+    );
+
+    useEffect(
+      function clearTrackStates() {
+        if (!audioPlayerRef?.src.includes(data.audioSrc)) {
+          setIsPaused(false);
+          setIsLoading(false);
+          setIsPlaying(false);
+        }
+      },
+      [audioPlayerRef, audioPlayerRef?.src, data.audioSrc]
+    );
+
     useEffect(() => {
-      if (selectedTrack === index) {
+      if (isSelected) {
         const timer = setTimeout(() => {
           setSelectedTrack(null);
         }, 5000);
 
         return () => clearTimeout(timer);
       }
-    }, [selectedTrack]);
+    }, [isSelected, setSelectedTrack, index]);
 
     function handleTrackClick() {
       setSelectedTrack(index);
@@ -66,31 +111,36 @@ const AudioTrackUnmemoized = forwardRef(
 
     function handleWatchClick(e) {
       e.stopPropagation();
-      setPlayerState({ ...playerState, isPlayerOpened: false });
+      setIsPlayerOpened(false);
       audioPlayerRef.pause();
       audioPlayerRef.src = "";
-      setVideoId(videoSource);
+      setVideoId(data.videoSrc);
       openPopup();
     }
 
     function handleListenClick(e) {
       e.stopPropagation();
-      audioPlayerRef.src = audioSource;
+      audioPlayerRef.src = data.audioSrc;
       audioPlayerRef.play();
       setIsPlayerOpened(true);
-      setPlayingAudioData({ index, name, imageSource, videoSource });
+      setPlayingAudioData({
+        index,
+        name: data.name,
+        imageSource: data.imageSrc,
+        videoSource: data.videoSrc,
+      });
     }
 
     const trackImageMaskClasses = cn(s.trackImageMask, {
-      [s.trackImageMaskSelected]: selectedTrack === index,
+      [s.trackImageMaskSelected]: isSelected,
     });
 
     return (
       <div className={s.track}>
         <div className={s.trackImageContainer} onClick={handleTrackClick}>
-          <img className={s.trackImage} src={imageSource} />
+          <img className={s.trackImage} src={data.imageSrc} />
           <div className={trackImageMaskClasses}>
-            {selectedTrack === index && (
+            {isSelected && (
               <>
                 <div
                   className={s.imageMaskButtonLeft}
@@ -117,11 +167,16 @@ const AudioTrackUnmemoized = forwardRef(
             )}
           </div>
         </div>
-        <AudioTitle playerState={playerState} name={name} />
+
+        <AudioTitle
+          isPlaying={isPlaying}
+          isLoading={isLoading}
+          isPaused={isPaused}
+          name={data.name}
+        />
       </div>
     );
   }
 );
 
-const AudioTrack = React.memo(AudioTrackUnmemoized);
 export default AudioTrack;

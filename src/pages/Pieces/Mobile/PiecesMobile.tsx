@@ -12,17 +12,6 @@ import closeIconSrc from "../../../assets/images/close-icon.svg";
 import { AudioTrackData } from "../../../types";
 import { Link } from "react-router-dom";
 
-export type PlayerState = {
-  isPlayerOpened: boolean;
-  isLoading: boolean;
-  isAudioPlaying: boolean;
-  duration: number;
-  elapsedTime: number;
-  playingAudioTitle: string;
-  playingAudioIndex: number;
-  playingAudioImageSrc: string;
-};
-
 export type PlayingAudioData = {
   index: number;
   name: string;
@@ -32,23 +21,12 @@ export type PlayingAudioData = {
 
 function PiecesMobile() {
   const [videoId, setVideoId] = useState<string>("");
-  const [isPopupOpened, setPopupState] = useState(false);
+  const [isVideoPopupOpened, setVideoPopupState] = useState(false);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [selectedTrack, setSelectedTrack] = useState<number>(null);
 
   const [isPlayerOpened, setIsPlayerOpened] = useState(false);
   const [playingAudioData, setPlayingAudioData] = useState<PlayingAudioData>();
-
-  const [playerState, setPlayerState] = useState<PlayerState>({
-    isPlayerOpened: false,
-    isLoading: false,
-    isAudioPlaying: false,
-    duration: 0,
-    elapsedTime: 0,
-    playingAudioIndex: 0,
-    playingAudioTitle: "",
-    playingAudioImageSrc: "",
-  });
 
   const filteredPieces = useMemo(
     () => filterPiecesByTags(selectedTags, PIECES),
@@ -64,23 +42,14 @@ function PiecesMobile() {
     }
   };
 
-  const isTagSelected = (tag: string) => {
-    return selectedTags.includes(tag);
-  };
-
-  function clearTags() {
+  function handleClearTagsClick() {
     setSelectedTrack(null);
     setSelectedTags([]);
   }
 
-  function filterPiecesByTags(
-    selectedTags: string[],
-    pieces: AudioTrackData[]
-  ) {
-    return pieces.filter((piece) => {
-      return selectedTags.every((tag) => piece.tags.includes(tag));
-    });
-  }
+  const isTagSelected = (tag: string) => {
+    return selectedTags.includes(tag);
+  };
 
   const isTagDisabled = (tag: string) => {
     for (const piece of filteredPieces) {
@@ -91,8 +60,17 @@ function PiecesMobile() {
     return true;
   };
 
-  function openPopup() {
-    setPopupState(true);
+  function filterPiecesByTags(
+    selectedTags: string[],
+    pieces: AudioTrackData[]
+  ) {
+    return pieces.filter((piece) => {
+      return selectedTags.every((tag) => piece.tags.includes(tag));
+    });
+  }
+
+  function openVideoPopup() {
+    setVideoPopupState(true);
   }
 
   return (
@@ -116,7 +94,7 @@ function PiecesMobile() {
                 key={i}
               />
             ))}
-            <div className={s.tagsButton} onClick={clearTags}>
+            <div className={s.tagsButton} onClick={handleClearTagsClick}>
               <img className={s.closeIcon} src={closeIconSrc} />
               No filter
             </div>
@@ -131,21 +109,16 @@ function PiecesMobile() {
         <div className={s.tracksSection}>
           {filteredPieces.map((track, index) => (
             <AudioTrack
-              name={track.name}
-              imageSource={track.imageSrc}
-              audioSource={track.audioSrc}
-              videoSource={track.videoSrc}
+              index={index}
+              data={track}
               setPlayingAudioData={setPlayingAudioData}
               setVideoId={setVideoId}
-              openPopup={openPopup}
-              playerState={playerState}
-              setPlayerState={setPlayerState}
+              openPopup={openVideoPopup}
               setIsPlayerOpened={setIsPlayerOpened}
-              selectedTrack={selectedTrack}
+              isSelected={selectedTrack === index}
               setSelectedTrack={setSelectedTrack}
-              index={index}
-              key={index}
               ref={audioPlayerRef}
+              key={index}
             />
           ))}
         </div>
@@ -157,12 +130,14 @@ function PiecesMobile() {
         playingAudioData={playingAudioData}
         setPlayingAudioData={setPlayingAudioData}
         setSelectedTrack={setSelectedTrack}
+        setVideoId={setVideoId}
+        openPopup={openVideoPopup}
         filteredPieces={filteredPieces}
         ref={audioPlayerRef}
       />
 
-      {isPopupOpened && (
-        <Modal setPopupState={setPopupState}>
+      {isVideoPopupOpened && (
+        <Modal setPopupState={setVideoPopupState}>
           <Suspense fallback={<Preloader content={"🐥"} />}>
             <YouTubePlayer videoId={videoId} />
           </Suspense>
