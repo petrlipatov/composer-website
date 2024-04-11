@@ -1,102 +1,94 @@
-// import Logo from "../../../components/Logo/Logo";
-// import { GENRES_WORK, PIECES } from "../../../utils/constants";
-// import s from "./FeaturedWork.module.css";
-// // import React, { useRef, RefObject, useState, Suspense } from "react";
-// import { Suspense, useState } from "react";
-// import closeIconSrc from "../../../assets/images/close-icon.svg";
+import { useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 
-// import Tag from "../../../components/Tag/Tag";
-// import AudioTrack from "../../../components/AudioTrack/AudioTrack";
-// import Modal from "../../../components/Modal/Modal";
-// import YouTubePlayer from "../../../components/YoutubePlayer/YoutubePlayer";
-// import Preloader from "../../../components/Preloader/Preloader";
+import Logo from "../../../components/Logo/Logo";
+import Tag from "../../../components/Tag/Tag";
 
-// function FeaturedWorkMobile() {
-//   const [isPlayerOpened, setIsPlayerOpened] = useState(false);
-//   const [isPopupOpened, setPopupState] = useState(false);
-//   const [videoId, setVideoId] = useState<string>("");
-//   const [selectedTags, setSelectedTags] = useState<string[]>([]);
-//   const [selectedTrack, setSelectedTrack] = useState<number>(null);
-//   const [selectedTrackAudioSrc, setSelectedTrackAudioSrc] =
-//     useState<number>(null);
+import { GENRES_PROJECTS, PROJECTS } from "../../../utils/constants";
+import closeIconSrc from "../../../assets/images/close-icon.svg";
 
-//   function filterPiecesByTags(selectedTags, pieces) {
-//     return pieces.filter((piece) => {
-//       return selectedTags.every((tag) => piece.tags.includes(tag));
-//     });
-//   }
+import s from "./FeaturedWork.module.css";
 
-//   const handleTagClick = (tag: string) => {
-//     if (selectedTags.includes(tag)) {
-//       setSelectedTags(selectedTags.filter((t) => t !== tag));
-//     } else {
-//       setSelectedTags([...selectedTags, tag]);
-//     }
-//   };
+function FeaturedWorkMobile() {
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
-//   const isTagSelected = (tag: string) => {
-//     return selectedTags.includes(tag);
-//   };
+  const filteredPieces = useMemo(
+    () => filterPiecesByTags(selectedTags, PROJECTS),
+    [selectedTags]
+  );
 
-//   function clearTags() {
-//     setSelectedTags([]);
-//   }
+  function filterPiecesByTags(
+    selectedTags: string[],
+    pieces: AudioTrackData[]
+  ) {
+    return pieces.filter((piece) => {
+      return selectedTags.every((tag) => piece.tags.includes(tag));
+    });
+  }
 
-//   function openPopup() {
-//     setPopupState(true);
-//   }
+  const handleTagClick = (tag: string) => {
+    if (selectedTags.includes(tag)) {
+      setSelectedTags(selectedTags.filter((t) => t !== tag));
+    } else {
+      setSelectedTags([...selectedTags, tag]);
+    }
+  };
 
-//   const filteredPieces = filterPiecesByTags(selectedTags, PIECES);
+  function handleClearTagsClick() {
+    setSelectedTags([]);
+  }
 
-//   return (
-//     <div className={s.page}>
-//       <div className={s.content}>
-//         <Logo />
-//         <div className={s.tagsSection}>
-//           <div className={s.tagsList}>
-//             {GENRES_WORK.map((genre, i) => (
-//               <Tag
-//                 name={genre}
-//                 isSelected={isTagSelected(genre)}
-//                 onClick={() => handleTagClick(genre)}
-//                 key={i}
-//               />
-//             ))}
-//             <button className={s.tagsButton} onClick={clearTags}>
-//               <img className={s.closeIcon} src={closeIconSrc} />
-//               No filter
-//             </button>
-//           </div>
-//         </div>
+  const isTagSelected = (tag: string) => {
+    return selectedTags.includes(tag);
+  };
 
-//         <div className={s.tracksSection}>
-//           {filteredPieces.map((track, index) => (
-//             <AudioTrack
-//               name={track.name}
-//               imageSource={track.src}
-//               audioSource={track.audioSrc}
-//               setSelectedTrack={setSelectedTrack}
-//               setIsPlayerOpened={setIsPlayerOpened}
-//               selectedTrack={selectedTrack}
-//               setVideoId={setVideoId}
-//               openPopup={openPopup}
-//               index={index}
-//               key={index}
-//               youtubeId={"u0dBG0AL3Cs"}
-//               setSelectedTrackAudioSrc={setSelectedTrackAudioSrc}
-//             />
-//           ))}
-//         </div>
-//       </div>
-//       {isPopupOpened && (
-//         <Modal setPopupState={setPopupState}>
-//           <Suspense fallback={<Preloader content={"🐥"} />}>
-//             <YouTubePlayer videoId={videoId} />
-//           </Suspense>
-//         </Modal>
-//       )}
-//     </div>
-//   );
-// }
+  //   const isTagDisabled = (tag: string) => {
+  //     return !filteredPieces.some((piece) => piece.tags.includes(tag));
+  //   };
 
-// export default FeaturedWorkMobile;
+  return (
+    <div className={s.page}>
+      <div className={s.content}>
+        <div className={s.nav}>
+          <Link to="/" className={s.pageTitle}>
+            Projects
+          </Link>
+          <Logo />
+        </div>
+
+        <div className={s.tagsSection}>
+          <div className={s.tagsList}>
+            {GENRES_PROJECTS.map((genre, i) => (
+              <Tag
+                name={genre}
+                isSelected={isTagSelected(genre)}
+                isDisabled={false}
+                onClick={() => handleTagClick(genre)}
+                key={i}
+              />
+            ))}
+            <div className={s.tagsButton} onClick={handleClearTagsClick}>
+              <img className={s.closeIcon} src={closeIconSrc} />
+              No filter
+            </div>
+          </div>
+        </div>
+
+        <div className={s.projectsSection}>
+          {PROJECTS.map((project, index) => (
+            <div className={s.projectContainer} key={index}>
+              <img
+                className={s.projectImage}
+                src={project.imageSrc}
+                alt="project artwork"
+              />
+              <div className={s.projectTitle}>{project.name}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default FeaturedWorkMobile;

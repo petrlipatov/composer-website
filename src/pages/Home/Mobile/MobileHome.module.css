@@ -1,10 +1,14 @@
 .page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 100%;
   width: 100%;
 }
 
 .content {
-  margin: 16px;
+  height: 97%;
+  width: 94%;
 }
 
 .image {

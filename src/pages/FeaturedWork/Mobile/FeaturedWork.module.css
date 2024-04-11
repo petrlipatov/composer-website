@@ -1,17 +1,38 @@
 .page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 100%;
   width: 100%;
-  /* scroll-snap-type: y mandatory;
-  overflow-y: scroll; */
+  position: relative;
+  overflow: hidden;
 }
 
 .content {
-  margin: 16px;
+  height: 97%;
+  width: 94%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: max-content max-content;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pageTitle {
+  text-decoration: none;
+  color: inherit;
+  font-size: 12px;
+  text-decoration: underline;
+  padding-bottom: 8px;
 }
 
 .tagsSection {
   gap: 16px;
-  margin-top: 40px;
+  margin-top: 28px;
   position: relative;
 }
 
@@ -24,14 +45,18 @@
 }
 
 .tagsButton {
+  line-height: normal;
+  outline: none;
+  padding: 0;
   border: none;
   background-color: transparent;
-  font-family: "IBM Plex Mono", monospace;
+  font: inherit;
   font-weight: 600;
   color: #e7397a;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 12px;
 }
 
 .closeIcon {
@@ -40,14 +65,29 @@
   width: 12px;
 }
 
-.tracksSection {
+.projectsSection {
+  /* grid-row: span 3; */
   position: relative;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: max-content;
-  height: 500px;
-  margin-top: 32px;
+  grid-template-columns: 48% 48%;
+  grid-template-rows: 1fr;
+  flex-direction: column;
+  margin-top: 24px;
   gap: 8px;
   row-gap: 8px;
   overflow-y: scroll;
+}
+
+.projectContainer {
+  /* border: 1px solid red; */
+}
+
+.projectImage {
+  display: block;
+  height: auto;
+  width: 100%;
+}
+
+.projectTitle {
+  font-size: 12px;
 }

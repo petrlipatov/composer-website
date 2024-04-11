@@ -1,16 +1,23 @@
 import { Suspense, useState, useRef, useMemo } from "react";
-import Logo from "../../../components/Logo/Logo";
-import { GENRES_PIECES, PIECES } from "../../../utils/constants";
-import s from "./PiecesMobile.module.css";
-import Tag from "../../../components/Tag/Tag";
-import AudioTrack from "../../../components/AudioTrack/AudioTrack";
-import Modal from "../../../components/Modal/Modal";
-import YouTubePlayer from "../../../components/YoutubePlayer/YoutubePlayer";
-import Preloader from "../../../components/Preloader/Preloader";
-import AudioPlayer from "../../../components/AudioPlayer/AudioPlayer";
-import closeIconSrc from "../../../assets/images/close-icon.svg";
-import { AudioTrackData } from "../../../types";
 import { Link } from "react-router-dom";
+
+import AudioPlayer from "../../../components/AudioPlayer/AudioPlayer";
+import AudioTrack from "../../../components/AudioTrack/AudioTrack";
+import Logo from "../../../components/Logo/Logo";
+import Modal from "../../../components/Modal/Modal";
+import Preloader from "../../../components/Preloader/Preloader";
+import Tag from "../../../components/Tag/Tag";
+import YouTubePlayer from "../../../components/YoutubePlayer/YoutubePlayer";
+import { AudioTrackData } from "../../../types";
+
+import {
+  GENRES_PIECES,
+  PIECES,
+  NO_TRACKS_FOUND_WARNING,
+} from "../../../utils/constants";
+import closeIconSrc from "../../../assets/images/close-icon.svg";
+
+import s from "./PiecesMobile.module.css";
 
 export type PlayingAudioData = {
   index: number;
@@ -26,7 +33,9 @@ function PiecesMobile() {
   const [selectedTrack, setSelectedTrack] = useState<number>(null);
 
   const [isPlayerOpened, setIsPlayerOpened] = useState(false);
-  const [playingAudioData, setPlayingAudioData] = useState<PlayingAudioData>();
+  const [playingAudioData, setPlayingAudioData] = useState<
+    PlayingAudioData | undefined
+  >();
 
   const filteredPieces = useMemo(
     () => filterPiecesByTags(selectedTags, PIECES),
@@ -52,12 +61,7 @@ function PiecesMobile() {
   };
 
   const isTagDisabled = (tag: string) => {
-    for (const piece of filteredPieces) {
-      if (piece.tags.includes(tag)) {
-        return false;
-      }
-    }
-    return true;
+    return !filteredPieces.some((piece) => piece.tags.includes(tag));
   };
 
   function filterPiecesByTags(
@@ -107,20 +111,24 @@ function PiecesMobile() {
         </audio>
 
         <div className={s.tracksSection}>
-          {filteredPieces.map((track, index) => (
-            <AudioTrack
-              index={index}
-              data={track}
-              setPlayingAudioData={setPlayingAudioData}
-              setVideoId={setVideoId}
-              openPopup={openVideoPopup}
-              setIsPlayerOpened={setIsPlayerOpened}
-              isSelected={selectedTrack === index}
-              setSelectedTrack={setSelectedTrack}
-              ref={audioPlayerRef}
-              key={index}
-            />
-          ))}
+          {filteredPieces.length > 0 ? (
+            filteredPieces.map((track, index) => (
+              <AudioTrack
+                index={index}
+                data={track}
+                setPlayingAudioData={setPlayingAudioData}
+                setVideoId={setVideoId}
+                openPopup={openVideoPopup}
+                setIsPlayerOpened={setIsPlayerOpened}
+                isSelected={selectedTrack === index}
+                setSelectedTrack={setSelectedTrack}
+                ref={audioPlayerRef}
+                key={index}
+              />
+            ))
+          ) : (
+            <div>{NO_TRACKS_FOUND_WARNING}</div>
+          )}
         </div>
       </div>
 

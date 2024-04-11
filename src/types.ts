@@ -5,3 +5,16 @@ export type AudioTrackData = {
   audioSrc: string;
   videoSrc: string;
 };
+
+type ProjectAudioTrack = {
+  name: string;
+  audioSrc: string;
+  videoSrc: string;
+};
+
+export type ProjectData = {
+  name: string;
+  imageSrc: string;
+  tags: string[];
+  tracks: ProjectAudioTrack[];
+};

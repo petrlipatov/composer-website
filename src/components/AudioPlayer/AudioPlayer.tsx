@@ -1,23 +1,17 @@
-import {
-  forwardRef,
-  RefObject,
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useState,
-} from "react";
+import cn from "classnames";
+import { forwardRef, useEffect, useState } from "react";
+import { Dispatch, RefObject, SetStateAction } from "react";
+import { AudioTrackData } from "../../types";
+import { PlayingAudioData } from "../../pages/Pieces/Mobile/PiecesMobile";
+import ProgressBar from "./ProgressBar/ProgressBar";
 import playSrc from "../../assets/images/play.svg";
 import pauseSrc from "../../assets/images/pause.svg";
 import closeIcon from "../../assets/images/close-icon_black.svg";
 import videoIcon from "../../assets/images/tv.svg";
-
-import cn from "classnames";
 import s from "./AudioPlayer.module.css";
-import { AudioTrackData } from "../../types";
-import ProgressBar from "./ProgressBar/ProgressBar";
-import { PlayingAudioData } from "../../pages/Pieces/Mobile/PiecesMobile";
 
 type AudioPlayerProps = {
+  filteredPieces: AudioTrackData[];
   isPlayerOpened: boolean;
   playingAudioData: PlayingAudioData;
   setPlayingAudioData: Dispatch<SetStateAction<PlayingAudioData>>;
@@ -25,7 +19,6 @@ type AudioPlayerProps = {
   setSelectedTrack: Dispatch<SetStateAction<number>>;
   openPopup: () => void;
   setVideoId: Dispatch<SetStateAction<string>>;
-  filteredPieces: AudioTrackData[];
 };
 
 const AudioPlayer = forwardRef(
