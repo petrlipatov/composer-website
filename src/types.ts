@@ -6,15 +6,14 @@ export type AudioTrackData = {
   videoSrc: string;
 };
 
-type ProjectAudioTrack = {
-  name: string;
-  audioSrc: string;
-  videoSrc: string;
-};
-
 export type ProjectData = {
   name: string;
+  description: string;
   imageSrc: string;
   tags: string[];
-  tracks: ProjectAudioTrack[];
+  tracks: {
+    name: string;
+    audioSrc: string;
+    videoSrc: string;
+  }[];
 };

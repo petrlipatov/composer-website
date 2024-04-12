@@ -1,7 +1,3 @@
-import cn from "classnames";
-import s from "./AudioTrack.module.css";
-import tvIconSrc from "../../assets/images/tv.svg";
-import hedphonesIconSrc from "../../assets/images/headphone50.svg";
 import React, {
   Dispatch,
   RefObject,
@@ -10,9 +6,16 @@ import React, {
   useEffect,
   useState,
 } from "react";
+import cn from "classnames";
+
 import AudioTitle from "./AudioTitle/AudioTitle";
 import { PlayingAudioData } from "../../pages/Pieces/Mobile/PiecesMobile";
 import { AudioTrackData } from "../../types";
+
+import tvIconSrc from "../../assets/images/tv.svg";
+import hedphonesIconSrc from "../../assets/images/headphone50.svg";
+
+import s from "./AudioTrack.module.css";
 
 type AudioTrackProps = {
   index: number;

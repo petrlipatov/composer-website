@@ -37,11 +37,12 @@ function PiecesMobile() {
     PlayingAudioData | undefined
   >();
 
+  const audioPlayerRef = useRef<HTMLAudioElement>();
+
   const filteredPieces = useMemo(
     () => filterPiecesByTags(selectedTags, PIECES),
     [selectedTags]
   );
-  const audioPlayerRef = useRef<HTMLAudioElement>();
 
   const handleTagClick = (tag: string) => {
     if (selectedTags.includes(tag)) {
@@ -131,6 +132,7 @@ function PiecesMobile() {
           )}
         </div>
       </div>
+
       <AudioPlayer
         isPlayerOpened={isPlayerOpened}
         setIsPlayerOpened={setIsPlayerOpened}

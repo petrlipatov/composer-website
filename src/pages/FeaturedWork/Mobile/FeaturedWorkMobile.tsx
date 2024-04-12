@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 import Logo from "../../../components/Logo/Logo";
@@ -6,12 +6,19 @@ import Tag from "../../../components/Tag/Tag";
 
 import { GENRES_PROJECTS, PROJECTS } from "../../../utils/constants";
 import closeIconSrc from "../../../assets/images/close-icon.svg";
+import tvIconSrc from "../../../assets/images/tv.svg";
+import hedphonesIconSrc from "../../../assets/images/headphone50.svg";
+// import hedphonesIconSrc from "../../assets/images/headphone50.svg";
 
+import cn from "classnames";
 import s from "./FeaturedWork.module.css";
+import Project from "../../../components/Project/Project";
 
 function FeaturedWorkMobile() {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [projectSelected, setSelectedProject] = useState<number>(null);
 
+  const audioPlayerRef = useRef<HTMLAudioElement>();
   // const filteredPieces = useMemo(
   //   () => filterPiecesByTags(selectedTags, PROJECTS),
   //   [selectedTags]
@@ -74,17 +81,20 @@ function FeaturedWorkMobile() {
           </div>
         </div>
 
+        <audio preload="none" ref={audioPlayerRef}>
+          <source src={""} type="audio/mpeg" />
+          Your browser does not support the audio element.
+        </audio>
+
         <div className={s.projectsSection}>
           {PROJECTS.map((project, index) => (
-            <div className={s.projectContainer} key={index}>
-              <img
-                className={s.projectImage}
-                src={project.imageSrc}
-                alt="project artwork"
-              />
-              <div className={s.projectTitle}>{project.name}</div>
-              <div className={s.projectDescription}>{project.description}</div>
-            </div>
+            <Project
+              data={project}
+              isSelected={projectSelected === index}
+              setSelectedProject={setSelectedProject}
+              index={index}
+              key={index}
+            />
           ))}
         </div>
       </div>

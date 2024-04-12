@@ -81,7 +81,7 @@ export const PROJECTS = [
     description: "TV Drama, 2021",
     tags: ["Piano", "Orchestral", "Vintage"],
     imageSrc: "/images/projects/project1.webp",
-    track: [
+    tracks: [
       {
         name: "I Thought It Would Be Fun",
         tags: ["Piano", "Orchestral", "Vintage"],
@@ -107,10 +107,10 @@ export const PROJECTS = [
   },
   {
     name: "Project #2",
-    description: "Video game, 2022",
+    description: "Game, 2022",
     tags: ["Piano", "Orchestral", "Vintage"],
     imageSrc: "/images/projects/project2.webp",
-    track: [
+    tracks: [
       {
         name: "I Thought It Would Be Fun",
         tags: ["Piano", "Orchestral", "Vintage"],
@@ -139,7 +139,7 @@ export const PROJECTS = [
     description: "TV Commercial, 2019",
     tags: ["Piano", "Orchestral", "Vintage"],
     imageSrc: "/images/projects/project1.webp",
-    track: [
+    tracks: [
       {
         name: "I Thought It Would Be Fun",
         tags: ["Piano", "Orchestral", "Vintage"],
@@ -168,7 +168,7 @@ export const PROJECTS = [
     description: "TV Commercial, 2019",
     tags: ["Piano", "Orchestral", "Vintage"],
     imageSrc: "/images/projects/project2.webp",
-    track: [
+    tracks: [
       {
         name: "I Thought It Would Be Fun",
         tags: ["Piano", "Orchestral", "Vintage"],
@@ -197,7 +197,7 @@ export const PROJECTS = [
     description: "TV Commercial, 2019",
     tags: ["Piano", "Orchestral", "Vintage"],
     imageSrc: "/images/projects/project1.webp",
-    track: [
+    tracks: [
       {
         name: "I Thought It Would Be Fun",
         tags: ["Piano", "Orchestral", "Vintage"],
@@ -226,7 +226,7 @@ export const PROJECTS = [
     description: "TV Commercial, 2019",
     tags: ["Piano", "Orchestral", "Vintage"],
     imageSrc: "/images/projects/project2.webp",
-    track: [
+    tracks: [
       {
         name: "I Thought It Would Be Fun",
         tags: ["Piano", "Orchestral", "Vintage"],

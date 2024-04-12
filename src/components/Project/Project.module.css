@@ -1,27 +1,29 @@
-.track {
-  display: flex;
-  flex-direction: column;
+.project {
+  border: 1px solid red;
 }
 
-.trackImageContainer {
+.projectImageContainer {
   position: relative;
 }
 
-.trackImage {
+.projectImage {
+  display: block;
   height: auto;
   width: 100%;
 }
 
-.trackImageMask {
+.projectImageMask {
   display: none;
   position: absolute;
   top: 0;
   left: 0;
+  height: 100%;
   width: 100%;
   padding-top: 100%;
+  border: 1px solid green;
 }
 
-.trackImageMaskSelected {
+.projectImageMaskSelected {
   display: block;
 }
 
@@ -56,17 +58,11 @@
   height: 45px;
 }
 
-.imageMaskIconLeft {
-  width: 37px;
-  height: 37px;
-  transform: translateY(-0.5px);
-}
-
-.imageMaskCaption {
+.projectTitle {
+  margin-top: 4px;
   font-size: 12px;
-  font-weight: 600;
 }
-
-.imageMaskCaptionLeft {
-  transform: translateY(4px);
+.projectDescription {
+  margin-top: 4px;
+  font-size: 10px;
 }

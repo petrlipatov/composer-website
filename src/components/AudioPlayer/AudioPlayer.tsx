@@ -40,13 +40,8 @@ const AudioPlayer = forwardRef(
 
     useEffect(
       function togglePlayingStatus() {
-        const onPlayingHandler = () => {
-          setIsAudioPlaying(true);
-        };
-
-        const onEndedHandler = () => {
-          setIsAudioPlaying(false);
-        };
+        const onPlayingHandler = () => setIsAudioPlaying(true);
+        const onEndedHandler = () => setIsAudioPlaying(false);
 
         if (audioPlayerRef) {
           audioPlayerRef.addEventListener("playing", onPlayingHandler);

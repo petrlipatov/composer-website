@@ -66,12 +66,10 @@
 }
 
 .projectsSection {
-  /* grid-row: span 3; */
   position: relative;
   display: grid;
   grid-template-columns: 48% 48%;
-  grid-template-rows: 1fr;
-  flex-direction: column;
+  /* grid-template-rows: 1fr; */
   margin-top: 24px;
   gap: 8px;
   row-gap: 8px;
@@ -79,13 +77,63 @@
 }
 
 .projectContainer {
-  /* border: 1px solid red; */
+  border: 1px solid red;
+}
+
+.projectImageContainer {
+  position: relative;
 }
 
 .projectImage {
   display: block;
   height: auto;
   width: 100%;
+}
+
+.projectImageMask {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  padding-top: 100%;
+  border: 1px solid green;
+}
+
+.projectImageMask {
+  display: block;
+}
+
+.imageMaskButtonLeft {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 4%;
+  left: 4%;
+  width: 44%;
+  height: 92%;
+  background-color: rgba(231, 57, 121, 1);
+}
+
+.imageMaskButtonRight {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 4%;
+  right: 4%;
+  width: 44%;
+  height: 92%;
+  background-color: rgba(231, 57, 121, 1);
+}
+
+.imageMaskIcon {
+  width: 45px;
+  height: 45px;
 }
 
 .projectTitle {
