@@ -1,15 +1,14 @@
 .page {
-  display: flex;
-  justify-content: center;
   align-items: center;
+  display: flex;
+  flex-direction: column;
   height: 100%;
+  margin-top: 16px;
   width: 100%;
-  position: relative;
-  overflow: hidden;
 }
 
 .content {
-  height: 97%;
+  height: 100%;
   width: 94%;
   display: grid;
   grid-template-columns: 1fr;

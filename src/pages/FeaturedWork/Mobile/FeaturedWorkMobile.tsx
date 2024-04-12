@@ -57,7 +57,7 @@ function FeaturedWorkMobile() {
       <div className={s.content}>
         <div className={s.nav}>
           <Link to="/" className={s.pageTitle}>
-            Projects
+            Featured Work
           </Link>
           <Logo />
         </div>

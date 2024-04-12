@@ -1,8 +1,7 @@
 export const PROJECTS_GENRES = [
   "Film",
-  "TV Show",
-  "Game",
   "Commercial",
+  "Video Game",
   "Fantasy",
   "Mystery",
   "Thriller",
