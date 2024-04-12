@@ -12,19 +12,19 @@ import s from "./FeaturedWork.module.css";
 function FeaturedWorkMobile() {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
-  const filteredPieces = useMemo(
-    () => filterPiecesByTags(selectedTags, PROJECTS),
-    [selectedTags]
-  );
+  // const filteredPieces = useMemo(
+  //   () => filterPiecesByTags(selectedTags, PROJECTS),
+  //   [selectedTags]
+  // );
 
-  function filterPiecesByTags(
-    selectedTags: string[],
-    pieces: AudioTrackData[]
-  ) {
-    return pieces.filter((piece) => {
-      return selectedTags.every((tag) => piece.tags.includes(tag));
-    });
-  }
+  // function filterPiecesByTags(
+  //   selectedTags: string[],
+  //   pieces: AudioTrackData[]
+  // ) {
+  //   return pieces.filter((piece) => {
+  //     return selectedTags.every((tag) => piece.tags.includes(tag));
+  //   });
+  // }
 
   const handleTagClick = (tag: string) => {
     if (selectedTags.includes(tag)) {
