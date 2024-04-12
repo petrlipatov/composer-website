@@ -1,16 +1,14 @@
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 import Logo from "../../../components/Logo/Logo";
 import Tag from "../../../components/Tag/Tag";
 
+import { ProjectData } from "../../../types";
+
 import { GENRES_PROJECTS, PROJECTS } from "../../../utils/constants";
 import closeIconSrc from "../../../assets/images/close-icon.svg";
-import tvIconSrc from "../../../assets/images/tv.svg";
-import hedphonesIconSrc from "../../../assets/images/headphone50.svg";
-// import hedphonesIconSrc from "../../assets/images/headphone50.svg";
 
-import cn from "classnames";
 import s from "./FeaturedWork.module.css";
 import Project from "../../../components/Project/Project";
 
@@ -19,19 +17,20 @@ function FeaturedWorkMobile() {
   const [projectSelected, setSelectedProject] = useState<number>(null);
 
   const audioPlayerRef = useRef<HTMLAudioElement>();
-  // const filteredPieces = useMemo(
-  //   () => filterPiecesByTags(selectedTags, PROJECTS),
-  //   [selectedTags]
-  // );
 
-  // function filterPiecesByTags(
-  //   selectedTags: string[],
-  //   pieces: AudioTrackData[]
-  // ) {
-  //   return pieces.filter((piece) => {
-  //     return selectedTags.every((tag) => piece.tags.includes(tag));
-  //   });
-  // }
+  const filteredProjects = useMemo(
+    () => filterProjectsByTags(selectedTags, PROJECTS),
+    [selectedTags]
+  );
+
+  function filterProjectsByTags(
+    selectedTags: string[],
+    projects: ProjectData[]
+  ) {
+    return projects.filter((project) => {
+      return selectedTags.every((tag) => project.tags.includes(tag));
+    });
+  }
 
   const handleTagClick = (tag: string) => {
     if (selectedTags.includes(tag)) {
@@ -87,7 +86,7 @@ function FeaturedWorkMobile() {
         </audio>
 
         <div className={s.projectsSection}>
-          {PROJECTS.map((project, index) => (
+          {filteredProjects.map((project, index) => (
             <Project
               data={project}
               isSelected={projectSelected === index}

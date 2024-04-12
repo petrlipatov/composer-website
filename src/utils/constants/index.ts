@@ -79,7 +79,7 @@ export const PROJECTS = [
   {
     name: "Project #1",
     description: "TV Drama, 2021",
-    tags: ["Piano", "Orchestral", "Vintage"],
+    tags: ["Film"],
     imageSrc: "/images/projects/project1.webp",
     tracks: [
       {
@@ -108,7 +108,7 @@ export const PROJECTS = [
   {
     name: "Project #2",
     description: "Game, 2022",
-    tags: ["Piano", "Orchestral", "Vintage"],
+    tags: ["Ad"],
     imageSrc: "/images/projects/project2.webp",
     tracks: [
       {
@@ -137,7 +137,7 @@ export const PROJECTS = [
   {
     name: "Project #2",
     description: "TV Commercial, 2019",
-    tags: ["Piano", "Orchestral", "Vintage"],
+    tags: ["Mystery", "Thriller"],
     imageSrc: "/images/projects/project1.webp",
     tracks: [
       {
@@ -195,7 +195,7 @@ export const PROJECTS = [
   {
     name: "Project #2",
     description: "TV Commercial, 2019",
-    tags: ["Piano", "Orchestral", "Vintage"],
+    tags: ["Comedy", "Action"],
     imageSrc: "/images/projects/project1.webp",
     tracks: [
       {
@@ -224,7 +224,7 @@ export const PROJECTS = [
   {
     name: "Project #2",
     description: "TV Commercial, 2019",
-    tags: ["Piano", "Orchestral", "Vintage"],
+    tags: ["Game", "Fantasy"],
     imageSrc: "/images/projects/project2.webp",
     tracks: [
       {

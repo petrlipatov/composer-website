@@ -38,15 +38,15 @@ const Project = forwardRef(
 
     const audioPlayerRef = ref?.current;
 
-    // useEffect(() => {
-    //   if (isSelected) {
-    //     const timer = setTimeout(() => {
-    //       setSelectedTrack(null);
-    //     }, 5000);
+    useEffect(() => {
+      if (isSelected) {
+        const timer = setTimeout(() => {
+          setSelectedProject(null);
+        }, 5000);
 
-    //     return () => clearTimeout(timer);
-    //   }
-    // }, [isSelected, setSelectedTrack, index]);
+        return () => clearTimeout(timer);
+      }
+    }, [isSelected, setSelectedProject, index]);
 
     function handleProjectClick() {
       setSelectedProject(index);
