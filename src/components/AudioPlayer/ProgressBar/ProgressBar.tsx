@@ -44,8 +44,10 @@ const ProgressBar = forwardRef((props, ref: RefObject<HTMLAudioElement>) => {
   );
 
   const onScrubberChange = (e) => {
+    audioPlayerRef.pause();
     const newTime = e.target.value;
     audioPlayerRef.currentTime = newTime;
+    audioPlayerRef.play();
   };
 
   return (

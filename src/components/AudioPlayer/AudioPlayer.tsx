@@ -44,13 +44,19 @@ const AudioPlayer = forwardRef(
           setIsAudioPlaying(true);
         };
 
+        const onEndedHandler = () => {
+          setIsAudioPlaying(false);
+        };
+
         if (audioPlayerRef) {
           audioPlayerRef.addEventListener("playing", onPlayingHandler);
+          audioPlayerRef.addEventListener("ended", onEndedHandler);
         }
 
         return () => {
           if (audioPlayerRef) {
             audioPlayerRef.removeEventListener("playing", onPlayingHandler);
+            audioPlayerRef.removeEventListener("ended", onEndedHandler);
           }
         };
       },
