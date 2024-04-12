@@ -2,7 +2,7 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
   margin-top: 16px;
   width: 100%;
 }
@@ -10,7 +10,7 @@
 .content {
   display: grid;
   grid-template-columns: 1fr;
-  /* height: auto; */
+  height: 97%;
   overflow: hidden;
   width: 94%;
   border: 1px solid blue;
