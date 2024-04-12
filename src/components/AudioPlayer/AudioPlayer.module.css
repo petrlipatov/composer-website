@@ -75,10 +75,11 @@
 
 .closeIcon {
   position: absolute;
-  top: 8px;
+  top: 4px;
   right: 8px;
-  height: 14px;
-  width: 14px;
+  height: 24px;
+  width: 24px;
+  padding: 4px;
 }
 .videoIcon {
   position: absolute;

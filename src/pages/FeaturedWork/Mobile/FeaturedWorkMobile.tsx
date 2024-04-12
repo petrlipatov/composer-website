@@ -6,7 +6,7 @@ import Tag from "../../../components/Tag/Tag";
 
 import { ProjectData } from "../../../types";
 
-import { GENRES_PROJECTS, PROJECTS } from "../../../utils/constants";
+import { PROJECTS, PROJECTS_GENRES } from "../../../utils/constants";
 import closeIconSrc from "../../../assets/images/close-icon.svg";
 
 import s from "./FeaturedWork.module.css";
@@ -64,7 +64,7 @@ function FeaturedWorkMobile() {
 
         <div className={s.tagsSection}>
           <div className={s.tagsList}>
-            {GENRES_PROJECTS.map((genre, i) => (
+            {PROJECTS_GENRES.map((genre, i) => (
               <Tag
                 name={genre}
                 isSelected={isTagSelected(genre)}

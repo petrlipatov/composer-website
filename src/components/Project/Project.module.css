@@ -1,5 +1,5 @@
 .project {
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 
 .projectImageContainer {
@@ -56,6 +56,21 @@
 .imageMaskIcon {
   width: 45px;
   height: 45px;
+}
+
+.imageMaskIconLeft {
+  width: 37px;
+  height: 37px;
+  transform: translateY(-0.5px);
+}
+
+.imageMaskCaption {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.imageMaskCaptionLeft {
+  transform: translateY(4px);
 }
 
 .projectTitle {

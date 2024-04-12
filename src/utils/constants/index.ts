@@ -1,4 +1,4 @@
-export const GENRES_PROJECTS = [
+export const PROJECTS_GENRES = [
   "Film",
   "TV Show",
   "Game",
@@ -12,7 +12,7 @@ export const GENRES_PROJECTS = [
   "Action",
 ];
 
-export const GENRES_PIECES = [
+export const PIECES_GENRES = [
   "Piano",
   "Orchestral",
   "Vintage",

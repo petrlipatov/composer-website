@@ -11,8 +11,8 @@ import YouTubePlayer from "../../../components/YoutubePlayer/YoutubePlayer";
 import { AudioTrackData } from "../../../types";
 
 import {
-  GENRES_PIECES,
   PIECES,
+  PIECES_GENRES,
   NO_TRACKS_FOUND_WARNING,
 } from "../../../utils/constants";
 import closeIconSrc from "../../../assets/images/close-icon.svg";
@@ -90,7 +90,7 @@ function PiecesMobile() {
 
         <div className={s.tagsSection}>
           <div className={s.tagsList}>
-            {GENRES_PIECES.map((genre, i) => (
+            {PIECES_GENRES.map((genre, i) => (
               <Tag
                 name={genre}
                 isSelected={isTagSelected(genre)}
