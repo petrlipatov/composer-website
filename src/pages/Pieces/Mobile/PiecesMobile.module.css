@@ -10,6 +10,7 @@
 .content {
   display: grid;
   grid-template-columns: 1fr;
+  grid-template-rows: max-content max-content min-content;
   height: 97%;
   overflow: hidden;
   width: 94%;
