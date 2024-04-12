@@ -48,9 +48,9 @@ function FeaturedWorkMobile() {
     return selectedTags.includes(tag);
   };
 
-  //   const isTagDisabled = (tag: string) => {
-  //     return !filteredPieces.some((piece) => piece.tags.includes(tag));
-  //   };
+  const isTagDisabled = (tag: string) => {
+    return !filteredProjects.some((piece) => piece.tags.includes(tag));
+  };
 
   return (
     <div className={s.page}>
@@ -68,7 +68,7 @@ function FeaturedWorkMobile() {
               <Tag
                 name={genre}
                 isSelected={isTagSelected(genre)}
-                isDisabled={false}
+                isDisabled={isTagDisabled(genre)}
                 onClick={() => handleTagClick(genre)}
                 key={i}
               />
