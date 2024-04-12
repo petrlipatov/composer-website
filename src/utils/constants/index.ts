@@ -70,7 +70,7 @@ export const PIECES = [
     name: "Power Drip",
     tags: ["Epic", "Easy", "Eccentric"],
     imageSrc: "/images/pieces/track2.webp",
-    audioSrc: "/audio/WORN-OUT_1__1",
+    audioSrc: "/audio/WORN-OUT.mp3",
     videoSrc: "u0dBG0AL3Cs",
   },
 ];
