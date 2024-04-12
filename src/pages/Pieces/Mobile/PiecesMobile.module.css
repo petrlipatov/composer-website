@@ -1,17 +1,19 @@
 .page {
   align-items: center;
   display: flex;
+  flex-direction: column;
   height: 100%;
-  justify-content: center;
+  margin-top: 16px;
   width: 100%;
 }
 
 .content {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: max-content max-content;
-  height: 97%;
+  /* height: auto; */
+  overflow: hidden;
   width: 94%;
+  border: 1px solid blue;
 }
 
 .nav {
@@ -73,7 +75,6 @@
   display: grid;
   grid-template-columns: 48% 48%;
   grid-template-rows: 1fr;
-  flex-direction: column;
   margin-top: 24px;
   gap: 8px;
   row-gap: 8px;

@@ -78,6 +78,7 @@ export const PIECES = [
 export const PROJECTS = [
   {
     name: "Project #1",
+    description: "TV Drama, 2021",
     tags: ["Piano", "Orchestral", "Vintage"],
     imageSrc: "/images/projects/project1.webp",
     track: [
@@ -106,6 +107,7 @@ export const PROJECTS = [
   },
   {
     name: "Project #2",
+    description: "Video game, 2022",
     tags: ["Piano", "Orchestral", "Vintage"],
     imageSrc: "/images/projects/project2.webp",
     track: [
@@ -134,92 +136,96 @@ export const PROJECTS = [
   },
   {
     name: "Project #2",
-    tags: ["Piano", "Orchestral", "Vintage"],
-    imageSrc: "/images/projects/project3.webp",
-    track: [
-      {
-        name: "I Thought It Would Be Fun",
-        tags: ["Piano", "Orchestral", "Vintage"],
-        imageSrc: "/images/track1.webp",
-        audioSrc: "/audio/Free_Test_Data_2MB_MP3.mp3",
-        videoSrc: "u0dBG0AL3Cs",
-      },
-      {
-        name: "Worn Out",
-        tags: ["Piano", "Electronic"],
-        imageSrc: "/images/track2.webp",
-        audioSrc: "/audio/Theory-of-Light-Master.mp3",
-        videoSrc: "u0dBG0AL3Cs",
-      },
-      {
-        name: "Threat Serenade",
-        tags: ["Dark", "Vibrant", "Misty"],
-        imageSrc: "/images/track3.webp",
-        audioSrc: "/audio/GOING-FAR-AWAY-_VINTAGE-HARMONY__1_.mp3",
-        videoSrc: "u0dBG0AL3Cs",
-      },
-    ],
-  },
-  {
-    name: "Project #2",
-    tags: ["Piano", "Orchestral", "Vintage"],
-    imageSrc: "/images/projects/project4.webp",
-    track: [
-      {
-        name: "I Thought It Would Be Fun",
-        tags: ["Piano", "Orchestral", "Vintage"],
-        imageSrc: "/images/track1.webp",
-        audioSrc: "/audio/Free_Test_Data_2MB_MP3.mp3",
-        videoSrc: "u0dBG0AL3Cs",
-      },
-      {
-        name: "Worn Out",
-        tags: ["Piano", "Electronic"],
-        imageSrc: "/images/track2.webp",
-        audioSrc: "/audio/Theory-of-Light-Master.mp3",
-        videoSrc: "u0dBG0AL3Cs",
-      },
-      {
-        name: "Threat Serenade",
-        tags: ["Dark", "Vibrant", "Misty"],
-        imageSrc: "/images/track3.webp",
-        audioSrc: "/audio/GOING-FAR-AWAY-_VINTAGE-HARMONY__1_.mp3",
-        videoSrc: "u0dBG0AL3Cs",
-      },
-    ],
-  },
-  {
-    name: "Project #2",
-    tags: ["Piano", "Orchestral", "Vintage"],
-    imageSrc: "/images/projects/project5.webp",
-    track: [
-      {
-        name: "I Thought It Would Be Fun",
-        tags: ["Piano", "Orchestral", "Vintage"],
-        imageSrc: "/images/track1.webp",
-        audioSrc: "/audio/Free_Test_Data_2MB_MP3.mp3",
-        videoSrc: "u0dBG0AL3Cs",
-      },
-      {
-        name: "Worn Out",
-        tags: ["Piano", "Electronic"],
-        imageSrc: "/images/track2.webp",
-        audioSrc: "/audio/Theory-of-Light-Master.mp3",
-        videoSrc: "u0dBG0AL3Cs",
-      },
-      {
-        name: "Threat Serenade",
-        tags: ["Dark", "Vibrant", "Misty"],
-        imageSrc: "/images/track3.webp",
-        audioSrc: "/audio/GOING-FAR-AWAY-_VINTAGE-HARMONY__1_.mp3",
-        videoSrc: "u0dBG0AL3Cs",
-      },
-    ],
-  },
-  {
-    name: "Project #2",
+    description: "TV Commercial, 2019",
     tags: ["Piano", "Orchestral", "Vintage"],
     imageSrc: "/images/projects/project1.webp",
+    track: [
+      {
+        name: "I Thought It Would Be Fun",
+        tags: ["Piano", "Orchestral", "Vintage"],
+        imageSrc: "/images/track1.webp",
+        audioSrc: "/audio/Free_Test_Data_2MB_MP3.mp3",
+        videoSrc: "u0dBG0AL3Cs",
+      },
+      {
+        name: "Worn Out",
+        tags: ["Piano", "Electronic"],
+        imageSrc: "/images/track2.webp",
+        audioSrc: "/audio/Theory-of-Light-Master.mp3",
+        videoSrc: "u0dBG0AL3Cs",
+      },
+      {
+        name: "Threat Serenade",
+        tags: ["Dark", "Vibrant", "Misty"],
+        imageSrc: "/images/track3.webp",
+        audioSrc: "/audio/GOING-FAR-AWAY-_VINTAGE-HARMONY__1_.mp3",
+        videoSrc: "u0dBG0AL3Cs",
+      },
+    ],
+  },
+  {
+    name: "Project #2",
+    description: "TV Commercial, 2019",
+    tags: ["Piano", "Orchestral", "Vintage"],
+    imageSrc: "/images/projects/project2.webp",
+    track: [
+      {
+        name: "I Thought It Would Be Fun",
+        tags: ["Piano", "Orchestral", "Vintage"],
+        imageSrc: "/images/track1.webp",
+        audioSrc: "/audio/Free_Test_Data_2MB_MP3.mp3",
+        videoSrc: "u0dBG0AL3Cs",
+      },
+      {
+        name: "Worn Out",
+        tags: ["Piano", "Electronic"],
+        imageSrc: "/images/track2.webp",
+        audioSrc: "/audio/Theory-of-Light-Master.mp3",
+        videoSrc: "u0dBG0AL3Cs",
+      },
+      {
+        name: "Threat Serenade",
+        tags: ["Dark", "Vibrant", "Misty"],
+        imageSrc: "/images/track3.webp",
+        audioSrc: "/audio/GOING-FAR-AWAY-_VINTAGE-HARMONY__1_.mp3",
+        videoSrc: "u0dBG0AL3Cs",
+      },
+    ],
+  },
+  {
+    name: "Project #2",
+    description: "TV Commercial, 2019",
+    tags: ["Piano", "Orchestral", "Vintage"],
+    imageSrc: "/images/projects/project1.webp",
+    track: [
+      {
+        name: "I Thought It Would Be Fun",
+        tags: ["Piano", "Orchestral", "Vintage"],
+        imageSrc: "/images/track1.webp",
+        audioSrc: "/audio/Free_Test_Data_2MB_MP3.mp3",
+        videoSrc: "u0dBG0AL3Cs",
+      },
+      {
+        name: "Worn Out",
+        tags: ["Piano", "Electronic"],
+        imageSrc: "/images/track2.webp",
+        audioSrc: "/audio/Theory-of-Light-Master.mp3",
+        videoSrc: "u0dBG0AL3Cs",
+      },
+      {
+        name: "Threat Serenade",
+        tags: ["Dark", "Vibrant", "Misty"],
+        imageSrc: "/images/track5.webp",
+        audioSrc: "/audio/GOING-FAR-AWAY-_VINTAGE-HARMONY__1_.mp3",
+        videoSrc: "u0dBG0AL3Cs",
+      },
+    ],
+  },
+  {
+    name: "Project #2",
+    description: "TV Commercial, 2019",
+    tags: ["Piano", "Orchestral", "Vintage"],
+    imageSrc: "/images/projects/project2.webp",
     track: [
       {
         name: "I Thought It Would Be Fun",

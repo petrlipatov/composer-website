@@ -89,5 +89,10 @@
 }
 
 .projectTitle {
+  margin-top: 4px;
   font-size: 12px;
+}
+.projectDescription {
+  margin-top: 4px;
+  font-size: 10px;
 }

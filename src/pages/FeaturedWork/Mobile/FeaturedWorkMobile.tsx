@@ -83,6 +83,7 @@ function FeaturedWorkMobile() {
                 alt="project artwork"
               />
               <div className={s.projectTitle}>{project.name}</div>
+              <div className={s.projectDescription}>{project.description}</div>
             </div>
           ))}
         </div>

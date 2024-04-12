@@ -131,7 +131,6 @@ function PiecesMobile() {
           )}
         </div>
       </div>
-
       <AudioPlayer
         isPlayerOpened={isPlayerOpened}
         setIsPlayerOpened={setIsPlayerOpened}
