@@ -8,6 +8,7 @@
   background-color: #e7397a;
   gap: 8px;
   position: relative;
+  box-shadow: 0px -1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .playerSectionActive {
