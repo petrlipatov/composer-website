@@ -3,10 +3,9 @@
   flex-direction: column;
   justify-content: flex-start;
   width: 100%;
-  min-height: 240px;
+  min-height: 280px;
   background-color: #e7397a;
   position: relative;
-  box-shadow: 0px -1px 2px rgba(0, 0, 0, 0.3);
   border: 1px solid black;
 }
 
@@ -16,7 +15,7 @@
 
 .closeIcon {
   position: absolute;
-  top: 2px;
+  top: -24px;
   right: 2px;
   height: 24px;
   width: 24px;
@@ -26,10 +25,10 @@
 .trackList {
   display: flex;
   flex-direction: column;
-  /* min-height: 100px; */
+  /* min-height: 140px; */
   row-gap: 8px;
   font-size: 14px;
-  margin: 16px 24px 0 24px;
+  margin: 10px 12px 0 12px;
   border: 1px solid black;
   overflow-y: scroll;
 }
@@ -120,14 +119,14 @@
   position: absolute;
   width: 40px;
   height: 40px;
-  right: 40px;
-  top: 30px;
+  right: 35px;
+  top: 20px;
 }
 
 .artwork {
   position: absolute;
-  width: 55px;
-  height: 55px;
+  width: auto;
+  height: 65px;
   top: 10px;
   left: 12px;
 }

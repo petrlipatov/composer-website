@@ -178,7 +178,7 @@ const ExtendedAudioPlayer = forwardRef(
             src={videoIcon}
             //   onClick={handleVideoClick}
           />
-          {/* <img className={s.artwork} src={playingAudioData?.imageSource} /> */}
+          <img className={s.artwork} src={playingProjectData?.imageSrc} />
         </div>
       </div>
     );
