@@ -81,6 +81,7 @@ export const PROJECTS = [
     description: "TV Drama, 2021",
     tags: ["Film"],
     imageSrc: "/images/projects/project1.webp",
+    videoSrc: "u0dBG0AL3Cs",
     tracks: [
       {
         name: "I Thought It Would Be Fun",
@@ -125,6 +126,7 @@ export const PROJECTS = [
     description: "Game, 2022",
     tags: ["Ad"],
     imageSrc: "/images/projects/project2.webp",
+    videoSrc: "u0dBG0AL3Cs",
     tracks: [
       {
         name: "I Thought It Would Be Fun",
@@ -163,6 +165,7 @@ export const PROJECTS = [
     description: "TV Commercial, 2019",
     tags: ["Mystery", "Thriller"],
     imageSrc: "/images/projects/project1.webp",
+    videoSrc: "u0dBG0AL3Cs",
     tracks: [
       {
         name: "I Thought It Would Be Fun",
@@ -189,6 +192,7 @@ export const PROJECTS = [
     description: "TV Commercial, 2019",
     tags: ["Piano", "Orchestral", "Vintage"],
     imageSrc: "/images/projects/project2.webp",
+    videoSrc: "u0dBG0AL3Cs",
     tracks: [
       {
         name: "I Thought It Would Be Fun",
@@ -215,6 +219,7 @@ export const PROJECTS = [
     description: "TV Commercial, 2019",
     tags: ["Comedy", "Action"],
     imageSrc: "/images/projects/project1.webp",
+    videoSrc: "u0dBG0AL3Cs",
     tracks: [
       {
         name: "I Thought It Would Be Fun",
@@ -241,6 +246,7 @@ export const PROJECTS = [
     description: "TV Commercial, 2019",
     tags: ["Game", "Fantasy"],
     imageSrc: "/images/projects/project2.webp",
+    videoSrc: "u0dBG0AL3Cs",
     tracks: [
       {
         name: "I Thought It Would Be Fun",
