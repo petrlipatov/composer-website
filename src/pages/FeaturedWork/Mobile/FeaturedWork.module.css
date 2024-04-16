@@ -5,14 +5,16 @@
   height: 100%;
   margin-top: 16px;
   width: 100%;
+  overflow: hidden;
 }
 
 .content {
-  height: 95%;
-  width: 94%;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: max-content max-content;
+  grid-template-rows: max-content max-content 1fr;
+  height: 95%;
+  overflow: hidden;
+  width: 94%;
 }
 
 .nav {

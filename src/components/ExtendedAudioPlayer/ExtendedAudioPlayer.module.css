@@ -2,17 +2,59 @@
   display: none;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
   width: 100%;
-  min-height: 140px;
+  min-height: 240px;
   background-color: #e7397a;
-  gap: 8px;
   position: relative;
-  box-shadow: 0px -1px 2px rgba(0, 0, 0, 0);
+  box-shadow: 0px -1px 2px rgba(0, 0, 0, 0.3);
+  border: 1px solid black;
 }
 
 .playerSectionActive {
   display: flex;
+}
+
+.closeIcon {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  height: 24px;
+  width: 24px;
+  padding: 4px;
+}
+
+.trackList {
+  display: flex;
+  flex-direction: column;
+  /* min-height: 100px; */
+  row-gap: 8px;
+  font-size: 14px;
+  margin: 16px 24px 0 24px;
+  border: 1px solid black;
+  overflow-y: scroll;
+}
+
+.track {
+  display: flex;
+  margin-top: 4px;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.trackTitle {
+  margin-left: 16px;
+  width: 80%;
+}
+
+.playerContainer {
+  position: relative;
+  display: flex;
+  min-height: 140px;
+  width: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
 }
 
 .title {
@@ -74,14 +116,6 @@
   width: 40px;
 }
 
-.closeIcon {
-  position: absolute;
-  top: 4px;
-  right: 8px;
-  height: 24px;
-  width: 24px;
-  padding: 4px;
-}
 .videoIcon {
   position: absolute;
   width: 40px;
@@ -96,19 +130,4 @@
   height: 55px;
   top: 10px;
   left: 12px;
-}
-
-.buffered {
-  height: 20px;
-  position: relative;
-  background: #555;
-  width: 300px;
-  margin-bottom: 20px;
-}
-
-.bufferedAmount {
-  display: block;
-  height: 100%;
-  background-color: #7eb81b;
-  width: 0;
 }

@@ -9,6 +9,7 @@ import React, {
 import cn from "classnames";
 
 import { ProjectData } from "../../types";
+import { PlayingProjectData } from "../../pages/FeaturedWork/Mobile/FeaturedWorkMobile";
 
 import tvIconSrc from "../../assets/images/tv.svg";
 import hedphonesIconSrc from "../../assets/images/headphone50.svg";
@@ -20,7 +21,8 @@ type ProjectProps = {
   data: ProjectData;
   isSelected: boolean;
   setSelectedProject: Dispatch<SetStateAction<number>>;
-
+  setIsPlayerOpened: Dispatch<SetStateAction<boolean>>;
+  setPlayingProjectData: Dispatch<SetStateAction<PlayingProjectData>>;
   //   openPopup: () => void;
   //   setVideoId: Dispatch<SetStateAction<string>>;
   //   setIsPlayerOpened: Dispatch<SetStateAction<boolean>>;
@@ -29,7 +31,14 @@ type ProjectProps = {
 
 const Project = forwardRef(
   (
-    { data, isSelected, setSelectedProject, index }: ProjectProps,
+    {
+      index,
+      data,
+      isSelected,
+      setIsPlayerOpened,
+      setSelectedProject,
+      setPlayingProjectData,
+    }: ProjectProps,
     ref: RefObject<HTMLAudioElement>
   ) => {
     const [isPaused, setIsPaused] = useState(false);
@@ -52,6 +61,11 @@ const Project = forwardRef(
       setSelectedProject(index);
     }
 
+    function handleListenClick() {
+      setIsPlayerOpened(true);
+      setPlayingProjectData({ ...data, index: index });
+    }
+
     const projectImageMaskClasses = cn(s.projectImageMask, {
       [s.projectImageMaskSelected]: isSelected,
     });
@@ -66,10 +80,7 @@ const Project = forwardRef(
           />
 
           <div className={projectImageMaskClasses}>
-            <div
-              className={s.imageMaskButtonLeft}
-              // onClick={handleListenClick}
-            >
+            <div className={s.imageMaskButtonLeft} onClick={handleListenClick}>
               <img
                 className={cn(s.imageMaskIcon, s.imageMaskIconLeft)}
                 src={hedphonesIconSrc}

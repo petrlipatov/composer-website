@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import Logo from "../../../components/Logo/Logo";
 import Tag from "../../../components/Tag/Tag";
+import ExtendedAudioPlayer from "../../../components/ExtendedAudioPlayer/ExtendedAudioPlayer";
 
 import { ProjectData } from "../../../types";
 
@@ -15,6 +16,12 @@ import Project from "../../../components/Project/Project";
 function FeaturedWorkMobile() {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [projectSelected, setSelectedProject] = useState<number>(null);
+
+  const [isPlayerOpened, setIsPlayerOpened] = useState(false);
+
+  const [playingProjectData, setPlayingProjectData] = useState<
+    ProjectData | undefined
+  >();
 
   const audioPlayerRef = useRef<HTMLAudioElement>();
 
@@ -49,7 +56,7 @@ function FeaturedWorkMobile() {
   };
 
   const isTagDisabled = (tag: string) => {
-    return !filteredProjects.some((piece) => piece.tags.includes(tag));
+    return !filteredProjects.some((project) => project.tags.includes(tag));
   };
 
   return (
@@ -91,12 +98,27 @@ function FeaturedWorkMobile() {
               data={project}
               isSelected={projectSelected === index}
               setSelectedProject={setSelectedProject}
+              setPlayingProjectData={setPlayingProjectData}
+              setIsPlayerOpened={setIsPlayerOpened}
               index={index}
               key={index}
             />
           ))}
         </div>
       </div>
+
+      <ExtendedAudioPlayer
+        isPlayerOpened={isPlayerOpened}
+        playingProjectData={playingProjectData}
+        setIsPlayerOpened={setIsPlayerOpened}
+        // playingAudioData={playingAudioData}
+        // setPlayingAudioData={setPlayingAudioData}
+        // setSelectedTrack={setSelectedTrack}
+        // setVideoId={setVideoId}
+        // openPopup={openVideoPopup}
+        // filteredPieces={filteredPieces}
+        ref={audioPlayerRef}
+      />
     </div>
   );
 }

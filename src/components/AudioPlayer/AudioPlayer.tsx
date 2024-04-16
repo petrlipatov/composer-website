@@ -1,5 +1,5 @@
 import cn from "classnames";
-import { forwardRef, useEffect, useState } from "react";
+import { forwardRef, useEffect, useState, useRef } from "react";
 import { Dispatch, RefObject, SetStateAction } from "react";
 import { AudioTrackData } from "../../types";
 import { PlayingAudioData } from "../../pages/Pieces/Mobile/PiecesMobile";
@@ -37,6 +37,24 @@ const AudioPlayer = forwardRef(
   ) => {
     const [isAudioPlaying, setIsAudioPlaying] = useState(false);
     const audioPlayerRef = ref.current;
+    const bufferedRef = useRef<HTMLSpanElement>();
+
+    // useEffect(() => {
+    //   if (audioPlayerRef && audioPlayerRef) {
+    //     const audio = audioPlayerRef;
+
+    //     if (audio.buffered && audio.buffered.length > 0) {
+    //       // Получаем доступ к окончанию последнего буфера, если он существует
+    //       const bufferedEnd = audio.buffered.end(audio.buffered.length - 1);
+    //       // Получаем продолжительность аудиофайла
+    //       const duration = audio.duration;
+    //       // Вычисляем прогресс буферизации в процентах
+    //       const bufferedProgress = (bufferedEnd / duration) * 100;
+    //       // Выводим прогресс в консоль
+    //       console.log("Buffered progress:", bufferedProgress);
+    //     }
+    //   }
+    // }, [audioPlayerRef]);
 
     useEffect(
       function togglePlayingStatus() {
@@ -148,6 +166,10 @@ const AudioPlayer = forwardRef(
         </div>
 
         <ProgressBar ref={ref} />
+
+        {/* <div className={s.buffered}>
+          <span ref={bufferedRef} className={s.bufferedAmount} />
+        </div> */}
 
         <img
           className={s.videoIcon}

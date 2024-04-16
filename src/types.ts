@@ -13,6 +13,7 @@ export type ProjectData = {
   tags: string[];
   tracks: {
     name: string;
+    duration: string;
     audioSrc: string;
     videoSrc: string;
   }[];
