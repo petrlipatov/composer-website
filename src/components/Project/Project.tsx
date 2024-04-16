@@ -8,13 +8,12 @@ import React, {
 } from "react";
 import cn from "classnames";
 
-import { ProjectData } from "../../types";
-import { PlayingProjectData } from "../../pages/FeaturedWork/Mobile/FeaturedWorkMobile";
-
 import tvIconSrc from "../../assets/images/tv.svg";
 import hedphonesIconSrc from "../../assets/images/headphone50.svg";
 
 import s from "./Project.module.css";
+
+import { ProjectData } from "../../types";
 
 type ProjectProps = {
   index: number;
@@ -22,7 +21,7 @@ type ProjectProps = {
   isSelected: boolean;
   setSelectedProject: Dispatch<SetStateAction<number>>;
   setIsPlayerOpened: Dispatch<SetStateAction<boolean>>;
-  setPlayingProjectData: Dispatch<SetStateAction<PlayingProjectData>>;
+  setPlayingProjectData: Dispatch<SetStateAction<ProjectData>>;
   //   openPopup: () => void;
   //   setVideoId: Dispatch<SetStateAction<string>>;
   //   setIsPlayerOpened: Dispatch<SetStateAction<boolean>>;
@@ -63,7 +62,7 @@ const Project = forwardRef(
 
     function handleListenClick() {
       setIsPlayerOpened(true);
-      setPlayingProjectData({ ...data, index: index });
+      setPlayingProjectData({ ...data });
     }
 
     const projectImageMaskClasses = cn(s.projectImageMask, {
