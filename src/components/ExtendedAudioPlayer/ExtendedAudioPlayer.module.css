@@ -6,11 +6,13 @@
   background-color: #e7397a;
   position: relative;
   margin-top: 24px;
-  flex-grow: 1;
+  /* flex-grow: 1; */
 }
 
 .playerSectionActive {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: max-content 1fr max-content;
 }
 
 .closeIcon {
@@ -51,12 +53,12 @@
   font-size: 14px;
   margin: 12px 12px 0 32px;
   overflow-y: scroll;
-  height: 190px;
+  height: 170px;
 }
 
 .track {
   display: flex;
-  margin-top: 24px;
+  margin-top: 28px;
   margin-right: 8px;
 }
 
