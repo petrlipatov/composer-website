@@ -3,10 +3,10 @@
   flex-direction: column;
   justify-content: flex-start;
   width: 100%;
-  min-height: 280px;
   background-color: #e7397a;
   position: relative;
-  border: 1px solid black;
+  margin-top: 24px;
+  flex-grow: 1;
 }
 
 .playerSectionActive {
@@ -22,21 +22,42 @@
   padding: 4px;
 }
 
+.trackInfoSection {
+  display: flex;
+  margin-left: 32px;
+  margin-top: 16px;
+}
+
+.trackInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 14px;
+  width: 40%;
+  margin-left: 16px;
+}
+
+.artwork {
+  display: block;
+  width: auto;
+  height: 140px;
+  top: 10px;
+  left: 12px;
+}
+
 .trackList {
   display: flex;
   flex-direction: column;
-  /* min-height: 140px; */
-  row-gap: 8px;
   font-size: 14px;
-  margin: 10px 12px 0 12px;
-  border: 1px solid black;
+  margin: 12px 12px 0 32px;
   overflow-y: scroll;
+  min-height: 140px;
 }
 
 .track {
   display: flex;
-  margin-top: 4px;
-  margin-left: 8px;
+  padding-top: 6px;
+  padding-bottom: 6px;
   margin-right: 8px;
 }
 
@@ -54,6 +75,7 @@
   justify-content: flex-start;
   align-items: center;
   gap: 8px;
+  border-top: 1px solid black;
 }
 
 .title {
@@ -121,12 +143,4 @@
   height: 40px;
   right: 35px;
   top: 20px;
-}
-
-.artwork {
-  position: absolute;
-  width: auto;
-  height: 65px;
-  top: 10px;
-  left: 12px;
 }

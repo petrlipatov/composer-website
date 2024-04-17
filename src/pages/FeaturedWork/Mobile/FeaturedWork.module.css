@@ -12,7 +12,6 @@
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: max-content max-content 1fr;
-  height: 95%;
   overflow: hidden;
   width: 94%;
 }

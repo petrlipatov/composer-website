@@ -122,6 +122,15 @@ const ExtendedAudioPlayer = forwardRef(
           src={closeIcon}
           onClick={handleCloseClick}
         />
+        <div className={s.trackInfoSection}>
+          <img className={s.artwork} src={playingProjectData?.imageSrc} />
+          <div className={s.trackInfo}>
+            <div>Project Title</div>
+            <div>TV-series</div>
+            <div>2017</div>
+          </div>
+        </div>
+
         <div className={s.trackList}>
           {playingProjectData?.tracks.map((track, i) => {
             return (
@@ -178,7 +187,6 @@ const ExtendedAudioPlayer = forwardRef(
             src={videoIcon}
             //   onClick={handleVideoClick}
           />
-          <img className={s.artwork} src={playingProjectData?.imageSrc} />
         </div>
       </div>
     );

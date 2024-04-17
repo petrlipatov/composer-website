@@ -61,7 +61,12 @@ function FeaturedWorkMobile() {
 
   return (
     <div className={s.page}>
-      <div className={s.content}>
+      <div
+        className={s.content}
+        style={
+          isPlayerOpened ? { gridTemplateRows: "max-content max-content" } : {}
+        }
+      >
         <div className={s.nav}>
           <Link to="/" className={s.pageTitle}>
             Featured Work
@@ -92,7 +97,10 @@ function FeaturedWorkMobile() {
           Your browser does not support the audio element.
         </audio>
 
-        <div className={s.projectsSection}>
+        <div
+          className={s.projectsSection}
+          style={isPlayerOpened ? { display: "none" } : {}}
+        >
           {filteredProjects.map((project, index) => (
             <Project
               data={project}
