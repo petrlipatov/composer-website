@@ -6,12 +6,14 @@
   position: relative;
   margin-top: 24px;
   flex-grow: 1;
+  border: 2px dotted black;
+  overflow: hidden;
 }
 
 .playerSectionActive {
   display: flex;
-
   justify-content: space-between;
+
   /* display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: max-content 40% max-content; */
