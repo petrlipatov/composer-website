@@ -70,7 +70,7 @@
 .playerContainer {
   position: relative;
   display: flex;
-  height: 30%;
+  height: 140px;
   width: 100%;
   flex-direction: column;
   justify-content: flex-start;
