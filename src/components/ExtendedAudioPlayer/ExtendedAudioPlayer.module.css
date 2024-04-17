@@ -40,7 +40,7 @@
 .artwork {
   display: block;
   width: auto;
-  height: 140px;
+  height: 110px;
   top: 10px;
   left: 12px;
 }
@@ -51,13 +51,12 @@
   font-size: 14px;
   margin: 12px 12px 0 32px;
   overflow-y: scroll;
-  min-height: 140px;
+  height: 170px;
 }
 
 .track {
   display: flex;
-  padding-top: 6px;
-  padding-bottom: 6px;
+  margin-top: 18px;
   margin-right: 8px;
 }
 
@@ -76,6 +75,7 @@
   align-items: center;
   gap: 8px;
   border-top: 1px solid black;
+  border: 1px solid green;
 }
 
 .title {
