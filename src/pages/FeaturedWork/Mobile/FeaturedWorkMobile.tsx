@@ -64,7 +64,7 @@ function FeaturedWorkMobile() {
       <div
         className={s.content}
         style={
-          isPlayerOpened ? { gridTemplateRows: "max-content max-content" } : {}
+          isPlayerOpened ? { gridTemplateRows: "min-content min-content" } : {}
         }
       >
         <div className={s.nav}>

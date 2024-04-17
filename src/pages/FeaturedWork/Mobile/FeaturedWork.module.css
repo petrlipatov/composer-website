@@ -11,9 +11,10 @@
 .content {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: max-content max-content 1fr;
+  grid-template-rows: min-content min-content 1fr;
   overflow: hidden;
   width: 94%;
+  flex-shrink: 0;
 }
 
 .nav {

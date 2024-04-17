@@ -1,16 +1,15 @@
 .playerSection {
   display: none;
+  flex-direction: column;
   width: 100%;
   background-color: #e7397a;
   position: relative;
   margin-top: 24px;
-  /* flex-grow: 1; */
+  flex-grow: 1;
 }
 
 .playerSectionActive {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: max-content 1fr max-content;
+  display: flex;
 }
 
 .closeIcon {
@@ -26,6 +25,7 @@
   display: flex;
   margin-left: 32px;
   margin-top: 16px;
+  height: 20%;
 }
 
 .trackInfo {
@@ -33,6 +33,7 @@
   flex-direction: column;
   gap: 4px;
   font-size: 14px;
+
   width: 40%;
   margin-left: 16px;
 }
@@ -49,10 +50,10 @@
   display: flex;
   flex-direction: column;
   font-size: 14px;
-  margin: 12px 12px 0 32px;
+  margin: 20px 12px 0 32px;
   overflow-y: scroll;
-  border: 1px solid green;
-  height: 170px;
+  /* border: 1px solid green; */
+  height: 35%;
 }
 
 .track {
@@ -69,7 +70,7 @@
 .playerContainer {
   position: relative;
   display: flex;
-  min-height: 140px;
+  height: 30%;
   width: 100%;
   flex-direction: column;
   justify-content: flex-start;
