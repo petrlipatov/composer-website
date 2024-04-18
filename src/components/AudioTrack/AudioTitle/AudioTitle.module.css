@@ -45,7 +45,6 @@
 .title {
   width: 96%;
   font-size: 12px;
-  line-height: 12px;
   word-spacing: -2px;
   white-space: nowrap;
   overflow: hidden;
@@ -56,6 +55,5 @@
   color: rgba(231, 57, 121, 1);
   font-weight: 600;
   font-size: 12px;
-  line-height: 12px;
   word-spacing: -2px;
 }

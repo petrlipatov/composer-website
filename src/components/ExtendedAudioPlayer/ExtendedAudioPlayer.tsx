@@ -50,28 +50,6 @@ const ExtendedAudioPlayer = forwardRef(
       [audioPlayerRef]
     );
 
-    // const handlePlayNextClick = (prevOrNext) => {
-    //   let nextSongIndex = 0;
-
-    //   prevOrNext === "next"
-    //     ? (nextSongIndex = playingAudioData.index + 1)
-    //     : (nextSongIndex = playingAudioData.index - 1);
-
-    //   const nextTrack = filteredPieces[nextSongIndex];
-
-    //   if (nextTrack) {
-    //     audioPlayerRef.src = nextTrack.audioSrc;
-    //     setSelectedTrack(nextSongIndex);
-    //     setPlayingAudioData({
-    //       index: filteredPieces.indexOf(nextTrack),
-    //       name: nextTrack.name,
-    //       imageSource: nextTrack.imageSrc,
-    //       videoSource: nextTrack.videoSrc,
-    //     });
-    //   }
-    //   if (nextTrack && isAudioPlaying) audioPlayerRef.play();
-    // };
-
     // const handleVideoClick = (e) => {
     //   e.stopPropagation();
     //   setIsPlayerOpened(false);
@@ -81,13 +59,38 @@ const ExtendedAudioPlayer = forwardRef(
     //   openPopup();
     // };
 
+    const handlePlayNextClick = (prevOrNext) => {
+      const tracksMaxIndex = playingProjectData.tracks.length - 1;
+      let nextTrackIndex;
+
+      if (prevOrNext === "next") {
+        playingTrackIndex + 1 > tracksMaxIndex
+          ? (nextTrackIndex = 0)
+          : (nextTrackIndex = playingTrackIndex + 1);
+
+        setPlayingTrackIndex(nextTrackIndex);
+        audioPlayerRef.src = playingProjectData.tracks[nextTrackIndex].audioSrc;
+        audioPlayerRef.play();
+      }
+
+      if (prevOrNext === "prev") {
+        playingTrackIndex - 1 < 0
+          ? (nextTrackIndex = tracksMaxIndex)
+          : (nextTrackIndex = playingTrackIndex - 1);
+
+        setPlayingTrackIndex(nextTrackIndex);
+        audioPlayerRef.src = playingProjectData.tracks[nextTrackIndex].audioSrc;
+        audioPlayerRef.play();
+      }
+    };
+
     const isTrackPlaying = (index) => {
       return isAudioPlaying && playingTrackIndex === index;
     };
 
     const handleTrackClick = (audioSrc: string, index: number) => {
-      audioPlayerRef.src = audioSrc;
       setPlayingTrackIndex(index);
+      audioPlayerRef.src = audioSrc;
       audioPlayerRef.play();
     };
 
@@ -103,6 +106,7 @@ const ExtendedAudioPlayer = forwardRef(
       audioPlayerRef.pause();
       audioPlayerRef.src = "";
       setIsPlayerOpened(false);
+      setPlayingTrackIndex(null);
     };
 
     const playerClasses = cn(s.playerSection, {
@@ -141,7 +145,7 @@ const ExtendedAudioPlayer = forwardRef(
                 onClick={() => handleTrackClick(track.audioSrc, i)}
               >
                 {isTrackPlaying(i) ? (
-                  <AudioPlayingLoader color={"white"} />
+                  <AudioPlayingLoader color={"black"} />
                 ) : (
                   <div className={s.trackIndex}>{i + 1}</div>
                 )}
@@ -159,10 +163,7 @@ const ExtendedAudioPlayer = forwardRef(
             <button
               type="button"
               className={s.playPreviousButton}
-              // onClick={() => handlePlayNextClick("prev")}
-              onClick={() => {
-                console.log(playingProjectData);
-              }}
+              onClick={() => handlePlayNextClick("prev")}
             />
 
             <button
@@ -188,7 +189,7 @@ const ExtendedAudioPlayer = forwardRef(
             <button
               type="button"
               className={s.playNextButton}
-              // onClick={() => handlePlayNextClick("next")}
+              onClick={() => handlePlayNextClick("next")}
             />
           </div>
 

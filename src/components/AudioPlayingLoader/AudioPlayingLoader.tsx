@@ -5,8 +5,8 @@ function AudioPlayingLoader({ color }: { color?: string }) {
   let barColor;
 
   switch (color) {
-    case "white":
-      barColor = "#FFFFFF";
+    case "black":
+      barColor = "#000000";
       break;
 
     default:
