@@ -78,7 +78,8 @@ export const PIECES = [
 export const PROJECTS = [
   {
     name: "Project #1",
-    description: "TV Drama, 2021",
+    genre: "TV Drama",
+    year: "2021",
     tags: ["Film"],
     imageSrc: "/images/projects/project1.webp",
     videoSrc: "u0dBG0AL3Cs",
@@ -123,7 +124,8 @@ export const PROJECTS = [
   },
   {
     name: "Project #2",
-    description: "Game, 2022",
+    genre: "TV Drama",
+    year: "2021",
     tags: ["Ad"],
     imageSrc: "/images/projects/project2.webp",
     videoSrc: "u0dBG0AL3Cs",
@@ -162,7 +164,8 @@ export const PROJECTS = [
   },
   {
     name: "Project #2",
-    description: "TV Commercial, 2019",
+    genre: "TV Drama",
+    year: "2021",
     tags: ["Mystery", "Thriller"],
     imageSrc: "/images/projects/project1.webp",
     videoSrc: "u0dBG0AL3Cs",
@@ -189,7 +192,8 @@ export const PROJECTS = [
   },
   {
     name: "Project #2",
-    description: "TV Commercial, 2019",
+    genre: "TV Drama",
+    year: "2021",
     tags: ["Piano", "Orchestral", "Vintage"],
     imageSrc: "/images/projects/project2.webp",
     videoSrc: "u0dBG0AL3Cs",
@@ -216,7 +220,8 @@ export const PROJECTS = [
   },
   {
     name: "Project #2",
-    description: "TV Commercial, 2019",
+    genre: "TV Drama",
+    year: "2021",
     tags: ["Comedy", "Action"],
     imageSrc: "/images/projects/project1.webp",
     videoSrc: "u0dBG0AL3Cs",
@@ -243,7 +248,8 @@ export const PROJECTS = [
   },
   {
     name: "Project #2",
-    description: "TV Commercial, 2019",
+    genre: "TV Drama",
+    year: "2021",
     tags: ["Game", "Fantasy"],
     imageSrc: "/images/projects/project2.webp",
     videoSrc: "u0dBG0AL3Cs",

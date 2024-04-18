@@ -8,7 +8,8 @@ export type AudioTrackData = {
 
 export type ProjectData = {
   name: string;
-  description: string;
+  genre: string;
+  year: string;
   imageSrc: string;
   videoSrc: string;
   tags: string[];

@@ -122,12 +122,19 @@ const ExtendedAudioPlayer = forwardRef(
           src={closeIcon}
           onClick={handleCloseClick}
         />
-        <div className={s.trackInfoSection}>
+        <div className={s.projectInfoSection}>
           <img className={s.artwork} src={playingProjectData?.imageSrc} />
-          <div className={s.trackInfo}>
-            <div>Project Title</div>
-            <div>TV-series</div>
-            <div>2017</div>
+          <div className={s.projectInfoContainer}>
+            <div className={s.projectDetailsBlock}>
+              <div>{playingProjectData?.name}</div>
+              <div>{playingProjectData?.genre}</div>
+              <div>{playingProjectData?.year}</div>
+            </div>
+            <img
+              className={s.videoIcon}
+              src={videoIcon}
+              //   onClick={handleVideoClick}
+            />
           </div>
         </div>
 
@@ -181,12 +188,6 @@ const ExtendedAudioPlayer = forwardRef(
           </div>
 
           <ProgressBar ref={ref} />
-
-          <img
-            className={s.videoIcon}
-            src={videoIcon}
-            //   onClick={handleVideoClick}
-          />
         </div>
       </div>
     );

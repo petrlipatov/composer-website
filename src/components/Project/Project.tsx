@@ -99,7 +99,7 @@ const Project = forwardRef(
         </div>
 
         <div className={s.projectTitle}>{data.name}</div>
-        <div className={s.projectDescription}>{data.description}</div>
+        <div className={s.projectDescription}>{data.genre}</div>
       </div>
     );
   }

@@ -8,19 +8,20 @@
 }
 
 .content {
-  margin-top: 16px;
   display: grid;
+  flex-shrink: 0;
   grid-template-columns: 1fr;
   grid-template-rows: min-content min-content 1fr;
+  height: 95%;
+  margin-top: 16px;
   overflow: hidden;
   width: 94%;
-  flex-shrink: 0;
 }
 
 .nav {
+  align-items: center;
   display: flex;
   justify-content: space-between;
-  align-items: center;
 }
 
 .pageTitle {

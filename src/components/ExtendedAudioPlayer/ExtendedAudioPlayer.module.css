@@ -23,28 +23,40 @@
   padding: 4px;
 }
 
-.trackInfoSection {
+.projectInfoSection {
   display: flex;
   margin-left: 32px;
   margin-top: 16px;
   flex-shrink: 0;
 }
 
-.trackInfo {
+.projectInfoContainer {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 4px;
   font-size: 14px;
   width: 40%;
   margin-left: 16px;
 }
 
+.projectDetailsBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
 .artwork {
   display: block;
   width: auto;
   height: 110px;
-  top: 10px;
-  left: 12px;
+}
+
+.videoIcon {
+  display: block;
+  width: 32px;
+  height: 32px;
+  transform: translateY(4px);
 }
 
 .trackList {
@@ -59,12 +71,15 @@
 ::-webkit-scrollbar {
   -webkit-appearance: none;
   width: 4px;
-  background-color: rgba(0, 0, 0, 0.3);
 }
 
 ::-webkit-scrollbar-thumb {
   background-color: rgba(0, 0, 0, 0.5);
   box-shadow: 0 0 1px rgba(255, 255, 255, 0.7);
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .track {
@@ -148,12 +163,4 @@
 .playIcon {
   height: 40px;
   width: 40px;
-}
-
-.videoIcon {
-  position: absolute;
-  width: 40px;
-  height: 40px;
-  right: 35px;
-  top: 20px;
 }
