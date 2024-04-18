@@ -174,7 +174,9 @@ const ExtendedAudioPlayer = forwardRef(
         </div>
 
         <div className={s.playerContainer}>
-          <div className={s.title}>{"Audio Title"}</div>
+          <div className={s.title}>
+            {playingProjectData?.tracks[selectedTrackIndex]?.name}
+          </div>
 
           <div className={s.buttonsContainer}>
             <button
