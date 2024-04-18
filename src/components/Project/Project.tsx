@@ -4,7 +4,7 @@ import React, {
   SetStateAction,
   forwardRef,
   useEffect,
-  useState,
+  // useState,
 } from "react";
 import cn from "classnames";
 
@@ -40,9 +40,9 @@ const Project = forwardRef(
     }: ProjectProps,
     ref: RefObject<HTMLAudioElement>
   ) => {
-    const [isPaused, setIsPaused] = useState(false);
-    const [isPlaying, setIsPlaying] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
+    // const [isPaused, setIsPaused] = useState(false);
+    // const [isPlaying, setIsPlaying] = useState(false);
+    // const [isLoading, setIsLoading] = useState(false);
 
     const audioPlayerRef = ref?.current;
 
@@ -58,6 +58,7 @@ const Project = forwardRef(
 
     function handleProjectClick() {
       setSelectedProject(index);
+      console.log(audioPlayerRef);
     }
 
     function handleListenClick() {

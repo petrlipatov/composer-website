@@ -5,14 +5,12 @@
   height: 16px;
   justify-content: space-between;
   align-items: flex-end;
-  box-sizing: border-box;
   margin-left: 4px;
   margin-right: 4px;
 }
 
 .playing__bar {
   display: inline-block;
-  background: rgba(231, 57, 121, 1);
   width: 30%;
   height: 100%;
   animation: up-and-down 1.3s ease infinite alternate;

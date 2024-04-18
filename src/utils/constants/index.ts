@@ -86,37 +86,31 @@ export const PROJECTS = [
     tracks: [
       {
         name: "I Thought It Would Be Fun",
-        imageSrc: "/images/track1.webp",
         audioSrc: "/audio/Free_Test_Data_2MB_MP3.mp3",
         duration: "3:00",
       },
       {
         name: "Worn Out",
-        imageSrc: "/images/track2.webp",
         audioSrc: "/audio/Theory-of-Light-Master.mp3",
         duration: "3:00",
       },
       {
         name: "Threat Serenade",
-        imageSrc: "/images/track3.webp",
         audioSrc: "/audio/GOING-FAR-AWAY-_VINTAGE-HARMONY__1_.mp3",
         duration: "3:00",
       },
       {
         name: "I Thought It Would Be Fun",
-        imageSrc: "/images/track1.webp",
         audioSrc: "/audio/Free_Test_Data_2MB_MP3.mp3",
         duration: "3:00",
       },
       {
         name: "Worn Out",
-        imageSrc: "/images/track2.webp",
         audioSrc: "/audio/Theory-of-Light-Master.mp3",
         duration: "3:00",
       },
       {
         name: "Threat Serenade",
-        imageSrc: "/images/track3.webp",
         audioSrc: "/audio/GOING-FAR-AWAY-_VINTAGE-HARMONY__1_.mp3",
         duration: "3:00",
       },
@@ -138,25 +132,21 @@ export const PROJECTS = [
       },
       {
         name: "Worn Out",
-        imageSrc: "/images/track2.webp",
         audioSrc: "/audio/Theory-of-Light-Master.mp3",
         duration: "3:00",
       },
       {
         name: "Threat Serenade",
-        imageSrc: "/images/track3.webp",
         audioSrc: "/audio/GOING-FAR-AWAY-_VINTAGE-HARMONY__1_.mp3",
         duration: "3:00",
       },
       {
         name: "Worn Out",
-        imageSrc: "/images/track2.webp",
         audioSrc: "/audio/Theory-of-Light-Master.mp3",
         duration: "3:00",
       },
       {
         name: "Threat Serenade",
-        imageSrc: "/images/track3.webp",
         audioSrc: "/audio/GOING-FAR-AWAY-_VINTAGE-HARMONY__1_.mp3",
         duration: "3:00",
       },
@@ -172,19 +162,16 @@ export const PROJECTS = [
     tracks: [
       {
         name: "I Thought It Would Be Fun",
-        imageSrc: "/images/track1.webp",
         audioSrc: "/audio/Free_Test_Data_2MB_MP3.mp3",
         duration: "3:00",
       },
       {
         name: "Worn Out",
-        imageSrc: "/images/track2.webp",
         audioSrc: "/audio/Theory-of-Light-Master.mp3",
         duration: "3:00",
       },
       {
         name: "Threat Serenade",
-        imageSrc: "/images/track3.webp",
         audioSrc: "/audio/GOING-FAR-AWAY-_VINTAGE-HARMONY__1_.mp3",
         duration: "3:00",
       },
@@ -200,19 +187,16 @@ export const PROJECTS = [
     tracks: [
       {
         name: "I Thought It Would Be Fun",
-        imageSrc: "/images/track1.webp",
         audioSrc: "/audio/Free_Test_Data_2MB_MP3.mp3",
         duration: "3:00",
       },
       {
         name: "Worn Out",
-        imageSrc: "/images/track2.webp",
         audioSrc: "/audio/Theory-of-Light-Master.mp3",
         duration: "3:00",
       },
       {
         name: "Threat Serenade",
-        imageSrc: "/images/track3.webp",
         audioSrc: "/audio/GOING-FAR-AWAY-_VINTAGE-HARMONY__1_.mp3",
         duration: "3:00",
       },
@@ -228,19 +212,16 @@ export const PROJECTS = [
     tracks: [
       {
         name: "I Thought It Would Be Fun",
-        imageSrc: "/images/track1.webp",
         audioSrc: "/audio/Free_Test_Data_2MB_MP3.mp3",
         duration: "3:00",
       },
       {
         name: "Worn Out",
-        imageSrc: "/images/track2.webp",
         audioSrc: "/audio/Theory-of-Light-Master.mp3",
         duration: "3:00",
       },
       {
         name: "Threat Serenade",
-        imageSrc: "/images/track5.webp",
         audioSrc: "/audio/GOING-FAR-AWAY-_VINTAGE-HARMONY__1_.mp3",
         duration: "3:00",
       },
@@ -256,19 +237,16 @@ export const PROJECTS = [
     tracks: [
       {
         name: "I Thought It Would Be Fun",
-        imageSrc: "/images/track1.webp",
         audioSrc: "/audio/Free_Test_Data_2MB_MP3.mp3",
         duration: "3:00",
       },
       {
         name: "Worn Out",
-        imageSrc: "/images/track2.webp",
         audioSrc: "/audio/Theory-of-Light-Master.mp3",
         duration: "3:00",
       },
       {
         name: "Threat Serenade",
-        imageSrc: "/images/track3.webp",
         audioSrc: "/audio/GOING-FAR-AWAY-_VINTAGE-HARMONY__1_.mp3",
         duration: "3:00",
       },

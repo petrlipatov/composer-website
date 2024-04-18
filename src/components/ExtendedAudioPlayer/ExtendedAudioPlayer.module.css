@@ -88,6 +88,22 @@
   margin-right: 8px;
 }
 
+.trackPlaying {
+  font-weight: 600;
+}
+
+.track:last-of-type {
+  margin-bottom: 18px;
+}
+
+.trackIndex {
+  height: 16px;
+  width: 16px;
+  margin-right: 4px;
+  margin-left: 4px;
+  text-align: center;
+}
+
 .trackTitle {
   margin-left: 16px;
   width: 80%;

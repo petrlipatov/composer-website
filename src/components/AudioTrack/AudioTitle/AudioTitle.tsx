@@ -1,5 +1,5 @@
 import s from "./AudioTitle.module.css";
-import AudioPlayingLoader from "../AudioPlayingLoader/AudioPlayingLoader";
+import AudioPlayingLoader from "../../AudioPlayingLoader/AudioPlayingLoader";
 
 type AudioTitleProps = {
   name: string;

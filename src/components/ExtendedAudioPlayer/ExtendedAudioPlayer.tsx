@@ -4,6 +4,7 @@ import { Dispatch, RefObject, SetStateAction } from "react";
 // import { AudioTrackData } from "../../types";
 // import { PlayingAudioData } from "../../pages/Pieces/Mobile/PiecesMobile";
 import ProgressBar from "./ProgressBar/ProgressBar";
+import AudioPlayingLoader from "../AudioPlayingLoader/AudioPlayingLoader";
 import playSrc from "../../assets/images/play.svg";
 import pauseSrc from "../../assets/images/pause.svg";
 import closeIcon from "../../assets/images/close-icon_black.svg";
@@ -13,44 +14,29 @@ import s from "./ExtendedAudioPlayer.module.css";
 import { ProjectData } from "../../types";
 
 type AudioPlayerProps = {
-  //   filteredPieces: AudioTrackData[];
   isPlayerOpened: boolean;
   playingProjectData: ProjectData;
   setIsPlayerOpened: Dispatch<SetStateAction<boolean>>;
-  //   playingAudioData: PlayingAudioData;
-  //   setPlayingAudioData: Dispatch<SetStateAction<PlayingAudioData>>;
-
-  //   setSelectedTrack: Dispatch<SetStateAction<number>>;
-  //   openPopup: () => void;
-  //   setVideoId: Dispatch<SetStateAction<string>>;
 };
 
 const ExtendedAudioPlayer = forwardRef(
   (
-    {
-      //   filteredPieces,
-      isPlayerOpened,
-      playingProjectData,
-
-      //   playingAudioData,
-      //   setPlayingAudioData,
-      setIsPlayerOpened,
-    }: //   setSelectedTrack,
-    //   setVideoId,
-    //   openPopup,
-    AudioPlayerProps,
+    { isPlayerOpened, playingProjectData, setIsPlayerOpened }: AudioPlayerProps,
     ref: RefObject<HTMLAudioElement>
   ) => {
     const [isAudioPlaying, setIsAudioPlaying] = useState(false);
+    const [playingTrackIndex, setPlayingTrackIndex] = useState<number>(null);
     const audioPlayerRef = ref.current;
 
     useEffect(
       function togglePlayingStatus() {
         const onPlayingHandler = () => setIsAudioPlaying(true);
+        const onPauseHandler = () => setIsAudioPlaying(false);
         const onEndedHandler = () => setIsAudioPlaying(false);
 
         if (audioPlayerRef) {
           audioPlayerRef.addEventListener("playing", onPlayingHandler);
+          audioPlayerRef.addEventListener("pause", onPauseHandler);
           audioPlayerRef.addEventListener("ended", onEndedHandler);
         }
 
@@ -63,15 +49,6 @@ const ExtendedAudioPlayer = forwardRef(
       },
       [audioPlayerRef]
     );
-
-    const handlePlayPauseClick = () => {
-      if (isAudioPlaying) {
-        audioPlayerRef.pause();
-      } else {
-        audioPlayerRef.play();
-      }
-      setIsAudioPlaying(!isAudioPlaying);
-    };
 
     // const handlePlayNextClick = (prevOrNext) => {
     //   let nextSongIndex = 0;
@@ -104,10 +81,27 @@ const ExtendedAudioPlayer = forwardRef(
     //   openPopup();
     // };
 
+    const isTrackPlaying = (index) => {
+      return isAudioPlaying && playingTrackIndex === index;
+    };
+
+    const handleTrackClick = (audioSrc: string, index: number) => {
+      audioPlayerRef.src = audioSrc;
+      setPlayingTrackIndex(index);
+      audioPlayerRef.play();
+    };
+
+    const handlePlayPauseClick = () => {
+      if (isAudioPlaying) {
+        audioPlayerRef.pause();
+      } else {
+        audioPlayerRef.play();
+      }
+    };
+
     const handleCloseClick = () => {
       audioPlayerRef.pause();
       audioPlayerRef.src = "";
-      setIsAudioPlaying(false);
       setIsPlayerOpened(false);
     };
 
@@ -141,8 +135,16 @@ const ExtendedAudioPlayer = forwardRef(
         <div className={s.trackList}>
           {playingProjectData?.tracks.map((track, i) => {
             return (
-              <div className={s.track} key={i}>
-                <span>{i + 1}</span>
+              <div
+                className={cn(s.track, isTrackPlaying(i) ? s.trackPlaying : "")}
+                key={i}
+                onClick={() => handleTrackClick(track.audioSrc, i)}
+              >
+                {isTrackPlaying(i) ? (
+                  <AudioPlayingLoader color={"white"} />
+                ) : (
+                  <div className={s.trackIndex}>{i + 1}</div>
+                )}
                 <span className={s.trackTitle}>{track.name}</span>
                 <span>{track.duration}</span>
               </div>
@@ -158,6 +160,9 @@ const ExtendedAudioPlayer = forwardRef(
               type="button"
               className={s.playPreviousButton}
               // onClick={() => handlePlayNextClick("prev")}
+              onClick={() => {
+                console.log(playingProjectData);
+              }}
             />
 
             <button

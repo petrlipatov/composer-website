@@ -112,24 +112,20 @@ function PiecesMobile() {
         </audio>
 
         <div className={s.tracksSection}>
-          {filteredPieces.length > 0 ? (
-            filteredPieces.map((track, index) => (
-              <AudioTrack
-                index={index}
-                data={track}
-                setPlayingAudioData={setPlayingAudioData}
-                setVideoId={setVideoId}
-                openPopup={openVideoPopup}
-                setIsPlayerOpened={setIsPlayerOpened}
-                isSelected={selectedTrack === index}
-                setSelectedTrack={setSelectedTrack}
-                ref={audioPlayerRef}
-                key={index}
-              />
-            ))
-          ) : (
-            <div>{NO_TRACKS_FOUND_WARNING}</div>
-          )}
+          {filteredPieces.map((track, index) => (
+            <AudioTrack
+              index={index}
+              data={track}
+              setPlayingAudioData={setPlayingAudioData}
+              setVideoId={setVideoId}
+              openPopup={openVideoPopup}
+              setIsPlayerOpened={setIsPlayerOpened}
+              isSelected={selectedTrack === index}
+              setSelectedTrack={setSelectedTrack}
+              ref={audioPlayerRef}
+              key={index}
+            />
+          ))}
         </div>
       </div>
 

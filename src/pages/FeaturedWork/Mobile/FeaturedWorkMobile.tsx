@@ -121,12 +121,6 @@ function FeaturedWorkMobile() {
         isPlayerOpened={isPlayerOpened}
         playingProjectData={playingProjectData}
         setIsPlayerOpened={setIsPlayerOpened}
-        // playingAudioData={playingAudioData}
-        // setPlayingAudioData={setPlayingAudioData}
-        // setSelectedTrack={setSelectedTrack}
-        // setVideoId={setVideoId}
-        // openPopup={openVideoPopup}
-        // filteredPieces={filteredPieces}
         ref={audioPlayerRef}
       />
     </div>
