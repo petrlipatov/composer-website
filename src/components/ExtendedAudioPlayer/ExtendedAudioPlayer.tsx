@@ -176,7 +176,7 @@ const ExtendedAudioPlayer = forwardRef(
 
         <div className={s.playerContainer}>
           <div className={s.title}>
-            {selectedTrackIndex
+            {selectedTrackIndex !== null
               ? playingProjectData.tracks[selectedTrackIndex].name
               : "..."}
           </div>
