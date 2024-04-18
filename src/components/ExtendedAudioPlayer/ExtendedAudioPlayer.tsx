@@ -79,6 +79,7 @@ const ExtendedAudioPlayer = forwardRef(
       setSelectedTrackIndex(nextTrackIndex);
       setPlayingTrackIndex(nextTrackIndex);
       audioPlayerRef.src = playingProjectData.tracks[nextTrackIndex].audioSrc;
+      audioPlayerRef.currentTime = 0;
       if (isAudioPlaying) {
         audioPlayerRef.play();
       }
@@ -175,7 +176,9 @@ const ExtendedAudioPlayer = forwardRef(
 
         <div className={s.playerContainer}>
           <div className={s.title}>
-            {playingProjectData?.tracks[selectedTrackIndex]?.name}
+            {selectedTrackIndex
+              ? playingProjectData.tracks[selectedTrackIndex].name
+              : "..."}
           </div>
 
           <div className={s.buttonsContainer}>
