@@ -118,7 +118,7 @@ const ExtendedAudioPlayer = forwardRef(
     const handleCloseClick = async () => {
       audioPlayerRef.currentTime = 0;
       await audioPlayerRef.pause();
-      // audioPlayerRef.src = "";
+      audioPlayerRef.src = "";
       // setIsAudioPlaying(false);
       setIsPlayerOpened(false);
       setPlayingTrackIndex(null);
