@@ -32,7 +32,10 @@ const ExtendedAudioPlayer = forwardRef(
     useEffect(
       function togglePlayingStatus() {
         const onPlayingHandler = () => setIsAudioPlaying(true);
-        const onPauseHandler = () => setIsAudioPlaying(false);
+        const onPauseHandler = () => {
+          setIsAudioPlaying(false);
+          console.log("setIsAudioPlaying(false)");
+        };
         const onEndedHandler = () => setIsAudioPlaying(false);
 
         if (audioPlayerRef) {
@@ -117,7 +120,9 @@ const ExtendedAudioPlayer = forwardRef(
 
     const handleCloseClick = async () => {
       audioPlayerRef.currentTime = 0;
-      await audioPlayerRef.pause();
+      await new Promise((resolve) => setTimeout(resolve, 100));
+      audioPlayerRef.pause();
+      audioPlayerRef.src = " ";
       setIsPlayerOpened(false);
       setPlayingTrackIndex(null);
       setSelectedTrackIndex(null);
