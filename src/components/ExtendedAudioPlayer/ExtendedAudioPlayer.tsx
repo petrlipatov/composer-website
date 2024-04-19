@@ -25,9 +25,18 @@ const ExtendedAudioPlayer = forwardRef(
     ref: RefObject<HTMLAudioElement>
   ) => {
     const [isAudioPlaying, setIsAudioPlaying] = useState(false);
-    const [playingTrackIndex, setPlayingTrackIndex] = useState<number>(null);
-    const [selectedTrackIndex, setSelectedTrackIndex] = useState<number>(null);
+    const [playingTrackIndex, setPlayingTrackIndex] = useState<number>(0);
+    const [selectedTrackIndex, setSelectedTrackIndex] = useState<number>(0);
     const audioPlayerRef = ref.current;
+
+    useEffect(() => {
+      if (isPlayerOpened) {
+        setPlayingTrackIndex(0);
+        setSelectedTrackIndex(0);
+        audioPlayerRef.src = playingProjectData.tracks[0].audioSrc;
+        audioPlayerRef.play();
+      }
+    }, [isPlayerOpened]);
 
     useEffect(
       function togglePlayingStatus() {
@@ -53,6 +62,14 @@ const ExtendedAudioPlayer = forwardRef(
       },
       [audioPlayerRef]
     );
+
+    const isTrackPlaying = (index) => {
+      return isAudioPlaying && playingTrackIndex === index;
+    };
+
+    const isTrackSelected = (index) => {
+      return selectedTrackIndex === index;
+    };
 
     // const handleVideoClick = (e) => {
     //   e.stopPropagation();
@@ -81,20 +98,12 @@ const ExtendedAudioPlayer = forwardRef(
 
       setSelectedTrackIndex(nextTrackIndex);
       setPlayingTrackIndex(nextTrackIndex);
-      audioPlayerRef.currentTime = 0;
+      // audioPlayerRef.currentTime = 0;
       audioPlayerRef.src = playingProjectData.tracks[nextTrackIndex].audioSrc;
 
       if (isAudioPlaying) {
         audioPlayerRef.play();
       }
-    };
-
-    const isTrackPlaying = (index) => {
-      return isAudioPlaying && playingTrackIndex === index;
-    };
-
-    const isTrackSelected = (index) => {
-      return selectedTrackIndex === index;
     };
 
     const handleTrackClick = (audioSrc: string, index: number) => {
@@ -120,12 +129,8 @@ const ExtendedAudioPlayer = forwardRef(
 
     const handleCloseClick = async () => {
       audioPlayerRef.pause();
-      audioPlayerRef.currentTime = 0;
-      setIsPlayerOpened(false);
-      setPlayingTrackIndex(null);
-      setSelectedTrackIndex(null);
-      await new Promise((resolve) => setTimeout(resolve, 100));
       audioPlayerRef.src = " ";
+      setIsPlayerOpened(false);
     };
 
     const playerClasses = cn(s.playerSection, {
@@ -180,9 +185,9 @@ const ExtendedAudioPlayer = forwardRef(
 
         <div className={s.playerContainer}>
           <div className={s.title}>
-            {selectedTrackIndex !== null
-              ? playingProjectData.tracks[selectedTrackIndex].name
-              : "..."}
+            {selectedTrackIndex === undefined
+              ? playingProjectData?.tracks[0].name
+              : playingProjectData?.tracks[selectedTrackIndex]?.name}
           </div>
 
           <div className={s.buttonsContainer}>

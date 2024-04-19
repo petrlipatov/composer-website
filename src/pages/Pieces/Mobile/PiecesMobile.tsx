@@ -10,11 +10,7 @@ import Tag from "../../../components/Tag/Tag";
 import YouTubePlayer from "../../../components/YoutubePlayer/YoutubePlayer";
 import { AudioTrackData } from "../../../types";
 
-import {
-  PIECES,
-  PIECES_GENRES,
-  NO_TRACKS_FOUND_WARNING,
-} from "../../../utils/constants";
+import { PIECES, PIECES_GENRES } from "../../../utils/constants";
 import closeIconSrc from "../../../assets/images/close-icon.svg";
 
 import s from "./PiecesMobile.module.css";

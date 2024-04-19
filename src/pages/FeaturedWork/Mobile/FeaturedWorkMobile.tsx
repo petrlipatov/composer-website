@@ -112,6 +112,7 @@ function FeaturedWorkMobile() {
               setIsPlayerOpened={setIsPlayerOpened}
               index={index}
               key={index}
+              ref={audioPlayerRef}
             />
           ))}
         </div>
