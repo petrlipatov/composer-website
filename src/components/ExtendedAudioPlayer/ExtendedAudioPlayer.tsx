@@ -121,8 +121,8 @@ const ExtendedAudioPlayer = forwardRef(
       // audioPlayerRef.src = "";
       // setIsAudioPlaying(false);
       setIsPlayerOpened(false);
-      // setPlayingTrackIndex(null);
-      // setSelectedTrackIndex(null);
+      setPlayingTrackIndex(null);
+      setSelectedTrackIndex(null);
     };
 
     const playerClasses = cn(s.playerSection, {
