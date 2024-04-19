@@ -68,7 +68,7 @@
   flex-grow: 1;
 }
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   -webkit-appearance: none;
   width: 4px;
 }
@@ -80,7 +80,7 @@
 
 ::-webkit-scrollbar-track {
   background-color: rgba(0, 0, 0, 0.3);
-}
+} */
 
 .track {
   display: flex;
