@@ -119,13 +119,13 @@ const ExtendedAudioPlayer = forwardRef(
     };
 
     const handleCloseClick = async () => {
-      audioPlayerRef.currentTime = 0;
-      await new Promise((resolve) => setTimeout(resolve, 100));
       audioPlayerRef.pause();
-      audioPlayerRef.src = " ";
+      audioPlayerRef.currentTime = 0;
       setIsPlayerOpened(false);
       setPlayingTrackIndex(null);
       setSelectedTrackIndex(null);
+      await new Promise((resolve) => setTimeout(resolve, 100));
+      audioPlayerRef.src = " ";
     };
 
     const playerClasses = cn(s.playerSection, {

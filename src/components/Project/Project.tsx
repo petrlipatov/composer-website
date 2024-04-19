@@ -58,7 +58,7 @@ const Project = forwardRef(
 
     function handleProjectClick() {
       setSelectedProject(index);
-      console.log(audioPlayerRef);
+      // console.log(audioPlayerRef);
     }
 
     function handleListenClick() {
