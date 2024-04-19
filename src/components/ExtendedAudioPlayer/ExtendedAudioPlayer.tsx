@@ -117,12 +117,12 @@ const ExtendedAudioPlayer = forwardRef(
 
     const handleCloseClick = async () => {
       await audioPlayerRef.pause();
-      // audioPlayerRef.src = "";
       audioPlayerRef.currentTime = 0;
-      // setIsAudioPlaying(false);
-      // setIsPlayerOpened(false);
-      // setPlayingTrackIndex(null);
-      // setSelectedTrackIndex(null);
+      audioPlayerRef.src = "";
+      setIsAudioPlaying(false);
+      setIsPlayerOpened(false);
+      setPlayingTrackIndex(null);
+      setSelectedTrackIndex(null);
     };
 
     const playerClasses = cn(s.playerSection, {
