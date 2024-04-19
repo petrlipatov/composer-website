@@ -120,7 +120,7 @@ const ExtendedAudioPlayer = forwardRef(
       // await audioPlayerRef.pause();
       // audioPlayerRef.src = "";
       // setIsAudioPlaying(false);
-      // setIsPlayerOpened(false);
+      setIsPlayerOpened(false);
       // setPlayingTrackIndex(null);
       // setSelectedTrackIndex(null);
     };
