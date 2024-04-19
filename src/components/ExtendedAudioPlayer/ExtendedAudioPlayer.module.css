@@ -71,7 +71,7 @@
 }
 
 .trackList::-webkit-scrollbar {
-  visibility: visible;
+  -webkit-appearance: none;
   width: 10px;
 }
 
