@@ -98,7 +98,7 @@ const ExtendedAudioPlayer = forwardRef(
 
       setSelectedTrackIndex(nextTrackIndex);
       setPlayingTrackIndex(nextTrackIndex);
-      // audioPlayerRef.currentTime = 0;
+      audioPlayerRef.currentTime = 0;
       audioPlayerRef.src = playingProjectData.tracks[nextTrackIndex].audioSrc;
 
       if (isAudioPlaying) {
