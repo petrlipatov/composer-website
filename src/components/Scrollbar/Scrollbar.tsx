@@ -38,7 +38,7 @@ const Scrollbar = ({ children }: { children: React.ReactNode }) => {
       contentRef.current;
     const { clientHeight: trackHeight } = scrollTrackRef.current;
 
-    let newTop = (contentTop / contentHeight) * trackHeight;
+    let newTop = Math.ceil((contentTop / contentHeight) * trackHeight);
     newTop = Math.min(newTop, trackHeight - thumbHeight);
 
     const thumb = scrollThumbRef.current;
