@@ -33,6 +33,7 @@
   height: 100%;
   position: relative;
   width: 6px;
+  overflow: hidden;
 }
 
 .track {

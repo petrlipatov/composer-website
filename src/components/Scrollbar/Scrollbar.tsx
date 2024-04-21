@@ -42,6 +42,7 @@ const Scrollbar = ({ children }: { children: React.ReactNode }) => {
     newTop = Math.min(newTop, trackHeight - thumbHeight);
 
     const thumb = scrollThumbRef.current;
+
     requestAnimationFrame(() => {
       thumb.style.top = `${newTop}px`;
     });
