@@ -23,6 +23,7 @@ body {
 
 .os-scrollbar-vertical {
   --os-size: 10px;
+  --os-track-border: black;
   --os-track-border-radius: 0;
   --os-handle-border-radius: 0;
 }

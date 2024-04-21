@@ -7,7 +7,6 @@ import {
   RefObject,
   SetStateAction,
 } from "react";
-import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 // import { AudioTrackData } from "../../types";
 // import { PlayingAudioData } from "../../pages/Pieces/Mobile/PiecesMobile";
 import ProgressBar from "./ProgressBar/ProgressBar";
@@ -19,6 +18,7 @@ import videoIcon from "../../assets/images/tv.svg";
 import s from "./ExtendedAudioPlayer.module.css";
 
 import { ProjectData } from "../../types";
+import Scrollbar from "../Scrollbar/Scrollbar";
 
 type AudioPlayerProps = {
   isPlayerOpened: boolean;
@@ -170,14 +170,7 @@ const ExtendedAudioPlayer = forwardRef(
           </div>
         </div>
 
-        <OverlayScrollbarsComponent
-          className={s.trackList}
-          options={{
-            overflow: { y: "scroll", x: "hidden" },
-            scrollbars: { autoHide: "never" },
-          }}
-          defer
-        >
+        <Scrollbar>
           {playingProjectData?.tracks.map((track, i) => {
             return (
               <div
@@ -198,7 +191,7 @@ const ExtendedAudioPlayer = forwardRef(
               </div>
             );
           })}
-        </OverlayScrollbarsComponent>
+        </Scrollbar>
 
         <div className={s.playerContainer}>
           <div className={s.title}>

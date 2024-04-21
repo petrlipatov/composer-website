@@ -1,0 +1,66 @@
+.container {
+  display: grid;
+  height: 100%;
+  grid-template-rows: auto;
+  grid-template-columns: 1fr 50px;
+  overflow: hidden;
+  position: relative;
+}
+
+.content {
+  -ms-overflow-style: none;
+  overflow-y: scroll;
+  scrollbar-width: 0;
+  height: 100%;
+  margin-left: 24px;
+}
+
+.content::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar {
+  padding-top: 12px;
+  padding-bottom: 1px;
+  display: grid;
+  grid-auto-flow: row;
+  grid-template: auto 1fr auto/ 1fr;
+  place-items: center;
+}
+
+.trackAndThumb {
+  display: block;
+  height: 100%;
+  position: relative;
+  width: 6px;
+}
+
+.track {
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  border: 1px solid black;
+  width: 100%;
+}
+
+.thumb {
+  position: absolute;
+  width: 6px;
+  background-color: black;
+}
+
+.button {
+  border: 0;
+  background-color: transparent;
+  background-image: url("../../assets/images/chevrons_double.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 24px;
+  width: 24px;
+}
+
+.buttonDown {
+  border: 0;
+  background-image: url("../../assets/images/chevrons-double-down.svg");
+}
