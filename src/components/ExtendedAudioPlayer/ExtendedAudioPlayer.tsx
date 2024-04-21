@@ -46,7 +46,7 @@ const ExtendedAudioPlayer = forwardRef(
       playingTrackIndex,
       audioPlayerRef,
       playingProjectData,
-      playingProjectData.tracks,
+      playingProjectData?.tracks,
     ]);
 
     useEffect(
