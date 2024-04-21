@@ -1,6 +1,14 @@
 import cn from "classnames";
-import { forwardRef, useEffect, useState } from "react";
-import { Dispatch, RefObject, SetStateAction } from "react";
+import {
+  forwardRef,
+  useEffect,
+  useState,
+  Dispatch,
+  RefObject,
+  SetStateAction,
+} from "react";
+import "overlayscrollbars/overlayscrollbars.css";
+import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 // import { AudioTrackData } from "../../types";
 // import { PlayingAudioData } from "../../pages/Pieces/Mobile/PiecesMobile";
 import ProgressBar from "./ProgressBar/ProgressBar";
@@ -163,7 +171,7 @@ const ExtendedAudioPlayer = forwardRef(
           </div>
         </div>
 
-        <div className={s.trackList}>
+        <OverlayScrollbarsComponent className={s.trackList}>
           {playingProjectData?.tracks.map((track, i) => {
             return (
               <div
@@ -184,7 +192,7 @@ const ExtendedAudioPlayer = forwardRef(
               </div>
             );
           })}
-        </div>
+        </OverlayScrollbarsComponent>
 
         <div className={s.playerContainer}>
           <div className={s.title}>
