@@ -41,10 +41,7 @@ const ExtendedAudioPlayer = forwardRef(
     useEffect(
       function togglePlayingStatus() {
         const onPlayingHandler = () => setIsAudioPlaying(true);
-        const onPauseHandler = () => {
-          setIsAudioPlaying(false);
-          console.log("setIsAudioPlaying(false)");
-        };
+        const onPauseHandler = () => setIsAudioPlaying(false);
         const onEndedHandler = () => setIsAudioPlaying(false);
 
         if (audioPlayerRef) {
@@ -98,8 +95,8 @@ const ExtendedAudioPlayer = forwardRef(
 
       setSelectedTrackIndex(nextTrackIndex);
       setPlayingTrackIndex(nextTrackIndex);
-      audioPlayerRef.currentTime = 0;
       audioPlayerRef.src = playingProjectData.tracks[nextTrackIndex].audioSrc;
+      audioPlayerRef.currentTime = 0;
 
       if (isAudioPlaying) {
         audioPlayerRef.play();
@@ -127,9 +124,9 @@ const ExtendedAudioPlayer = forwardRef(
       }
     };
 
-    const handleCloseClick = async () => {
+    const handleCloseClick = () => {
       audioPlayerRef.pause();
-      audioPlayerRef.src = " ";
+      // audioPlayerRef.src = " ";
       setIsPlayerOpened(false);
     };
 
