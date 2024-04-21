@@ -20,3 +20,9 @@ body {
 #root {
   height: 100%;
 }
+
+.os-scrollbar-vertical {
+  --os-size: 10px;
+  --os-track-border-radius: 0;
+  --os-handle-border-radius: 0;
+}

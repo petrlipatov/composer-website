@@ -7,7 +7,6 @@ import {
   RefObject,
   SetStateAction,
 } from "react";
-import "overlayscrollbars/overlayscrollbars.css";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 // import { AudioTrackData } from "../../types";
 // import { PlayingAudioData } from "../../pages/Pieces/Mobile/PiecesMobile";
@@ -173,7 +172,10 @@ const ExtendedAudioPlayer = forwardRef(
 
         <OverlayScrollbarsComponent
           className={s.trackList}
-          options={{ scrollbars: { autoHide: "never" } }}
+          options={{
+            overflow: { y: "scroll", x: "hidden" },
+            scrollbars: { autoHide: "never" },
+          }}
           defer
         >
           {playingProjectData?.tracks.map((track, i) => {

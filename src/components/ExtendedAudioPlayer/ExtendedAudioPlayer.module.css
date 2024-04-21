@@ -66,8 +66,7 @@
   margin: 10px 24px 0 24px;
   overflow-y: scroll;
   flex-grow: 1;
-  /* scrollbar-width: 5px;
-  scrollbar-color: pink; */
+  --os-size: 20px;
 }
 
 .trackList::-webkit-scrollbar {
@@ -77,7 +76,7 @@
 .track {
   display: flex;
   margin-top: 28px;
-  margin-right: 8px;
+  margin-right: 24px;
 }
 
 .trackPlaying {
