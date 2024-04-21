@@ -171,7 +171,11 @@ const ExtendedAudioPlayer = forwardRef(
           </div>
         </div>
 
-        <OverlayScrollbarsComponent className={s.trackList}>
+        <OverlayScrollbarsComponent
+          className={s.trackList}
+          options={{ scrollbars: { autoHide: "never" } }}
+          defer
+        >
           {playingProjectData?.tracks.map((track, i) => {
             return (
               <div
