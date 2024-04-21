@@ -96,7 +96,7 @@ const ExtendedAudioPlayer = forwardRef(
       setSelectedTrackIndex(nextTrackIndex);
       setPlayingTrackIndex(nextTrackIndex);
       audioPlayerRef.src = playingProjectData.tracks[nextTrackIndex].audioSrc;
-      audioPlayerRef.currentTime = 0;
+      // audioPlayerRef.currentTime = 0;
 
       if (isAudioPlaying) {
         audioPlayerRef.play();
@@ -126,7 +126,6 @@ const ExtendedAudioPlayer = forwardRef(
 
     const handleCloseClick = () => {
       audioPlayerRef.pause();
-      // audioPlayerRef.src = " ";
       setIsPlayerOpened(false);
     };
 

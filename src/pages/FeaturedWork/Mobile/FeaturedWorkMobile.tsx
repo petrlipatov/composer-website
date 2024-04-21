@@ -94,7 +94,7 @@ function FeaturedWorkMobile() {
           </div>
         </div>
 
-        <audio preload="none" ref={audioPlayerRef}>
+        <audio preload="metadata" ref={audioPlayerRef}>
           <source src={""} type="audio/mpeg" />
           Your browser does not support the audio element.
         </audio>
