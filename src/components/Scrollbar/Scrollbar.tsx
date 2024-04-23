@@ -23,7 +23,7 @@ const Scrollbar = ({ children }: { children: React.ReactNode }) => {
     }
   }
 
-  const handleThumbPosition = () => {
+  function handleThumbPosition() {
     if (
       !contentRef.current ||
       !scrollTrackRef.current ||
@@ -44,7 +44,7 @@ const Scrollbar = ({ children }: { children: React.ReactNode }) => {
     requestAnimationFrame(() => {
       thumb.style.top = `${newTop}px`;
     });
-  };
+  }
 
   useEffect(() => {
     if (contentRef.current) {
@@ -71,6 +71,14 @@ const Scrollbar = ({ children }: { children: React.ReactNode }) => {
     }
   }, [thumbHeight, scrollTrackRef?.current, contentRef?.current]);
 
+  function handleScrollButton(direction: "up" | "down") {
+    const { current: content } = contentRef;
+    if (content) {
+      const scrollAmount = direction === "down" ? 200 : -200;
+      content.scrollBy({ top: scrollAmount, behavior: "smooth" });
+    }
+  }
+
   return (
     <div className={s.container}>
       <div
@@ -83,7 +91,10 @@ const Scrollbar = ({ children }: { children: React.ReactNode }) => {
 
       {isVisible && (
         <div className={s.scrollbar}>
-          <button className={cn(s.button, s.buttonUp)}></button>
+          <button
+            className={cn(s.button, s.buttonUp)}
+            onClick={() => handleScrollButton("up")}
+          />
 
           <div
             className={s.trackAndThumb}
@@ -95,10 +106,15 @@ const Scrollbar = ({ children }: { children: React.ReactNode }) => {
               className={s.thumb}
               style={{ height: `${thumbHeight}px` }}
               ref={scrollThumbRef}
+
+              //   onMouseDownCapture={handleThumbMousedown}
             />
           </div>
 
-          <button className={cn(s.button, s.buttonDown)}></button>
+          <button
+            className={cn(s.button, s.buttonDown)}
+            onClick={() => handleScrollButton("down")}
+          />
         </div>
       )}
     </div>
