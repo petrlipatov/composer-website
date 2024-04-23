@@ -110,7 +110,7 @@ const Scrollbar = ({ children }: { children: React.ReactNode }) => {
   const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
     if (isDragging) {
       const {
-        // scrollHeight: contentTotalHeight,
+        scrollHeight: contentTotalHeight,
         clientHeight: contentVisibleHeight,
       } = contentRef.current;
 
@@ -120,7 +120,10 @@ const Scrollbar = ({ children }: { children: React.ReactNode }) => {
         (touch.clientY - scrollStartPosition) *
         (contentVisibleHeight / thumbHeight);
 
-      const newScrollTop = initialContentScrollTop + deltaY;
+      const newScrollTop = Math.min(
+        initialContentScrollTop + deltaY,
+        contentTotalHeight - contentVisibleHeight
+      );
 
       contentRef.current.scrollTop = newScrollTop;
     }
