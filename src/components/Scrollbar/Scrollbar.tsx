@@ -5,6 +5,10 @@ import cn from "classnames";
 const Scrollbar = ({ children }: { children: React.ReactNode }) => {
   const [isVisible, setIsVisible] = useState<boolean>();
   const [thumbHeight, setThumbHeight] = useState<number>(20);
+  const [isDragging, setIsDragging] = useState(false);
+  const [scrollStartPosition, setScrollStartPosition] = useState<number>(0);
+  const [initialContentScrollTop, setInitialContentScrollTop] =
+    useState<number>(0);
 
   const contentRef = useRef<HTMLDivElement>(null);
   const scrollTrackRef = useRef<HTMLDivElement>(null);
@@ -71,13 +75,98 @@ const Scrollbar = ({ children }: { children: React.ReactNode }) => {
     }
   }, [thumbHeight, scrollTrackRef?.current, contentRef?.current]);
 
-  function handleScrollButton(direction: "up" | "down") {
-    const { current: content } = contentRef;
-    if (content) {
-      const scrollAmount = direction === "down" ? 200 : -200;
-      content.scrollBy({ top: scrollAmount, behavior: "smooth" });
-    }
+  function handleTouchStart(e: React.TouchEvent<HTMLDivElement>) {
+    e.stopPropagation();
+
+    const touch = e.touches[0];
+
+    const thumb = scrollThumbRef.current;
+    if (!thumb) return;
+
+    // const thumbTop = thumb.offsetTop;
+    // const thumbParent = thumb.offsetParent as HTMLElement;
+    // const rect = thumbParent.getBoundingClientRect();
+    // const relativeY = touch.clientY - thumbTop;
+    const relativeY = touch.clientY;
+
+    // console.log(relativeY);
+
+    setScrollStartPosition(relativeY);
+
+    if (contentRef.current)
+      setInitialContentScrollTop(contentRef.current.scrollTop);
+
+    setIsDragging(true);
   }
+
+  const handleTouchEnd = (e: React.TouchEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+
+    if (isDragging) {
+      setIsDragging(false);
+    }
+  };
+
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (isDragging) {
+      const {
+        // scrollHeight: contentTotalHeight,
+        clientHeight: contentVisibleHeight,
+      } = contentRef.current;
+
+      const touch = e.changedTouches[0];
+
+      const deltaY =
+        (touch.clientY - scrollStartPosition) *
+        (contentVisibleHeight / thumbHeight);
+
+      const newScrollTop = initialContentScrollTop + deltaY;
+
+      contentRef.current.scrollTop = newScrollTop;
+    }
+  };
+
+  //   const handleThumbMousemove = (e: TouchEvent) => {
+  //     if (contentRef.current) {
+  //       e.preventDefault();
+  //       e.stopPropagation();
+
+  //       console.log(e);
+
+  //       const touch = e?.touches[0];
+
+  //       if (isDragging) {
+  //         const {
+  //           scrollHeight: contentTotalHeight,
+  //           clientHeight: contentVisibleHeight,
+  //         } = contentRef.current;
+
+  //         // console.log(touch.clientY);
+
+  //         const deltaY =
+  //           (touch.clientY - scrollStartPosition) *
+  //           (contentVisibleHeight / thumbHeight);
+
+  //         const newScrollTop = Math.min(
+  //           initialContentScrollTop + deltaY,
+  //           contentTotalHeight - contentVisibleHeight
+  //         );
+
+  //         console.log("newScrollTop", newScrollTop);
+
+  //         contentRef.current.scrollTop = newScrollTop;
+  //       }
+  //     }
+  //   };
+
+  //   useEffect(() => {
+  //     document.addEventListener("mousemove", handleThumbMousemove);
+  //     // document.addEventListener("touchend", handleTouchEnd);
+  //     return () => {
+  //       document.removeEventListener("mousemove", handleThumbMousemove);
+  //       //   document.removeEventListener("touchend", handleTouchEnd);
+  //     };
+  //   }, []);
 
   return (
     <div className={s.container}>
@@ -91,10 +180,9 @@ const Scrollbar = ({ children }: { children: React.ReactNode }) => {
 
       {isVisible && (
         <div className={s.scrollbar}>
-          <button
-            className={cn(s.button, s.buttonUp)}
-            onClick={() => handleScrollButton("up")}
-          />
+          <button className={cn(s.button, s.buttonUp)}>
+            {`${isDragging}`}
+          </button>
 
           <div
             className={s.trackAndThumb}
@@ -106,15 +194,14 @@ const Scrollbar = ({ children }: { children: React.ReactNode }) => {
               className={s.thumb}
               style={{ height: `${thumbHeight}px` }}
               ref={scrollThumbRef}
-
+              onTouchStart={handleTouchStart}
+              onTouchEnd={handleTouchEnd}
+              onTouchMove={handleTouchMove}
               //   onMouseDownCapture={handleThumbMousedown}
             />
           </div>
 
-          <button
-            className={cn(s.button, s.buttonDown)}
-            onClick={() => handleScrollButton("down")}
-          />
+          <button className={cn(s.button, s.buttonDown)}></button>
         </div>
       )}
     </div>
@@ -122,3 +209,21 @@ const Scrollbar = ({ children }: { children: React.ReactNode }) => {
 };
 
 export default Scrollbar;
+
+// function handleScrollButton(direction: "up" | "down") {
+//     const { current: content } = contentRef;
+//     if (content) {
+//       const scrollAmount = direction === "down" ? 200 : -200;
+//       content.scrollBy({ top: scrollAmount, behavior: "smooth" });
+//     }
+//   }
+
+//           <button
+//             className={cn(s.button, s.buttonUp)}
+//             onClick={() => handleScrollButton("up")}
+//           />
+
+//           <button
+//             className={cn(s.button, s.buttonDown)}
+//             onClick={() => handleScrollButton("down")}
+//           />
