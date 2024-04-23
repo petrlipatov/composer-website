@@ -3,6 +3,7 @@ import s from "./Scrollbar.module.css";
 import cn from "classnames";
 
 const Scrollbar = ({ children }: { children: React.ReactNode }) => {
+  const [isVisible, setIsVisible] = useState<boolean>();
   const [thumbHeight, setThumbHeight] = useState<number>(20);
 
   const contentRef = useRef<HTMLDivElement>(null);
@@ -10,7 +11,7 @@ const Scrollbar = ({ children }: { children: React.ReactNode }) => {
   const scrollThumbRef = useRef<HTMLDivElement>(null);
   const observer = useRef<ResizeObserver | null>(null);
 
-  function handleResize() {
+  function handleThumbResize() {
     if (scrollTrackRef.current && contentRef.current) {
       const { clientHeight: trackSize } = scrollTrackRef.current;
       const { clientHeight: contentVisible, scrollHeight: contentTotalHeight } =
@@ -22,7 +23,7 @@ const Scrollbar = ({ children }: { children: React.ReactNode }) => {
     }
   }
 
-  function handleThumbPosition() {
+  const handleThumbPosition = () => {
     if (
       !contentRef.current ||
       !scrollTrackRef.current ||
@@ -43,25 +44,32 @@ const Scrollbar = ({ children }: { children: React.ReactNode }) => {
     requestAnimationFrame(() => {
       thumb.style.top = `${newTop}px`;
     });
-  }
+  };
 
   useEffect(() => {
     if (contentRef.current) {
       const content = contentRef.current;
+      const { clientHeight: contentVisible, scrollHeight: contentTotalHeight } =
+        content;
+
+      if (contentTotalHeight <= contentVisible) {
+        return setIsVisible(false);
+      } else {
+        setIsVisible(true);
+      }
+
       observer.current = new ResizeObserver(() => {
-        handleResize();
+        handleThumbResize();
       });
       observer.current.observe(content);
+
       content.addEventListener("scroll", handleThumbPosition);
       return () => {
         observer.current?.unobserve(content);
         content.removeEventListener("scroll", handleThumbPosition);
-        console.log("вызваны функции на анмаунте");
       };
     }
-  }, []);
-
-  //
+  }, [thumbHeight, scrollTrackRef?.current, contentRef?.current]);
 
   return (
     <div className={s.container}>
@@ -73,24 +81,26 @@ const Scrollbar = ({ children }: { children: React.ReactNode }) => {
         {children}
       </div>
 
-      <div className={s.scrollbar}>
-        <button className={cn(s.button, s.buttonUp)}></button>
+      {isVisible && (
+        <div className={s.scrollbar}>
+          <button className={cn(s.button, s.buttonUp)}></button>
 
-        <div
-          className={s.trackAndThumb}
-          role="scrollbar"
-          aria-controls="custom-scrollbars-content"
-        >
-          <div className={s.track} ref={scrollTrackRef} />
           <div
-            className={s.thumb}
-            style={{ height: `${thumbHeight}px` }}
-            ref={scrollThumbRef}
-          />
-        </div>
+            className={s.trackAndThumb}
+            role="scrollbar"
+            aria-controls="custom-scrollbars-content"
+          >
+            <div className={s.track} ref={scrollTrackRef} />
+            <div
+              className={s.thumb}
+              style={{ height: `${thumbHeight}px` }}
+              ref={scrollThumbRef}
+            />
+          </div>
 
-        <button className={cn(s.button, s.buttonDown)}></button>
-      </div>
+          <button className={cn(s.button, s.buttonDown)}></button>
+        </div>
+      )}
     </div>
   );
 };

@@ -6,6 +6,7 @@ import {
   Dispatch,
   RefObject,
   SetStateAction,
+  useCallback,
 } from "react";
 // import { AudioTrackData } from "../../types";
 // import { PlayingAudioData } from "../../pages/Pieces/Mobile/PiecesMobile";
@@ -22,13 +23,13 @@ import Scrollbar from "../Scrollbar/Scrollbar";
 
 type AudioPlayerProps = {
   isPlayerOpened: boolean;
-  playingProjectData: ProjectData;
+  projectData: ProjectData;
   setIsPlayerOpened: Dispatch<SetStateAction<boolean>>;
 };
 
 const ExtendedAudioPlayer = forwardRef(
   (
-    { isPlayerOpened, playingProjectData, setIsPlayerOpened }: AudioPlayerProps,
+    { isPlayerOpened, projectData, setIsPlayerOpened }: AudioPlayerProps,
     ref: RefObject<HTMLAudioElement>
   ) => {
     const [isAudioPlaying, setIsAudioPlaying] = useState(false);
@@ -36,28 +37,38 @@ const ExtendedAudioPlayer = forwardRef(
     const [selectedTrackIndex, setSelectedTrackIndex] = useState<number>(null);
     const audioPlayerRef = ref.current;
 
-    useEffect(() => {
-      if (
-        isPlayerOpened &&
-        playingTrackIndex === null &&
-        selectedTrackIndex === null
-      ) {
+    const playFirstTrack = useCallback(async () => {
+      try {
         setPlayingTrackIndex(0);
         setSelectedTrackIndex(0);
-        audioPlayerRef.src = playingProjectData.tracks[0].audioSrc;
+        audioPlayerRef.src = projectData.tracks[0].audioSrc;
+
+        await new Promise((resolve, reject) => {
+          audioPlayerRef.oncanplaythrough = resolve;
+          audioPlayerRef.onerror = reject;
+        });
+
         audioPlayerRef.play();
+      } catch (err) {
+        console.log("Error", err);
       }
-    }, [
-      isPlayerOpened,
-      selectedTrackIndex,
-      playingTrackIndex,
-      audioPlayerRef,
-      playingProjectData,
-      playingProjectData?.tracks,
-    ]);
+    }, [audioPlayerRef, projectData.tracks]);
 
     useEffect(
-      function togglePlayingStatus() {
+      function playWhenComponentIsMounted() {
+        if (
+          isPlayerOpened &&
+          playingTrackIndex === null &&
+          selectedTrackIndex === null
+        ) {
+          playFirstTrack();
+        }
+      },
+      [isPlayerOpened, selectedTrackIndex, playingTrackIndex, playFirstTrack]
+    );
+
+    useEffect(
+      function setListenersOnPlayerStates() {
         const onPlayingHandler = () => setIsAudioPlaying(true);
         const onPauseHandler = () => setIsAudioPlaying(false);
         const onEndedHandler = () => setIsAudioPlaying(false);
@@ -79,22 +90,13 @@ const ExtendedAudioPlayer = forwardRef(
       [audioPlayerRef]
     );
 
-    const isTrackPlaying = (index) => {
-      return isAudioPlaying && playingTrackIndex === index;
+    const isTrackPlaying = (i) => {
+      return isAudioPlaying && playingTrackIndex === i;
     };
 
-    const isTrackSelected = (index) => {
-      return selectedTrackIndex === index;
+    const isTrackSelected = (i) => {
+      return selectedTrackIndex === i;
     };
-
-    // const handleVideoClick = (e) => {
-    //   e.stopPropagation();
-    //   setIsPlayerOpened(false);
-    //   setVideoId(playingAudioData.videoSource);
-    //   audioPlayerRef.pause();
-    //   audioPlayerRef.src = "";
-    //   openPopup();
-    // };
 
     const handlePlayPauseClick = () => {
       if (isAudioPlaying) {
@@ -105,7 +107,7 @@ const ExtendedAudioPlayer = forwardRef(
     };
 
     const handlePlayNextClick = (prevOrNext) => {
-      const tracksMaxIndex = playingProjectData.tracks.length - 1;
+      const tracksMaxIndex = projectData.tracks.length - 1;
       let nextTrackIndex;
 
       if (prevOrNext === "next") {
@@ -122,7 +124,7 @@ const ExtendedAudioPlayer = forwardRef(
 
       setSelectedTrackIndex(nextTrackIndex);
       setPlayingTrackIndex(nextTrackIndex);
-      audioPlayerRef.src = playingProjectData.tracks[nextTrackIndex].audioSrc;
+      audioPlayerRef.src = projectData.tracks[nextTrackIndex].audioSrc;
 
       if (isAudioPlaying) {
         audioPlayerRef.play();
@@ -143,24 +145,29 @@ const ExtendedAudioPlayer = forwardRef(
       setSelectedTrackIndex(null);
     };
 
-    const playerClasses = cn(s.playerSection, {
-      [s.playerSectionActive]: isPlayerOpened == true,
-    });
+    // const handleVideoClick = (e) => {
+    //   e.stopPropagation();
+    //   setIsPlayerOpened(false);
+    //   setVideoId(playingAudioData.videoSource);
+    //   audioPlayerRef.pause();
+    //   audioPlayerRef.src = "";
+    //   openPopup();
+    // };
 
     return (
-      <div className={playerClasses}>
+      <div className={s.playerSection}>
         <img
           className={s.closeIcon}
           src={closeIcon}
           onClick={handleCloseClick}
         />
         <div className={s.projectInfoSection}>
-          <img className={s.artwork} src={playingProjectData?.imageSrc} />
+          <img className={s.artwork} src={projectData?.imageSrc} />
           <div className={s.projectInfoContainer}>
             <div className={s.projectDetailsBlock}>
-              <div>{playingProjectData?.name}</div>
-              <div>{playingProjectData?.genre}</div>
-              <div>{playingProjectData?.year}</div>
+              <div>{projectData?.name}</div>
+              <div>{projectData?.genre}</div>
+              <div>{projectData?.year}</div>
             </div>
             <img
               className={s.videoIcon}
@@ -171,7 +178,7 @@ const ExtendedAudioPlayer = forwardRef(
         </div>
 
         <Scrollbar>
-          {playingProjectData?.tracks.map((track, i) => {
+          {projectData?.tracks.map((track, i) => {
             return (
               <div
                 className={cn(
@@ -196,8 +203,8 @@ const ExtendedAudioPlayer = forwardRef(
         <div className={s.playerContainer}>
           <div className={s.title}>
             {selectedTrackIndex === undefined
-              ? playingProjectData?.tracks[0].name
-              : playingProjectData?.tracks[selectedTrackIndex]?.name}
+              ? projectData?.tracks[0].name
+              : projectData?.tracks[selectedTrackIndex]?.name}
           </div>
 
           <div className={s.buttonsContainer}>

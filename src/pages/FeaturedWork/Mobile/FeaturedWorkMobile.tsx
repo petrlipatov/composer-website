@@ -15,13 +15,9 @@ import Project from "../../../components/Project/Project";
 
 function FeaturedWorkMobile() {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
-  const [projectSelected, setSelectedProject] = useState<number>(null);
-
+  const [selectedProject, setSelectedProject] = useState<number>(null);
+  const [projectData, setProjectData] = useState<ProjectData | undefined>();
   const [isPlayerOpened, setIsPlayerOpened] = useState(false);
-
-  const [playingProjectData, setPlayingProjectData] = useState<
-    ProjectData | undefined
-  >();
 
   const audioPlayerRef = useRef<HTMLAudioElement>();
 
@@ -106,13 +102,12 @@ function FeaturedWorkMobile() {
           {filteredProjects.map((project, index) => (
             <Project
               data={project}
-              isSelected={projectSelected === index}
+              isSelected={selectedProject === index}
               setSelectedProject={setSelectedProject}
-              setPlayingProjectData={setPlayingProjectData}
+              setProjectData={setProjectData}
               setIsPlayerOpened={setIsPlayerOpened}
               index={index}
               key={index}
-              ref={audioPlayerRef}
             />
           ))}
         </div>
@@ -121,7 +116,7 @@ function FeaturedWorkMobile() {
       {isPlayerOpened && (
         <ExtendedAudioPlayer
           isPlayerOpened={isPlayerOpened}
-          playingProjectData={playingProjectData}
+          projectData={projectData}
           setIsPlayerOpened={setIsPlayerOpened}
           ref={audioPlayerRef}
         />
