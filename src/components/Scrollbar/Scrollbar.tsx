@@ -16,9 +16,6 @@ const Scrollbar = ({ children }: { children: React.ReactNode }) => {
       const { clientHeight: contentVisible, scrollHeight: contentTotalHeight } =
         contentRef.current;
 
-      //   console.log((contentVisible / contentTotalHeight) * trackSize);
-      //   console.log(Math.ceil((contentVisible / contentTotalHeight) * trackSize));
-
       setThumbHeight(
         Math.ceil((contentVisible / contentTotalHeight) * trackSize)
       );
@@ -59,9 +56,12 @@ const Scrollbar = ({ children }: { children: React.ReactNode }) => {
       return () => {
         observer.current?.unobserve(content);
         content.removeEventListener("scroll", handleThumbPosition);
+        console.log("вызваны функции на анмаунте");
       };
     }
   }, []);
+
+  //
 
   return (
     <div className={s.container}>

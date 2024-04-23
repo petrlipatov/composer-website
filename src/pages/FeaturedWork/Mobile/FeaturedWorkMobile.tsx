@@ -118,12 +118,14 @@ function FeaturedWorkMobile() {
         </div>
       </div>
 
-      <ExtendedAudioPlayer
-        isPlayerOpened={isPlayerOpened}
-        playingProjectData={playingProjectData}
-        setIsPlayerOpened={setIsPlayerOpened}
-        ref={audioPlayerRef}
-      />
+      {isPlayerOpened && (
+        <ExtendedAudioPlayer
+          isPlayerOpened={isPlayerOpened}
+          playingProjectData={playingProjectData}
+          setIsPlayerOpened={setIsPlayerOpened}
+          ref={audioPlayerRef}
+        />
+      )}
     </div>
   );
 }
