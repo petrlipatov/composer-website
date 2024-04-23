@@ -179,7 +179,12 @@ const Scrollbar = ({ children }: { children: React.ReactNode }) => {
       </div>
 
       {isVisible && (
-        <div className={s.scrollbar}>
+        <div
+          className={s.scrollbar}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          onTouchMove={handleTouchMove}
+        >
           <button className={cn(s.button, s.buttonUp)} />
 
           <div
@@ -192,9 +197,7 @@ const Scrollbar = ({ children }: { children: React.ReactNode }) => {
               className={s.thumb}
               style={{ height: `${thumbHeight}px` }}
               ref={scrollThumbRef}
-              onTouchStart={handleTouchStart}
-              onTouchEnd={handleTouchEnd}
-              onTouchMove={handleTouchMove}
+
               //   onMouseDownCapture={handleThumbMousedown}
             />
           </div>
