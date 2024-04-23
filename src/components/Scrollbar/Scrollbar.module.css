@@ -32,7 +32,7 @@
   display: block;
   height: 100%;
   position: relative;
-  width: 4px;
+  width: 8px;
   overflow: hidden;
 }
 
@@ -46,7 +46,7 @@
 
 .thumb {
   position: absolute;
-  width: 4px;
+  width: 8px;
   background-color: black;
 }
 
