@@ -180,9 +180,7 @@ const Scrollbar = ({ children }: { children: React.ReactNode }) => {
 
       {isVisible && (
         <div className={s.scrollbar}>
-          <button className={cn(s.button, s.buttonUp)}>
-            {`${isDragging}`}
-          </button>
+          <button className={cn(s.button, s.buttonUp)} />
 
           <div
             className={s.trackAndThumb}
@@ -201,7 +199,7 @@ const Scrollbar = ({ children }: { children: React.ReactNode }) => {
             />
           </div>
 
-          <button className={cn(s.button, s.buttonDown)}></button>
+          <button className={cn(s.button, s.buttonDown)} />
         </div>
       )}
     </div>
