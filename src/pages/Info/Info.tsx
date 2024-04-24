@@ -13,13 +13,14 @@ function Info() {
 
   useLayoutEffect(() => {
     if (textContainerRef.current != undefined) {
-      const isOverflown = ({ clientHeight, scrollHeight }) =>
-        scrollHeight > clientHeight;
+      const isOverflown = ({ clientHeight, scrollHeight }) => {
+        return scrollHeight > clientHeight;
+      };
 
       const resizeText = ({
         element,
-        minSize = 8,
-        maxSize = 20,
+        minSize = 9,
+        maxSize = 16,
         step = 0.5,
         unit = "px",
       }) => {
@@ -29,12 +30,10 @@ function Info() {
         while (!overflow && i < maxSize) {
           element.style.fontSize = `${i}${unit}`;
           overflow = isOverflown(element);
-          console.log(element.style.fontSize);
           if (!overflow) i += step;
         }
 
         element.style.fontSize = `${i - step}${unit}`;
-        console.log(element.style.fontSize);
       };
       resizeText({ element: textContainerRef.current });
     }
