@@ -38,8 +38,8 @@
 }
 
 .image {
-  width: 160px;
-  height: auto;
+  width: auto;
+  height: 120px;
 }
 
 .textSection {
@@ -49,7 +49,6 @@
   margin-right: 8px;
   overflow: scroll;
   /* flex-grow: 1; */
-
   flex-grow: 1;
 }
 
