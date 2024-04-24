@@ -8,17 +8,11 @@
 }
 
 .content {
-  /* display: grid;
+  display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: max-content max-content 1fr; */
-  /* height: 95%; */
-  /* overflow: scroll; */
-  overflow: scroll;
+  grid-template-rows: max-content max-content max-content 1fr;
   width: 90%;
-}
-
-.content::-webkit-scrollbar {
-  display: none;
+  height: 100%;
 }
 
 .nav {
@@ -38,6 +32,9 @@
   margin-top: 24px;
   display: grid;
   grid-template-columns: 1fr;
+  grid-template-rows: max-content max-content 1fr;
+  /* border: 1px solid green; */
+  flex-grow: 1;
 }
 
 .imagesSection {
@@ -51,27 +48,43 @@
   flex-grow: 1;
 }
 
-.heading {
-  color: #e7397a;
-  /* font-weight: 600; */
-  text-transform: uppercase;
-}
-
 .textSection {
   margin-top: 8px;
   font-size: 13px;
 }
 
+.heading {
+  color: #e7397a;
+  text-transform: uppercase;
+}
+
 .list {
   list-style: none;
-  /* margin-bottom: 24px; */
   padding: 0;
   margin: 0;
 }
 
 .listItem {
-  /* margin: 16px 0; */
-  /* text-wrap: pretty; */
   text-align: justify;
   text-transform: uppercase;
+}
+
+.contactsSection {
+  margin-top: 8px;
+  background-color: #e7397a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 16px;
+}
+
+.iconsContainer {
+  display: flex;
+  gap: 18px;
+}
+
+.icon {
+  height: 30px;
+  width: 30px;
 }
