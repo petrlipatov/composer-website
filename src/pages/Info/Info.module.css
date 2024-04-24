@@ -35,19 +35,20 @@
 }
 
 .grid {
+  margin-top: 24px;
   display: grid;
-  grid-template-columns: 40% 60%;
+  grid-template-columns: 1fr;
 }
 
 .imagesSection {
   display: flex;
-  flex-direction: column;
-  gap: 16px;
+  gap: 8px;
 }
 
 .image {
   width: 150px;
   height: auto;
+  flex-grow: 1;
 }
 
 .heading {
@@ -56,6 +57,7 @@
 }
 
 .textSection {
+  margin-top: 16px;
   font-size: 14px;
 }
 

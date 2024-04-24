@@ -21,9 +21,6 @@ function Info() {
           <div className={s.imagesSection}>
             <img className={s.image} src={image} />
             <img className={s.image} src={image} />
-            <img className={s.image} src={image} />
-            <img className={s.image} src={image} />
-            <img className={s.image} src={image} />
           </div>
 
           <div className={s.textSection}>
