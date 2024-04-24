@@ -6,16 +6,14 @@ import image from "../../assets/images/portrait.jpg";
 import whatsappSrc from "../../assets/images/whatsapp.svg";
 
 import s from "./Info.module.css";
-import { useEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 
 function Info() {
   const textContainerRef = useRef<HTMLDivElement>();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (textContainerRef.current != undefined) {
       const isOverflown = ({ clientHeight, scrollHeight }) => {
-        console.log("scrollHeight", scrollHeight);
-        console.log("clientHeight", clientHeight);
         return scrollHeight > clientHeight;
       };
 
@@ -39,7 +37,6 @@ function Info() {
         }
 
         element.style.fontSize = `${i - step}${unit}`;
-        console.log(element.style.fontSize);
       };
       resizeText({ element: textContainerRef.current });
     }
