@@ -20,7 +20,7 @@ function Info() {
         element,
         minSize = 8,
         maxSize = 20,
-        step = 1,
+        step = 0.5,
         unit = "px",
       }) => {
         let i = minSize;
