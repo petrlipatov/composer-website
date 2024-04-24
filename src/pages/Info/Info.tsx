@@ -27,9 +27,10 @@ function Info() {
             <div className={s.heading}>Composer: </div>
 
             <ul className={s.list}>
+              <li className={s.listItem}>Classical music background </li>
               <li className={s.listItem}>
-                Classical music background Composing since 1996 in neoclassical,
-                experimental and popular genres.
+                Composing since 1996 in neoclassical, experimental and popular
+                genres.
               </li>
               <li className={s.listItem}>Composing for video since 2012</li>
             </ul>
