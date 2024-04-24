@@ -53,7 +53,8 @@
 
 .heading {
   color: #e7397a;
-  font-weight: 600;
+  /* font-weight: 600; */
+  text-transform: uppercase;
 }
 
 .textSection {
@@ -71,4 +72,5 @@
 .listItem {
   /* margin: 16px 0; */
   text-wrap: pretty;
+  text-transform: uppercase;
 }
