@@ -42,11 +42,11 @@ function Info() {
                 Studied music technology at London College of Music, first class
                 honours graduate
               </li>
+              <li className={s.listItem}>Recording and mixing since 2006</li>
               <li className={s.listItem}>
                 Worked and collected experience at music studios in London,
                 Berlin, New York and Moscow
               </li>
-              <li className={s.listItem}>Recording and mixing since 2006</li>
               <li className={s.listItem}>
                 Had a long talk with Michael Brauer at Electric Lady Studios,
                 NYC in 2012 which changed my perception of mixing and life -
@@ -57,7 +57,7 @@ function Info() {
             <div className={s.heading}>Musician:</div>
 
             <ul className={s.list}>
-              <li className={s.listItem}>Performed music since 1996</li>
+              <li className={s.listItem}>Performed on stage since 1996</li>
               <li className={s.listItem}>
                 Conservatory class of fortepiano (1996-2004)
               </li>
@@ -67,7 +67,9 @@ function Info() {
               <li className={s.listItem}>
                 Self-taught basic guitar and bass guitar player
               </li>
-              <li className={s.listItem}>2006-2013 Leader of an indie band</li>
+              <li className={s.listItem}>
+                Leader of an indie band (2006-2013)
+              </li>
             </ul>
           </div>
         </div>
