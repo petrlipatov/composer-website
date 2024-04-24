@@ -6,8 +6,45 @@ import image from "../../assets/images/portrait.jpg";
 import whatsappSrc from "../../assets/images/whatsapp.svg";
 
 import s from "./Info.module.css";
+import { useEffect, useRef } from "react";
 
 function Info() {
+  const textContainerRef = useRef<HTMLDivElement>();
+
+  useEffect(() => {
+    if (textContainerRef.current != undefined) {
+      const isOverflown = ({ clientHeight, scrollHeight }) => {
+        console.log("scrollHeight", scrollHeight);
+        console.log("clientHeight", clientHeight);
+        return scrollHeight > clientHeight;
+      };
+
+      const resizeText = ({
+        element,
+        minSize = 8,
+        maxSize = 25,
+        step = 1,
+        unit = "px",
+      }) => {
+        let i = minSize;
+        let overflow = false;
+
+        const parent = element;
+
+        while (!overflow && i < maxSize) {
+          element.style.fontSize = `${i}${unit}`;
+          overflow = isOverflown(parent);
+
+          if (!overflow) i += step;
+        }
+
+        element.style.fontSize = `${i - step}${unit}`;
+        console.log(element.style.fontSize);
+      };
+      resizeText({ element: textContainerRef.current });
+    }
+  }, [textContainerRef.current]);
+
   return (
     <div className={s.page}>
       <div className={s.content}>
@@ -23,7 +60,7 @@ function Info() {
           <img className={s.image} src={image} />
         </div>
 
-        <div className={s.textSection}>
+        <div className={s.textSection} ref={textContainerRef}>
           <div className={s.heading}>Composer: </div>
           <ul className={s.list}>
             <li className={s.listItem}>Classical music background </li>
