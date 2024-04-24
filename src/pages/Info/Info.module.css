@@ -71,6 +71,7 @@
 
 .listItem {
   /* margin: 16px 0; */
-  text-wrap: pretty;
+  /* text-wrap: pretty; */
+  text-align: justify;
   text-transform: uppercase;
 }
