@@ -30,7 +30,7 @@ function Info() {
               <li className={s.listItem}>Classical music background </li>
               <li className={s.listItem}>
                 Composing since 1996 in neoclassical, experimental and popular
-                genres.
+                genres
               </li>
               <li className={s.listItem}>Composing for video since 2012</li>
             </ul>
@@ -40,7 +40,7 @@ function Info() {
             <ul className={s.list}>
               <li className={s.listItem}>
                 Studied music technology at London College of Music, first class
-                honours graduated
+                honours graduate
               </li>
               <li className={s.listItem}>
                 Worked and collected experience at music studios in London,
@@ -48,9 +48,9 @@ function Info() {
               </li>
               <li className={s.listItem}>Recording and mixing since 2006</li>
               <li className={s.listItem}>
-                Had a long talk with Michael Brauer at Electric Studios, NYC in
-                2012 which changed my perception of mixing and life - forever
-                thankful for kindness, wisdom and hospitality.
+                Had a long talk with Michael Brauer at Electric Lady Studios,
+                NYC in 2012 which changed my perception of mixing and life -
+                forever thankful for kindness and wisdom
               </li>
             </ul>
 
