@@ -10,8 +10,9 @@
 .content {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: max-content max-content max-content;
+  grid-template-rows: max-content max-content 1fr;
   width: 94%;
+  flex-grow: 1;
 }
 
 .nav {
@@ -75,8 +76,6 @@
   row-gap: 16px;
   height: 130px;
   width: 100%;
-  position: absolute;
-  bottom: 0;
 }
 
 .iconsContainer {
