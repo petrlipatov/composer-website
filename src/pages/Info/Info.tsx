@@ -67,17 +67,16 @@ function Info() {
             <li className={s.listItem}>2006-2013: Leader of an indie band</li>
           </ul>
         </div>
-
-        <div className={s.contactsSection}>
-          <div>LIZATIKH@GMAIL.COM</div>
-          <div className={s.iconsContainer}>
-            <img className={s.icon} src={whatsappSrc} />
-            <img className={s.icon} src={whatsappSrc} />
-            <img className={s.icon} src={whatsappSrc} />
-            <img className={s.icon} src={whatsappSrc} />
-            <img className={s.icon} src={whatsappSrc} />
-            <img className={s.icon} src={whatsappSrc} />
-          </div>
+      </div>
+      <div className={s.contactsSection}>
+        <div>LIZATIKH@GMAIL.COM</div>
+        <div className={s.iconsContainer}>
+          <img className={s.icon} src={whatsappSrc} />
+          <img className={s.icon} src={whatsappSrc} />
+          <img className={s.icon} src={whatsappSrc} />
+          <img className={s.icon} src={whatsappSrc} />
+          <img className={s.icon} src={whatsappSrc} />
+          <img className={s.icon} src={whatsappSrc} />
         </div>
       </div>
     </div>
