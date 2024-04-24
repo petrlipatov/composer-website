@@ -23,16 +23,10 @@
 }
 
 .pageTitle {
-  text-decoration: none;
   color: inherit;
   font-size: 12px;
-  text-decoration: underline;
   padding-bottom: 8px;
-}
-
-.pageTitleIcon {
-  height: 18px;
-  width: 18px;
+  text-decoration: underline;
 }
 
 .tagsSection {
