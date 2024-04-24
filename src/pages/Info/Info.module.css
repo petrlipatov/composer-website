@@ -70,4 +70,5 @@
 
 .listItem {
   /* margin: 16px 0; */
+  text-wrap: pretty;
 }
