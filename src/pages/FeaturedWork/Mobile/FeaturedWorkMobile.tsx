@@ -41,6 +41,7 @@ function FeaturedWorkMobile() {
   }
 
   const handleTagClick = (tag: string) => {
+    setIsPlayerOpened(false);
     if (selectedTags.includes(tag)) {
       setSelectedTags(selectedTags.filter((t) => t !== tag));
     } else {
