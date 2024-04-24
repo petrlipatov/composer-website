@@ -59,17 +59,15 @@ function Info() {
             <ul className={s.list}>
               <li className={s.listItem}>Performed on stage since 1996</li>
               <li className={s.listItem}>
-                Conservatory class of fortepiano (1996-2004)
+                1996-2004: Conservatory class of fortepiano
               </li>
               <li className={s.listItem}>
-                Classes of drums and vocals (2003-2012)
+                2003-2012: Classes of drums and vocals,
               </li>
               <li className={s.listItem}>
-                Self-taught basic guitar and bass guitar player
+                Self-taught guitar and bass guitar player
               </li>
-              <li className={s.listItem}>
-                Leader of an indie band (2006-2013)
-              </li>
+              <li className={s.listItem}>2006-2013: Leader of an indie band</li>
             </ul>
           </div>
         </div>
