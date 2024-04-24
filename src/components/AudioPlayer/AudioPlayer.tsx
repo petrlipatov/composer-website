@@ -37,7 +37,7 @@ const AudioPlayer = forwardRef(
   ) => {
     const [isAudioPlaying, setIsAudioPlaying] = useState(false);
     const audioPlayerRef = ref.current;
-    const bufferedRef = useRef<HTMLSpanElement>();
+    // const bufferedRef = useRef<HTMLSpanElement>();
 
     // useEffect(() => {
     //   if (audioPlayerRef && audioPlayerRef) {

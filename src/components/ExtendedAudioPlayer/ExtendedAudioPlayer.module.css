@@ -48,31 +48,24 @@
   height: 110px;
 }
 
+.videoButtonContainer {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+}
+
 .videoIcon {
   display: block;
   width: 32px;
   height: 32px;
-  transform: translateY(4px);
-}
-
-.trackList {
-  display: flex;
-  flex-direction: column;
-  font-size: 14px;
-  margin: 10px 24px 0 24px;
-  overflow-y: scroll;
-  flex-grow: 1;
-}
-
-.trackList::-webkit-scrollbar {
-  -webkit-appearance: none;
+  margin-right: 4px;
+  /* transform: translateY(4px); */
 }
 
 .track {
   font-size: 14px;
   display: flex;
   margin-top: 28px;
-  /* margin-right: 24px; */
 }
 
 .trackPlaying {

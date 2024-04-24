@@ -1,4 +1,4 @@
-export function formatTime(seconds) {
+export function formatTime(seconds: number) {
   const minutes = Math.floor(seconds / 60);
   const secondsPart = Math.round(seconds % 60);
   const formattedTime = `${minutes}:${String(secondsPart).padStart(2, "0")}`;

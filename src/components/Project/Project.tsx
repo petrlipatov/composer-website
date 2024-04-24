@@ -1,9 +1,4 @@
-import {
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  // useState,
-} from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
 import cn from "classnames";
 
 import tvIconSrc from "../../assets/images/tv.svg";
@@ -20,10 +15,8 @@ type ProjectProps = {
   setSelectedProject: Dispatch<SetStateAction<number>>;
   setIsPlayerOpened: Dispatch<SetStateAction<boolean>>;
   setProjectData: Dispatch<SetStateAction<ProjectData>>;
-  //   openPopup: () => void;
-  //   setVideoId: Dispatch<SetStateAction<string>>;
-  //   setIsPlayerOpened: Dispatch<SetStateAction<boolean>>;
-  //   setPlayingAudioData: Dispatch<SetStateAction<PlayingAudioData>>;
+  setVideoId: Dispatch<SetStateAction<string>>;
+  openVideoModal: () => void;
 };
 
 const Project = ({
@@ -33,11 +26,9 @@ const Project = ({
   setIsPlayerOpened,
   setSelectedProject,
   setProjectData,
+  setVideoId,
+  openVideoModal,
 }: ProjectProps) => {
-  // const [isPaused, setIsPaused] = useState(false);
-  // const [isPlaying, setIsPlaying] = useState(false);
-  // const [isLoading, setIsLoading] = useState(false);
-
   useEffect(() => {
     if (isSelected) {
       const timer = setTimeout(() => {
@@ -55,6 +46,11 @@ const Project = ({
   function handleListenClick() {
     setIsPlayerOpened(true);
     setProjectData(data);
+  }
+
+  function handleWatchClick() {
+    setVideoId(data.videoSrc);
+    openVideoModal();
   }
 
   const projectImageMaskClasses = cn(s.projectImageMask, {
@@ -80,10 +76,7 @@ const Project = ({
               Listen
             </div>
           </div>
-          <div
-            className={s.imageMaskButtonRight}
-            // onClick={handleWatchClick}
-          >
+          <div className={s.imageMaskButtonRight} onClick={handleWatchClick}>
             <img className={cn(s.imageMaskIcon)} src={tvIconSrc} />
             <div className={s.imageMaskCaption}>Watch</div>
           </div>

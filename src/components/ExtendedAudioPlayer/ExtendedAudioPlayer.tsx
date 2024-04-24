@@ -8,8 +8,6 @@ import {
   SetStateAction,
   useCallback,
 } from "react";
-// import { AudioTrackData } from "../../types";
-// import { PlayingAudioData } from "../../pages/Pieces/Mobile/PiecesMobile";
 import ProgressBar from "./ProgressBar/ProgressBar";
 import AudioPlayingLoader from "../AudioPlayingLoader/AudioPlayingLoader";
 import playSrc from "../../assets/images/play.svg";
@@ -25,11 +23,19 @@ type AudioPlayerProps = {
   isPlayerOpened: boolean;
   projectData: ProjectData;
   setIsPlayerOpened: Dispatch<SetStateAction<boolean>>;
+  setVideoId: Dispatch<SetStateAction<string>>;
+  openVideoModal: () => void;
 };
 
 const ExtendedAudioPlayer = forwardRef(
   (
-    { isPlayerOpened, projectData, setIsPlayerOpened }: AudioPlayerProps,
+    {
+      isPlayerOpened,
+      projectData,
+      setIsPlayerOpened,
+      setVideoId,
+      openVideoModal,
+    }: AudioPlayerProps,
     ref: RefObject<HTMLAudioElement>
   ) => {
     const [isAudioPlaying, setIsAudioPlaying] = useState(false);
@@ -145,14 +151,13 @@ const ExtendedAudioPlayer = forwardRef(
       setSelectedTrackIndex(null);
     };
 
-    // const handleVideoClick = (e) => {
-    //   e.stopPropagation();
-    //   setIsPlayerOpened(false);
-    //   setVideoId(playingAudioData.videoSource);
-    //   audioPlayerRef.pause();
-    //   audioPlayerRef.src = "";
-    //   openPopup();
-    // };
+    const handleVideoClick = (e) => {
+      e.stopPropagation();
+      setIsPlayerOpened(false);
+      setVideoId(projectData.videoSrc);
+      audioPlayerRef.src = "";
+      openVideoModal();
+    };
 
     return (
       <div className={s.playerSection}>
@@ -169,11 +174,10 @@ const ExtendedAudioPlayer = forwardRef(
               <div>{projectData?.genre}</div>
               <div>{projectData?.year}</div>
             </div>
-            <img
-              className={s.videoIcon}
-              src={videoIcon}
-              //   onClick={handleVideoClick}
-            />
+            <div className={s.videoButtonContainer} onClick={handleVideoClick}>
+              <img className={s.videoIcon} src={videoIcon} />
+              <div>watch</div>
+            </div>
           </div>
         </div>
 

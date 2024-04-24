@@ -1,9 +1,13 @@
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState, Suspense } from "react";
 import { Link } from "react-router-dom";
 
 import Logo from "../../../components/Logo/Logo";
 import Tag from "../../../components/Tag/Tag";
+import Project from "../../../components/Project/Project";
 import ExtendedAudioPlayer from "../../../components/ExtendedAudioPlayer/ExtendedAudioPlayer";
+import Modal from "../../../components/Modal/Modal";
+import Preloader from "../../../components/Preloader/Preloader";
+import YouTubePlayer from "../../../components/YoutubePlayer/YoutubePlayer";
 
 import { ProjectData } from "../../../types";
 
@@ -11,9 +15,10 @@ import { PROJECTS, PROJECTS_GENRES } from "../../../utils/constants";
 import closeIconSrc from "../../../assets/images/close-icon.svg";
 
 import s from "./FeaturedWork.module.css";
-import Project from "../../../components/Project/Project";
 
 function FeaturedWorkMobile() {
+  const [videoId, setVideoId] = useState<string>("");
+  const [isVideoPopupOpened, setVideoPopupState] = useState(false);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [selectedProject, setSelectedProject] = useState<number>(null);
   const [projectData, setProjectData] = useState<ProjectData | undefined>();
@@ -45,6 +50,10 @@ function FeaturedWorkMobile() {
 
   function handleClearTagsClick() {
     setSelectedTags([]);
+  }
+
+  function openVideoModal() {
+    setVideoPopupState(true);
   }
 
   const isTagSelected = (tag: string) => {
@@ -106,6 +115,8 @@ function FeaturedWorkMobile() {
               setSelectedProject={setSelectedProject}
               setProjectData={setProjectData}
               setIsPlayerOpened={setIsPlayerOpened}
+              setVideoId={setVideoId}
+              openVideoModal={openVideoModal}
               index={index}
               key={index}
             />
@@ -118,8 +129,18 @@ function FeaturedWorkMobile() {
           isPlayerOpened={isPlayerOpened}
           projectData={projectData}
           setIsPlayerOpened={setIsPlayerOpened}
+          setVideoId={setVideoId}
+          openVideoModal={openVideoModal}
           ref={audioPlayerRef}
         />
+      )}
+
+      {isVideoPopupOpened && (
+        <Modal setPopupState={setVideoPopupState}>
+          <Suspense fallback={<Preloader content={"🐥"} />}>
+            <YouTubePlayer videoId={videoId} />
+          </Suspense>
+        </Modal>
       )}
     </div>
   );
