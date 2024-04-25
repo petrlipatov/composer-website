@@ -22,7 +22,7 @@ function Info() {
         minSize = 0,
         maxSize = 10,
         step = 0.1,
-        unit = "rem",
+        unit = "em",
       }) => {
         let i = minSize;
         let overflow = false;
