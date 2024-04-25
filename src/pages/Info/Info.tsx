@@ -20,7 +20,7 @@ function Info() {
       const resizeText = ({
         element,
         minSize = 9,
-        maxSize = 20,
+        maxSize = 22,
         step = 0.1,
         unit = "px",
       }) => {
@@ -55,47 +55,49 @@ function Info() {
         </div> */}
 
         <div className={s.textSection} ref={textContainerRef}>
-          <div className={s.heading}>Composer: </div>
+          <div className={s.heading}>Composer</div>
           <ul className={s.list}>
-            <li className={s.listItem}>Classical music background </li>
+            <li className={s.listItem}>&gt; Classical music background</li>
             <li className={s.listItem}>
-              Composing since 1996 in neoclassical, experimental and popular
-              genres
+              &gt; Composing since 1996 in neoclassical, experimental and
+              popular genres
             </li>
-            <li className={s.listItem}>Composing for video since 2012</li>
+            <li className={s.listItem}>&gt; Composing for video since 2012</li>
           </ul>
 
-          <div className={s.heading}>Sound Engineer:</div>
+          <div className={s.heading}>Sound Engineer</div>
           <ul className={s.list}>
             <li className={s.listItem}>
-              Studied music technology at London College of Music, first class
-              honours graduate
+              &gt; Studied music technology at London College of Music, first
+              class honours graduate
             </li>
             <li className={s.listItem}>Recording and mixing since 2006</li>
             <li className={s.listItem}>
-              Worked and collected experience at music studios in London,
+              &gt; Worked and collected experience at music studios in London,
               Berlin, New York and Moscow
             </li>
             <li className={s.listItem}>
-              Had a long talk with Michael Brauer at Electric Lady Studios, NYC
-              in 2012 which changed my perception of mixing and life - forever
-              thankful for kindness and wisdom
+              &gt; Had a long talk with Michael Brauer at Electric Lady Studios,
+              NYC in 2012 which changed my perception of mixing and life -
+              forever thankful for kindness and wisdom
             </li>
           </ul>
 
-          <div className={s.heading}>Musician:</div>
+          <div className={s.heading}>Musician</div>
           <ul className={s.list}>
-            <li className={s.listItem}>Performed on stage since 1996</li>
+            <li className={s.listItem}>&gt; Performed on stage since 1996</li>
             <li className={s.listItem}>
-              1996-2004: Conservatory class of fortepiano
+              &gt; 1996-2004: Conservatory class of fortepiano
             </li>
             <li className={s.listItem}>
-              2003-2012: Classes of drums and vocals,
+              &gt; 2003-2012: Drums and vocals classes
             </li>
             <li className={s.listItem}>
-              Self-taught guitar and bass guitar player
+              &gt; Self-taught guitar and bass player
             </li>
-            <li className={s.listItem}>2006-2013: Leader of an indie band</li>
+            <li className={s.listItem}>
+              &gt; 2006-2013: Leader of an indie band
+            </li>
           </ul>
         </div>
       </div>

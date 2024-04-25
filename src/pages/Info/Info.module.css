@@ -43,11 +43,12 @@
 }
 
 .textSection {
-  margin-top: 16px;
+  /* margin-top: 16px; */
   margin-left: 8px;
   margin-right: 8px;
   overflow: scroll;
-  text-wrap: pretty;
+  /* text-wrap: pretty; */
+  text-align: right;
   flex-grow: 1;
   /* text-transform: uppercase; */
 }
@@ -59,6 +60,7 @@
 .list {
   list-style: none;
   padding: 0;
+  padding-left: 15px;
   margin: 0;
 }
 
