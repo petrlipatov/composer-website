@@ -53,12 +53,10 @@
   flex-grow: 1;
   /* text-transform: uppercase; */
   white-space: nowrap;
-  border: 1px solid green;
 }
 
 .wrapper {
   display: inline-block;
-  border: 1px solid red;
 }
 
 .heading {

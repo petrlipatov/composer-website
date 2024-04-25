@@ -47,8 +47,7 @@ function Info() {
           if (!overflow) i += step;
         }
 
-        container.style.fontSize = `${i - step}${unit}`;
-        console.log(`установлена `, container.clientWidth);
+        container.style.fontSize = `${i - step * 2}${unit}`;
       };
       resizeText({
         section: textSectionRef.current,
