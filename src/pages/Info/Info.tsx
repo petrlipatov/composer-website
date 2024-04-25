@@ -19,10 +19,10 @@ function Info() {
 
       const resizeText = ({
         element,
-        minSize = 9,
-        maxSize = 28,
+        minSize = 0,
+        maxSize = 10,
         step = 0.1,
-        unit = "px",
+        unit = "rem",
       }) => {
         let i = minSize;
         let overflow = false;
