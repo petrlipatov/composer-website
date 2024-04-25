@@ -35,7 +35,7 @@ function Info() {
         container,
         minSize = 1,
         maxSize = 10,
-        step = 0.01,
+        step = 0.005,
         unit = "rem",
       }) => {
         let i = minSize;
