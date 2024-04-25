@@ -13,16 +13,21 @@ function Info() {
 
   useLayoutEffect(() => {
     if (textContainerRef.current != undefined) {
-      const isOverflown = ({ clientHeight, scrollHeight }) => {
-        return scrollHeight > clientHeight;
+      const isOverflown = ({
+        clientHeight,
+        clientWidth,
+        scrollHeight,
+        scrollWidth,
+      }) => {
+        return scrollHeight > clientHeight || scrollWidth > clientWidth;
       };
 
       const resizeText = ({
         element,
-        minSize = 0,
-        maxSize = 10,
+        minSize = 8,
+        maxSize = 20,
         step = 0.1,
-        unit = "em",
+        unit = "px",
       }) => {
         let i = minSize;
         let overflow = false;
@@ -35,7 +40,7 @@ function Info() {
 
         element.style.fontSize = `${i - step}${unit}`;
       };
-      // resizeText({ element: textContainerRef.current });
+      resizeText({ element: textContainerRef.current });
     }
   }, [textContainerRef.current, textContainerRef.current?.clientHeight]);
 

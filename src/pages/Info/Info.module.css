@@ -52,7 +52,6 @@
   text-align: end;
   flex-grow: 1;
   /* text-transform: uppercase; */
-  border: 1px solid green;
   white-space: nowrap;
 }
 
