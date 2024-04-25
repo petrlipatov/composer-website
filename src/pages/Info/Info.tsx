@@ -37,7 +37,7 @@ function Info() {
       };
       resizeText({ element: textContainerRef.current });
     }
-  }, [textContainerRef.current]);
+  }, [textContainerRef.current, textContainerRef.current?.clientHeight]);
 
   return (
     <div className={s.page}>
