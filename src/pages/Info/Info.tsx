@@ -33,10 +33,10 @@ function Info() {
       const resizeText = ({
         section,
         container,
-        minSize = 15,
-        maxSize = 30,
+        minSize = 1,
+        maxSize = 10,
         step = 0.1,
-        unit = "px",
+        unit = "rem",
       }) => {
         let i = minSize;
         let overflow = false;
