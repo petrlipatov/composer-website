@@ -35,7 +35,7 @@ function Info() {
         container,
         minSize = 18,
         maxSize = 25,
-        step = 0.05,
+        step = 0.1,
         unit = "px",
       }) => {
         let i = minSize;
