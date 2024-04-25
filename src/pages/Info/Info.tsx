@@ -21,13 +21,13 @@ function Info() {
         { clientWidth: sectionWidth },
         { clientWidth: containerWidth }
       ) => {
-        // console.log(
-        //   `sectionWidth: ${sectionWidth}, containerWidth: ${containerWidth} = ${
-        //     sectionWidth === containerWidth
-        //   }`
-        // );
+        console.log(
+          `sectionWidth: ${sectionWidth}, containerWidth: ${containerWidth} = ${
+            sectionWidth === containerWidth
+          }`
+        );
 
-        return sectionWidth === containerWidth;
+        return sectionWidth < containerWidth;
       };
 
       const resizeText = ({
@@ -35,7 +35,7 @@ function Info() {
         container,
         minSize = 15,
         maxSize = 25,
-        step = 0.01,
+        step = 0.1,
         unit = "px",
       }) => {
         let i = minSize;
