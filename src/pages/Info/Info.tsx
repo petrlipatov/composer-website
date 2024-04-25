@@ -34,7 +34,7 @@ function Info() {
         section,
         container,
         minSize = 15,
-        maxSize = 25,
+        maxSize = 30,
         step = 0.1,
         unit = "px",
       }) => {
