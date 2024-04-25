@@ -33,9 +33,9 @@ function Info() {
       const resizeText = ({
         section,
         container,
-        minSize = 15,
+        minSize = 18,
         maxSize = 25,
-        step = 0.05,
+        step = 0.01,
         unit = "px",
       }) => {
         let i = minSize;
