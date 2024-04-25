@@ -35,7 +35,7 @@ function Info() {
         container,
         minSize = 1,
         maxSize = 10,
-        step = 0.005,
+        step = 0.1,
         unit = "rem",
       }) => {
         let i = minSize;
@@ -47,9 +47,7 @@ function Info() {
           if (!overflow) i += step;
         }
 
-        const modifiedStep = step * 10;
-
-        container.style.fontSize = `${i - modifiedStep}${unit}`;
+        container.style.fontSize = `${i - step}${unit}`;
       };
       resizeText({
         section: textSectionRef.current,
