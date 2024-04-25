@@ -62,7 +62,7 @@
 .list {
   list-style: none;
   padding: 0;
-  padding-left: 15px;
+  /* padding-left: 15px; */
   margin: 0;
 }
 
