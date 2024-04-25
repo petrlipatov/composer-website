@@ -62,6 +62,10 @@
   margin: 0;
 }
 
+.listItem {
+  margin-bottom: 4px;
+}
+
 .contactsSection {
   margin-top: 10px;
   background-color: #e7397a;
