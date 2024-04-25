@@ -20,7 +20,7 @@ function Info() {
       const resizeText = ({
         element,
         minSize = 9,
-        maxSize = 16,
+        maxSize = 20,
         step = 0.1,
         unit = "px",
       }) => {
@@ -49,10 +49,10 @@ function Info() {
           <Logo />
         </div>
 
-        <div className={s.imagesSection}>
+        {/* <div className={s.imagesSection}>
           <img className={s.image} src={image} />
           <img className={s.image} src={image} />
-        </div>
+        </div> */}
 
         <div className={s.textSection} ref={textContainerRef}>
           <div className={s.heading}>Composer: </div>
@@ -100,7 +100,7 @@ function Info() {
         </div>
       </div>
       <div className={s.contactsSection}>
-        <div>LIZATIKH@GMAIL.COM</div>
+        {/* <div>LIZATIKH@GMAIL.COM</div> */}
         <div className={s.iconsContainer}>
           <img className={s.icon} src={whatsappSrc} />
           <img className={s.icon} src={whatsappSrc} />

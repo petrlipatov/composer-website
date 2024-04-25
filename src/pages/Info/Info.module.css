@@ -49,22 +49,17 @@
   overflow: scroll;
   text-wrap: pretty;
   flex-grow: 1;
+  text-transform: uppercase;
 }
 
 .heading {
   color: #e7397a;
-  text-transform: uppercase;
 }
 
 .list {
   list-style: none;
   padding: 0;
   margin: 0;
-}
-
-.listItem {
-  /* text-align: justify; */
-  text-transform: uppercase;
 }
 
 .contactsSection {
@@ -75,7 +70,7 @@
   align-items: center;
   justify-content: center;
   row-gap: 16px;
-  height: 130px;
+  height: 70px;
   width: 100%;
 }
 
