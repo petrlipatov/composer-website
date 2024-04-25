@@ -35,7 +35,7 @@ function Info() {
         container,
         minSize = 18,
         maxSize = 25,
-        step = 0.1,
+        step = 0.5,
         unit = "px",
       }) => {
         let i = minSize;
@@ -48,6 +48,7 @@ function Info() {
         }
 
         container.style.fontSize = `${i - step}${unit}`;
+        console.log(`установлена `, container.clientWidth);
       };
       resizeText({
         section: textSectionRef.current,
