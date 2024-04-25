@@ -20,7 +20,7 @@ function Info() {
       const resizeText = ({
         element,
         minSize = 9,
-        maxSize = 22,
+        maxSize = 28,
         step = 0.1,
         unit = "px",
       }) => {
