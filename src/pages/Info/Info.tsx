@@ -47,7 +47,9 @@ function Info() {
           if (!overflow) i += step;
         }
 
-        container.style.fontSize = `${i - step}${unit}`;
+        const modifiedStep = step * 3;
+
+        container.style.fontSize = `${i - modifiedStep}${unit}`;
       };
       resizeText({
         section: textSectionRef.current,
