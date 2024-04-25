@@ -56,6 +56,10 @@
   border: 1px solid green;
 }
 
+.wrapper {
+  border: 1px solid red;
+}
+
 .heading {
   color: #e7397a;
   font-weight: 600;
