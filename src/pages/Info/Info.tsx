@@ -47,7 +47,7 @@ function Info() {
           if (!overflow) i += step;
         }
 
-        const modifiedStep = step * 4;
+        const modifiedStep = step * 10;
 
         container.style.fontSize = `${i - modifiedStep}${unit}`;
       };
