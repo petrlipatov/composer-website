@@ -9,40 +9,52 @@ import s from "./Info.module.css";
 import { useLayoutEffect, useRef } from "react";
 
 function Info() {
+  const textSectionRef = useRef<HTMLDivElement>();
   const textContainerRef = useRef<HTMLDivElement>();
 
   useLayoutEffect(() => {
-    if (textContainerRef.current != undefined) {
-      const isOverflown = ({
-        clientHeight,
-        clientWidth,
-        scrollHeight,
-        scrollWidth,
-      }) => {
-        return scrollHeight > clientHeight || scrollWidth > clientWidth;
+    if (
+      textSectionRef.current != undefined &&
+      textContainerRef.current != undefined
+    ) {
+      const isWidthEven = (
+        { clientWidth: sectionWidth },
+        { clientWidth: containerWidth }
+      ) => {
+        // console.log(
+        //   `sectionWidth: ${sectionWidth}, containerWidth: ${containerWidth} = ${
+        //     sectionWidth === containerWidth
+        //   }`
+        // );
+
+        return sectionWidth === containerWidth;
       };
 
       const resizeText = ({
-        element,
-        minSize = 8,
-        maxSize = 30,
-        step = 0.1,
+        section,
+        container,
+        minSize = 15,
+        maxSize = 25,
+        step = 0.05,
         unit = "px",
       }) => {
         let i = minSize;
         let overflow = false;
 
         while (!overflow && i < maxSize) {
-          element.style.fontSize = `${i}${unit}`;
-          overflow = isOverflown(element);
+          container.style.fontSize = `${i}${unit}`;
+          overflow = isWidthEven(section, container);
           if (!overflow) i += step;
         }
 
-        element.style.fontSize = `${i - step}${unit}`;
+        container.style.fontSize = `${i - step}${unit}`;
       };
-      resizeText({ element: textContainerRef.current });
+      resizeText({
+        section: textSectionRef.current,
+        container: textContainerRef.current,
+      });
     }
-  }, [textContainerRef.current, textContainerRef.current?.clientHeight]);
+  }, [textSectionRef.current, textContainerRef.current]);
 
   return (
     <div className={s.page}>
@@ -59,8 +71,8 @@ function Info() {
           <img className={s.image} src={image} />
         </div> */}
 
-        <div className={s.textSection} ref={textContainerRef}>
-          <div className={s.wrapper}>
+        <div className={s.textSection} ref={textSectionRef}>
+          <div className={s.wrapper} ref={textContainerRef}>
             <div className={s.heading}>composer</div>
             <ul className={s.list}>
               <li className={s.listItem}>&gt; Classical music background</li>
