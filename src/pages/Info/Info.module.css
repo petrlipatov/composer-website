@@ -48,11 +48,12 @@
   /* margin-right: 14px; */
   overflow: scroll;
   /* text-wrap: pretty; */
-  font-size: 22px;
+  font-size: 16px;
   text-align: end;
   flex-grow: 1;
   /* text-transform: uppercase; */
   border: 1px solid green;
+  white-space: nowrap;
 }
 
 .heading {
