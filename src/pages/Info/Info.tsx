@@ -63,7 +63,7 @@ function Info() {
   }, [textSectionRef.current, textContainerRef.current]);
 
   useEffect(() => {
-    if (difference > 6) {
+    if (difference > 10) {
       const currentFontSize = parseInt(textContainerRef.current.style.fontSize);
       textContainerRef.current.style.fontSize = `${currentFontSize + 1}px`;
     }
