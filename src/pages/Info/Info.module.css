@@ -70,7 +70,7 @@
 }
 
 .contactsSection {
-  margin-top: 10px;
+  /* margin-top: 10px; */
   background-color: #e7397a;
   display: flex;
   flex-direction: column;
