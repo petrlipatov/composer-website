@@ -36,7 +36,7 @@ function Info() {
         container,
         minSize = 15,
         maxSize = 23,
-        step = 0.1,
+        step = 1,
         unit = "px",
       }) => {
         let i = minSize;
@@ -49,7 +49,7 @@ function Info() {
         }
 
         container.style.fontSize = `${i - step}${unit}`;
-        console.log(container.style.fontSize);
+        console.log(parseInt(container.style.fontSize));
       };
       resizeText({
         section: textSectionRef.current,
@@ -61,6 +61,18 @@ function Info() {
       );
     }
   }, [textSectionRef.current, textContainerRef.current]);
+
+  useEffect(() => {
+    if (difference > 6) {
+      const currentFontSize = parseInt(textContainerRef.current.style.fontSize);
+      textContainerRef.current.style.fontSize = `${currentFontSize + 0.1}px`;
+      setDifference(
+        textSectionRef.current.clientWidth -
+          textContainerRef.current.clientWidth
+      );
+      console.log(textContainerRef.current.style.fontSize);
+    }
+  }, [difference]);
 
   return (
     <div className={s.page}>
