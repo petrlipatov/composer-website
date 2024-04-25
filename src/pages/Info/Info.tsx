@@ -6,9 +6,10 @@ import image from "../../assets/images/portrait.jpg";
 import whatsappSrc from "../../assets/images/whatsapp.svg";
 
 import s from "./Info.module.css";
-import { useLayoutEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 function Info() {
+  const [difference, setDifference] = useState<number>();
   const textSectionRef = useRef<HTMLDivElement>();
   const textContainerRef = useRef<HTMLDivElement>();
 
@@ -54,6 +55,10 @@ function Info() {
         section: textSectionRef.current,
         container: textContainerRef.current,
       });
+      setDifference(
+        textSectionRef.current.clientWidth -
+          textContainerRef.current.clientWidth
+      );
     }
   }, [textSectionRef.current, textContainerRef.current]);
 
@@ -74,6 +79,7 @@ function Info() {
 
         <div className={s.textSection} ref={textSectionRef}>
           <div className={s.wrapper} ref={textContainerRef}>
+            <div className={s.heading}>{difference}</div>
             <div className={s.heading}>composer</div>
             <ul className={s.list}>
               <li className={s.listItem}>&gt; Classical music background</li>
