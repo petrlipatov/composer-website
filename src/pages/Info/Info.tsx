@@ -46,7 +46,7 @@ function Info() {
           <Link to="/" className={s.pageTitle}>
             Info
           </Link>
-          <Logo />
+          <Logo noTitle={true} />
         </div>
 
         {/* <div className={s.imagesSection}>
