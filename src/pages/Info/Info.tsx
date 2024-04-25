@@ -27,7 +27,7 @@ function Info() {
           }`
         );
 
-        return sectionWidth < containerWidth;
+        return sectionWidth <= containerWidth;
       };
 
       const resizeText = ({
