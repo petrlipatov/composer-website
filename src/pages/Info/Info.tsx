@@ -60,7 +60,7 @@ function Info() {
         </div> */}
 
         <div className={s.textSection} ref={textContainerRef}>
-          <div className={s.heading}>Composer</div>
+          <div className={s.heading}>composer</div>
           <ul className={s.list}>
             <li className={s.listItem}>&gt; Classical music background</li>
             <li className={s.listItem}>
@@ -70,7 +70,7 @@ function Info() {
             <li className={s.listItem}>&gt; Composing for video since 2012</li>
           </ul>
 
-          <div className={s.heading}>Sound Engineer</div>
+          <div className={s.heading}>sound engineer</div>
           <ul className={s.list}>
             <li className={s.listItem}>
               &gt; Studied music technology
@@ -96,7 +96,7 @@ function Info() {
             </li>
           </ul>
 
-          <div className={s.heading}>Musician</div>
+          <div className={s.heading}>musician</div>
           <ul className={s.list}>
             <li className={s.listItem}>
               &gt; 1996-2004 Fortepiano
