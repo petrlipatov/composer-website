@@ -56,11 +56,6 @@
   border: 1px solid green;
 }
 
-.wrapper {
-  display: inline-block;
-  border: 1px solid red;
-}
-
 .heading {
   color: #e7397a;
   font-weight: 600;
@@ -69,12 +64,14 @@
 .list {
   list-style: none;
   padding: 0;
-  /* padding-left: 15px; */
+  width: 100%;
   margin: 0;
+  border: 1px solid orange;
+  font-size: larger;
 }
 
 .listItem {
-  /* margin-bottom: 4px; */
+  max-width: 100%;
 }
 
 .contactsSection {
