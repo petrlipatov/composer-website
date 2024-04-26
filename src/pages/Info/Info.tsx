@@ -70,6 +70,12 @@ function Info() {
             </li>
           </ul>
         </div>
+
+        <div className={s.navButtonsSection}>
+          <button className={s.navButton}>Tech Spec</button>
+          <button className={s.navButton}>Gallery</button>
+        </div>
+
         <div className={s.contactsSection}>
           <button className={s.button} style={{ backgroundColor: "#FF0101" }}>
             YouTube
@@ -86,10 +92,13 @@ function Info() {
           <button className={s.button} style={{ backgroundColor: "#1FD861" }}>
             Spotify
           </button>
+          <button className={s.button} style={{ backgroundColor: "#EAB90A" }}>
+            IMDB
+          </button>
           <button className={s.button} style={{ backgroundColor: "#FC526A" }}>
             Apple Music
           </button>
-          <button className={s.button} style={{ backgroundColor: "#FED42A" }}>
+          <button className={s.button} style={{ backgroundColor: "#FFDB4A" }}>
             Yandex Music
           </button>
         </div>
