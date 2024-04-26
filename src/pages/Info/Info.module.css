@@ -95,6 +95,7 @@
   /* margin-top: 10px; */
   /* background-color: #e7397a; */
   display: flex;
+
   /* flex-direction: column; */
   /* align-items: center;
   justify-content: center; */
@@ -115,4 +116,8 @@
   font-size: 12px;
   flex-grow: 1;
   text-align: center;
+}
+
+.button:nth-child(4) {
+  order: 1;
 }
