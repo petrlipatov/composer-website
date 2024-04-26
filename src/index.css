@@ -14,16 +14,8 @@ body {
   font-family: "IBM Plex Mono", monospace;
   background-color: #d6d6d6;
   -webkit-text-size-adjust: none;
-  /* overscroll-behavior: none; */
 }
 
 #root {
   height: 100%;
-}
-
-.os-scrollbar-vertical {
-  --os-size: 10px;
-  --os-track-border: black;
-  --os-track-border-radius: 0;
-  --os-handle-border-radius: 0;
 }

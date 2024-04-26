@@ -6,68 +6,68 @@ import image from "../../assets/images/portrait.jpg";
 import whatsappSrc from "../../assets/images/whatsapp.svg";
 
 import s from "./Info.module.css";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useRef } from "react";
 
 function Info() {
-  const [difference, setDifference] = useState<number>();
+  // const [difference, setDifference] = useState<number>();
   const textSectionRef = useRef<HTMLDivElement>();
   const textContainerRef = useRef<HTMLDivElement>();
 
-  useLayoutEffect(() => {
-    if (
-      textSectionRef.current != undefined &&
-      textContainerRef.current != undefined
-    ) {
-      const isWidthEven = (
-        { clientWidth: sectionWidth },
-        { clientWidth: containerWidth }
-      ) => {
-        console.log(
-          `sectionWidth: ${sectionWidth}, containerWidth: ${containerWidth} = ${
-            sectionWidth <= containerWidth
-          }`
-        );
+  // useLayoutEffect(() => {
+  //   if (
+  //     textSectionRef.current != undefined &&
+  //     textContainerRef.current != undefined
+  //   ) {
+  //     const isWidthEven = (
+  //       { clientWidth: sectionWidth },
+  //       { clientWidth: containerWidth }
+  //     ) => {
+  //       console.log(
+  //         `sectionWidth: ${sectionWidth}, containerWidth: ${containerWidth} = ${
+  //           sectionWidth <= containerWidth
+  //         }`
+  //       );
 
-        return sectionWidth <= containerWidth;
-      };
+  //       return sectionWidth <= containerWidth;
+  //     };
 
-      const resizeText = ({
-        section,
-        container,
-        minSize = 15,
-        maxSize = 23,
-        step = 1,
-        unit = "px",
-      }) => {
-        let i = minSize;
-        let overflow = false;
+  //     const resizeText = ({
+  //       section,
+  //       container,
+  //       minSize = 15,
+  //       maxSize = 23,
+  //       step = 0.5,
+  //       unit = "px",
+  //     }) => {
+  //       let i = minSize;
+  //       let overflow = false;
 
-        while (!overflow && i < maxSize) {
-          container.style.fontSize = `${i}${unit}`;
-          overflow = isWidthEven(section, container);
-          if (!overflow) i += step;
-        }
+  //       while (!overflow && i < maxSize) {
+  //         container.style.fontSize = `${i}${unit}`;
+  //         overflow = isWidthEven(section, container);
+  //         if (!overflow) i += step;
+  //       }
 
-        container.style.fontSize = `${i - step}${unit}`;
-        console.log(parseInt(container.style.fontSize));
-      };
-      resizeText({
-        section: textSectionRef.current,
-        container: textContainerRef.current,
-      });
-      setDifference(
-        textSectionRef.current.clientWidth -
-          textContainerRef.current.clientWidth
-      );
-    }
-  }, [textSectionRef.current, textContainerRef.current]);
+  //       container.style.fontSize = `${i - step}${unit}`;
+  //       console.log(parseInt(container.style.fontSize));
+  //     };
+  //     resizeText({
+  //       section: textSectionRef.current,
+  //       container: textContainerRef.current,
+  //     });
+  //     setDifference(
+  //       textSectionRef.current.clientWidth -
+  //         textContainerRef.current.clientWidth
+  //     );
+  //   }
+  // }, [textSectionRef.current, textContainerRef.current]);
 
-  useEffect(() => {
-    if (difference > 10) {
-      const currentFontSize = parseInt(textContainerRef.current.style.fontSize);
-      textContainerRef.current.style.fontSize = `${currentFontSize + 1}px`;
-    }
-  }, [difference]);
+  // useEffect(() => {
+  //   if (difference > 10) {
+  //     const currentFontSize = parseInt(textContainerRef.current.style.fontSize);
+  //     textContainerRef.current.style.fontSize = `${currentFontSize + 1}px`;
+  //   }
+  // }, [difference]);
 
   return (
     <div className={s.page}>
@@ -86,7 +86,7 @@ function Info() {
 
         <div className={s.textSection} ref={textSectionRef}>
           <div className={s.wrapper} ref={textContainerRef}>
-            <div className={s.heading}>{difference}</div>
+            <div className={s.heading}>{screen.width}</div>
             <div className={s.heading}>composer</div>
             <ul className={s.list}>
               <li className={s.listItem}>&gt; Classical music background</li>
