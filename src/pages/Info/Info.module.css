@@ -104,6 +104,7 @@
   width: 100%;
   /* border: 1px solid #e7397a; */
   gap: 8px;
+  margin-bottom: 8px;
 }
 
 .button {
@@ -111,4 +112,7 @@
   padding: 6px;
   border: 1px solid #000000;
   font-weight: 600;
+  font-size: 12px;
+  flex-grow: 1;
+  text-align: center;
 }

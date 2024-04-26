@@ -70,29 +70,29 @@ function Info() {
             </li>
           </ul>
         </div>
-      </div>
-      <div className={s.contactsSection}>
-        <button className={s.button} style={{ backgroundColor: "#FF0101" }}>
-          YouTube
-        </button>
-        <button className={s.button} style={{ backgroundColor: "#CD1CFB" }}>
-          Instagram
-        </button>
-        <button className={s.button} style={{ backgroundColor: "#13C230" }}>
-          WhatsApp
-        </button>
-        <button className={s.button} style={{ backgroundColor: "#4386F5" }}>
-          Email
-        </button>
-        <button className={s.button} style={{ backgroundColor: "#1FD861" }}>
-          Spotify
-        </button>
-        <button className={s.button} style={{ backgroundColor: "#FC526A" }}>
-          🍎Music
-        </button>
-        <button className={s.button} style={{ backgroundColor: "#FED42A" }}>
-          Yandex Music
-        </button>
+        <div className={s.contactsSection}>
+          <button className={s.button} style={{ backgroundColor: "#FF0101" }}>
+            YouTube
+          </button>
+          <button className={s.button} style={{ backgroundColor: "#CD1CFB" }}>
+            Instagram
+          </button>
+          <button className={s.button} style={{ backgroundColor: "#13C230" }}>
+            WhatsApp
+          </button>
+          <button className={s.button} style={{ backgroundColor: "#4386F5" }}>
+            Email
+          </button>
+          <button className={s.button} style={{ backgroundColor: "#1FD861" }}>
+            Spotify
+          </button>
+          <button className={s.button} style={{ backgroundColor: "#FC526A" }}>
+            Apple Music
+          </button>
+          <button className={s.button} style={{ backgroundColor: "#FED42A" }}>
+            Yandex Music
+          </button>
+        </div>
       </div>
     </div>
   );
