@@ -56,7 +56,13 @@
   /* border: 1px solid green; */
 }
 
-@media (max-width: 1250px) {
+@media (min-width: 375px) {
+  .textSection {
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 414px) {
   .textSection {
     font-size: 17px;
   }
