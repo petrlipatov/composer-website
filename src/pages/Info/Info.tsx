@@ -22,7 +22,7 @@ function Info() {
           <div className={s.heading}>composer</div>
           <ul className={s.list}>
             <li className={s.listItem}>
-              &gt; Composing since ’96 in classical,
+              &gt; Composing since 1996 in classical,
               <br /> experimental and popular genres
             </li>
             <li className={s.listItem}>&gt; Composing for video since 2012</li>
