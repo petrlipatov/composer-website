@@ -86,7 +86,7 @@ function Info() {
 
         <div className={s.textSection} ref={textSectionRef}>
           <div className={s.wrapper} ref={textContainerRef}>
-            <div className={s.heading}>{screen.width}</div>
+            {/* <div className={s.heading}>{screen.width}</div> */}
             <div className={s.heading}>composer</div>
             <ul className={s.list}>
               <li className={s.listItem}>&gt; Classical music background</li>
