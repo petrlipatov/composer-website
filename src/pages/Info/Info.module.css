@@ -56,6 +56,12 @@
   /* border: 1px solid green; */
 }
 
+@media (max-width: 1250px) {
+  .textSection {
+    font-size: 17px;
+  }
+}
+
 .wrapper {
   display: inline-block;
   /* border: 1px solid red; */
