@@ -40,8 +40,26 @@
   /* border: 1px solid green; */
 }
 
+.navButtonsSection {
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+.navButton {
+  all: unset;
+  text-align: center;
+  width: 30%;
+  text-decoration: underline;
+  color: #e7397a;
+  font-size: 12px;
+}
+
 @media (min-width: 375px) {
   .textSection {
+    font-size: 15.3px;
+  }
+  .navButton {
     font-size: 15.3px;
   }
 }
@@ -49,6 +67,9 @@
 @media (min-width: 414px) {
   .textSection {
     font-size: 17px;
+  }
+  .navButton {
+    font-size: 15.3px;
   }
 }
 
@@ -64,20 +85,6 @@
   margin: 0;
   /* border: 1px solid orange; */
   /* font-size: min(max(16px, 4vw), 22px); */
-}
-
-.navButtonsSection {
-  display: flex;
-  justify-content: center;
-  flex-grow: 1;
-}
-
-.navButton {
-  all: unset;
-  text-align: center;
-  width: 30%;
-  text-decoration: underline;
-  color: #e7397a;
 }
 
 .contactsSection {

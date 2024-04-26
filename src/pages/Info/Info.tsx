@@ -72,7 +72,7 @@ function Info() {
         </div>
 
         <div className={s.navButtonsSection}>
-          <button className={s.navButton}>Tech Spec</button>
+          <button className={s.navButton}>Tech Specs</button>
           <button className={s.navButton}>Gallery</button>
         </div>
 
