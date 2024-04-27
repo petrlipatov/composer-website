@@ -27,6 +27,23 @@
   text-decoration: underline;
 }
 
+.tagsSection {
+  margin-top: 24px;
+  display: flex;
+  gap: 8px;
+}
+
+.tag {
+  all: unset;
+  text-align: center;
+  border: 1px solid black;
+  font-size: 12px;
+  padding: 8px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-weight: 600;
+}
+
 .textSection {
   margin-top: 20px;
   /* margin-left: 8px; */
@@ -38,21 +55,7 @@
   /* text-transform: uppercase; */
   white-space: nowrap;
   /* border: 1px solid green; */
-}
-
-.navButtonsSection {
-  display: flex;
-  justify-content: center;
   flex-grow: 1;
-}
-
-.navButton {
-  all: unset;
-  text-align: center;
-  width: 30%;
-  text-decoration: underline;
-  color: #e7397a;
-  font-size: 12px;
 }
 
 @media (min-width: 375px) {
@@ -97,7 +100,6 @@
 
 .button {
   all: unset;
-
   padding: 8px;
   padding-top: 10px;
   padding-bottom: 10px;

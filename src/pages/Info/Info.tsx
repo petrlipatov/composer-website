@@ -15,7 +15,13 @@ function Info() {
           <Link to="/" className={s.pageTitle}>
             Info
           </Link>
-          <Logo noTitle={true} />
+          <Logo />
+        </div>
+
+        <div className={s.tagsSection}>
+          <button className={s.tag}>About</button>
+          <button className={s.tag}>Gallery</button>
+          <button className={s.tag}>Tech Specs</button>
         </div>
 
         <div className={s.textSection}>
@@ -69,11 +75,6 @@ function Info() {
               &gt; 2006-2013 Leader of an indie band
             </li>
           </ul>
-        </div>
-
-        <div className={s.navButtonsSection}>
-          <button className={s.navButton}>Tech Specs</button>
-          <button className={s.navButton}>Gallery</button>
         </div>
 
         <div className={s.contactsSection}>
