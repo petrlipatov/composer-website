@@ -39,9 +39,11 @@
   border: 1px solid black;
   font-size: 12px;
   padding: 8px;
-  padding-top: 10px;
-  padding-bottom: 10px;
   font-weight: 600;
+}
+
+.tagSelected {
+  background-color: #e7397a;
 }
 
 .textSection {

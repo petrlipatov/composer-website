@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
+import cn from "classnames";
 
 import Logo from "../../components/Logo/Logo";
 
-import image from "../../assets/images/portrait.jpg";
-import whatsappSrc from "../../assets/images/whatsapp.svg";
-
 import s from "./Info.module.css";
+import { useState } from "react";
 
 function Info() {
+  const [selectedTag, setSelectedTag] = useState(1);
+
   return (
     <div className={s.page}>
       <div className={s.content}>
@@ -19,9 +20,24 @@ function Info() {
         </div>
 
         <div className={s.tagsSection}>
-          <button className={s.tag}>About</button>
-          <button className={s.tag}>Gallery</button>
-          <button className={s.tag}>Tech Specs</button>
+          <button
+            className={cn(s.tag, selectedTag === 1 ? s.tagSelected : "")}
+            onClick={() => setSelectedTag(1)}
+          >
+            About
+          </button>
+          <button
+            className={cn(s.tag, selectedTag === 2 ? s.tagSelected : "")}
+            onClick={() => setSelectedTag(2)}
+          >
+            Gallery
+          </button>
+          <button
+            className={cn(s.tag, selectedTag === 3 ? s.tagSelected : "")}
+            onClick={() => setSelectedTag(3)}
+          >
+            Tech Specs
+          </button>
         </div>
 
         <div className={s.textSection}>
