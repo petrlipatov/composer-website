@@ -6,13 +6,13 @@
 }
 
 @media (min-width: 375px) {
-  .aboutSection {
+  .section {
     font-size: 15px;
   }
 }
 
 @media (min-width: 414px) {
-  .aboutSection {
+  .section {
     font-size: 17px;
   }
 }
