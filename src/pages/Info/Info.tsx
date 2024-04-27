@@ -8,6 +8,7 @@ import { useState } from "react";
 
 enum SECTION_TAGS {
   about,
+  contacts,
   gallery,
   specs,
 }
@@ -34,6 +35,15 @@ function Info() {
             onClick={() => setSelectedTag(SECTION_TAGS.about)}
           >
             About
+          </button>
+          <button
+            className={cn(
+              s.tag,
+              selectedTag === SECTION_TAGS.contacts ? s.tagSelected : ""
+            )}
+            onClick={() => setSelectedTag(SECTION_TAGS.contacts)}
+          >
+            Contacts
           </button>
           <button
             className={cn(
@@ -111,38 +121,123 @@ function Info() {
                 &gt; 2006-2013 Leader of an indie band
               </li>
             </ul>
+
+            <div className={s.aboutLinksSection}>
+              <button
+                className={s.aboutLinkButton}
+                style={{ backgroundColor: "#FF0101" }}
+              >
+                YouTube
+              </button>
+              <button
+                className={s.aboutLinkButton}
+                style={{ backgroundColor: "#CD1CFB" }}
+              >
+                Instagram
+              </button>
+              <button
+                className={s.aboutLinkButton}
+                style={{ backgroundColor: "#EAB90A" }}
+              >
+                IMDB
+              </button>
+              <button
+                className={s.aboutLinkButton}
+                style={{ backgroundColor: "#1FD861" }}
+              >
+                Spotify
+              </button>
+            </div>
+          </div>
+        )}
+
+        {selectedTag === SECTION_TAGS.contacts && (
+          <div className={s.contactsSection}>
+            <button
+              className={s.contactsButton}
+              style={{ backgroundColor: "#13C230" }}
+            >
+              WhatsApp
+            </button>
+            <button
+              className={s.contactsButton}
+              style={{ backgroundColor: "#99A0F8" }}
+            >
+              Email
+            </button>
+            <button
+              className={s.contactsButton}
+              style={{ backgroundColor: "#4793D0" }}
+            >
+              Telegram
+            </button>
+            <button
+              className={s.contactsButton}
+              style={{ backgroundColor: "#2D69C9" }}
+            >
+              LinkedIn
+            </button>
+            <button
+              className={s.contactsButton}
+              style={{ backgroundColor: "#EAB90A" }}
+            >
+              IMDB
+            </button>
+            <button
+              className={s.contactsButton}
+              style={{ backgroundColor: "#FF0101" }}
+            >
+              YouTube
+            </button>
+            <button
+              className={s.contactsButton}
+              style={{ backgroundColor: "#CD1CFB" }}
+            >
+              Instagram
+            </button>
+
+            <button
+              className={s.contactsButton}
+              style={{ backgroundColor: "#1FD861" }}
+            >
+              Spotify
+            </button>
+            <button
+              className={s.contactsButton}
+              style={{ backgroundColor: "#FC526A" }}
+            >
+              Apple Music
+            </button>
+            <button
+              className={s.contactsButton}
+              style={{ backgroundColor: "#FFDB4A" }}
+            >
+              Yandex Music
+            </button>
+
+            <button
+              className={s.contactsButton}
+              style={{ backgroundColor: "#FFFFFF" }}
+            >
+              VEVO
+            </button>
+
+            <button
+              className={s.contactsButton}
+              style={{ backgroundColor: "#963EF6" }}
+            >
+              Deezer
+            </button>
+            <button
+              className={s.contactsButton}
+              style={{ backgroundColor: "#65CFD9" }}
+            >
+              Amazon music
+            </button>
           </div>
         )}
 
         <div className={s.gallerySection}></div>
-
-        <div className={s.contactsSection}>
-          <button className={s.button} style={{ backgroundColor: "#FF0101" }}>
-            YouTube
-          </button>
-          <button className={s.button} style={{ backgroundColor: "#CD1CFB" }}>
-            Instagram
-          </button>
-          {/* <button className={s.button} style={{ backgroundColor: "#13C230" }}>
-            WhatsApp
-          </button>
-          <button className={s.button} style={{ backgroundColor: "#4386F5" }}>
-            Email
-          </button> */}
-
-          <button className={s.button} style={{ backgroundColor: "#EAB90A" }}>
-            IMDB
-          </button>
-          <button className={s.button} style={{ backgroundColor: "#1FD861" }}>
-            Spotify
-          </button>
-          {/* <button className={s.button} style={{ backgroundColor: "#FC526A" }}>
-            Apple Music
-          </button>
-          <button className={s.button} style={{ backgroundColor: "#FFDB4A" }}>
-            Yandex Music
-          </button> */}
-        </div>
       </div>
     </div>
   );

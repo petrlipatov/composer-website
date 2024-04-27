@@ -80,7 +80,7 @@
   /* font-size: min(max(16px, 4vw), 22px); */
 }
 
-.contactsSection {
+.aboutLinksSection {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -92,7 +92,7 @@
   /* margin-bottom: 8px; */
 }
 
-.button {
+.aboutLinkButton {
   all: unset;
   padding: 8px;
   padding-top: 14px;
@@ -106,4 +106,21 @@
 
 .button:nth-child(5) {
   order: 1;
+}
+
+.contactsSection {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 48px;
+  gap: 8px;
+}
+
+.contactsButton {
+  all: unset;
+  padding: 20px;
+  font-size: 16px;
+  padding-top: 24px;
+  padding-bottom: 24px;
+  flex-grow: 1;
+  text-align: center;
 }
