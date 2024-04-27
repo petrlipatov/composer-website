@@ -1,0 +1,58 @@
+.section {
+  margin-top: 24px;
+  overflow: scroll;
+  white-space: nowrap;
+  flex-grow: 1;
+}
+
+@media (min-width: 375px) {
+  .aboutSection {
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 414px) {
+  .aboutSection {
+    font-size: 17px;
+  }
+}
+
+.heading {
+  color: #e7397a;
+  color: black;
+  font-weight: 600;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  /* width: 100%; */
+  margin: 0;
+  /* border: 1px solid orange; */
+  /* font-size: min(max(16px, 4vw), 22px); */
+}
+
+.aboutLinksSection {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  /* gap: 8px; */
+  /* margin-bottom: 8px; */
+  height: 7%;
+}
+
+.aboutLinkButton {
+  all: unset;
+  padding: 8px;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  /* border: 1px solid #000000; */
+  font-weight: 600;
+  font-size: 12px;
+  flex-grow: 1;
+  text-align: center;
+}

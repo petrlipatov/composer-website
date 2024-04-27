@@ -1,6 +1,5 @@
 import cn from "classnames";
 import s from "./Tag.module.css";
-import { Dispatch, SetStateAction } from "react";
 
 type TagProps = {
   name: string;

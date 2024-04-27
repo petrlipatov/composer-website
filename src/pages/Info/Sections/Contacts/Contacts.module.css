@@ -1,0 +1,17 @@
+.section {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 48px;
+  gap: 8px;
+}
+
+.contactsButton {
+  all: unset;
+  padding: 20px;
+  font-size: 16px;
+  padding-top: 32px;
+  padding-bottom: 32px;
+  flex-grow: 1;
+  text-align: center;
+  font-weight: 600;
+}

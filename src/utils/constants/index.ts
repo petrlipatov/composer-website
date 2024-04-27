@@ -255,10 +255,28 @@ export const PROJECTS = [
 ];
 
 export const GALLERY_IMAGES = [
-  "/images/gallery/portrait.webp",
-  "/images/gallery/portrait.webp",
-  "/images/gallery/portrait.webp",
-  "/images/gallery/portrait.webp",
-  "/images/gallery/portrait.webp",
-  "/images/gallery/portrait.webp",
+  {
+    src: "/images/gallery/portrait.webp",
+    desc: "photo description photo description",
+  },
+  {
+    src: "/images/gallery/portrait.webp",
+    desc: "photo description photo description",
+  },
+  {
+    src: "/images/gallery/portrait.webp",
+    desc: "photo description photo description",
+  },
+  {
+    src: "/images/gallery/portrait.webp",
+    desc: "photo description photo description",
+  },
+  {
+    src: "/images/gallery/portrait.webp",
+    desc: "photo description photo description",
+  },
+  {
+    src: "/images/gallery/portrait.webp",
+    desc: "photo description photo description",
+  },
 ];

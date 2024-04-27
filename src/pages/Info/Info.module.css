@@ -46,7 +46,7 @@
   background-color: #e7397a;
 }
 
-.textSection {
+.aboutSection {
   margin-top: 24px;
   overflow: scroll;
   white-space: nowrap;
@@ -54,13 +54,13 @@
 }
 
 @media (min-width: 375px) {
-  .textSection {
+  .aboutSection {
     font-size: 15px;
   }
 }
 
 @media (min-width: 414px) {
-  .textSection {
+  .aboutSection {
     font-size: 17px;
   }
 }
