@@ -1,20 +1,44 @@
 .section {
-  margin-top: 16px;
+  /* margin-top: 16px; */
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+}
+
+.imagesGrid {
   display: grid;
-  grid-template-columns: 50% 50%;
+  flex-wrap: wrap;
+  grid-template-columns: 48% 48%;
+  grid-auto-rows: minmax(min-content, max-content);
   gap: 8px;
+  flex-grow: 1;
+  overflow: hidden;
 }
 
 .container {
+  height: auto;
   position: relative;
   display: flex;
   flex-direction: column;
   font-size: 12px;
+  /* row-gap: 4px; */
 }
 
 .image {
+  width: 100%;
+  height: auto;
 }
 
 .caption {
-  margin-top: 4px;
+  padding-top: 4px;
+}
+
+.pagesCountContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pagesCount {
 }
