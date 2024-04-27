@@ -95,8 +95,8 @@
 .button {
   all: unset;
   padding: 8px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 12px;
+  padding-bottom: 12px;
   /* border: 1px solid #000000; */
   font-weight: 600;
   font-size: 12px;
