@@ -62,17 +62,11 @@
   .textSection {
     font-size: 15.3px;
   }
-  .navButton {
-    font-size: 15.3px;
-  }
 }
 
 @media (min-width: 414px) {
   .textSection {
-    font-size: 17px;
-  }
-  .navButton {
-    font-size: 15.3px;
+    font-size: 16.5px;
   }
 }
 
