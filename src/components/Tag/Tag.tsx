@@ -9,7 +9,7 @@ type TagProps = {
   onClick: () => void;
 };
 
-function Tag({ name, isSelected, isDisabled, onClick }) {
+function Tag({ name, isSelected, isDisabled, onClick }: TagProps) {
   return (
     <button
       type="button"

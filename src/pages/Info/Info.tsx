@@ -6,8 +6,14 @@ import Logo from "../../components/Logo/Logo";
 import s from "./Info.module.css";
 import { useState } from "react";
 
+enum SECTION_TAGS {
+  about,
+  gallery,
+  specs,
+}
+
 function Info() {
-  const [selectedTag, setSelectedTag] = useState(1);
+  const [selectedTag, setSelectedTag] = useState(SECTION_TAGS.about);
 
   return (
     <div className={s.page}>
@@ -21,20 +27,29 @@ function Info() {
 
         <div className={s.tagsSection}>
           <button
-            className={cn(s.tag, selectedTag === 1 ? s.tagSelected : "")}
-            onClick={() => setSelectedTag(1)}
+            className={cn(
+              s.tag,
+              selectedTag === SECTION_TAGS.about ? s.tagSelected : ""
+            )}
+            onClick={() => setSelectedTag(SECTION_TAGS.about)}
           >
             About
           </button>
           <button
-            className={cn(s.tag, selectedTag === 2 ? s.tagSelected : "")}
-            onClick={() => setSelectedTag(2)}
+            className={cn(
+              s.tag,
+              selectedTag === SECTION_TAGS.gallery ? s.tagSelected : ""
+            )}
+            onClick={() => setSelectedTag(SECTION_TAGS.gallery)}
           >
             Gallery
           </button>
           <button
-            className={cn(s.tag, selectedTag === 3 ? s.tagSelected : "")}
-            onClick={() => setSelectedTag(3)}
+            className={cn(
+              s.tag,
+              selectedTag === SECTION_TAGS.specs ? s.tagSelected : ""
+            )}
+            onClick={() => setSelectedTag(SECTION_TAGS.specs)}
           >
             Tech Specs
           </button>
