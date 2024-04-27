@@ -47,7 +47,7 @@
 }
 
 .textSection {
-  margin-top: 16px;
+  margin-top: 24px;
   overflow: scroll;
   white-space: nowrap;
   flex-grow: 1;
@@ -55,7 +55,7 @@
 
 @media (min-width: 375px) {
   .textSection {
-    font-size: 14px;
+    font-size: 15px;
   }
 }
 

@@ -254,5 +254,11 @@ export const PROJECTS = [
   },
 ];
 
-export const NO_TRACKS_FOUND_WARNING =
-  "What a peculiar request! Nothing I've made matches yet! For now please try other combos or single tags.";
+export const GALLERY_IMAGES = [
+  "/images/gallery/portrait.webp",
+  "/images/gallery/portrait.webp",
+  "/images/gallery/portrait.webp",
+  "/images/gallery/portrait.webp",
+  "/images/gallery/portrait.webp",
+  "/images/gallery/portrait.webp",
+];
