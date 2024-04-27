@@ -90,6 +90,7 @@
   width: 100%;
   /* gap: 8px; */
   /* margin-bottom: 8px; */
+  height: 7%;
 }
 
 .aboutLinkButton {
@@ -102,10 +103,6 @@
   font-size: 12px;
   flex-grow: 1;
   text-align: center;
-}
-
-.button:nth-child(5) {
-  order: 1;
 }
 
 .contactsSection {
