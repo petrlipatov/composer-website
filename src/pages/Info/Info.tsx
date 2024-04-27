@@ -61,7 +61,7 @@ function Info() {
             )}
             onClick={() => setSelectedTag(SECTION_TAGS.specs)}
           >
-            Tech Specs
+            Sound Specs
           </button>
         </div>
 
