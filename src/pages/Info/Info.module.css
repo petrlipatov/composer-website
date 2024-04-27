@@ -12,7 +12,7 @@
   flex-direction: column;
   width: 94%;
   flex-grow: 1;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .nav {
@@ -89,7 +89,7 @@
   flex-wrap: wrap;
   width: 100%;
   /* gap: 8px; */
-  margin-bottom: 8px;
+  /* margin-bottom: 8px; */
 }
 
 .button {
