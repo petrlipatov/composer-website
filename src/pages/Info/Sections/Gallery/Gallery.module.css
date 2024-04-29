@@ -19,7 +19,6 @@
 }
 
 .container {
-  /* height: 100%; */
   position: relative;
   display: flex;
   flex-direction: column;
@@ -32,12 +31,10 @@
   height: 80%;
   width: auto;
   object-fit: cover;
-  /* height: auto; */
 }
 
 .caption {
   height: 10%;
-  /* margin-top: 10%; */
 }
 
 .pagesCountContainer {
