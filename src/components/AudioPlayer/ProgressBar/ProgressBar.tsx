@@ -25,6 +25,10 @@ const ProgressBar = forwardRef((props, ref: RefObject<HTMLAudioElement>) => {
       audioPlayerRef.onplaying = () => {
         setIsLoading(false);
       };
+
+      audioPlayerRef.oncanplay = () => {
+        setIsLoading(false);
+      };
       audioPlayerRef.onended = () => {
         setElapsedTime(0);
       };
