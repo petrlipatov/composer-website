@@ -1,18 +1,18 @@
 .container {
-  position: absolute;
-  inset: 0;
   background-color: #d6d6d6;
   flex-direction: column;
+  inset: 0;
   justify-content: center;
-  will-change: opacity;
+  position: absolute;
 }
 
 .closeIcon {
-  all: unset;
-  height: 30px;
-  width: 30px;
-  background-color: transparent;
   align-self: flex-end;
-  background-size: 90%;
+  all: unset;
+  background-color: transparent;
   background-position: center;
+  background-size: 90%;
+  height: 30px;
+  margin-bottom: 16px;
+  width: 30px;
 }
