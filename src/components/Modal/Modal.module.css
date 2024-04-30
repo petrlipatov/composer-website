@@ -8,12 +8,9 @@
 }
 
 .closeIcon {
-  position: absolute;
-  height: 50px;
-  width: 50px;
-  right: 0;
-  top: 20%;
-  border: none;
+  all: unset;
+  height: 30px;
+  width: 30px;
   background-color: transparent;
   align-self: flex-end;
   background-size: 90%;

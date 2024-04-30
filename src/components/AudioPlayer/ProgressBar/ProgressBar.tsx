@@ -4,7 +4,6 @@ import s from "./ProgressBar.module.css";
 import ProgressBarLoader from "../ProgressBarLoader/ProgressBarLoader";
 
 const ProgressBar = forwardRef((props, ref: RefObject<HTMLAudioElement>) => {
-  const [events, setEvent] = useState("");
   const [duration, setDuration] = useState(0);
   const [elapsedTime, setElapsedTime] = useState(0);
   const [isLoading, setIsLoading] = useState(false);

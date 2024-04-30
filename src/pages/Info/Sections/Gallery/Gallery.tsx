@@ -4,10 +4,13 @@ import {
   GALLERY_IMAGES,
   GALLERY_IMAGES_ON_PAGE_MOBILE,
 } from "../../../../utils/constants/index.ts";
+import Modal from "../../../../components/Modal/Modal.tsx";
 
 function Gallery() {
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [imagesSlice, setImagesSlice] = useState<typeof GALLERY_IMAGES>([]);
+  const [isPopupOpened, setIsPopupOpened] = useState<boolean>();
+  const [selectedImage, setSelectedImage] = useState({ img: "", desc: "" });
 
   useEffect(() => {
     const rightIndex = pageNumber * GALLERY_IMAGES_ON_PAGE_MOBILE;
@@ -34,12 +37,21 @@ function Gallery() {
     }
   };
 
+  const handleImageClick = (img, desc) => {
+    setSelectedImage({ img, desc });
+    setIsPopupOpened(true);
+  };
+
   return (
     <div className={s.section}>
       <div className={s.imagesGrid}>
         {imagesSlice.map((el, i) => {
           return (
-            <div className={s.container} key={i}>
+            <div
+              className={s.container}
+              key={i}
+              onClick={() => handleImageClick(el.src, el.desc)}
+            >
               <img className={s.image} src={el.src} />
               <div className={s.caption}>{el.desc}</div>
             </div>
@@ -57,6 +69,17 @@ function Gallery() {
           &gt;
         </button>
       </div>
+
+      {isPopupOpened && (
+        <Modal setPopupState={setIsPopupOpened}>
+          {/* <Suspense fallback={<Preloader content={"🐥"} />}> */}
+          <div>
+            <img className={s.popupImage} src={selectedImage.img} />
+            <div className={s.popupCaption}>{selectedImage.desc}</div>
+          </div>
+          {/* </Suspense> */}
+        </Modal>
+      )}
     </div>
   );
 }
