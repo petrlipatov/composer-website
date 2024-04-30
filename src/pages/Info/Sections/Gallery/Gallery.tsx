@@ -22,6 +22,18 @@ function Gallery() {
     GALLERY_IMAGES.length / GALLERY_IMAGES_ON_PAGE_MOBILE
   );
 
+  const goToPreviousPage = () => {
+    if (pageNumber > 1) {
+      setPageNumber((prevPageNumber) => prevPageNumber - 1);
+    }
+  };
+
+  const goToNextPage = () => {
+    if (pageNumber < pagesCount) {
+      setPageNumber((prevPageNumber) => prevPageNumber + 1);
+    }
+  };
+
   return (
     <div className={s.section}>
       <div className={s.imagesGrid}>
@@ -35,9 +47,15 @@ function Gallery() {
         })}
       </div>
       <div className={s.pagesCountContainer}>
-        <div className={s.pagesCount}>{`< ${pageNumber} / ${Math.ceil(
+        <button className={s.button} onClick={goToPreviousPage}>
+          &lt;
+        </button>
+        <div className={s.pagesCount}>{`${pageNumber} / ${Math.ceil(
           pagesCount
-        )} >`}</div>
+        )}`}</div>
+        <button className={s.button} onClick={goToNextPage}>
+          &gt;
+        </button>
       </div>
     </div>
   );
