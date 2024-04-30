@@ -43,13 +43,15 @@
   justify-content: center;
   height: 10%;
   /* border: 1px solid red; */
-  font-size: 18px;
 }
 
 .pagesCount {
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .button {
   all: unset;
   padding: 8px;
+  font-size: 24px;
 }
