@@ -9,7 +9,7 @@ import React, {
 import cn from "classnames";
 
 import AudioTitle from "./AudioTitle/AudioTitle";
-import { PlayingAudioData } from "../../pages/Pieces/Mobile/PiecesMobile";
+import { PlayingAudioData } from "../../pages/Pieces/Pieces";
 import { AudioTrackData } from "../../types";
 
 import tvIconSrc from "../../assets/images/tv.svg";
@@ -32,8 +32,8 @@ const AudioTrack = forwardRef(
   (
     {
       index,
-      data,
       isSelected,
+      data,
       setSelectedTrack,
       setVideoId,
       setIsPlayerOpened,

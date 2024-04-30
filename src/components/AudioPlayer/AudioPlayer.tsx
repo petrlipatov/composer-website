@@ -2,7 +2,7 @@ import cn from "classnames";
 import { forwardRef, useEffect, useState } from "react";
 import { Dispatch, RefObject, SetStateAction } from "react";
 import { AudioTrackData } from "../../types";
-import { PlayingAudioData } from "../../pages/Pieces/Mobile/PiecesMobile";
+import { PlayingAudioData } from "../../pages/Pieces/Pieces";
 import ProgressBar from "./ProgressBar/ProgressBar";
 import playSrc from "../../assets/images/play.svg";
 import pauseSrc from "../../assets/images/pause.svg";
