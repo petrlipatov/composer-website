@@ -4,6 +4,7 @@ import s from "./ProgressBar.module.css";
 import ProgressBarLoader from "../ProgressBarLoader/ProgressBarLoader";
 
 const ProgressBar = forwardRef((props, ref: RefObject<HTMLAudioElement>) => {
+  const [events, setEvent] = useState("");
   const [duration, setDuration] = useState(0);
   const [elapsedTime, setElapsedTime] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
@@ -26,9 +27,26 @@ const ProgressBar = forwardRef((props, ref: RefObject<HTMLAudioElement>) => {
         setIsLoading(false);
       };
 
-      audioPlayerRef.oncanplay = () => {
+      audioPlayerRef.onstalled = () => {
         setIsLoading(false);
       };
+
+      audioPlayerRef.onerror = () => {
+        setIsLoading(false);
+      };
+
+      audioPlayerRef.onsuspend = (e) => {
+        console.log(e);
+      };
+
+      // audioPlayerRef.oncanplay = () => {
+      //   console.log();
+      // };
+
+      // audioPlayerRef.oncanplaythrough = () => {
+      //   // setIsLoading(false);
+      // };
+
       audioPlayerRef.onended = () => {
         setElapsedTime(0);
       };
@@ -48,7 +66,7 @@ const ProgressBar = forwardRef((props, ref: RefObject<HTMLAudioElement>) => {
   );
 
   const onScrubberChange = (e) => {
-    setIsLoading(true);
+    // setIsLoading(true);
     const newTime = e.target.value;
     audioPlayerRef.currentTime = newTime;
   };

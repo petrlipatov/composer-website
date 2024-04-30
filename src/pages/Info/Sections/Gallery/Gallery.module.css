@@ -34,13 +34,16 @@
 }
 
 .caption {
-  height: 10%;
+  height: 20%;
 }
 
 .pagesCountContainer {
+  align-items: center;
   display: flex;
   justify-content: center;
-  align-items: center;
+  height: 10%;
+  /* border: 1px solid red; */
+  font-size: 18px;
 }
 
 .pagesCount {
