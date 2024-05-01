@@ -1,8 +1,9 @@
-import { Dispatch, SetStateAction, useEffect } from "react";
+import { useEffect, useContext } from "react";
 import cn from "classnames";
 
 import tvIconSrc from "../../assets/images/tv.svg";
 import hedphonesIconSrc from "../../assets/images/headphone50.svg";
+import { Context } from "../../pages/FeaturedWork/FeaturedWork";
 
 import s from "./Project.module.css";
 
@@ -12,23 +13,17 @@ type ProjectProps = {
   index: number;
   data: ProjectData;
   isSelected: boolean;
-  setSelectedProject: Dispatch<SetStateAction<number>>;
-  setIsPlayerOpened: Dispatch<SetStateAction<boolean>>;
-  setProjectData: Dispatch<SetStateAction<ProjectData>>;
-  setVideoId: Dispatch<SetStateAction<string>>;
-  openVideoModal: () => void;
 };
 
-const Project = ({
-  index,
-  data,
-  isSelected,
-  setIsPlayerOpened,
-  setSelectedProject,
-  setProjectData,
-  setVideoId,
-  openVideoModal,
-}: ProjectProps) => {
+const Project = ({ index, data, isSelected }: ProjectProps) => {
+  const {
+    setIsPlayerOpened,
+    setProjectData,
+    setSelectedProject,
+    setVideoId,
+    setVideoPopupState,
+  } = useContext(Context);
+
   useEffect(() => {
     if (isSelected) {
       const timer = setTimeout(() => {
@@ -50,7 +45,7 @@ const Project = ({
 
   function handleWatchClick() {
     setVideoId(data.videoSrc);
-    openVideoModal();
+    setVideoPopupState(true);
   }
 
   const projectImageMaskClasses = cn(s.projectImageMask, {

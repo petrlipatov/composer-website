@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState, Suspense } from "react";
+import { useMemo, useRef, useState, Suspense, createContext } from "react";
 import { Link } from "react-router-dom";
 
 import Logo from "../../components/Logo/Logo";
@@ -16,6 +16,16 @@ import closeIconSrc from "../../assets/images/close-icon.svg";
 
 import s from "./FeaturedWork.module.css";
 
+interface FeaturedWorkContext {
+  setSelectedProject: React.Dispatch<React.SetStateAction<number>>;
+  setProjectData: React.Dispatch<React.SetStateAction<ProjectData>>;
+  setVideoId: React.Dispatch<React.SetStateAction<string>>;
+  setIsPlayerOpened: React.Dispatch<React.SetStateAction<boolean>>;
+  setVideoPopupState: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export const Context = createContext<FeaturedWorkContext>(null);
+
 function FeaturedWork() {
   const [videoId, setVideoId] = useState<string>("");
   const [isVideoPopupOpened, setVideoPopupState] = useState(false);
@@ -25,6 +35,17 @@ function FeaturedWork() {
   const [isPlayerOpened, setIsPlayerOpened] = useState(false);
 
   const audioPlayerRef = useRef<HTMLAudioElement>();
+
+  const contextValue = useMemo(
+    () => ({
+      setSelectedProject,
+      setProjectData,
+      setIsPlayerOpened,
+      setVideoPopupState,
+      setVideoId,
+    }),
+    [setSelectedProject, setProjectData]
+  );
 
   const filteredProjects = useMemo(
     () => filterProjectsByTags(selectedTags, PROJECTS),
@@ -67,82 +88,79 @@ function FeaturedWork() {
 
   return (
     <div className={s.page}>
-      <div
-        className={s.content}
-        style={
-          isPlayerOpened
-            ? { gridTemplateRows: "min-content min-content", height: "auto" }
-            : {}
-        }
-      >
-        <div className={s.nav}>
-          <Link to="/" className={s.pageTitle}>
-            Featured Work
-          </Link>
-          <Logo />
-        </div>
+      <Context.Provider value={contextValue}>
+        <div
+          className={s.content}
+          style={
+            isPlayerOpened
+              ? { gridTemplateRows: "min-content min-content", height: "auto" }
+              : {}
+          }
+        >
+          <div className={s.nav}>
+            <Link to="/" className={s.pageTitle}>
+              Featured Work
+            </Link>
+            <Logo />
+          </div>
 
-        <div className={s.tagsSection}>
-          <div className={s.tagsList}>
-            {PROJECTS_GENRES.map((genre, i) => (
-              <Tag
-                name={genre}
-                isSelected={isTagSelected(genre)}
-                isDisabled={isTagDisabled(genre)}
-                onClick={() => handleTagClick(genre)}
-                key={i}
+          <div className={s.tagsSection}>
+            <div className={s.tagsList}>
+              {PROJECTS_GENRES.map((genre, i) => (
+                <Tag
+                  name={genre}
+                  isSelected={isTagSelected(genre)}
+                  isDisabled={isTagDisabled(genre)}
+                  onClick={() => handleTagClick(genre)}
+                  key={i}
+                />
+              ))}
+              <div className={s.tagsButton} onClick={handleClearTagsClick}>
+                <img className={s.closeIcon} src={closeIconSrc} />
+                No filter
+              </div>
+            </div>
+          </div>
+
+          <audio preload="metadata" ref={audioPlayerRef}>
+            <source src={""} type="audio/mpeg" />
+            Your browser does not support the audio element.
+          </audio>
+
+          <div
+            className={s.projectsSection}
+            style={isPlayerOpened ? { display: "none" } : {}}
+          >
+            {filteredProjects.map((project, index) => (
+              <Project
+                data={project}
+                isSelected={selectedProject === index}
+                index={index}
+                key={index}
               />
             ))}
-            <div className={s.tagsButton} onClick={handleClearTagsClick}>
-              <img className={s.closeIcon} src={closeIconSrc} />
-              No filter
-            </div>
           </div>
         </div>
 
-        <audio preload="metadata" ref={audioPlayerRef}>
-          <source src={""} type="audio/mpeg" />
-          Your browser does not support the audio element.
-        </audio>
+        {isPlayerOpened && (
+          <ExtendedAudioPlayer
+            isPlayerOpened={isPlayerOpened}
+            projectData={projectData}
+            setIsPlayerOpened={setIsPlayerOpened}
+            setVideoId={setVideoId}
+            openVideoModal={openVideoModal}
+            ref={audioPlayerRef}
+          />
+        )}
 
-        <div
-          className={s.projectsSection}
-          style={isPlayerOpened ? { display: "none" } : {}}
-        >
-          {filteredProjects.map((project, index) => (
-            <Project
-              data={project}
-              isSelected={selectedProject === index}
-              setSelectedProject={setSelectedProject}
-              setProjectData={setProjectData}
-              setIsPlayerOpened={setIsPlayerOpened}
-              setVideoId={setVideoId}
-              openVideoModal={openVideoModal}
-              index={index}
-              key={index}
-            />
-          ))}
-        </div>
-      </div>
-
-      {isPlayerOpened && (
-        <ExtendedAudioPlayer
-          isPlayerOpened={isPlayerOpened}
-          projectData={projectData}
-          setIsPlayerOpened={setIsPlayerOpened}
-          setVideoId={setVideoId}
-          openVideoModal={openVideoModal}
-          ref={audioPlayerRef}
-        />
-      )}
-
-      {isVideoPopupOpened && (
-        <Modal setPopupState={setVideoPopupState}>
-          <Suspense fallback={<Preloader content={"🐥"} />}>
-            <YouTubePlayer videoId={videoId} />
-          </Suspense>
-        </Modal>
-      )}
+        {isVideoPopupOpened && (
+          <Modal setPopupState={setVideoPopupState}>
+            <Suspense fallback={<Preloader content={"🐥"} />}>
+              <YouTubePlayer videoId={videoId} />
+            </Suspense>
+          </Modal>
+        )}
+      </Context.Provider>
     </div>
   );
 }
