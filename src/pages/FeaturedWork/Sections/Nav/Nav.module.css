@@ -1,0 +1,13 @@
+.nav {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.pageTitle {
+  text-decoration: none;
+  color: inherit;
+  font-size: 12px;
+  text-decoration: underline;
+  padding-bottom: 8px;
+}

@@ -1,166 +1,130 @@
-import { useMemo, useRef, useState, Suspense, createContext } from "react";
-import { Link } from "react-router-dom";
+import {
+  useMemo,
+  useRef,
+  useState,
+  Suspense,
+  createContext,
+  useEffect,
+  lazy,
+} from "react";
 
-import Logo from "../../components/Logo/Logo";
-import Tag from "../../components/Tag/Tag";
-import Project from "../../components/Project/Project";
 import ExtendedAudioPlayer from "../../components/ExtendedAudioPlayer/ExtendedAudioPlayer";
 import Modal from "../../components/Modal/Modal";
 import Preloader from "../../components/Preloader/Preloader";
 import YouTubePlayer from "../../components/YoutubePlayer/YoutubePlayer";
 
+import Nav from "./Sections/Nav/Nav";
+import Tags from "./Sections/Tags/Tags";
+// import Projects from "./Sections/Projects/Projects";
+
 import { ProjectData } from "../../types";
 
-import { PROJECTS, PROJECTS_GENRES } from "../../utils/constants";
-import closeIconSrc from "../../assets/images/close-icon.svg";
+import { PROJECTS } from "../../utils/constants";
 
 import s from "./FeaturedWork.module.css";
+import cn from "classnames";
+import HtmlAudioTag from "./Sections/HtmlAudio/HtmlAudio";
 
-interface FeaturedWorkContext {
-  setSelectedProject: React.Dispatch<React.SetStateAction<number>>;
+const Projects = lazy(() => import("./Sections/Projects/Projects"));
+
+interface FeaturedWorkPageContext {
+  isPlayerOpened: boolean;
+  selectedTags: string[];
+  filteredProjects: ProjectData[];
+  selectedProjectIndex: number;
+  setSelectedTags: React.Dispatch<React.SetStateAction<string[]>>;
+  setSelectedProjectIndex: React.Dispatch<React.SetStateAction<number>>;
   setProjectData: React.Dispatch<React.SetStateAction<ProjectData>>;
-  setVideoId: React.Dispatch<React.SetStateAction<string>>;
+  setVideoID: React.Dispatch<React.SetStateAction<string>>;
   setIsPlayerOpened: React.Dispatch<React.SetStateAction<boolean>>;
-  setVideoPopupState: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsVideoPopupOpened: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const Context = createContext<FeaturedWorkContext>(null);
+export const FeaturedWorkPageContext =
+  createContext<FeaturedWorkPageContext>(null);
 
 function FeaturedWork() {
-  const [videoId, setVideoId] = useState<string>("");
-  const [isVideoPopupOpened, setVideoPopupState] = useState(false);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
-  const [selectedProject, setSelectedProject] = useState<number>(null);
-  const [projectData, setProjectData] = useState<ProjectData | undefined>();
+  const [filteredProjects, setFilteredProjects] = useState<ProjectData[]>([]);
+  const [projectData, setProjectData] = useState<ProjectData>(null);
   const [isPlayerOpened, setIsPlayerOpened] = useState(false);
+  const [videoID, setVideoID] = useState<string>("");
+  const [isVideoPopupOpened, setIsVideoPopupOpened] = useState(false);
+  const [selectedProjectIndex, setSelectedProjectIndex] =
+    useState<number>(null);
 
   const audioPlayerRef = useRef<HTMLAudioElement>();
 
   const contextValue = useMemo(
     () => ({
-      setSelectedProject,
+      isPlayerOpened,
+      selectedTags,
+      filteredProjects,
+      selectedProjectIndex,
+      setSelectedTags,
+      setSelectedProjectIndex,
       setProjectData,
       setIsPlayerOpened,
-      setVideoPopupState,
-      setVideoId,
+      setIsVideoPopupOpened,
+      setVideoID,
     }),
-    [setSelectedProject, setProjectData]
+    [
+      isPlayerOpened,
+      selectedTags,
+      filteredProjects,
+      selectedProjectIndex,
+      setSelectedTags,
+      setSelectedProjectIndex,
+      setProjectData,
+      setIsPlayerOpened,
+      setIsVideoPopupOpened,
+      setVideoID,
+    ]
   );
 
-  const filteredProjects = useMemo(
-    () => filterProjectsByTags(selectedTags, PROJECTS),
+  useEffect(
+    function filterProjectsByTags() {
+      const filteredProjects = PROJECTS.filter((project) =>
+        selectedTags.every((tag) => project.tags.includes(tag))
+      );
+      setFilteredProjects(filteredProjects);
+    },
     [selectedTags]
   );
 
-  function filterProjectsByTags(
-    selectedTags: string[],
-    projects: ProjectData[]
-  ) {
-    return projects.filter((project) => {
-      return selectedTags.every((tag) => project.tags.includes(tag));
-    });
-  }
-
-  const handleTagClick = (tag: string) => {
-    setIsPlayerOpened(false);
-    if (selectedTags.includes(tag)) {
-      setSelectedTags(selectedTags.filter((t) => t !== tag));
-    } else {
-      setSelectedTags([...selectedTags, tag]);
-    }
-  };
-
-  function handleClearTagsClick() {
-    setSelectedTags([]);
-  }
-
-  function openVideoModal() {
-    setVideoPopupState(true);
-  }
-
-  const isTagSelected = (tag: string) => {
-    return selectedTags.includes(tag);
-  };
-
-  const isTagDisabled = (tag: string) => {
-    return !filteredProjects.some((project) => project.tags.includes(tag));
-  };
-
   return (
     <div className={s.page}>
-      <Context.Provider value={contextValue}>
+      <FeaturedWorkPageContext.Provider value={contextValue}>
         <div
-          className={s.content}
-          style={
-            isPlayerOpened
-              ? { gridTemplateRows: "min-content min-content", height: "auto" }
-              : {}
-          }
+          className={cn(s.content, isPlayerOpened ? s.contentShortened : "")}
         >
-          <div className={s.nav}>
-            <Link to="/" className={s.pageTitle}>
-              Featured Work
-            </Link>
-            <Logo />
-          </div>
+          <Nav />
 
-          <div className={s.tagsSection}>
-            <div className={s.tagsList}>
-              {PROJECTS_GENRES.map((genre, i) => (
-                <Tag
-                  name={genre}
-                  isSelected={isTagSelected(genre)}
-                  isDisabled={isTagDisabled(genre)}
-                  onClick={() => handleTagClick(genre)}
-                  key={i}
-                />
-              ))}
-              <div className={s.tagsButton} onClick={handleClearTagsClick}>
-                <img className={s.closeIcon} src={closeIconSrc} />
-                No filter
-              </div>
-            </div>
-          </div>
+          <Tags />
 
-          <audio preload="metadata" ref={audioPlayerRef}>
-            <source src={""} type="audio/mpeg" />
-            Your browser does not support the audio element.
-          </audio>
+          <Suspense fallback={<Preloader content={"🐥"} />}>
+            <Projects />
+          </Suspense>
 
-          <div
-            className={s.projectsSection}
-            style={isPlayerOpened ? { display: "none" } : {}}
-          >
-            {filteredProjects.map((project, index) => (
-              <Project
-                data={project}
-                isSelected={selectedProject === index}
-                index={index}
-                key={index}
-              />
-            ))}
-          </div>
+          <HtmlAudioTag ref={audioPlayerRef} />
         </div>
 
         {isPlayerOpened && (
           <ExtendedAudioPlayer
             isPlayerOpened={isPlayerOpened}
             projectData={projectData}
-            setIsPlayerOpened={setIsPlayerOpened}
-            setVideoId={setVideoId}
-            openVideoModal={openVideoModal}
             ref={audioPlayerRef}
           />
         )}
 
         {isVideoPopupOpened && (
-          <Modal setPopupState={setVideoPopupState}>
+          <Modal setPopupState={setIsVideoPopupOpened}>
             <Suspense fallback={<Preloader content={"🐥"} />}>
-              <YouTubePlayer videoId={videoId} />
+              <YouTubePlayer videoId={videoID} />
             </Suspense>
           </Modal>
         )}
-      </Context.Provider>
+      </FeaturedWorkPageContext.Provider>
     </div>
   );
 }

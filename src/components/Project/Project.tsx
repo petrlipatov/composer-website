@@ -3,7 +3,7 @@ import cn from "classnames";
 
 import tvIconSrc from "../../assets/images/tv.svg";
 import hedphonesIconSrc from "../../assets/images/headphone50.svg";
-import { Context } from "../../pages/FeaturedWork/FeaturedWork";
+import { FeaturedWorkPageContext } from "../../pages/FeaturedWork/FeaturedWork";
 
 import s from "./Project.module.css";
 
@@ -19,23 +19,23 @@ const Project = ({ index, data, isSelected }: ProjectProps) => {
   const {
     setIsPlayerOpened,
     setProjectData,
-    setSelectedProject,
-    setVideoId,
-    setVideoPopupState,
-  } = useContext(Context);
+    setSelectedProjectIndex,
+    setVideoID,
+    setIsVideoPopupOpened,
+  } = useContext(FeaturedWorkPageContext);
 
   useEffect(() => {
     if (isSelected) {
       const timer = setTimeout(() => {
-        setSelectedProject(null);
+        setSelectedProjectIndex(null);
       }, 5000);
 
       return () => clearTimeout(timer);
     }
-  }, [isSelected, setSelectedProject, index]);
+  }, [isSelected, setSelectedProjectIndex, index]);
 
   function handleProjectClick() {
-    setSelectedProject(index);
+    setSelectedProjectIndex(index);
   }
 
   function handleListenClick() {
@@ -44,8 +44,8 @@ const Project = ({ index, data, isSelected }: ProjectProps) => {
   }
 
   function handleWatchClick() {
-    setVideoId(data.videoSrc);
-    setVideoPopupState(true);
+    setVideoID(data.videoSrc);
+    setIsVideoPopupOpened(true);
   }
 
   const projectImageMaskClasses = cn(s.projectImageMask, {

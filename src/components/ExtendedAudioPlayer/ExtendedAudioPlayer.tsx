@@ -1,46 +1,46 @@
-import cn from "classnames";
 import {
   forwardRef,
+  useContext,
   useEffect,
   useState,
-  Dispatch,
   RefObject,
-  SetStateAction,
   useCallback,
 } from "react";
+import cn from "classnames";
+
 import ProgressBar from "./ProgressBar/ProgressBar";
 import AudioPlayingLoader from "../AudioPlayingLoader/AudioPlayingLoader";
+import Scrollbar from "../Scrollbar/Scrollbar";
+
+import { FeaturedWorkPageContext } from "../../pages/FeaturedWork/FeaturedWork";
+
+import { ProjectData } from "../../types";
+
 import playSrc from "../../assets/images/play.svg";
 import pauseSrc from "../../assets/images/pause.svg";
 import closeIcon from "../../assets/images/close-icon_black.svg";
 import videoIcon from "../../assets/images/tv.svg";
-import s from "./ExtendedAudioPlayer.module.css";
 
-import { ProjectData } from "../../types";
-import Scrollbar from "../Scrollbar/Scrollbar";
+import s from "./ExtendedAudioPlayer.module.css";
 
 type AudioPlayerProps = {
   isPlayerOpened: boolean;
   projectData: ProjectData;
-  setIsPlayerOpened: Dispatch<SetStateAction<boolean>>;
-  setVideoId: Dispatch<SetStateAction<string>>;
-  openVideoModal: () => void;
 };
 
 const ExtendedAudioPlayer = forwardRef(
   (
-    {
-      isPlayerOpened,
-      projectData,
-      setIsPlayerOpened,
-      setVideoId,
-      openVideoModal,
-    }: AudioPlayerProps,
+    { isPlayerOpened, projectData }: AudioPlayerProps,
     ref: RefObject<HTMLAudioElement>
   ) => {
     const [isAudioPlaying, setIsAudioPlaying] = useState(false);
     const [playingTrackIndex, setPlayingTrackIndex] = useState<number>(null);
     const [selectedTrackIndex, setSelectedTrackIndex] = useState<number>(null);
+
+    const { setIsPlayerOpened, setVideoID, setIsVideoPopupOpened } = useContext(
+      FeaturedWorkPageContext
+    );
+
     const audioPlayerRef = ref.current;
 
     const playFirstTrack = useCallback(async () => {
@@ -154,9 +154,9 @@ const ExtendedAudioPlayer = forwardRef(
     const handleVideoClick = (e) => {
       e.stopPropagation();
       setIsPlayerOpened(false);
-      setVideoId(projectData.videoSrc);
+      setVideoID(projectData.videoSrc);
       audioPlayerRef.src = "";
-      openVideoModal();
+      setIsVideoPopupOpened(true);
     };
 
     return (

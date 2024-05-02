@@ -18,61 +18,7 @@
   width: 94%;
 }
 
-.nav {
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
-}
-
-.pageTitle {
-  text-decoration: none;
-  color: inherit;
-  font-size: 12px;
-  text-decoration: underline;
-  padding-bottom: 8px;
-}
-
-.tagsSection {
-  gap: 16px;
-  margin-top: 28px;
-  position: relative;
-}
-
-.tagsList {
-  display: flex;
-  font-weight: 600;
-  gap: 8px;
-  row-gap: 8px;
-  flex-wrap: wrap;
-}
-
-.tagsButton {
-  line-height: normal;
-  outline: none;
-  padding: 0;
-  border: none;
-  background-color: transparent;
-  font: inherit;
-  font-weight: 600;
-  color: #e7397a;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 12px;
-}
-
-.closeIcon {
-  margin-right: 6px;
-  height: 12px;
-  width: 12px;
-}
-
-.projectsSection {
-  position: relative;
-  display: grid;
-  grid-template-columns: 48% 48%;
-  margin-top: 24px;
-  gap: 8px;
-  row-gap: 16px;
-  overflow-y: scroll;
+.contentShortened {
+  grid-template-rows: min-content min-content;
+  height: auto;
 }
