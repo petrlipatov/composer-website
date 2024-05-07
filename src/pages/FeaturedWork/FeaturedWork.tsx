@@ -1,52 +1,41 @@
-import {
-  useMemo,
-  useRef,
-  useState,
-  Suspense,
-  createContext,
-  useEffect,
-  lazy,
-} from "react";
+import { useMemo, useRef, useState, createContext, useEffect } from "react";
+import cn from "classnames";
 
-import ExtendedAudioPlayer from "../../components/ExtendedAudioPlayer/ExtendedAudioPlayer";
-import Modal from "../../components/Modal/Modal";
-import Preloader from "../../components/Preloader/Preloader";
-import YouTubePlayer from "../../components/YoutubePlayer/YoutubePlayer";
+import HTMLAudioTag from "../../components/HTMLAudioTag/HTMLAudioTag";
+import Header from "../../components/Header/Header";
+import VideoPopup from "../../components/VideoPopup/VideoPopup";
 
-import Nav from "./Sections/Nav/Nav";
 import Tags from "./Sections/Tags/Tags";
-// import Projects from "./Sections/Projects/Projects";
+import ProjectsSuspensed from "./Sections/ProjectsSuspensed/ProjectsSuspensed";
+import ExtendedAudioPlayer from "./Sections/ExtendedAudioPlayer/ExtendedAudioPlayer";
 
 import { ProjectData } from "../../types";
 
 import { PROJECTS } from "../../utils/constants";
 
 import s from "./FeaturedWork.module.css";
-import cn from "classnames";
-import HtmlAudioTag from "./Sections/HtmlAudio/HtmlAudio";
 
-const Projects = lazy(() => import("./Sections/Projects/Projects"));
-
-interface FeaturedWorkPageContext {
+interface FeaturedWorkContext {
+  videoID: string;
   isPlayerOpened: boolean;
   selectedTags: string[];
+  currentProject: ProjectData;
   filteredProjects: ProjectData[];
   selectedProjectIndex: number;
   setSelectedTags: React.Dispatch<React.SetStateAction<string[]>>;
   setSelectedProjectIndex: React.Dispatch<React.SetStateAction<number>>;
-  setProjectData: React.Dispatch<React.SetStateAction<ProjectData>>;
+  setCurrentProject: React.Dispatch<React.SetStateAction<ProjectData>>;
   setVideoID: React.Dispatch<React.SetStateAction<string>>;
   setIsPlayerOpened: React.Dispatch<React.SetStateAction<boolean>>;
   setIsVideoPopupOpened: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const FeaturedWorkPageContext =
-  createContext<FeaturedWorkPageContext>(null);
+export const FeaturedWorkContext = createContext<FeaturedWorkContext>(null);
 
 function FeaturedWork() {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [filteredProjects, setFilteredProjects] = useState<ProjectData[]>([]);
-  const [projectData, setProjectData] = useState<ProjectData>(null);
+  const [currentProject, setCurrentProject] = useState<ProjectData>(null);
   const [isPlayerOpened, setIsPlayerOpened] = useState(false);
   const [videoID, setVideoID] = useState<string>("");
   const [isVideoPopupOpened, setIsVideoPopupOpened] = useState(false);
@@ -57,25 +46,29 @@ function FeaturedWork() {
 
   const contextValue = useMemo(
     () => ({
+      videoID,
+      currentProject,
       isPlayerOpened,
       selectedTags,
       filteredProjects,
       selectedProjectIndex,
       setSelectedTags,
       setSelectedProjectIndex,
-      setProjectData,
+      setCurrentProject,
       setIsPlayerOpened,
       setIsVideoPopupOpened,
       setVideoID,
     }),
     [
+      videoID,
       isPlayerOpened,
       selectedTags,
+      currentProject,
       filteredProjects,
       selectedProjectIndex,
       setSelectedTags,
       setSelectedProjectIndex,
-      setProjectData,
+      setCurrentProject,
       setIsPlayerOpened,
       setIsVideoPopupOpened,
       setVideoID,
@@ -93,39 +86,30 @@ function FeaturedWork() {
   );
 
   return (
-    <div className={s.page}>
-      <FeaturedWorkPageContext.Provider value={contextValue}>
+    <FeaturedWorkContext.Provider value={contextValue}>
+      <div className={s.page}>
         <div
           className={cn(s.content, isPlayerOpened ? s.contentShortened : "")}
         >
-          <Nav />
+          <Header pageTitle={"Featured Work"} />
 
           <Tags />
 
-          <Suspense fallback={<Preloader content={"🐥"} />}>
-            <Projects />
-          </Suspense>
+          <ProjectsSuspensed />
 
-          <HtmlAudioTag ref={audioPlayerRef} />
+          <HTMLAudioTag ref={audioPlayerRef} />
         </div>
 
-        {isPlayerOpened && (
-          <ExtendedAudioPlayer
-            isPlayerOpened={isPlayerOpened}
-            projectData={projectData}
-            ref={audioPlayerRef}
-          />
-        )}
+        {isPlayerOpened && <ExtendedAudioPlayer ref={audioPlayerRef} />}
 
         {isVideoPopupOpened && (
-          <Modal setPopupState={setIsVideoPopupOpened}>
-            <Suspense fallback={<Preloader content={"🐥"} />}>
-              <YouTubePlayer videoId={videoID} />
-            </Suspense>
-          </Modal>
+          <VideoPopup
+            videoID={videoID}
+            setIsVideoPopupOpened={setIsVideoPopupOpened}
+          />
         )}
-      </FeaturedWorkPageContext.Provider>
-    </div>
+      </div>
+    </FeaturedWorkContext.Provider>
   );
 }
 

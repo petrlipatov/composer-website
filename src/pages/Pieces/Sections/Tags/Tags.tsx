@@ -1,16 +1,16 @@
 import { useContext } from "react";
 
-import { FeaturedWorkContext } from "../../FeaturedWork";
+import { PiecesContext } from "../../Pieces";
 
-import { PROJECTS_GENRES } from "../../../../utils/constants";
+import { PIECES_GENRES } from "../../../../utils/constants";
 import closeIconSrc from "../../../../assets/images/close-icon.svg";
 
 import s from "./Tags.module.css";
 import Tag from "../../../../components/Tag/Tag";
 
 function Tags() {
-  const { selectedTags, filteredProjects, setIsPlayerOpened, setSelectedTags } =
-    useContext(FeaturedWorkContext);
+  const { selectedTags, filteredPieces, setIsPlayerOpened, setSelectedTags } =
+    useContext(PiecesContext);
 
   const handleTagClick = (tag: string) => {
     setIsPlayerOpened(false);
@@ -30,13 +30,13 @@ function Tags() {
   };
 
   const isTagDisabled = (tag: string) => {
-    return !filteredProjects.some((project) => project.tags.includes(tag));
+    return !filteredPieces.some((project) => project.tags.includes(tag));
   };
 
   return (
     <div className={s.tagsSection}>
       <div className={s.tagsList}>
-        {PROJECTS_GENRES.map((genre, i) => (
+        {PIECES_GENRES.map((genre, i) => (
           <Tag
             name={genre}
             isSelected={isTagSelected(genre)}

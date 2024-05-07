@@ -1,15 +1,8 @@
-import React, {
-  Dispatch,
-  RefObject,
-  SetStateAction,
-  forwardRef,
-  useEffect,
-  useState,
-} from "react";
+import { RefObject, forwardRef, useContext, useEffect, useState } from "react";
 import cn from "classnames";
 
 import AudioTitle from "./AudioTitle/AudioTitle";
-import { PlayingAudioData } from "../../pages/Pieces/Pieces";
+import { PiecesContext } from "../../pages/Pieces/Pieces";
 import { AudioTrackData } from "../../types";
 
 import tvIconSrc from "../../assets/images/tv.svg";
@@ -21,32 +14,26 @@ type AudioTrackProps = {
   index: number;
   data: AudioTrackData;
   isSelected: boolean;
-  openPopup: () => void;
-  setSelectedTrack: Dispatch<SetStateAction<number>>;
-  setVideoId: Dispatch<SetStateAction<string>>;
-  setIsPlayerOpened: Dispatch<SetStateAction<boolean>>;
-  setPlayingAudioData: Dispatch<SetStateAction<PlayingAudioData>>;
 };
 
 const AudioTrack = forwardRef(
   (
-    {
-      index,
-      isSelected,
-      data,
-      setSelectedTrack,
-      setVideoId,
-      setIsPlayerOpened,
-      openPopup,
-      setPlayingAudioData,
-    }: AudioTrackProps,
+    { index, isSelected, data }: AudioTrackProps,
     ref: RefObject<HTMLAudioElement>
   ) => {
     const [isPaused, setIsPaused] = useState(false);
     const [isPlaying, setIsPlaying] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
-    const audioPlayerRef = ref.current;
+    const {
+      setIsPlayerOpened,
+      setSelectedTrackIndex,
+      setCurrentAudioData,
+      setVideoID,
+      setIsVideoPopupOpened,
+    } = useContext(PiecesContext);
+
+    const audioPlayerRef = ref?.current;
 
     useEffect(
       function mountPlayerListeners() {
@@ -101,15 +88,15 @@ const AudioTrack = forwardRef(
     useEffect(() => {
       if (isSelected) {
         const timer = setTimeout(() => {
-          setSelectedTrack(null);
+          setSelectedTrackIndex(null);
         }, 5000);
 
         return () => clearTimeout(timer);
       }
-    }, [isSelected, setSelectedTrack, index]);
+    }, [isSelected, setSelectedTrackIndex, index]);
 
     function handleTrackClick() {
-      setSelectedTrack(index);
+      setSelectedTrackIndex(index);
     }
 
     function handleWatchClick(e) {
@@ -117,8 +104,8 @@ const AudioTrack = forwardRef(
       setIsPlayerOpened(false);
       audioPlayerRef.pause();
       audioPlayerRef.src = "";
-      setVideoId(data.videoSrc);
-      openPopup();
+      setVideoID(data.videoSrc);
+      setIsVideoPopupOpened(true);
     }
 
     function handleListenClick(e) {
@@ -126,12 +113,7 @@ const AudioTrack = forwardRef(
       audioPlayerRef.src = data.audioSrc;
       audioPlayerRef.play();
       setIsPlayerOpened(true);
-      setPlayingAudioData({
-        index,
-        name: data.name,
-        imageSource: data.imageSrc,
-        videoSource: data.videoSrc,
-      });
+      setCurrentAudioData({ ...data, index });
     }
 
     const trackImageMaskClasses = cn(s.trackImageMask, {

@@ -1,151 +1,125 @@
-import { Suspense, useState, useRef, useMemo } from "react";
-import { Link } from "react-router-dom";
+import {
+  useState,
+  useRef,
+  useMemo,
+  createContext,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+} from "react";
 
-import AudioPlayer from "../../components/AudioPlayer/AudioPlayer";
-import AudioTrack from "../../components/AudioTrack/AudioTrack";
-import Logo from "../../components/Logo/Logo";
-import Tag from "../../components/Tag/Tag";
-import Modal from "../../components/Modal/Modal";
-import Preloader from "../../components/Preloader/Preloader";
-import YouTubePlayer from "../../components/YoutubePlayer/YoutubePlayer";
+import AudioPlayer from "./Sections/AudioPlayer/AudioPlayer";
+import Header from "../../components/Header/Header";
+import HTMLAudioTag from "../../components/HTMLAudioTag/HTMLAudioTag";
+import VideoPopup from "../../components/VideoPopup/VideoPopup";
+
+import Tags from "./Sections/Tags/Tags";
+import Tracks from "./Sections/Tracks/Tracks";
 
 import { AudioTrackData } from "../../types";
-
-import { PIECES, PIECES_GENRES } from "../../utils/constants";
-import closeIconSrc from "../../assets/images/close-icon.svg";
+import { PIECES } from "../../utils/constants";
 
 import s from "./Pieces.module.css";
 
-export type PlayingAudioData = {
+export type currentAudioData = AudioTrackData & {
   index: number;
-  name: string;
-  imageSource: string;
-  videoSource: string;
 };
 
-function Pieces() {
-  const [videoId, setVideoId] = useState<string>("");
-  const [isVideoPopupOpened, setVideoPopupState] = useState(false);
-  const [selectedTags, setSelectedTags] = useState<string[]>([]);
-  const [selectedTrack, setSelectedTrack] = useState<number>(null);
+interface PiecesContext {
+  videoID: string;
+  selectedTags: string[];
+  filteredPieces: AudioTrackData[];
+  currentAudioData: currentAudioData;
+  isPlayerOpened: boolean;
+  isVideoPopupOpened: boolean;
+  selectedTrackIndex: number;
+  setVideoID: Dispatch<SetStateAction<string>>;
+  setSelectedTags: Dispatch<SetStateAction<string[]>>;
+  setCurrentAudioData: Dispatch<SetStateAction<currentAudioData>>;
+  setIsPlayerOpened: Dispatch<SetStateAction<boolean>>;
+  setIsVideoPopupOpened: Dispatch<SetStateAction<boolean>>;
+  setSelectedTrackIndex: Dispatch<SetStateAction<number>>;
+}
 
+export const PiecesContext = createContext<PiecesContext>(null);
+
+function Pieces() {
+  const [videoID, setVideoID] = useState<string>("");
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [selectedTrackIndex, setSelectedTrackIndex] = useState<number>(null);
+  const [currentAudioData, setCurrentAudioData] = useState<currentAudioData>();
+  const [filteredPieces, setFilteredPieces] = useState<AudioTrackData[]>([]);
   const [isPlayerOpened, setIsPlayerOpened] = useState(false);
-  const [playingAudioData, setPlayingAudioData] = useState<
-    PlayingAudioData | undefined
-  >();
+  const [isVideoPopupOpened, setIsVideoPopupOpened] = useState(false);
 
   const audioPlayerRef = useRef<HTMLAudioElement>();
 
-  const filteredPieces = useMemo(
-    () => filterPiecesByTags(selectedTags, PIECES),
+  const contextValue = useMemo(
+    () => ({
+      videoID,
+      selectedTags,
+      filteredPieces,
+      currentAudioData,
+      isPlayerOpened,
+      isVideoPopupOpened,
+      selectedTrackIndex,
+      setVideoID,
+      setSelectedTags,
+      setCurrentAudioData,
+      setIsPlayerOpened,
+      setIsVideoPopupOpened,
+      setSelectedTrackIndex,
+    }),
+    [
+      videoID,
+      selectedTags,
+      filteredPieces,
+      currentAudioData,
+      isPlayerOpened,
+      isVideoPopupOpened,
+      selectedTrackIndex,
+      setVideoID,
+      setSelectedTags,
+      setCurrentAudioData,
+      setIsPlayerOpened,
+      setIsVideoPopupOpened,
+      setSelectedTrackIndex,
+    ]
+  );
+
+  useEffect(
+    function filterPiecesByTags() {
+      const filteredPieces = PIECES.filter((piece) =>
+        selectedTags.every((tag) => piece.tags.includes(tag))
+      );
+      setFilteredPieces(filteredPieces);
+    },
     [selectedTags]
   );
 
-  const handleTagClick = (tag: string) => {
-    if (selectedTags.includes(tag)) {
-      setSelectedTags(selectedTags.filter((t) => t !== tag));
-    } else {
-      setSelectedTags([...selectedTags, tag]);
-    }
-  };
-
-  function handleClearTagsClick() {
-    setSelectedTrack(null);
-    setSelectedTags([]);
-  }
-
-  const isTagSelected = (tag: string) => {
-    return selectedTags.includes(tag);
-  };
-
-  const isTagDisabled = (tag: string) => {
-    return !filteredPieces.some((piece) => piece.tags.includes(tag));
-  };
-
-  function filterPiecesByTags(
-    selectedTags: string[],
-    pieces: AudioTrackData[]
-  ) {
-    return pieces.filter((piece) => {
-      return selectedTags.every((tag) => piece.tags.includes(tag));
-    });
-  }
-
-  function openVideoPopup() {
-    setVideoPopupState(true);
-  }
-
   return (
-    <div className={s.page}>
-      <div className={s.content}>
-        <div className={s.nav}>
-          <Link to="/" className={s.pageTitle}>
-            Pieces
-          </Link>
-          <Logo />
+    <PiecesContext.Provider value={contextValue}>
+      <div className={s.page}>
+        <div className={s.content}>
+          <Header pageTitle={"Pieces"} />
+
+          <Tags />
+
+          <Tracks ref={audioPlayerRef} />
+
+          <HTMLAudioTag ref={audioPlayerRef} />
         </div>
 
-        <div className={s.tagsSection}>
-          <div className={s.tagsList}>
-            {PIECES_GENRES.map((genre, i) => (
-              <Tag
-                name={genre}
-                isSelected={isTagSelected(genre)}
-                isDisabled={isTagDisabled(genre)}
-                onClick={() => handleTagClick(genre)}
-                key={i}
-              />
-            ))}
-            <div className={s.tagsButton} onClick={handleClearTagsClick}>
-              <img className={s.closeIcon} src={closeIconSrc} />
-              No filter
-            </div>
-          </div>
-        </div>
+        {isPlayerOpened && <AudioPlayer ref={audioPlayerRef} />}
 
-        <audio preload="none" ref={audioPlayerRef}>
-          <source src={""} type="audio/mpeg" />
-          Your browser does not support the audio element.
-        </audio>
-
-        <div className={s.tracksSection}>
-          {filteredPieces.map((track, index) => (
-            <AudioTrack
-              index={index}
-              data={track}
-              setPlayingAudioData={setPlayingAudioData}
-              setVideoId={setVideoId}
-              openPopup={openVideoPopup}
-              setIsPlayerOpened={setIsPlayerOpened}
-              isSelected={selectedTrack === index}
-              setSelectedTrack={setSelectedTrack}
-              ref={audioPlayerRef}
-              key={index}
-            />
-          ))}
-        </div>
+        {isVideoPopupOpened && (
+          <VideoPopup
+            videoID={videoID}
+            setIsVideoPopupOpened={setIsVideoPopupOpened}
+          />
+        )}
       </div>
-
-      <AudioPlayer
-        isPlayerOpened={isPlayerOpened}
-        setIsPlayerOpened={setIsPlayerOpened}
-        playingAudioData={playingAudioData}
-        setPlayingAudioData={setPlayingAudioData}
-        setSelectedTrack={setSelectedTrack}
-        setVideoId={setVideoId}
-        openPopup={openVideoPopup}
-        filteredPieces={filteredPieces}
-        ref={audioPlayerRef}
-      />
-
-      {isVideoPopupOpened && (
-        <Modal setPopupState={setVideoPopupState}>
-          <Suspense fallback={<Preloader content={"🐥"} />}>
-            <YouTubePlayer videoId={videoId} />
-          </Suspense>
-        </Modal>
-      )}
-    </div>
+    </PiecesContext.Provider>
   );
 }
 

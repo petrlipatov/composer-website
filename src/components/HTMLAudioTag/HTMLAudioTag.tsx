@@ -1,6 +1,6 @@
 import { RefObject, forwardRef } from "react";
 
-const HtmlAudioTag = forwardRef((props, ref: RefObject<HTMLAudioElement>) => {
+const HTMLAudioTag = forwardRef((props, ref: RefObject<HTMLAudioElement>) => {
   return (
     <audio preload="metadata" ref={ref}>
       <source src={""} type="audio/mpeg" />
@@ -9,4 +9,4 @@ const HtmlAudioTag = forwardRef((props, ref: RefObject<HTMLAudioElement>) => {
   );
 });
 
-export default HtmlAudioTag;
+export default HTMLAudioTag;

@@ -9,37 +9,30 @@ import {
 import cn from "classnames";
 
 import ProgressBar from "./ProgressBar/ProgressBar";
-import AudioPlayingLoader from "../AudioPlayingLoader/AudioPlayingLoader";
-import Scrollbar from "../Scrollbar/Scrollbar";
+import AudioPlayingLoader from "../../../../components/AudioPlayingLoader/AudioPlayingLoader";
+import Scrollbar from "../../../../components/Scrollbar/Scrollbar";
 
-import { FeaturedWorkPageContext } from "../../pages/FeaturedWork/FeaturedWork";
-
-import { ProjectData } from "../../types";
-
-import playSrc from "../../assets/images/play.svg";
-import pauseSrc from "../../assets/images/pause.svg";
-import closeIcon from "../../assets/images/close-icon_black.svg";
-import videoIcon from "../../assets/images/tv.svg";
+import { FeaturedWorkContext } from "../../FeaturedWork";
+import playSrc from "../../../../assets/images/play.svg";
+import pauseSrc from "../../../../assets/images/pause.svg";
+import closeIcon from "../../../../assets/images/close-icon_black.svg";
+import videoIcon from "../../../../assets/images/tv.svg";
 
 import s from "./ExtendedAudioPlayer.module.css";
 
-type AudioPlayerProps = {
-  isPlayerOpened: boolean;
-  projectData: ProjectData;
-};
-
 const ExtendedAudioPlayer = forwardRef(
-  (
-    { isPlayerOpened, projectData }: AudioPlayerProps,
-    ref: RefObject<HTMLAudioElement>
-  ) => {
+  (props, ref: RefObject<HTMLAudioElement>) => {
     const [isAudioPlaying, setIsAudioPlaying] = useState(false);
     const [playingTrackIndex, setPlayingTrackIndex] = useState<number>(null);
     const [selectedTrackIndex, setSelectedTrackIndex] = useState<number>(null);
 
-    const { setIsPlayerOpened, setVideoID, setIsVideoPopupOpened } = useContext(
-      FeaturedWorkPageContext
-    );
+    const {
+      currentProject,
+      isPlayerOpened,
+      setIsPlayerOpened,
+      setVideoID,
+      setIsVideoPopupOpened,
+    } = useContext(FeaturedWorkContext);
 
     const audioPlayerRef = ref.current;
 
@@ -47,7 +40,7 @@ const ExtendedAudioPlayer = forwardRef(
       try {
         setPlayingTrackIndex(0);
         setSelectedTrackIndex(0);
-        audioPlayerRef.src = projectData.tracks[0].audioSrc;
+        audioPlayerRef.src = currentProject.tracks[0].audioSrc;
 
         await new Promise((resolve, reject) => {
           audioPlayerRef.oncanplaythrough = resolve;
@@ -58,7 +51,7 @@ const ExtendedAudioPlayer = forwardRef(
       } catch (err) {
         console.log("Error", err);
       }
-    }, [audioPlayerRef, projectData.tracks]);
+    }, [audioPlayerRef, currentProject?.tracks]);
 
     useEffect(
       function playWhenComponentIsMounted() {
@@ -113,7 +106,7 @@ const ExtendedAudioPlayer = forwardRef(
     };
 
     const handlePlayNextClick = (prevOrNext) => {
-      const tracksMaxIndex = projectData.tracks.length - 1;
+      const tracksMaxIndex = currentProject.tracks.length - 1;
       let nextTrackIndex;
 
       if (prevOrNext === "next") {
@@ -130,7 +123,7 @@ const ExtendedAudioPlayer = forwardRef(
 
       setSelectedTrackIndex(nextTrackIndex);
       setPlayingTrackIndex(nextTrackIndex);
-      audioPlayerRef.src = projectData.tracks[nextTrackIndex].audioSrc;
+      audioPlayerRef.src = currentProject.tracks[nextTrackIndex].audioSrc;
 
       if (isAudioPlaying) {
         audioPlayerRef.play();
@@ -154,7 +147,7 @@ const ExtendedAudioPlayer = forwardRef(
     const handleVideoClick = (e) => {
       e.stopPropagation();
       setIsPlayerOpened(false);
-      setVideoID(projectData.videoSrc);
+      setVideoID(currentProject.videoSrc);
       audioPlayerRef.src = "";
       setIsVideoPopupOpened(true);
     };
@@ -167,12 +160,12 @@ const ExtendedAudioPlayer = forwardRef(
           onClick={handleCloseClick}
         />
         <div className={s.projectInfoSection}>
-          <img className={s.artwork} src={projectData?.imageSrc} />
+          <img className={s.artwork} src={currentProject?.imageSrc} />
           <div className={s.projectInfoContainer}>
             <div className={s.projectDetailsBlock}>
-              <div>{projectData?.name}</div>
-              <div>{projectData?.genre}</div>
-              <div>{projectData?.year}</div>
+              <div>{currentProject?.name}</div>
+              <div>{currentProject?.genre}</div>
+              <div>{currentProject?.year}</div>
             </div>
             <div className={s.videoButtonContainer} onClick={handleVideoClick}>
               <img className={s.videoIcon} src={videoIcon} />
@@ -182,7 +175,7 @@ const ExtendedAudioPlayer = forwardRef(
         </div>
 
         <Scrollbar>
-          {projectData?.tracks.map((track, i) => {
+          {currentProject?.tracks.map((track, i) => {
             return (
               <div
                 className={cn(
@@ -207,8 +200,8 @@ const ExtendedAudioPlayer = forwardRef(
         <div className={s.playerContainer}>
           <div className={s.title}>
             {selectedTrackIndex === undefined
-              ? projectData?.tracks[0].name
-              : projectData?.tracks[selectedTrackIndex]?.name}
+              ? currentProject?.tracks[0].name
+              : currentProject?.tracks[selectedTrackIndex]?.name}
           </div>
 
           <div className={s.buttonsContainer}>

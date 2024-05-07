@@ -1,5 +1,5 @@
 .playerSection {
-  display: none;
+  display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
@@ -8,10 +8,6 @@
   background-color: #e7397a;
   gap: 8px;
   position: relative;
-}
-
-.playerSectionActive {
-  display: flex;
 }
 
 .title {
@@ -35,7 +31,7 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100%;
-  background-image: url("../../assets//images/play-next.svg");
+  background-image: url("../../../../assets//images/play-next.svg");
 }
 
 .playPreviousButton {
@@ -47,7 +43,7 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100%;
-  background-image: url("../../assets//images/play-previous.svg");
+  background-image: url("../../../../assets//images/play-previous.svg");
 }
 
 .playNextButton :active {

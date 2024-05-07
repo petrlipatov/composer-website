@@ -1,16 +1,16 @@
-import s from "./Nav.module.css";
+import s from "./Header.module.css";
 import { Link } from "react-router-dom";
-import Logo from "../../../../components/Logo/Logo";
+import Logo from "../Logo/Logo";
 
-function Nav() {
+function Header({ pageTitle }) {
   return (
     <div className={s.nav}>
       <Link to="/" className={s.pageTitle}>
-        Featured Work
+        {pageTitle}
       </Link>
       <Logo />
     </div>
   );
 }
 
-export default Nav;
+export default Header;

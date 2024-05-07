@@ -53,11 +53,11 @@ function Home() {
         <div
           className={s.image}
           style={{ backgroundImage: `url(${flower1_src})` }}
-        />{" "}
+        />
         <div
           className={s.image}
           style={{ backgroundImage: `url(${flower2_src})` }}
-        />{" "}
+        />
         <div
           className={s.image}
           style={{ backgroundImage: `url(${flower3_src})` }}

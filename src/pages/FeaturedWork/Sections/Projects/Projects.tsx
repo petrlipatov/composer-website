@@ -1,12 +1,11 @@
 import { useContext } from "react";
-import { FeaturedWorkPageContext } from "../../FeaturedWork";
+import { FeaturedWorkContext } from "../../FeaturedWork";
 import s from "./Projects.module.css";
 import Project from "../../../../components/Project/Project";
 
 function Projects() {
-  const { isPlayerOpened, filteredProjects, selectedProjectIndex } = useContext(
-    FeaturedWorkPageContext
-  );
+  const { isPlayerOpened, filteredProjects, selectedProjectIndex } =
+    useContext(FeaturedWorkContext);
 
   return (
     <div

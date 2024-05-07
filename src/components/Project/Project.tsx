@@ -3,7 +3,7 @@ import cn from "classnames";
 
 import tvIconSrc from "../../assets/images/tv.svg";
 import hedphonesIconSrc from "../../assets/images/headphone50.svg";
-import { FeaturedWorkPageContext } from "../../pages/FeaturedWork/FeaturedWork";
+import { FeaturedWorkContext } from "../../pages/FeaturedWork/FeaturedWork";
 
 import s from "./Project.module.css";
 
@@ -18,11 +18,11 @@ type ProjectProps = {
 const Project = ({ index, data, isSelected }: ProjectProps) => {
   const {
     setIsPlayerOpened,
-    setProjectData,
+    setCurrentProject,
     setSelectedProjectIndex,
     setVideoID,
     setIsVideoPopupOpened,
-  } = useContext(FeaturedWorkPageContext);
+  } = useContext(FeaturedWorkContext);
 
   useEffect(() => {
     if (isSelected) {
@@ -40,7 +40,7 @@ const Project = ({ index, data, isSelected }: ProjectProps) => {
 
   function handleListenClick() {
     setIsPlayerOpened(true);
-    setProjectData(data);
+    setCurrentProject(data);
   }
 
   function handleWatchClick() {
