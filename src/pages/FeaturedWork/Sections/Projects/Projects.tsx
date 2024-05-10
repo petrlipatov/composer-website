@@ -17,7 +17,7 @@ function Projects() {
           data={project}
           isSelected={selectedProjectIndex === index}
           index={index}
-          key={index}
+          key={project.name}
         />
       ))}
     </div>

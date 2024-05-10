@@ -17,7 +17,7 @@ const Tracks = forwardRef((props, ref: RefObject<HTMLAudioElement>) => {
           index={index}
           data={track}
           isSelected={selectedTrackIndex === index}
-          key={index}
+          key={track.name}
           ref={ref}
         />
       ))}

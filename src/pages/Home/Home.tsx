@@ -1,8 +1,5 @@
 import React, { useRef, RefObject, useState, Suspense } from "react";
-import { gsap } from "gsap";
-import { Observer } from "gsap/Observer";
 import { Link } from "react-router-dom";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import Modal from "../../components/Modal/Modal";
 import Preloader from "../../components/Preloader/Preloader";
@@ -17,8 +14,6 @@ import s from "./Home.module.css";
 const YouTubePlayer = React.lazy(
   () => import("../../components/YoutubePlayer/YoutubePlayer")
 );
-
-gsap.registerPlugin(ScrollTrigger, Observer);
 
 function Home() {
   const [isPopupOpened, setPopupState] = useState(false);
