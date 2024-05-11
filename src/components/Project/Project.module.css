@@ -8,13 +8,6 @@
   width: 100%;
 }
 
-@media (min-width: 414px) {
-  .projectImage {
-    width: 187px;
-    height: 249px;
-  }
-}
-
 .projectImageMask {
   display: none;
   position: absolute;

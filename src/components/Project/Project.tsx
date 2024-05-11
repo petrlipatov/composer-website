@@ -59,6 +59,7 @@ const Project = ({ index, data, isSelected }: ProjectProps) => {
           className={s.projectImage}
           src={data.imageSrc}
           alt="project artwork"
+          style={{ width: "187px", height: "249px" }}
         />
 
         <div className={projectImageMaskClasses}>
