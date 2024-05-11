@@ -2,17 +2,17 @@
   position: relative;
 }
 
-@media (min-width: 414px) {
-  .projectImageContainer {
-    width: 187px;
-    height: 249px;
-  }
-}
-
 .projectImage {
   display: block;
   height: auto;
   width: 100%;
+}
+
+@media (min-width: 414px) {
+  .projectImage {
+    width: 187px;
+    height: 249px;
+  }
 }
 
 .projectImageMask {

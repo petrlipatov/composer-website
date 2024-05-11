@@ -4,12 +4,12 @@ import {
   useState,
   useEffect,
   useRef,
-  useLayoutEffect,
+  // useLayoutEffect,
   RefObject,
   createContext,
 } from "react";
 import { trackViewportSize } from "../../utils/helpers/trackViewportSize";
-import { gsap } from "gsap";
+// import { gsap } from "gsap";
 
 export const ScreenSizeContext = createContext(null);
 
@@ -25,15 +25,15 @@ function Layout() {
     trackViewportSize(setScreenSize);
   }, []);
 
-  useLayoutEffect(function revealWebsiteContent() {
-    if (layoutRef.current) {
-      gsap.fromTo(
-        layoutRef.current,
-        { opacity: 0 },
-        { opacity: 1, duration: 1, ease: "power1.in" }
-      );
-    }
-  }, []);
+  // useLayoutEffect(function revealWebsiteContent() {
+  //   if (layoutRef.current) {
+  //     gsap.fromTo(
+  //       layoutRef.current,
+  //       { opacity: 0 },
+  //       { opacity: 1, duration: 1, ease: "power1.in" }
+  //     );
+  //   }
+  // }, []);
 
   return (
     <div
