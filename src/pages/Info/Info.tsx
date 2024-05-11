@@ -1,14 +1,12 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import cn from "classnames";
-
-import Logo from "../../components/Logo/Logo";
 
 import About from "./Sections/About/About";
 import Contacts from "./Sections/Contacts/Contacts";
 
 import s from "./Info.module.css";
 import Gallery from "./Sections/Gallery/Gallery";
+import Header from "../../components/Header/Header";
 
 enum SECTION_TAGS {
   about,
@@ -23,12 +21,7 @@ function Info() {
   return (
     <div className={s.page}>
       <div className={s.content}>
-        <div className={s.nav}>
-          <Link to="/" className={s.pageTitle}>
-            Info
-          </Link>
-          <Logo />
-        </div>
+        <Header pageTitle={"Info"} />
 
         <div className={s.tagsSection}>
           <button

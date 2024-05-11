@@ -59,6 +59,7 @@ const Project = ({ index, data, isSelected }: ProjectProps) => {
           className={s.projectImage}
           src={data.imageSrc}
           alt="project artwork"
+          loading="lazy"
         />
 
         <div className={projectImageMaskClasses}>

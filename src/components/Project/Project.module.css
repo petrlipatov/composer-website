@@ -1,9 +1,12 @@
-.project {
-  /* border: 1px solid red; */
-}
-
 .projectImageContainer {
   position: relative;
+}
+
+@media (min-width: 414px) {
+  .projectImageContainer {
+    width: 187px;
+    height: 249px;
+  }
 }
 
 .projectImage {
