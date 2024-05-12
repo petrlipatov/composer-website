@@ -1,9 +1,10 @@
 .projectsSection {
+  max-width: 360px;
   position: relative;
   display: grid;
   grid-template-columns: 49% 49%;
   margin-top: 24px;
-  gap: 4px;
+  gap: 8px;
   row-gap: 16px;
   overflow-y: scroll;
 }
