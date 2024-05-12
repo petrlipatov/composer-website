@@ -60,7 +60,7 @@ const Project = memo(
             className={s.projectImage}
             src={data.imageSrc}
             alt="project artwork"
-            style={{ width: "165px", height: "220px" }}
+            style={{ width: "174px", height: "232px" }}
           />
           <div className={projectImageMaskClasses}>
             <div className={s.imageMaskButtonLeft} onClick={handleListenClick}>

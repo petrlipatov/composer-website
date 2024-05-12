@@ -7,15 +7,31 @@
 
 .name {
   font-family: "IBM Plex Mono", monospace;
-  font-size: 24px;
+  font-size: 20px;
+  padding-right: 4px;
   text-align: right;
+}
+
+@media (min-width: 380px) {
+  .name {
+    font-size: 24px;
+    padding-right: 0;
+  }
 }
 
 .job {
   color: #e7397a;
   font-family: "IBM Plex Mono", monospace;
-  font-size: 16px;
+  font-size: 14px;
+  padding-right: 4px;
   text-align: right;
+}
+
+@media (min-width: 380px) {
+  .job {
+    font-size: 16px;
+    padding-right: 0;
+  }
 }
 
 .jobHidden {

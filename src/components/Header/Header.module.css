@@ -10,4 +10,11 @@
   font-size: 12px;
   text-decoration: underline;
   padding-bottom: 12px;
+  padding-left: 4px;
+}
+
+@media (min-width: 380px) {
+  .pageTitle {
+    padding-left: 0;
+  }
 }

@@ -15,7 +15,13 @@
   height: 95%;
   margin-top: 16px;
   overflow: hidden;
-  width: 94%;
+  width: 100%;
+}
+
+@media (min-width: 380px) {
+  .content {
+    width: 96%;
+  }
 }
 
 @media (min-width: 400px) {
