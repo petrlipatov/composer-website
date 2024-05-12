@@ -60,7 +60,7 @@ const Project = memo(
             className={s.projectImage}
             src={data.imageSrc}
             alt="project artwork"
-            style={{ width: "187px", height: "249px" }}
+            style={{ width: "170px", height: "226.66px" }}
           />
 
           <div className={projectImageMaskClasses}>

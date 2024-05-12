@@ -1,11 +1,12 @@
 .projectImageContainer {
   position: relative;
+  overflow: hidden;
 }
 
 .projectImage {
   display: block;
-  height: auto;
-  width: 100%;
+  /* height: auto !important;
+  width: 100% !important; */
 }
 
 .projectImageMask {
