@@ -2,7 +2,7 @@
   max-width: 360px;
   position: relative;
   display: grid;
-  grid-template-columns: 49% 49%;
+  grid-template-columns: 48% 48%;
   margin-top: 24px;
   gap: 8px;
   row-gap: 16px;
