@@ -8,3 +8,9 @@
   row-gap: 16px;
   overflow-y: scroll;
 }
+
+@media (min-width: 410px) {
+  .projectsSection {
+    margin-left: 16px;
+  }
+}
