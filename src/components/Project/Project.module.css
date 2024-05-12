@@ -1,13 +1,25 @@
 .projectImageContainer {
   position: relative;
-  overflow: hidden;
+  width: 165px;
 }
+
+/* @media (min-width: 400px) {
+  .projectImageContainer {
+    width: 100% !important;
+    height: auto !important;
+  }
+} */
 
 .projectImage {
   display: block;
-  /* height: auto !important;
-  width: 100% !important; */
 }
+
+/* @media (min-width: 400px) {
+  .projectImage {
+    width: 100% !important;
+    height: auto !important;
+  }
+} */
 
 .projectImageMask {
   display: none;
@@ -17,7 +29,6 @@
   height: 100%;
   width: 100%;
   padding-top: 100%;
-  border: 1px solid green;
 }
 
 .projectImageMaskSelected {

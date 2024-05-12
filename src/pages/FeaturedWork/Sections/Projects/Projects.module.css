@@ -1,4 +1,5 @@
 .projectsSection {
+  max-width: 360px;
   position: relative;
   display: grid;
   grid-template-columns: 48% 48%;

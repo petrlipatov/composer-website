@@ -18,6 +18,12 @@
   width: 94%;
 }
 
+@media (min-width: 400px) {
+  .content {
+    width: 90%;
+  }
+}
+
 .contentShortened {
   grid-template-rows: min-content min-content;
   height: auto;
