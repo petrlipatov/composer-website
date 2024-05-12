@@ -21,9 +21,9 @@ interface FeaturedWorkContext {
   selectedTags: string[];
   currentProject: ProjectData;
   filteredProjects: ProjectData[];
-  selectedProjectIndex: number;
+  // selectedProjectIndex: number;
   setSelectedTags: React.Dispatch<React.SetStateAction<string[]>>;
-  setSelectedProjectIndex: React.Dispatch<React.SetStateAction<number>>;
+  // setSelectedProjectIndex: React.Dispatch<React.SetStateAction<number>>;
   setCurrentProject: React.Dispatch<React.SetStateAction<ProjectData>>;
   setVideoID: React.Dispatch<React.SetStateAction<string>>;
   setIsPlayerOpened: React.Dispatch<React.SetStateAction<boolean>>;
@@ -39,8 +39,6 @@ function FeaturedWork() {
   const [isPlayerOpened, setIsPlayerOpened] = useState(false);
   const [videoID, setVideoID] = useState<string>("");
   const [isVideoPopupOpened, setIsVideoPopupOpened] = useState(false);
-  const [selectedProjectIndex, setSelectedProjectIndex] =
-    useState<number>(null);
 
   const audioPlayerRef = useRef<HTMLAudioElement>();
 
@@ -51,9 +49,7 @@ function FeaturedWork() {
       isPlayerOpened,
       selectedTags,
       filteredProjects,
-      selectedProjectIndex,
       setSelectedTags,
-      setSelectedProjectIndex,
       setCurrentProject,
       setIsPlayerOpened,
       setIsVideoPopupOpened,
@@ -65,9 +61,7 @@ function FeaturedWork() {
       selectedTags,
       currentProject,
       filteredProjects,
-      selectedProjectIndex,
       setSelectedTags,
-      setSelectedProjectIndex,
       setCurrentProject,
       setIsPlayerOpened,
       setIsVideoPopupOpened,

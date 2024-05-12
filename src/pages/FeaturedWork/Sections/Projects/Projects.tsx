@@ -1,11 +1,17 @@
-import { useContext } from "react";
+import { useCallback, useContext, useState } from "react";
 import { FeaturedWorkContext } from "../../FeaturedWork";
 import s from "./Projects.module.css";
 import Project from "../../../../components/Project/Project";
 
 function Projects() {
-  const { isPlayerOpened, filteredProjects, selectedProjectIndex } =
-    useContext(FeaturedWorkContext);
+  const [selectedProjectIndex, setSelectedProjectIndex] =
+    useState<number>(null);
+
+  const { isPlayerOpened, filteredProjects } = useContext(FeaturedWorkContext);
+
+  const setSelectedProjectIndexCached = useCallback(setSelectedProjectIndex, [
+    setSelectedProjectIndex,
+  ]);
 
   return (
     <div
@@ -16,6 +22,7 @@ function Projects() {
         <Project
           data={project}
           isSelected={selectedProjectIndex === index}
+          setSelectedProjectIndex={setSelectedProjectIndexCached}
           index={index}
           key={project.name}
         />

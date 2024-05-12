@@ -1,4 +1,4 @@
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, Dispatch, memo } from "react";
 import cn from "classnames";
 
 import tvIconSrc from "../../assets/images/tv.svg";
@@ -13,76 +13,78 @@ type ProjectProps = {
   index: number;
   data: ProjectData;
   isSelected: boolean;
+  setSelectedProjectIndex: Dispatch<React.SetStateAction<number>>;
 };
 
-const Project = ({ index, data, isSelected }: ProjectProps) => {
-  const {
-    setIsPlayerOpened,
-    setCurrentProject,
-    setSelectedProjectIndex,
-    setVideoID,
-    setIsVideoPopupOpened,
-  } = useContext(FeaturedWorkContext);
+const Project = memo(
+  ({ index, data, isSelected, setSelectedProjectIndex }: ProjectProps) => {
+    const {
+      setIsPlayerOpened,
+      setCurrentProject,
+      setVideoID,
+      setIsVideoPopupOpened,
+    } = useContext(FeaturedWorkContext);
 
-  useEffect(() => {
-    if (isSelected) {
-      const timer = setTimeout(() => {
-        setSelectedProjectIndex(null);
-      }, 5000);
+    useEffect(() => {
+      if (isSelected) {
+        const timer = setTimeout(() => {
+          setSelectedProjectIndex(null);
+        }, 5000);
 
-      return () => clearTimeout(timer);
+        return () => clearTimeout(timer);
+      }
+    }, [isSelected, setSelectedProjectIndex, index]);
+
+    function handleProjectClick() {
+      setSelectedProjectIndex(index);
     }
-  }, [isSelected, setSelectedProjectIndex, index]);
 
-  function handleProjectClick() {
-    setSelectedProjectIndex(index);
-  }
+    function handleListenClick() {
+      setIsPlayerOpened(true);
+      setCurrentProject(data);
+    }
 
-  function handleListenClick() {
-    setIsPlayerOpened(true);
-    setCurrentProject(data);
-  }
+    function handleWatchClick() {
+      setVideoID(data.videoSrc);
+      setIsVideoPopupOpened(true);
+    }
 
-  function handleWatchClick() {
-    setVideoID(data.videoSrc);
-    setIsVideoPopupOpened(true);
-  }
+    const projectImageMaskClasses = cn(s.projectImageMask, {
+      [s.projectImageMaskSelected]: isSelected,
+    });
 
-  const projectImageMaskClasses = cn(s.projectImageMask, {
-    [s.projectImageMaskSelected]: isSelected,
-  });
+    return (
+      <div className={s.project}>
+        <div className={s.projectImageContainer} onClick={handleProjectClick}>
+          <img
+            className={s.projectImage}
+            src={data.imageSrc}
+            alt="project artwork"
+            style={{ width: "187px", height: "249px" }}
+          />
 
-  return (
-    <div className={s.project}>
-      <div className={s.projectImageContainer} onClick={handleProjectClick}>
-        <img
-          className={s.projectImage}
-          src={data.imageSrc}
-          alt="project artwork"
-          style={{ width: "187px", height: "249px" }}
-        />
-
-        <div className={projectImageMaskClasses}>
-          <div className={s.imageMaskButtonLeft} onClick={handleListenClick}>
-            <img
-              className={cn(s.imageMaskIcon, s.imageMaskIconLeft)}
-              src={hedphonesIconSrc}
-            />
-            <div className={cn(s.imageMaskCaption, s.imageMaskCaptionLeft)}>
-              Listen
+          <div className={projectImageMaskClasses}>
+            <div className={s.imageMaskButtonLeft} onClick={handleListenClick}>
+              <img
+                className={cn(s.imageMaskIcon, s.imageMaskIconLeft)}
+                src={hedphonesIconSrc}
+              />
+              <div className={cn(s.imageMaskCaption, s.imageMaskCaptionLeft)}>
+                Listen
+              </div>
+            </div>
+            <div className={s.imageMaskButtonRight} onClick={handleWatchClick}>
+              <img className={cn(s.imageMaskIcon)} src={tvIconSrc} />
+              <div className={s.imageMaskCaption}>Watch</div>
             </div>
           </div>
-          <div className={s.imageMaskButtonRight} onClick={handleWatchClick}>
-            <img className={cn(s.imageMaskIcon)} src={tvIconSrc} />
-            <div className={s.imageMaskCaption}>Watch</div>
-          </div>
         </div>
-      </div>
 
-      <div className={s.projectTitle}>{data.name}</div>
-      <div className={s.projectDescription}>{data.genre}</div>
-    </div>
-  );
-};
+        <div className={s.projectTitle}>{data.name}</div>
+        <div className={s.projectDescription}>{data.genre}</div>
+      </div>
+    );
+  }
+);
 
 export default Project;
