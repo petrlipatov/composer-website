@@ -4,7 +4,7 @@
   display: grid;
   grid-template-columns: 48% 48%;
   margin-top: 24px;
-  gap: 12px;
+  gap: 8px;
   row-gap: 16px;
   overflow-y: scroll;
 }
@@ -12,5 +12,6 @@
 @media (min-width: 410px) {
   .projectsSection {
     margin-left: 14px;
+    gap: 16px;
   }
 }
