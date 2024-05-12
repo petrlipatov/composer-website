@@ -1,8 +1,8 @@
 .projectsSection {
-  max-width: 370px;
+  max-width: 380px;
   position: relative;
   display: grid;
-  grid-template-columns: 48% 48%;
+  grid-template-columns: 47% 47%;
   margin-top: 24px;
   gap: 8px;
   row-gap: 16px;

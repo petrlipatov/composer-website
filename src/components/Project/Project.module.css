@@ -1,6 +1,9 @@
+.project {
+  width: 174px;
+}
+
 .projectImageContainer {
   position: relative;
-  /* width: 174px; */
 }
 
 /* @media (min-width: 400px) {
