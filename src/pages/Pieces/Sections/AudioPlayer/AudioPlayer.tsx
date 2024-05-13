@@ -15,7 +15,6 @@ const AudioPlayer = forwardRef((props, ref: RefObject<HTMLAudioElement>) => {
     filteredPieces,
     currentAudioData,
     setIsPlayerOpened,
-    setSelectedTrackIndex,
     setCurrentAudioData,
     setVideoID,
     setIsVideoPopupOpened,
@@ -81,7 +80,6 @@ const AudioPlayer = forwardRef((props, ref: RefObject<HTMLAudioElement>) => {
 
     if (nextTrack) {
       audioPlayerRef.src = nextTrack.audioSrc;
-      setSelectedTrackIndex(nextSongIndex);
       setCurrentAudioData({
         index: filteredPieces.indexOf(nextTrack),
         ...nextTrack,

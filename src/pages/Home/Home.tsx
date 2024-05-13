@@ -5,10 +5,6 @@ import Modal from "../../components/Modal/Modal";
 import Preloader from "../../components/Preloader/Preloader";
 import Logo from "../../components/Logo/Logo";
 
-import flower1_src from "../../assets/images/flower1.webp";
-import flower2_src from "../../assets/images/flower2.webp";
-import flower3_src from "../../assets/images/flower3.webp";
-
 import s from "./Home.module.css";
 
 const YouTubePlayer = React.lazy(
