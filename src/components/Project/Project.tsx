@@ -55,11 +55,7 @@ const Project = memo(
 
     return (
       <div className={s.project}>
-        <div
-          className={s.projectImageContainer}
-          style={{ width: "174px", height: "232px" }}
-          onClick={handleProjectClick}
-        >
+        <div className={s.projectImageContainer} onClick={handleProjectClick}>
           <img
             className={s.projectImage}
             src={data.imageSrc}

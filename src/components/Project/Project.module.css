@@ -1,7 +1,10 @@
+.project {
+}
+
 .projectImageContainer {
   position: relative;
-  width: 100% !important;
-  height: auto !important;
+  min-height: 228px;
+  min-width: 171px;
 }
 
 .projectImage {
