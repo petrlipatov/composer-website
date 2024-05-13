@@ -31,7 +31,7 @@
   flex-direction: column;
   justify-content: space-between;
   gap: 4px;
-  font-size: 14px;
+  font-size: 12px;
   width: 40%;
   margin-left: 16px;
 }
@@ -45,7 +45,17 @@
 .artwork {
   display: block;
   width: auto;
-  height: 110px;
+  height: 90px;
+}
+
+@media (min-width: 400px) {
+  .projectInfoContainer {
+    font-size: 14px;
+  }
+
+  .artwork {
+    height: 110px;
+  }
 }
 
 .videoButtonContainer {
@@ -63,9 +73,16 @@
 }
 
 .track {
-  font-size: 14px;
+  font-size: 12px;
   display: flex;
-  margin-top: 28px;
+  margin-top: 24px;
+}
+
+@media (min-width: 400px) {
+  .track {
+    font-size: 14px;
+    margin-top: 28px;
+  }
 }
 
 .trackPlaying {
@@ -94,19 +111,32 @@
   flex-shrink: 0;
   position: relative;
   display: flex;
-  height: 120px;
+  height: 100px;
   width: 100%;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
   border-top: 1px solid black;
+}
+
+@media (min-width: 400px) {
+  .playerContainer {
+    height: 120px;
+    gap: 8px;
+  }
 }
 
 .title {
   height: 16px;
   margin-top: 12px;
-  font-size: 14px;
+  font-size: 12px;
+}
+
+@media (min-width: 400px) {
+  .title {
+    font-size: 14px;
+  }
 }
 
 .buttonsContainer {
@@ -120,8 +150,8 @@
   background-color: transparent;
   padding: 0;
   border: 0;
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100%;
@@ -132,8 +162,8 @@
   border: 0;
   background-color: transparent;
   padding: 0;
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100%;
@@ -159,6 +189,23 @@
 }
 
 .playIcon {
-  height: 40px;
-  width: 40px;
+  height: 35px;
+  width: 35px;
+}
+
+@media (min-width: 400px) {
+  .playIcon {
+    height: 40px;
+    width: 40px;
+  }
+
+  .playNextButton {
+    height: 40px;
+    width: 40px;
+  }
+
+  .playPreviousButton {
+    height: 40px;
+    width: 40px;
+  }
 }
