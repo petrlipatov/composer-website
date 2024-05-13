@@ -1,8 +1,8 @@
-.project {
-  width: 174px;
-}
+/* .project {
+} */
 
 .projectImageContainer {
+  display: inline-block;
   position: relative;
 }
 
@@ -15,14 +15,9 @@
 
 .projectImage {
   display: block;
+  width: 100% !important;
+  height: auto !important;
 }
-
-/* @media (min-width: 400px) {
-  .projectImage {
-    width: 100% !important;
-    height: auto !important;
-  }
-} */
 
 .projectImageMask {
   display: none;
