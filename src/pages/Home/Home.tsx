@@ -47,15 +47,15 @@ function Home() {
         </div>
         <div
           className={s.image}
-          style={{ backgroundImage: `url(${flower1_src})` }}
+          style={{ backgroundImage: `url(/images/home/flower1_414x753.webp)` }}
         />
         <div
           className={s.image}
-          style={{ backgroundImage: `url(${flower2_src})` }}
+          style={{ backgroundImage: `url(/images/home/flower2_414x753.webp)` }}
         />
         <div
           className={s.image}
-          style={{ backgroundImage: `url(${flower3_src})` }}
+          style={{ backgroundImage: `url(/images/home/flower3_414x753.webp)` }}
         />
         {isPopupOpened && (
           <Modal setPopupState={setPopupState}>
