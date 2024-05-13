@@ -1,5 +1,4 @@
 .projectsSection {
-  /* max-width: 380px; */
   position: relative;
   display: grid;
   grid-template-columns: 48% 48%;
@@ -11,7 +10,5 @@
 
 @media (min-width: 410px) {
   .projectsSection {
-    /* margin-left: 14px; */
-    /* gap: 16px; */
   }
 }

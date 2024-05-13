@@ -15,6 +15,7 @@
 
 .projectImage {
   display: block;
+  aspect-ratio: 0.75;
   width: 100% !important;
   height: auto !important;
 }
