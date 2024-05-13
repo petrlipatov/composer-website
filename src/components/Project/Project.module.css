@@ -1,21 +1,11 @@
-/* .project {
-} */
-
 .projectImageContainer {
-  display: inline-block;
   position: relative;
+  width: 100% !important;
+  height: auto !important;
 }
-
-/* @media (min-width: 400px) {
-  .projectImageContainer {
-    width: 100% !important;
-    height: auto !important;
-  }
-} */
 
 .projectImage {
   display: block;
-  aspect-ratio: 0.75;
   width: 100% !important;
   height: auto !important;
 }

@@ -1,4 +1,4 @@
-import { useEffect, useContext, Dispatch, memo, useState } from "react";
+import { useEffect, useContext, Dispatch, memo } from "react";
 import cn from "classnames";
 
 import tvIconSrc from "../../assets/images/tv.svg";
@@ -55,12 +55,15 @@ const Project = memo(
 
     return (
       <div className={s.project}>
-        <div className={s.projectImageContainer} onClick={handleProjectClick}>
+        <div
+          className={s.projectImageContainer}
+          style={{ width: "174px", height: "232px" }}
+          onClick={handleProjectClick}
+        >
           <img
             className={s.projectImage}
             src={data.imageSrc}
             alt="project artwork"
-            style={{ width: "174px", height: "232px" }}
           />
           <div className={projectImageMaskClasses}>
             <div className={s.imageMaskButtonLeft} onClick={handleListenClick}>
