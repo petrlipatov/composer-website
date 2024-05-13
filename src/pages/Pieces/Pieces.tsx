@@ -32,13 +32,11 @@ interface PiecesContext {
   currentAudioData: currentAudioData;
   isPlayerOpened: boolean;
   isVideoPopupOpened: boolean;
-  selectedTrackIndex: number;
   setVideoID: Dispatch<SetStateAction<string>>;
   setSelectedTags: Dispatch<SetStateAction<string[]>>;
   setCurrentAudioData: Dispatch<SetStateAction<currentAudioData>>;
   setIsPlayerOpened: Dispatch<SetStateAction<boolean>>;
   setIsVideoPopupOpened: Dispatch<SetStateAction<boolean>>;
-  setSelectedTrackIndex: Dispatch<SetStateAction<number>>;
 }
 
 export const PiecesContext = createContext<PiecesContext>(null);
@@ -46,7 +44,6 @@ export const PiecesContext = createContext<PiecesContext>(null);
 function Pieces() {
   const [videoID, setVideoID] = useState<string>("");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
-  const [selectedTrackIndex, setSelectedTrackIndex] = useState<number>(null);
   const [currentAudioData, setCurrentAudioData] = useState<currentAudioData>();
   const [filteredPieces, setFilteredPieces] = useState<AudioTrackData[]>([]);
   const [isPlayerOpened, setIsPlayerOpened] = useState(false);
@@ -62,13 +59,11 @@ function Pieces() {
       currentAudioData,
       isPlayerOpened,
       isVideoPopupOpened,
-      selectedTrackIndex,
       setVideoID,
       setSelectedTags,
       setCurrentAudioData,
       setIsPlayerOpened,
       setIsVideoPopupOpened,
-      setSelectedTrackIndex,
     }),
     [
       videoID,
@@ -77,13 +72,11 @@ function Pieces() {
       currentAudioData,
       isPlayerOpened,
       isVideoPopupOpened,
-      selectedTrackIndex,
       setVideoID,
       setSelectedTags,
       setCurrentAudioData,
       setIsPlayerOpened,
       setIsVideoPopupOpened,
-      setSelectedTrackIndex,
     ]
   );
 
