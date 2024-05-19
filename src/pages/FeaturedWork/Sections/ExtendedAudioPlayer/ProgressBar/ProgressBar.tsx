@@ -1,31 +1,35 @@
-import { RefObject, forwardRef, useEffect, useRef, useState } from "react";
-import { formatTime } from "../../../../../utils/helpers/formatTime";
-import s from "./ProgressBar.module.css";
-import ProgressBarLoader from "../ProgressBarLoader/ProgressBarLoader";
+import { useContext, useEffect, useRef, useState } from "react";
 
-const ProgressBar = forwardRef((props, ref: RefObject<HTMLAudioElement>) => {
+import ProgressBarLoader from "../../../../../components/AudioPlayer/Shared/ProgressBarLoader/ProgressBarLoader";
+import { FeaturedWorkContext } from "../../../FeaturedWork";
+import { formatTime } from "../../../../../utils/helpers/formatTime";
+
+import s from "./ProgressBar.module.css";
+
+const ProgressBar = () => {
   const [duration, setDuration] = useState(0);
   const [elapsedTime, setElapsedTime] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-  const audioPlayerRef = ref?.current;
   const progressBarRef = useRef<HTMLInputElement>();
   const progressBar = progressBarRef.current;
+  const { audioPlayerRef } = useContext(FeaturedWorkContext);
+  const audioPlayer = audioPlayerRef.current;
 
   useEffect(() => {
     if (audioPlayerRef) {
-      audioPlayerRef.onloadedmetadata = () => {
-        setDuration(audioPlayerRef.duration);
+      audioPlayer.onloadedmetadata = () => {
+        setDuration(audioPlayer.duration);
         setElapsedTime(0);
       };
 
-      audioPlayerRef.ontimeupdate = () =>
-        setElapsedTime(Math.round(audioPlayerRef.currentTime));
+      audioPlayer.ontimeupdate = () =>
+        setElapsedTime(Math.round(audioPlayer.currentTime));
 
-      audioPlayerRef.onplaying = () => setIsLoading(false);
-      audioPlayerRef.onwaiting = () => setIsLoading(true);
-      audioPlayerRef.onended = () => setElapsedTime(0);
+      audioPlayer.onplaying = () => setIsLoading(false);
+      audioPlayer.onwaiting = () => setIsLoading(true);
+      audioPlayer.onended = () => setElapsedTime(0);
     }
-  }, [audioPlayerRef]);
+  }, [audioPlayer, audioPlayerRef]);
 
   useEffect(
     function updateElapsedProgressOnScrubber() {
@@ -41,7 +45,7 @@ const ProgressBar = forwardRef((props, ref: RefObject<HTMLAudioElement>) => {
 
   const onScrubberChange = (e) => {
     const newTime = e.target.value;
-    audioPlayerRef.currentTime = newTime;
+    audioPlayer.currentTime = newTime;
   };
 
   return (
@@ -63,6 +67,6 @@ const ProgressBar = forwardRef((props, ref: RefObject<HTMLAudioElement>) => {
       <div className={s.timeValue}>{formatTime(duration)}</div>
     </div>
   );
-});
+};
 
 export default ProgressBar;

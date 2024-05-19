@@ -1,0 +1,8 @@
+.closeIcon {
+  position: absolute;
+  top: 4px;
+  right: 8px;
+  height: 24px;
+  width: 24px;
+  padding: 4px;
+}

@@ -1,15 +1,7 @@
 import { Outlet } from "react-router-dom";
 import styles from "./Layout.module.css";
-import {
-  useState,
-  useEffect,
-  useRef,
-  // useLayoutEffect,
-  RefObject,
-  createContext,
-} from "react";
+import { useState, useEffect, useRef, RefObject, createContext } from "react";
 import { trackViewportSize } from "../../utils/helpers/trackViewportSize";
-// import { gsap } from "gsap";
 
 export const ScreenSizeContext = createContext(null);
 
@@ -24,16 +16,6 @@ function Layout() {
   useEffect(() => {
     trackViewportSize(setScreenSize);
   }, []);
-
-  // useLayoutEffect(function revealWebsiteContent() {
-  //   if (layoutRef.current) {
-  //     gsap.fromTo(
-  //       layoutRef.current,
-  //       { opacity: 0 },
-  //       { opacity: 1, duration: 1, ease: "power1.in" }
-  //     );
-  //   }
-  // }, []);
 
   return (
     <div

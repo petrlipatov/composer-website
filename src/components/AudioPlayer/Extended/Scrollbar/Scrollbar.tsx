@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import cn from "classnames";
-import { throttle } from "../../utils/helpers/throttle";
+import { throttle } from "../../../../utils/helpers/throttle";
 import s from "./Scrollbar.module.css";
 
 const Scrollbar = ({ children }: { children: React.ReactNode }) => {

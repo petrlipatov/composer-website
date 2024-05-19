@@ -3,7 +3,7 @@ import { Dispatch, SetStateAction, Suspense, lazy } from "react";
 import Modal from "../Modal/Modal";
 import Preloader from "../Preloader/Preloader";
 
-const YouTubePlayer = lazy(() => import("../YoutubePlayer/YoutubePlayer"));
+const YouTubePlayer = lazy(() => import("./YoutubePlayer/YoutubePlayer"));
 
 type Props = {
   videoID: string;

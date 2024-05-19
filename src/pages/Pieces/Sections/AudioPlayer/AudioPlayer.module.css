@@ -1,109 +1,43 @@
-.playerSection {
+.player {
+  display: flex;
+  width: 100%;
+  min-height: 100px;
+  background-color: #e7397a;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.content {
+  position: relative;
+  width: 100%;
+}
+
+.playerControls {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  width: 100%;
-  min-height: 140px;
-  background-color: #e7397a;
   gap: 8px;
-  position: relative;
 }
 
-.title {
-  margin-top: 12px;
-  font-size: 14px;
+@media (min-width: 720px) {
+  .player {
+    height: 100px;
+    overflow: hidden;
+  }
+
+  .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .playerControls {
+    width: 500px;
+  }
 }
 
-.buttonsContainer {
-  width: 40%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.playNextButton {
-  background-color: transparent;
-  padding: 0;
-  border: 0;
-  width: 40px;
-  height: 40px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 100%;
-  background-image: url("../../../../assets//images/play-next.svg");
-}
-
-.playPreviousButton {
-  border: 0;
-  background-color: transparent;
-  padding: 0;
-  width: 40px;
-  height: 40px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 100%;
-  background-image: url("../../../../assets//images/play-previous.svg");
-}
-
-.playNextButton :active {
-  opacity: 0;
-}
-
-.playButton {
-  align-items: center;
-  background-color: transparent;
-  border: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0;
-}
-
-.playbutton :active {
-  opacity: 0;
-}
-
-.playIcon {
-  height: 40px;
-  width: 40px;
-}
-
-.closeIcon {
+.promise {
   position: absolute;
-  top: 4px;
-  right: 8px;
-  height: 24px;
-  width: 24px;
-  padding: 4px;
-}
-.videoIcon {
-  position: absolute;
-  width: 40px;
-  height: 40px;
-  right: 40px;
-  top: 30px;
-}
-
-.artwork {
-  position: absolute;
-  width: 55px;
-  height: 55px;
-  top: 10px;
-  left: 12px;
-}
-
-.buffered {
-  height: 20px;
-  position: relative;
-  background: #555;
-  width: 300px;
-  margin-bottom: 20px;
-}
-
-.bufferedAmount {
-  display: block;
-  height: 100%;
-  background-color: #7eb81b;
-  width: 0;
 }

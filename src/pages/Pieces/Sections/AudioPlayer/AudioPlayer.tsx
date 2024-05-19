@@ -1,26 +1,29 @@
-import { forwardRef, useContext, useEffect, useState } from "react";
-import { RefObject } from "react";
+import { useContext, useEffect, useState } from "react";
 import { PiecesContext } from "../../Pieces";
 import ProgressBar from "./ProgressBar/ProgressBar";
-import playSrc from "../../../../assets/images/play.svg";
-import pauseSrc from "../../../../assets/images/pause.svg";
-import closeIcon from "../../../../assets/images/close-icon_black.svg";
-import videoIcon from "../../../../assets/images/tv.svg";
-import s from "./AudioPlayer.module.css";
 
-const AudioPlayer = forwardRef((props, ref: RefObject<HTMLAudioElement>) => {
+import s from "./AudioPlayer.module.css";
+import ControlButtons from "../../../../components/AudioPlayer/Shared/ControlButtons/ControlButtons";
+import Title from "../../../../components/AudioPlayer/Simple/Title/Title";
+import Artwork from "../../../../components/AudioPlayer/Simple/Artwork/Artwork";
+import VideoButton from "../../../../components/AudioPlayer/Simple/VideoButton/VideoButton";
+import CloseButton from "../../../../components/AudioPlayer/Simple/CloseButton/CloseButton";
+
+const AudioPlayer = () => {
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
+  const [promise, setPromise] = useState("promise");
 
   const {
     filteredPieces,
     currentAudioData,
+    audioPlayerRef,
     setIsPlayerOpened,
     setCurrentAudioData,
     setVideoID,
     setIsVideoPopupOpened,
   } = useContext(PiecesContext);
 
-  const audioPlayerRef = ref.current;
+  const audioPlayer = audioPlayerRef.current;
   // const bufferedRef = useRef<HTMLSpanElement>();
 
   // useEffect(() => {
@@ -45,26 +48,36 @@ const AudioPlayer = forwardRef((props, ref: RefObject<HTMLAudioElement>) => {
       const onPlayingHandler = () => setIsAudioPlaying(true);
       const onEndedHandler = () => setIsAudioPlaying(false);
 
-      if (audioPlayerRef) {
-        audioPlayerRef.addEventListener("playing", onPlayingHandler);
-        audioPlayerRef.addEventListener("ended", onEndedHandler);
+      if (audioPlayer) {
+        audioPlayer.addEventListener("playing", onPlayingHandler);
+        audioPlayer.addEventListener("ended", onEndedHandler);
       }
 
       return () => {
         if (audioPlayerRef) {
-          audioPlayerRef.removeEventListener("playing", onPlayingHandler);
-          audioPlayerRef.removeEventListener("ended", onEndedHandler);
+          audioPlayer.removeEventListener("playing", onPlayingHandler);
+          audioPlayer.removeEventListener("ended", onEndedHandler);
         }
       };
     },
-    [audioPlayerRef]
+    [audioPlayer, audioPlayerRef]
   );
 
   const handlePlayPauseClick = () => {
     if (isAudioPlaying) {
-      audioPlayerRef.pause();
+      audioPlayer.pause();
     } else {
-      audioPlayerRef.play();
+      audioPlayer
+        .play()
+        .then(() => {
+          setPromise("pending");
+        })
+        .catch(() => {
+          setPromise("error");
+        })
+        .finally(() => {
+          setPromise("success");
+        });
     }
     setIsAudioPlaying(!isAudioPlaying);
   };
@@ -79,80 +92,51 @@ const AudioPlayer = forwardRef((props, ref: RefObject<HTMLAudioElement>) => {
     const nextTrack = filteredPieces[nextSongIndex];
 
     if (nextTrack) {
-      audioPlayerRef.src = nextTrack.audioSrc;
+      audioPlayer.src = nextTrack.audioSrc;
       setCurrentAudioData({
         index: filteredPieces.indexOf(nextTrack),
         ...nextTrack,
       });
     }
-    if (nextTrack && isAudioPlaying) audioPlayerRef.play();
+    if (nextTrack && isAudioPlaying) audioPlayer.play();
   };
 
-  const handleVideoClick = (e) => {
-    e.stopPropagation();
+  const handleVideoClick = () => {
     setIsPlayerOpened(false);
     setVideoID(currentAudioData.videoSrc);
-    audioPlayerRef.pause();
-    audioPlayerRef.src = "";
+    audioPlayer.pause();
+    audioPlayer.src = "";
     setIsVideoPopupOpened(true);
   };
 
   const handleCloseClick = () => {
-    audioPlayerRef.pause();
-    audioPlayerRef.src = "";
+    audioPlayer.pause();
+    audioPlayer.src = "";
     setIsAudioPlaying(false);
     setIsPlayerOpened(false);
   };
 
   return (
-    <div className={s.playerSection}>
-      <div className={s.title}>{currentAudioData?.name}</div>
+    <div className={s.player}>
+      <div className={s.content}>
+        <Artwork src={currentAudioData?.imageSrc} />
 
-      <div className={s.buttonsContainer}>
-        <button
-          type="button"
-          className={s.playPreviousButton}
-          onClick={() => handlePlayNextClick("prev")}
-        />
+        <div className={s.promise}>{promise}</div>
 
-        <button
-          type="button"
-          className={s.playButton}
-          onClick={handlePlayPauseClick}
-        >
-          <img
-            className={s.playIcon}
-            src={pauseSrc}
-            alt="pause-button"
-            style={isAudioPlaying ? {} : { display: "none" }}
+        <div className={s.playerControls}>
+          <Title>{currentAudioData?.name}</Title>
+          <ControlButtons
+            handlePlayPauseClick={handlePlayPauseClick}
+            handlePlayNextClick={handlePlayNextClick}
+            isAudioPlaying={isAudioPlaying}
           />
-
-          <img
-            className={s.playIcon}
-            src={playSrc}
-            alt="play-button"
-            style={isAudioPlaying ? { display: "none" } : {}}
-          />
-        </button>
-
-        <button
-          type="button"
-          className={s.playNextButton}
-          onClick={() => handlePlayNextClick("next")}
-        />
+          <ProgressBar />
+        </div>
+        <VideoButton handleVideoClick={handleVideoClick} />
+        <CloseButton handleCloseClick={handleCloseClick} />
       </div>
-
-      <ProgressBar ref={ref} />
-
-      {/* <div className={s.buffered}>
-          <span ref={bufferedRef} className={s.bufferedAmount} />
-        </div> */}
-
-      <img className={s.videoIcon} src={videoIcon} onClick={handleVideoClick} />
-      <img className={s.closeIcon} src={closeIcon} onClick={handleCloseClick} />
-      <img className={s.artwork} src={currentAudioData?.imageSrc} />
     </div>
   );
-});
+};
 
 export default AudioPlayer;

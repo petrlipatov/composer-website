@@ -1,4 +1,4 @@
-.tagsSection {
+.section {
   gap: 16px;
   margin-top: 28px;
   position: relative;
@@ -31,4 +31,11 @@
   margin-right: 6px;
   height: 12px;
   width: 12px;
+}
+
+@media (min-width: 720px) {
+  .section {
+    width: 80%;
+    justify-self: center;
+  }
 }

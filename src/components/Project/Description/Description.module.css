@@ -1,0 +1,11 @@
+.desc {
+  margin-top: 4px;
+  font-size: 10px;
+}
+
+@media (min-width: 720px) {
+  .desc {
+    margin-top: 8px;
+    font-size: 16px;
+  }
+}

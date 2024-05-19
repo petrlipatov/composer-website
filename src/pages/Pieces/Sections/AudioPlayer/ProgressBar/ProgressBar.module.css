@@ -16,6 +16,10 @@
   background-color: rgba(0, 0, 0, 1);
 }
 
+.timeScrubber:hover {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
 .timeValue {
   color: black;
   font-size: 14px;
@@ -43,13 +47,4 @@ input[type="range"]::-webkit-slider-runnable-track {
   border: none;
   box-shadow: none;
   -webkit-appearance: none;
-}
-
-.bufferedTimeline {
-  background-image: linear-gradient(black, black);
-  position: absolute;
-  width: 100%;
-  height: 5px;
-  border: 1px solid black;
-  top: 0;
 }

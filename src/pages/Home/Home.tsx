@@ -8,7 +8,7 @@ import Logo from "../../components/Logo/Logo";
 import s from "./Home.module.css";
 
 const YouTubePlayer = React.lazy(
-  () => import("../../components/YoutubePlayer/YoutubePlayer")
+  () => import("../../components/VideoPopup/YoutubePlayer/YoutubePlayer")
 );
 
 function Home() {
@@ -25,7 +25,7 @@ function Home() {
       <div className={s.content} ref={pageRef}>
         <Logo />
         <div className={s.nav}>
-          <div className={s.button} onClick={openPopup}>
+          <div className={s.link} onClick={openPopup}>
             Showreel
           </div>
 

@@ -1,0 +1,16 @@
+.artwork {
+  position: absolute;
+  width: 55px;
+  height: 55px;
+  top: 10px;
+  left: 12px;
+}
+
+@media (min-width: 720px) {
+  .artwork {
+    height: 90px;
+    width: auto;
+    left: 5px;
+    top: 5px;
+  }
+}

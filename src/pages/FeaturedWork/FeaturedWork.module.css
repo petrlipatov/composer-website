@@ -18,6 +18,11 @@
   width: 99%;
 }
 
+.contentShortened {
+  grid-template-rows: min-content min-content;
+  height: auto;
+}
+
 @media (min-width: 380px) {
   .content {
     width: 96%;
@@ -28,9 +33,4 @@
   .content {
     width: 94%;
   }
-}
-
-.contentShortened {
-  grid-template-rows: min-content min-content;
-  height: auto;
 }

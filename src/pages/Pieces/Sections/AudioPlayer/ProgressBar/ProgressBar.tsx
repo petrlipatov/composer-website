@@ -1,56 +1,47 @@
-import { RefObject, forwardRef, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { formatTime } from "../../../../../utils/helpers/formatTime";
 import s from "./ProgressBar.module.css";
-import ProgressBarLoader from "../ProgressBarLoader/ProgressBarLoader";
+import ProgressBarLoader from "../../../../../components/AudioPlayer/Shared/ProgressBarLoader/ProgressBarLoader";
+import { PiecesContext } from "../../../Pieces";
 
-const ProgressBar = forwardRef((props, ref: RefObject<HTMLAudioElement>) => {
+const ProgressBar = () => {
   const [duration, setDuration] = useState(0);
   const [elapsedTime, setElapsedTime] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-  const audioPlayerRef = ref?.current;
   const progressBarRef = useRef<HTMLInputElement>();
+  const { audioPlayerRef } = useContext(PiecesContext);
+
   const progressBar = progressBarRef.current;
+  const audioPlayer = audioPlayerRef.current;
 
   useEffect(() => {
-    if (audioPlayerRef) {
-      audioPlayerRef.onloadedmetadata = () => {
-        setDuration(audioPlayerRef.duration);
+    if (audioPlayer) {
+      audioPlayer.onloadedmetadata = () => {
+        setDuration(audioPlayer.duration);
       };
-      audioPlayerRef.ontimeupdate = () => {
-        setElapsedTime(Math.round(audioPlayerRef.currentTime));
+      audioPlayer.ontimeupdate = () => {
+        setElapsedTime(Math.round(audioPlayer.currentTime));
       };
-      audioPlayerRef.onwaiting = () => {
+      audioPlayer.onwaiting = () => {
         setIsLoading(true);
       };
-      audioPlayerRef.onplaying = () => {
+      audioPlayer.onplaying = () => {
         setIsLoading(false);
       };
 
-      audioPlayerRef.onstalled = () => {
+      audioPlayer.onstalled = () => {
         setIsLoading(false);
       };
 
-      audioPlayerRef.onerror = () => {
+      audioPlayer.onerror = () => {
         setIsLoading(false);
       };
 
-      // audioPlayerRef.onsuspend = (e) => {
-      //   console.log(e);
-      // };
-
-      // audioPlayerRef.oncanplay = () => {
-      //   console.log();
-      // };
-
-      // audioPlayerRef.oncanplaythrough = () => {
-      //   // setIsLoading(false);
-      // };
-
-      audioPlayerRef.onended = () => {
+      audioPlayer.onended = () => {
         setElapsedTime(0);
       };
     }
-  }, [audioPlayerRef]);
+  }, [audioPlayerRef, audioPlayer]);
 
   useEffect(
     function updateElapsedProgressOnScrubber() {
@@ -66,7 +57,7 @@ const ProgressBar = forwardRef((props, ref: RefObject<HTMLAudioElement>) => {
 
   const onScrubberChange = (e) => {
     const newTime = e.target.value;
-    audioPlayerRef.currentTime = newTime;
+    audioPlayer.currentTime = newTime;
   };
 
   return (
@@ -88,6 +79,6 @@ const ProgressBar = forwardRef((props, ref: RefObject<HTMLAudioElement>) => {
       <div className={s.timeValue}>{formatTime(duration)}</div>
     </div>
   );
-});
+};
 
 export default ProgressBar;

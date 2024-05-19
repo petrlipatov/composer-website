@@ -1,4 +1,4 @@
-.tracksSection {
+.section {
   position: relative;
   display: grid;
   grid-template-columns: 48% 48%;
@@ -7,4 +7,14 @@
   gap: 8px;
   row-gap: 8px;
   overflow-y: scroll;
+}
+
+@media (min-width: 720px) {
+  .section {
+    grid-template-columns: 23% 23% 23% 23%;
+    width: 80%;
+    gap: 24px;
+    justify-self: center;
+    margin-top: 48px;
+  }
 }

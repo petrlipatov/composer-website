@@ -6,6 +6,7 @@ import {
   Dispatch,
   SetStateAction,
   useEffect,
+  MutableRefObject,
 } from "react";
 
 import AudioPlayer from "./Sections/AudioPlayer/AudioPlayer";
@@ -32,6 +33,7 @@ interface PiecesContext {
   currentAudioData: currentAudioData;
   isPlayerOpened: boolean;
   isVideoPopupOpened: boolean;
+  audioPlayerRef: MutableRefObject<HTMLAudioElement>;
   setVideoID: Dispatch<SetStateAction<string>>;
   setSelectedTags: Dispatch<SetStateAction<string[]>>;
   setCurrentAudioData: Dispatch<SetStateAction<currentAudioData>>;
@@ -59,6 +61,7 @@ function Pieces() {
       currentAudioData,
       isPlayerOpened,
       isVideoPopupOpened,
+      audioPlayerRef,
       setVideoID,
       setSelectedTags,
       setCurrentAudioData,
@@ -94,16 +97,14 @@ function Pieces() {
     <PiecesContext.Provider value={contextValue}>
       <div className={s.page}>
         <div className={s.content}>
-          <Header pageTitle={"Pieces"} />
+          <Header>{"Pieces"}</Header>
 
           <Tags />
 
-          <Tracks ref={audioPlayerRef} />
-
-          <HTMLAudioTag ref={audioPlayerRef} />
+          <Tracks />
         </div>
 
-        {isPlayerOpened && <AudioPlayer ref={audioPlayerRef} />}
+        {isPlayerOpened && <AudioPlayer />}
 
         {isVideoPopupOpened && (
           <VideoPopup
@@ -111,6 +112,7 @@ function Pieces() {
             setIsVideoPopupOpened={setIsVideoPopupOpened}
           />
         )}
+        <HTMLAudioTag ref={audioPlayerRef} />
       </div>
     </PiecesContext.Provider>
   );

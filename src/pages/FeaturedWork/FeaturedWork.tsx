@@ -1,4 +1,11 @@
-import { useMemo, useRef, useState, createContext, useEffect } from "react";
+import {
+  useMemo,
+  useRef,
+  useState,
+  createContext,
+  useEffect,
+  MutableRefObject,
+} from "react";
 import cn from "classnames";
 
 import HTMLAudioTag from "../../components/HTMLAudioTag/HTMLAudioTag";
@@ -21,9 +28,8 @@ interface FeaturedWorkContext {
   selectedTags: string[];
   currentProject: ProjectData;
   filteredProjects: ProjectData[];
-  // selectedProjectIndex: number;
+  audioPlayerRef: MutableRefObject<HTMLAudioElement>;
   setSelectedTags: React.Dispatch<React.SetStateAction<string[]>>;
-  // setSelectedProjectIndex: React.Dispatch<React.SetStateAction<number>>;
   setCurrentProject: React.Dispatch<React.SetStateAction<ProjectData>>;
   setVideoID: React.Dispatch<React.SetStateAction<string>>;
   setIsPlayerOpened: React.Dispatch<React.SetStateAction<boolean>>;
@@ -49,6 +55,7 @@ function FeaturedWork() {
       isPlayerOpened,
       selectedTags,
       filteredProjects,
+      audioPlayerRef,
       setSelectedTags,
       setCurrentProject,
       setIsPlayerOpened,
@@ -79,22 +86,20 @@ function FeaturedWork() {
     [selectedTags]
   );
 
+  const content = cn(s.content, isPlayerOpened ? s.contentShortened : "");
+
   return (
     <FeaturedWorkContext.Provider value={contextValue}>
       <div className={s.page}>
-        <div
-          className={cn(s.content, isPlayerOpened ? s.contentShortened : "")}
-        >
-          <Header pageTitle={"Featured Work"} />
+        <div className={content}>
+          <Header>{"Featured Work"}</Header>
 
           <Tags />
 
           <ProjectsSuspensed />
-
-          <HTMLAudioTag ref={audioPlayerRef} />
         </div>
 
-        {isPlayerOpened && <ExtendedAudioPlayer ref={audioPlayerRef} />}
+        {isPlayerOpened && <ExtendedAudioPlayer />}
 
         {isVideoPopupOpened && (
           <VideoPopup
@@ -102,6 +107,7 @@ function FeaturedWork() {
             setIsVideoPopupOpened={setIsVideoPopupOpened}
           />
         )}
+        <HTMLAudioTag ref={audioPlayerRef} />
       </div>
     </FeaturedWorkContext.Provider>
   );

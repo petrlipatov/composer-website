@@ -1,0 +1,52 @@
+.track {
+  font-size: 12px;
+  display: flex;
+  margin-top: 24px;
+}
+
+.trackPlaying {
+  font-weight: 600;
+}
+
+.track:last-of-type {
+  margin-bottom: 18px;
+}
+
+.trackTitle {
+  word-spacing: -2px;
+  margin-left: 16px;
+  width: 80%;
+}
+
+.trackIndex {
+  height: 16px;
+  width: 16px;
+  margin-right: 4px;
+  margin-left: 4px;
+  text-align: center;
+}
+
+@media (min-width: 720px) {
+  .track {
+    /* font-size: 10px; */
+    /* border: 1px solid black; */
+    margin-top: 24px;
+  }
+
+  .track:first-of-type {
+    margin-top: 32px;
+  }
+
+  .trackTitle {
+    margin-left: 8px;
+    width: 100%;
+  }
+
+  .duration {
+    margin-right: 8px;
+  }
+
+  .trackIndex {
+    margin-left: 16px;
+  }
+}

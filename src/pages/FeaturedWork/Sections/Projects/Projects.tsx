@@ -1,7 +1,7 @@
 import { useCallback, useContext, useState } from "react";
 import { FeaturedWorkContext } from "../../FeaturedWork";
 import s from "./Projects.module.css";
-import Project from "../../../../components/Project/Project";
+import Project from "../Project/Project";
 
 function Projects() {
   const [selectedProjectIndex, setSelectedProjectIndex] =
@@ -15,7 +15,7 @@ function Projects() {
 
   return (
     <div
-      className={s.projectsSection}
+      className={s.section}
       style={isPlayerOpened ? { display: "none" } : {}}
     >
       {filteredProjects.map((project, index) => (

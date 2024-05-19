@@ -3,246 +3,191 @@ import {
   useContext,
   useEffect,
   useState,
-  RefObject,
   useCallback,
 } from "react";
-import cn from "classnames";
 
 import ProgressBar from "./ProgressBar/ProgressBar";
-import AudioPlayingLoader from "../../../../components/AudioPlayingLoader/AudioPlayingLoader";
-import Scrollbar from "../../../../components/Scrollbar/Scrollbar";
+import ControlButtons from "../../../../components/AudioPlayer/Shared/ControlButtons/ControlButtons";
+import Title from "../../../../components/AudioPlayer/Extended/Title/Title";
+import AudioTrack from "../../../../components/AudioPlayer/Extended/AudioTrack/AudioTrack";
+import Info from "../../../../components/AudioPlayer/Extended/Info/Info";
+import Scrollbar from "../../../../components/AudioPlayer/Extended/Scrollbar/Scrollbar";
 
 import { FeaturedWorkContext } from "../../FeaturedWork";
-import playSrc from "../../../../assets/images/play.svg";
-import pauseSrc from "../../../../assets/images/pause.svg";
+
 import closeIcon from "../../../../assets/images/close-icon_black.svg";
-import videoIcon from "../../../../assets/images/tv.svg";
 
 import s from "./ExtendedAudioPlayer.module.css";
 
-const ExtendedAudioPlayer = forwardRef(
-  (props, ref: RefObject<HTMLAudioElement>) => {
-    const [isAudioPlaying, setIsAudioPlaying] = useState(false);
-    const [playingTrackIndex, setPlayingTrackIndex] = useState<number>(null);
-    const [selectedTrackIndex, setSelectedTrackIndex] = useState<number>(null);
+const ExtendedAudioPlayer = forwardRef(() => {
+  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
+  const [playingTrackIndex, setPlayingTrackIndex] = useState<number>(null);
+  const [selectedTrackIndex, setSelectedTrackIndex] = useState<number>(null);
 
-    const {
-      currentProject,
-      isPlayerOpened,
-      setIsPlayerOpened,
-      setVideoID,
-      setIsVideoPopupOpened,
-    } = useContext(FeaturedWorkContext);
+  const {
+    currentProject,
+    isPlayerOpened,
+    setIsPlayerOpened,
+    setVideoID,
+    setIsVideoPopupOpened,
+    audioPlayerRef,
+  } = useContext(FeaturedWorkContext);
 
-    const audioPlayerRef = ref.current;
+  const audioPlayer = audioPlayerRef.current;
 
-    const playFirstTrack = useCallback(async () => {
-      try {
-        setPlayingTrackIndex(0);
-        setSelectedTrackIndex(0);
-        audioPlayerRef.src = currentProject.tracks[0].audioSrc;
+  const playFirstTrack = useCallback(async () => {
+    try {
+      setPlayingTrackIndex(0);
+      setSelectedTrackIndex(0);
+      audioPlayerRef.current.src = currentProject.tracks[0].audioSrc;
 
-        await new Promise((resolve, reject) => {
-          audioPlayerRef.oncanplaythrough = resolve;
-          audioPlayerRef.onerror = reject;
-        });
+      await new Promise((resolve, reject) => {
+        audioPlayer.oncanplaythrough = resolve;
+        audioPlayer.onerror = reject;
+      });
 
-        audioPlayerRef.play();
-      } catch (err) {
-        console.log("Error", err);
+      audioPlayer.play();
+    } catch (err) {
+      console.log("Error", err);
+    }
+  }, [audioPlayer, audioPlayerRef, currentProject?.tracks]);
+
+  useEffect(
+    function playWhenComponentIsMounted() {
+      if (
+        isPlayerOpened &&
+        playingTrackIndex === null &&
+        selectedTrackIndex === null
+      ) {
+        playFirstTrack();
       }
-    }, [audioPlayerRef, currentProject?.tracks]);
+    },
+    [isPlayerOpened, selectedTrackIndex, playingTrackIndex, playFirstTrack]
+  );
 
-    useEffect(
-      function playWhenComponentIsMounted() {
-        if (
-          isPlayerOpened &&
-          playingTrackIndex === null &&
-          selectedTrackIndex === null
-        ) {
-          playFirstTrack();
+  useEffect(
+    function setListenersOnPlayerStates() {
+      const onPlayingHandler = () => setIsAudioPlaying(true);
+      const onPauseHandler = () => setIsAudioPlaying(false);
+      const onEndedHandler = () => setIsAudioPlaying(false);
+
+      if (audioPlayer) {
+        audioPlayer.addEventListener("playing", onPlayingHandler);
+        audioPlayer.addEventListener("pause", onPauseHandler);
+        audioPlayer.addEventListener("ended", onEndedHandler);
+      }
+
+      return () => {
+        if (audioPlayer) {
+          audioPlayer.removeEventListener("playing", onPlayingHandler);
+          audioPlayer.removeEventListener("pause", onPauseHandler);
+          audioPlayer.removeEventListener("ended", onEndedHandler);
         }
-      },
-      [isPlayerOpened, selectedTrackIndex, playingTrackIndex, playFirstTrack]
-    );
+      };
+    },
+    [audioPlayer]
+  );
 
-    useEffect(
-      function setListenersOnPlayerStates() {
-        const onPlayingHandler = () => setIsAudioPlaying(true);
-        const onPauseHandler = () => setIsAudioPlaying(false);
-        const onEndedHandler = () => setIsAudioPlaying(false);
+  const isTrackPlaying = (i) => {
+    return isAudioPlaying && playingTrackIndex === i;
+  };
 
-        if (audioPlayerRef) {
-          audioPlayerRef.addEventListener("playing", onPlayingHandler);
-          audioPlayerRef.addEventListener("pause", onPauseHandler);
-          audioPlayerRef.addEventListener("ended", onEndedHandler);
-        }
+  const isTrackSelected = (i) => {
+    return selectedTrackIndex === i;
+  };
 
-        return () => {
-          if (audioPlayerRef) {
-            audioPlayerRef.removeEventListener("playing", onPlayingHandler);
-            audioPlayerRef.removeEventListener("pause", onPauseHandler);
-            audioPlayerRef.removeEventListener("ended", onEndedHandler);
-          }
-        };
-      },
-      [audioPlayerRef]
-    );
+  const handlePlayPauseClick = () => {
+    if (isAudioPlaying) {
+      audioPlayer.pause();
+    } else {
+      audioPlayer.play();
+    }
+  };
 
-    const isTrackPlaying = (i) => {
-      return isAudioPlaying && playingTrackIndex === i;
-    };
+  const handlePlayNextClick = (prevOrNext: "next" | "prev") => {
+    const tracksMaxIndex = currentProject.tracks.length - 1;
+    let nextTrackIndex;
 
-    const isTrackSelected = (i) => {
-      return selectedTrackIndex === i;
-    };
+    if (prevOrNext === "next") {
+      playingTrackIndex + 1 > tracksMaxIndex
+        ? (nextTrackIndex = 0)
+        : (nextTrackIndex = playingTrackIndex + 1);
+    }
 
-    const handlePlayPauseClick = () => {
-      if (isAudioPlaying) {
-        audioPlayerRef.pause();
-      } else {
-        audioPlayerRef.play();
-      }
-    };
+    if (prevOrNext === "prev") {
+      playingTrackIndex - 1 < 0
+        ? (nextTrackIndex = tracksMaxIndex)
+        : (nextTrackIndex = playingTrackIndex - 1);
+    }
 
-    const handlePlayNextClick = (prevOrNext) => {
-      const tracksMaxIndex = currentProject.tracks.length - 1;
-      let nextTrackIndex;
+    setSelectedTrackIndex(nextTrackIndex);
+    setPlayingTrackIndex(nextTrackIndex);
+    audioPlayer.src = currentProject.tracks[nextTrackIndex].audioSrc;
 
-      if (prevOrNext === "next") {
-        playingTrackIndex + 1 > tracksMaxIndex
-          ? (nextTrackIndex = 0)
-          : (nextTrackIndex = playingTrackIndex + 1);
-      }
+    if (isAudioPlaying) {
+      audioPlayer.play();
+    }
+  };
 
-      if (prevOrNext === "prev") {
-        playingTrackIndex - 1 < 0
-          ? (nextTrackIndex = tracksMaxIndex)
-          : (nextTrackIndex = playingTrackIndex - 1);
-      }
+  const handleTrackClick = (audioSrc: string, index: number) => {
+    setSelectedTrackIndex(index);
+    setPlayingTrackIndex(index);
+    audioPlayer.src = audioSrc;
+    audioPlayer.play();
+  };
 
-      setSelectedTrackIndex(nextTrackIndex);
-      setPlayingTrackIndex(nextTrackIndex);
-      audioPlayerRef.src = currentProject.tracks[nextTrackIndex].audioSrc;
+  const handleCloseClick = () => {
+    audioPlayer.pause();
+    setIsPlayerOpened(false);
+    setPlayingTrackIndex(null);
+    setSelectedTrackIndex(null);
+  };
 
-      if (isAudioPlaying) {
-        audioPlayerRef.play();
-      }
-    };
+  const handleVideoClick = (e) => {
+    e.stopPropagation();
+    setIsPlayerOpened(false);
+    setVideoID(currentProject.videoSrc);
+    audioPlayer.src = "";
+    setIsVideoPopupOpened(true);
+  };
 
-    const handleTrackClick = (audioSrc: string, index: number) => {
-      setSelectedTrackIndex(index);
-      setPlayingTrackIndex(index);
-      audioPlayerRef.src = audioSrc;
-      audioPlayerRef.play();
-    };
+  return (
+    <div className={s.section}>
+      <img className={s.closeIcon} src={closeIcon} onClick={handleCloseClick} />
 
-    const handleCloseClick = () => {
-      audioPlayerRef.pause();
-      setIsPlayerOpened(false);
-      setPlayingTrackIndex(null);
-      setSelectedTrackIndex(null);
-    };
+      <Info data={currentProject} handleVideoClick={handleVideoClick} />
 
-    const handleVideoClick = (e) => {
-      e.stopPropagation();
-      setIsPlayerOpened(false);
-      setVideoID(currentProject.videoSrc);
-      audioPlayerRef.src = "";
-      setIsVideoPopupOpened(true);
-    };
+      <Scrollbar>
+        {currentProject?.tracks.map((track, i) => {
+          return (
+            <AudioTrack
+              key={i}
+              index={i}
+              track={track}
+              isTrackPlaying={isTrackPlaying(i)}
+              isTrackSelected={isTrackSelected(i)}
+              handleTrackClick={handleTrackClick}
+            />
+          );
+        })}
+      </Scrollbar>
 
-    return (
-      <div className={s.playerSection}>
-        <img
-          className={s.closeIcon}
-          src={closeIcon}
-          onClick={handleCloseClick}
+      <div className={s.playerContainer}>
+        <Title
+          selectedTrackIndex={selectedTrackIndex}
+          currentProject={currentProject}
         />
-        <div className={s.projectInfoSection}>
-          <img className={s.artwork} src={currentProject?.imageSrc} />
-          <div className={s.projectInfoContainer}>
-            <div className={s.projectDetailsBlock}>
-              <div>{currentProject?.name}</div>
-              <div>{currentProject?.genre}</div>
-              <div>{currentProject?.year}</div>
-            </div>
-            <div className={s.videoButtonContainer} onClick={handleVideoClick}>
-              <img className={s.videoIcon} src={videoIcon} />
-              <div>watch</div>
-            </div>
-          </div>
-        </div>
 
-        <Scrollbar>
-          {currentProject?.tracks.map((track, i) => {
-            return (
-              <div
-                className={cn(
-                  s.track,
-                  isTrackSelected(i) ? s.trackPlaying : ""
-                )}
-                key={i}
-                onClick={() => handleTrackClick(track.audioSrc, i)}
-              >
-                {isTrackPlaying(i) ? (
-                  <AudioPlayingLoader color={"black"} />
-                ) : (
-                  <div className={s.trackIndex}>{i + 1}</div>
-                )}
-                <span className={s.trackTitle}>{track.name}</span>
-                <span>{track.duration}</span>
-              </div>
-            );
-          })}
-        </Scrollbar>
+        <ControlButtons
+          handlePlayPauseClick={handlePlayPauseClick}
+          handlePlayNextClick={handlePlayNextClick}
+          isAudioPlaying={isAudioPlaying}
+        />
 
-        <div className={s.playerContainer}>
-          <div className={s.title}>
-            {selectedTrackIndex === undefined
-              ? currentProject?.tracks[0].name
-              : currentProject?.tracks[selectedTrackIndex]?.name}
-          </div>
-
-          <div className={s.buttonsContainer}>
-            <button
-              type="button"
-              className={s.playPreviousButton}
-              onClick={() => handlePlayNextClick("prev")}
-            />
-
-            <button
-              type="button"
-              className={s.playButton}
-              onClick={handlePlayPauseClick}
-            >
-              <img
-                className={s.playIcon}
-                src={pauseSrc}
-                alt="pause-button"
-                style={isAudioPlaying ? {} : { display: "none" }}
-              />
-
-              <img
-                className={s.playIcon}
-                src={playSrc}
-                alt="play-button"
-                style={isAudioPlaying ? { display: "none" } : {}}
-              />
-            </button>
-
-            <button
-              type="button"
-              className={s.playNextButton}
-              onClick={() => handlePlayNextClick("next")}
-            />
-          </div>
-
-          <ProgressBar ref={ref} />
-        </div>
+        <ProgressBar />
       </div>
-    );
-  }
-);
+    </div>
+  );
+});
 
 export default ExtendedAudioPlayer;

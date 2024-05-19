@@ -34,7 +34,7 @@ function Tags() {
   };
 
   return (
-    <div className={s.tagsSection}>
+    <div className={s.section}>
       <div className={s.tagsList}>
         {PIECES_GENRES.map((genre, i) => (
           <Tag

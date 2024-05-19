@@ -1,16 +1,7 @@
-.project {
-}
-
-.projectImageContainer {
+.imageContainer {
   position: relative;
   min-height: 228px;
   min-width: 171px;
-}
-
-.projectImage {
-  display: block;
-  width: 100% !important;
-  height: auto !important;
 }
 
 .projectImageMask {
@@ -71,13 +62,4 @@
 
 .imageMaskCaptionLeft {
   transform: translateY(4px);
-}
-
-.projectTitle {
-  margin-top: 4px;
-  font-size: 12px;
-}
-.projectDescription {
-  margin-top: 4px;
-  font-size: 10px;
 }

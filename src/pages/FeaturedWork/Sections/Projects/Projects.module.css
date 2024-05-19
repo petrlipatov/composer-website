@@ -1,4 +1,4 @@
-.projectsSection {
+.section {
   position: relative;
   display: grid;
   grid-template-columns: 48% 48%;
@@ -8,7 +8,13 @@
   overflow-y: scroll;
 }
 
-@media (min-width: 410px) {
-  .projectsSection {
+@media (min-width: 720px) {
+  .section {
+    grid-template-columns: 330px 330px 330px;
+    width: 80%;
+    gap: 56px;
+    row-gap: 32px;
+    justify-self: center;
+    margin-top: 48px;
   }
 }

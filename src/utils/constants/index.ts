@@ -203,7 +203,7 @@ export const PIECES = [
 
 export const PROJECTS = [
   {
-    name: "Project #1",
+    name: "Six Empty Seats",
     genre: "TV Drama",
     year: "2021",
     tags: ["Film"],
@@ -233,6 +233,11 @@ export const PROJECTS = [
       {
         name: "Journey into Twilight Forest",
         audioSrc: "/audio/Theory-of-Light-Master.mp3",
+        duration: "3:00",
+      },
+      {
+        name: "Stardust",
+        audioSrc: "/audio/GOING-FAR-AWAY-_VINTAGE-HARMONY__1_.mp3",
         duration: "3:00",
       },
       {

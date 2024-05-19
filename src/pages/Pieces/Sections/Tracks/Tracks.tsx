@@ -1,10 +1,4 @@
-import {
-  RefObject,
-  forwardRef,
-  useCallback,
-  useContext,
-  useState,
-} from "react";
+import { forwardRef, useCallback, useContext, useState } from "react";
 
 import AudioTrack from "../../../../components/AudioTrack/AudioTrack";
 
@@ -13,7 +7,7 @@ import { PiecesContext } from "../../Pieces";
 import s from "./Tracks.module.css";
 forwardRef;
 
-const Tracks = forwardRef((props, ref: RefObject<HTMLAudioElement>) => {
+const Tracks = () => {
   const [selectedTrackIndex, setSelectedTrackIndex] = useState<number>(null);
   const { filteredPieces } = useContext(PiecesContext);
 
@@ -22,7 +16,7 @@ const Tracks = forwardRef((props, ref: RefObject<HTMLAudioElement>) => {
   ]);
 
   return (
-    <div className={s.tracksSection}>
+    <div className={s.section}>
       {filteredPieces.map((track, index) => (
         <AudioTrack
           index={index}
@@ -30,11 +24,10 @@ const Tracks = forwardRef((props, ref: RefObject<HTMLAudioElement>) => {
           isSelected={selectedTrackIndex === index}
           setSelectedTrackIndex={setSelectedTrackIndexCached}
           key={track.name}
-          ref={ref}
         />
       ))}
     </div>
   );
-});
+};
 
 export default Tracks;

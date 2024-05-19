@@ -1,0 +1,48 @@
+.projectInfoSection {
+  display: flex;
+  margin-left: 32px;
+  margin-top: 16px;
+  flex-shrink: 0;
+}
+
+.artwork {
+  display: block;
+  width: auto;
+  height: 90px;
+}
+
+.projectInfoContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 4px;
+  font-size: 12px;
+  width: 40%;
+  margin-left: 16px;
+}
+
+.projectDetailsBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.videoButtonContainer {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  transform: translateY(4.5px);
+}
+
+.videoIcon {
+  display: block;
+  width: 32px;
+  height: 32px;
+  margin-right: 4px;
+}
+
+@media (min-width: 700px) {
+  .projectInfoSection {
+    margin-left: 16px;
+  }
+}
