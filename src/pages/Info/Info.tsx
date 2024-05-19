@@ -21,7 +21,7 @@ function Info() {
   return (
     <div className={s.page}>
       <div className={s.content}>
-        <Header pageTitle={"Info"} />
+        <Header>{"Info"}</Header>
 
         <div className={s.tagsSection}>
           <button
