@@ -1,7 +1,7 @@
 .player {
   display: flex;
   width: 100%;
-  min-height: 100px;
+  /* min-height: 140px; */
   background-color: #e7397a;
   justify-content: center;
   position: relative;
@@ -24,7 +24,6 @@
 @media (min-width: 720px) {
   .player {
     height: 100px;
-    overflow: hidden;
   }
 
   .content {

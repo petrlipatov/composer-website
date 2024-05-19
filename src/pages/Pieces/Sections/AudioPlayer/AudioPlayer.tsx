@@ -67,16 +67,14 @@ const AudioPlayer = () => {
     if (isAudioPlaying) {
       audioPlayer.pause();
     } else {
+      setPromise("pending");
       audioPlayer
         .play()
         .then(() => {
-          setPromise("pending");
+          setPromise("success");
         })
         .catch(() => {
           setPromise("error");
-        })
-        .finally(() => {
-          setPromise("success");
         });
     }
     setIsAudioPlaying(!isAudioPlaying);
@@ -98,7 +96,17 @@ const AudioPlayer = () => {
         ...nextTrack,
       });
     }
-    if (nextTrack && isAudioPlaying) audioPlayer.play();
+    if (nextTrack && isAudioPlaying) {
+      setPromise("pending");
+      audioPlayer
+        .play()
+        .then(() => {
+          setPromise("success");
+        })
+        .catch(() => {
+          setPromise("error");
+        });
+    }
   };
 
   const handleVideoClick = () => {
