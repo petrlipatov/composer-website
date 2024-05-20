@@ -8,9 +8,9 @@
 
 @media (min-width: 720px) {
   .artwork {
-    height: 90px;
+    height: 70px;
     width: auto;
-    left: 5px;
-    top: 5px;
+    left: 10px;
+    top: 10px;
   }
 }

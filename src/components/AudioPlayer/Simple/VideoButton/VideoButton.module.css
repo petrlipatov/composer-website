@@ -20,6 +20,7 @@
 @media (min-width: 720px) {
   .container {
     top: 56px;
+    right: auto;
     left: 112px;
   }
 

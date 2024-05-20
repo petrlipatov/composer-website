@@ -10,7 +10,8 @@
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: max-content max-content 1fr;
-  height: 95%;
+  flex-grow: 1;
   overflow: hidden;
   width: 94%;
+  border: 1px solid green;
 }

@@ -129,7 +129,7 @@ const AudioPlayer = () => {
       <div className={s.content}>
         <Artwork src={currentAudioData?.imageSrc} />
 
-        <div className={s.promise}>{promise}</div>
+        {/* <div className={s.promise}>{promise}</div> */}
 
         <div className={s.playerControls}>
           <Title>{currentAudioData?.name}</Title>
