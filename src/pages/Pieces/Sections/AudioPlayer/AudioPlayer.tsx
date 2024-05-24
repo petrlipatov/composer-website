@@ -23,24 +23,6 @@ const AudioPlayer = () => {
   } = useContext(PiecesContext);
 
   const audioPlayer = audioPlayerRef.current;
-  // const bufferedRef = useRef<HTMLSpanElement>();
-
-  // useEffect(() => {
-  //   if (audioPlayerRef && audioPlayerRef) {
-  //     const audio = audioPlayerRef;
-
-  //     if (audio.buffered && audio.buffered.length > 0) {
-  //       // Получаем доступ к окончанию последнего буфера, если он существует
-  //       const bufferedEnd = audio.buffered.end(audio.buffered.length - 1);
-  //       // Получаем продолжительность аудиофайла
-  //       const duration = audio.duration;
-  //       // Вычисляем прогресс буферизации в процентах
-  //       const bufferedProgress = (bufferedEnd / duration) * 100;
-  //       // Выводим прогресс в консоль
-  //       console.log("Buffered progress:", bufferedProgress);
-  //     }
-  //   }
-  // }, [audioPlayerRef]);
 
   useEffect(
     function togglePlayingStatus() {
