@@ -18,13 +18,20 @@ const ProgressBar = () => {
   const audioPlayer = audioPlayerRef.current;
 
   const updateBufferedAndElapsedTime = useCallback(() => {
-    if (audioPlayer) {
-      setElapsedTime(Math.round(audioPlayer.currentTime));
-      if (audioPlayer.buffered?.length) {
-        setBuffered(
-          Math.round(audioPlayer.buffered.end(audioPlayer.buffered.length - 1))
-        );
-      }
+    if (!audioPlayer) {
+      return;
+    }
+
+    const currentTime = Math.round(audioPlayer.currentTime);
+    setElapsedTime(currentTime);
+
+    const bufferedRanges = audioPlayer.buffered;
+    const hasBufferedRanges = bufferedRanges && bufferedRanges.length > 0;
+
+    if (hasBufferedRanges) {
+      const lastBufferedIndex = bufferedRanges.length - 1;
+      const bufferedEndTime = Math.round(bufferedRanges.end(lastBufferedIndex));
+      setBuffered(bufferedEndTime);
     }
   }, [audioPlayer]);
 
