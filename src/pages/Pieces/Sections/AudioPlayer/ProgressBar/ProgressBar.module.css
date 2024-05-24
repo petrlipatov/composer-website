@@ -16,11 +16,16 @@
   position: relative;
   display: flex;
   width: 100%;
+  /* border: 1px solid green; */
+  height: 4px;
+  /* overflow: hidden; */
 }
 
 .timeScrubber {
-  background-color: rgba(0, 0, 0);
+  /* background-color: black; */
+  /* width: 100%;
   height: 1px;
+  color: black; */
 }
 
 @keyframes flash {
@@ -38,13 +43,14 @@
 }
 
 .buffered {
+  border-top: 0.5px solid black;
   position: absolute;
-  width: 100%;
-  background-image: linear-gradient(white, white);
+  background-image: linear-gradient(black, black);
   background-size: 0% 100%;
   background-repeat: no-repeat;
-  height: 2px;
+  inset: 0;
   transition: background-size 2s ease;
+  z-index: 1;
 }
 
 .timeValue {
@@ -53,12 +59,14 @@
 }
 
 input[type="range"] {
+  all: unset;
+  position: absolute;
   background-image: linear-gradient(white, white);
   background-size: 0% 100%;
   background-repeat: no-repeat;
-  height: 4px;
-  width: 100%;
+  inset: 0;
   -webkit-appearance: none;
+  z-index: 2;
 }
 
 input[type="range"]::-webkit-slider-thumb {
