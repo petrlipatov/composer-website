@@ -8,10 +8,13 @@ const ProgressBar = () => {
   const [duration, setDuration] = useState(0);
   const [elapsedTime, setElapsedTime] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [buffered, setBuffered] = useState(0);
   const progressBarRef = useRef<HTMLInputElement>();
+  const bufferedBarRef = useRef<HTMLInputElement>();
   const { audioPlayerRef } = useContext(PiecesContext);
 
   const progressBar = progressBarRef.current;
+  const bufferedBar = bufferedBarRef.current;
   const audioPlayer = audioPlayerRef.current;
 
   useEffect(() => {
@@ -22,26 +25,17 @@ const ProgressBar = () => {
       audioPlayer.ontimeupdate = () => {
         setElapsedTime(Math.round(audioPlayer.currentTime));
       };
-      audioPlayer.onwaiting = () => {
-        setIsLoading(true);
-      };
-      audioPlayer.onplaying = () => {
-        setIsLoading(false);
-      };
+      audioPlayer.onwaiting = () => setIsLoading(true);
 
-      audioPlayer.onstalled = () => {
-        setIsLoading(false);
-      };
+      audioPlayer.onplaying = () => setIsLoading(false);
 
-      audioPlayer.onerror = () => {
-        setIsLoading(false);
-      };
+      audioPlayer.onstalled = () => setIsLoading(false);
 
-      audioPlayer.onended = () => {
-        setElapsedTime(0);
-      };
+      audioPlayer.onerror = () => setIsLoading(false);
+
+      audioPlayer.onended = () => setElapsedTime(0);
     }
-  }, [audioPlayerRef, audioPlayer]);
+  }, [audioPlayer]);
 
   useEffect(
     function updateElapsedProgressOnScrubber() {
@@ -55,6 +49,30 @@ const ProgressBar = () => {
     [elapsedTime, progressBar]
   );
 
+  useEffect(
+    function updateBuffered1() {
+      if (audioPlayer) {
+        for (let i = 0; i < audioPlayer.buffered.length; i++) {
+          setBuffered(audioPlayer.buffered.end(i));
+        }
+      }
+    },
+    [audioPlayer, audioPlayer.buffered]
+  );
+
+  useEffect(
+    function updateBuffered2() {
+      if (bufferedBar) {
+        const max = duration;
+        const progressValue = buffered;
+        const relativeProgressVal = ((progressValue / +max) * 100).toFixed(0);
+
+        bufferedBar.style.backgroundSize = `${relativeProgressVal}% 100%`;
+      }
+    },
+    [buffered, bufferedBar, duration, audioPlayer.buffered]
+  );
+
   const onScrubberChange = (e) => {
     const newTime = e.target.value;
     audioPlayer.currentTime = newTime;
@@ -66,17 +84,23 @@ const ProgressBar = () => {
       {isLoading ? (
         <ProgressBarLoader />
       ) : (
-        <input
-          className={s.timeScrubber}
-          type="range"
-          value={elapsedTime}
-          min={0}
-          max={duration}
-          onChange={onScrubberChange}
-          ref={progressBarRef}
-        />
+        <div className={s.scrubberContainer}>
+          <input
+            className={s.timeScrubber}
+            type="range"
+            value={elapsedTime}
+            min={0}
+            max={duration}
+            onChange={onScrubberChange}
+            ref={progressBarRef}
+          />
+          <div className={s.buffered} ref={bufferedBarRef} />
+        </div>
       )}
-      <div className={s.timeValue}>{formatTime(duration)}</div>
+      <div>
+        <div className={s.timeValue}>{formatTime(duration)}</div>
+        <div className={s.timeValue}>{formatTime(buffered)}</div>
+      </div>
     </div>
   );
 };

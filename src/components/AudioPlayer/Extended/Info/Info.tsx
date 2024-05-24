@@ -18,7 +18,7 @@ function Info({ data, handleVideoClick }: Props) {
         </div>
         <div className={s.videoButtonContainer} onClick={handleVideoClick}>
           <img className={s.videoIcon} src={videoIcon} />
-          <div>watch</div>
+          <div>watch compilation</div>
         </div>
       </div>
     </div>

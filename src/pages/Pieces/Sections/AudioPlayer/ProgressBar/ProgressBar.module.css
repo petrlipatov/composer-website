@@ -9,15 +9,42 @@
   justify-items: center;
   padding-left: 8px;
   padding-right: 8px;
+  position: relative;
+}
+
+.scrubberContainer {
+  position: relative;
+  display: flex;
+  width: 100%;
 }
 
 .timeScrubber {
-  width: 100%;
   background-color: rgba(0, 0, 0, 1);
+  cursor: pointer;
+}
+
+@keyframes flash {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
 }
 
 .timeScrubber:hover {
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  animation: flash 0.5s 1;
+}
+
+.buffered {
+  position: absolute;
+  width: 100%;
+  background-image: linear-gradient(white, white);
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+  height: 2px;
+  transition: background-size 2s ease;
 }
 
 .timeValue {

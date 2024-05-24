@@ -5,38 +5,6 @@
   align-items: center;
 }
 
-.playNextButton {
-  background-color: transparent;
-  padding: 0;
-  border: 0;
-}
-
-.playNextButton :active {
-  opacity: 0;
-}
-
-.playNextButton :hover {
-  filter: drop-shadow(3px 3px 3px rgb(0 0 0 / 0.4));
-}
-
-.playButton {
-  align-items: center;
-  background-color: transparent;
-  border: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0;
-}
-
-.playbutton :active {
-  opacity: 0;
-}
-
-.playButton :hover {
-  filter: drop-shadow(3px 3px 3px rgb(0 0 0 / 0.4));
-}
-
 .icon {
   height: 35px;
   width: 35px;
@@ -46,7 +14,56 @@
   transform: rotate(180deg);
 }
 
-@media (min-width: 400px) {
+@keyframes flash {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.playNextButton {
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  padding: 0;
+}
+
+.playNextButton:hover {
+  animation: flash 0.5s 1;
+}
+
+.playNextButton:active {
+  opacity: 0;
+}
+
+.playButton {
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  transition: all 0.1s;
+}
+
+.playButton:hover {
+  animation: flash 0.5s 1;
+}
+
+.playButton :active {
+  opacity: 0;
+}
+
+@media (min-width: 720px) {
+  .container {
+    width: 30%;
+  }
+
   .icon {
     height: 40px;
     width: 40px;

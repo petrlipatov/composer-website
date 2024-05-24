@@ -1,13 +1,17 @@
-import { useCallback, useContext, useState } from "react";
+import { useCallback, useContext } from "react";
 import { FeaturedWorkContext } from "../../FeaturedWork";
 import s from "./Projects.module.css";
 import Project from "../Project/Project";
+import useIsMobile from "../../../../utils/hooks/useIsMobile";
 
 function Projects() {
-  const [selectedProjectIndex, setSelectedProjectIndex] =
-    useState<number>(null);
-
-  const { isPlayerOpened, filteredProjects } = useContext(FeaturedWorkContext);
+  const isMobile = useIsMobile();
+  const {
+    isPlayerOpened,
+    filteredProjects,
+    selectedProjectIndex,
+    setSelectedProjectIndex,
+  } = useContext(FeaturedWorkContext);
 
   const setSelectedProjectIndexCached = useCallback(setSelectedProjectIndex, [
     setSelectedProjectIndex,
@@ -16,14 +20,14 @@ function Projects() {
   return (
     <div
       className={s.section}
-      style={isPlayerOpened ? { display: "none" } : {}}
+      style={isMobile && isPlayerOpened ? { display: "none" } : {}}
     >
       {filteredProjects.map((project, index) => (
         <Project
+          index={index}
           data={project}
           isSelected={selectedProjectIndex === index}
           setSelectedProjectIndex={setSelectedProjectIndexCached}
-          index={index}
           key={project.name}
         />
       ))}

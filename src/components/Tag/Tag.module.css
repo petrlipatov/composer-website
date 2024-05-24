@@ -2,10 +2,25 @@
   all: unset;
   border: 1px solid black;
   color: inherit;
+  cursor: pointer;
   display: inline;
   font-size: 12px;
   font-weight: 600;
   padding: 8px;
+}
+
+@keyframes flash {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.tag:not(.tagDisabled):hover {
+  animation: flash 0.5s 1;
 }
 
 .tagSelected {

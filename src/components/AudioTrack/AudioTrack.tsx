@@ -144,32 +144,21 @@ const AudioTrack = memo(
       <div className={s.track}>
         <div className={s.trackImageContainer} onClick={handleTrackClick}>
           <img className={s.trackImage} src={data.imageSrc} />
+
           <div className={trackImageMaskClasses}>
-            {isSelected && (
-              <>
-                <div
-                  className={s.imageMaskButtonLeft}
-                  onClick={handleListenClick}
-                >
-                  <img
-                    className={cn(s.imageMaskIcon, s.imageMaskIconLeft)}
-                    src={hedphonesIconSrc}
-                  />
-                  <div
-                    className={cn(s.imageMaskCaption, s.imageMaskCaptionLeft)}
-                  >
-                    Listen
-                  </div>
-                </div>
-                <div
-                  className={s.imageMaskButtonRight}
-                  onClick={handleWatchClick}
-                >
-                  <img className={cn(s.imageMaskIcon)} src={tvIconSrc} />
-                  <div className={s.imageMaskCaption}>Watch</div>
-                </div>
-              </>
-            )}
+            <div className={s.imageMaskButtonLeft} onClick={handleListenClick}>
+              <img
+                className={cn(s.imageMaskIcon, s.imageMaskIconLeft)}
+                src={hedphonesIconSrc}
+              />
+              <div className={cn(s.imageMaskCaption, s.imageMaskCaptionLeft)}>
+                Listen
+              </div>
+            </div>
+            <div className={s.imageMaskButtonRight} onClick={handleWatchClick}>
+              <img className={cn(s.imageMaskIcon)} src={tvIconSrc} />
+              <div className={s.imageMaskCaption}>Watch</div>
+            </div>
           </div>
         </div>
 

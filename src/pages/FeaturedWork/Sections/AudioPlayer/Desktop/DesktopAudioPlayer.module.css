@@ -1,0 +1,18 @@
+.player {
+  display: flex;
+  width: 100%;
+  min-height: 100px;
+  background-color: #e7397a;
+  justify-content: center;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.playerControls {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  width: 700px;
+}

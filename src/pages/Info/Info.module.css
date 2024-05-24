@@ -46,3 +46,9 @@
 .tagSelected {
   background-color: #e7397a;
 }
+
+@media (min-width: 720px) {
+  .content {
+    margin-top: 24px;
+  }
+}

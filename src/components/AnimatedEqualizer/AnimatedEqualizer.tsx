@@ -1,7 +1,7 @@
-import s from "./AudioPlayingLoader.module.css";
+import s from "./AnimatedEqualizer.module.css";
 import cn from "classnames";
 
-function AudioPlayingLoader({ color }: { color?: string }) {
+function EqualizerIcon({ color }: { color?: string }) {
   let barColor;
 
   switch (color) {
@@ -32,4 +32,4 @@ function AudioPlayingLoader({ color }: { color?: string }) {
   );
 }
 
-export default AudioPlayingLoader;
+export default EqualizerIcon;

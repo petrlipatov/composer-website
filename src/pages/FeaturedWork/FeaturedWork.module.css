@@ -9,18 +9,21 @@
 
 .content {
   display: grid;
-  flex-shrink: 0;
   grid-template-columns: 1fr;
   grid-template-rows: min-content min-content 1fr;
-  height: 95%;
   margin-top: 16px;
   overflow: hidden;
   width: 99%;
+  flex-grow: 1;
 }
 
-.contentShortened {
+.mobilePlayerOpened {
   grid-template-rows: min-content min-content;
   height: auto;
+}
+
+.desktopPlayerOpened {
+  /* grid-template-rows: min-content min-content 1fr; */
 }
 
 @media (min-width: 380px) {
@@ -32,5 +35,11 @@
 @media (min-width: 400px) {
   .content {
     width: 94%;
+  }
+}
+
+@media (min-width: 720px) {
+  .content {
+    margin-top: 24px;
   }
 }

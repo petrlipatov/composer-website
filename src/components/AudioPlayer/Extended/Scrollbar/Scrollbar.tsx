@@ -136,11 +136,7 @@ const Scrollbar = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <div className={s.container}>
-      <div
-        className={s.content}
-        id="custom-scrollbars-content"
-        ref={contentRef}
-      >
+      <div className={s.content} ref={contentRef}>
         {children}
       </div>
 

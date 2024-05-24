@@ -11,7 +11,6 @@ import CloseButton from "../../../../components/AudioPlayer/Simple/CloseButton/C
 
 const AudioPlayer = () => {
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
-  const [promise, setPromise] = useState("promise");
 
   const {
     filteredPieces,
@@ -67,15 +66,7 @@ const AudioPlayer = () => {
     if (isAudioPlaying) {
       audioPlayer.pause();
     } else {
-      setPromise("pending");
-      audioPlayer
-        .play()
-        .then(() => {
-          setPromise("success");
-        })
-        .catch(() => {
-          setPromise("error");
-        });
+      audioPlayer.play();
     }
     setIsAudioPlaying(!isAudioPlaying);
   };
@@ -97,15 +88,7 @@ const AudioPlayer = () => {
       });
     }
     if (nextTrack && isAudioPlaying) {
-      setPromise("pending");
-      audioPlayer
-        .play()
-        .then(() => {
-          setPromise("success");
-        })
-        .catch(() => {
-          setPromise("error");
-        });
+      audioPlayer.play();
     }
   };
 

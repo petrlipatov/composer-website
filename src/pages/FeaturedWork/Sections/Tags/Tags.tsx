@@ -9,10 +9,22 @@ import s from "./Tags.module.css";
 import Tag from "../../../../components/Tag/Tag";
 
 function Tags() {
-  const { selectedTags, filteredProjects, setIsPlayerOpened, setSelectedTags } =
-    useContext(FeaturedWorkContext);
+  const {
+    selectedTags,
+    filteredProjects,
+    audioPlayerRef,
+    setIsPlayerOpened,
+    setSelectedTags,
+    setSelectedTrackIndex,
+    setSelectedProjectIndex,
+  } = useContext(FeaturedWorkContext);
+
+  const audioPlayer = audioPlayerRef.current;
 
   const handleTagClick = (tag: string) => {
+    audioPlayer.pause();
+    setSelectedProjectIndex(null);
+    setSelectedTrackIndex(null);
     setIsPlayerOpened(false);
     if (selectedTags.includes(tag)) {
       setSelectedTags(selectedTags.filter((t) => t !== tag));

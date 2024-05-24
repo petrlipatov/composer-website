@@ -1,8 +1,9 @@
 import cn from "classnames";
 
-import AudioPlayingLoader from "../../../AudioPlayingLoader/AudioPlayingLoader";
+import AnimatedEqualizer from "../../../AnimatedEqualizer/AnimatedEqualizer";
 
 import s from "./AudioTrack.module.css";
+import { SyntheticEvent } from "react";
 
 type Props = {
   index: number;
@@ -13,7 +14,7 @@ type Props = {
     duration: string;
     audioSrc: string;
   };
-  handleTrackClick: (audioSrc: string, index: number) => void;
+  handleTrackClick: (src: string, index: number) => void;
 };
 
 function AudioTrack({
@@ -23,14 +24,19 @@ function AudioTrack({
   isTrackSelected,
   handleTrackClick,
 }: Props) {
+  const handleTrackClickWithStopPropagation = (e: SyntheticEvent) => {
+    e.stopPropagation();
+    handleTrackClick(track.audioSrc, index);
+  };
+
   return (
     <div
       className={cn(s.track, isTrackSelected ? s.trackPlaying : "")}
       key={index}
-      onClick={() => handleTrackClick(track.audioSrc, index)}
+      onClick={handleTrackClickWithStopPropagation}
     >
       {isTrackPlaying ? (
-        <AudioPlayingLoader color={"black"} />
+        <AnimatedEqualizer color={"black"} />
       ) : (
         <div className={s.trackIndex}>{index + 1}</div>
       )}

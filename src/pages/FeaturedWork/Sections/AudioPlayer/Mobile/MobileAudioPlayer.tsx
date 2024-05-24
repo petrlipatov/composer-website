@@ -1,25 +1,19 @@
-import {
-  forwardRef,
-  useContext,
-  useEffect,
-  useState,
-  useCallback,
-} from "react";
+import { useContext, useEffect, useState, useCallback } from "react";
 
-import ProgressBar from "./ProgressBar/ProgressBar";
-import ControlButtons from "../../../../components/AudioPlayer/Shared/ControlButtons/ControlButtons";
-import Title from "../../../../components/AudioPlayer/Extended/Title/Title";
-import AudioTrack from "../../../../components/AudioPlayer/Extended/AudioTrack/AudioTrack";
-import Info from "../../../../components/AudioPlayer/Extended/Info/Info";
-import Scrollbar from "../../../../components/AudioPlayer/Extended/Scrollbar/Scrollbar";
+import ProgressBar from "../ProgressBar/ProgressBar";
+import ControlButtons from "../../../../../components/AudioPlayer/Shared/ControlButtons/ControlButtons";
+import Title from "../../../../../components/AudioPlayer/Extended/Title/Title";
+import AudioTrack from "../../../../../components/AudioPlayer/Extended/AudioTrack/AudioTrack";
+import Info from "../../../../../components/AudioPlayer/Extended/Info/Info";
+import Scrollbar from "../../../../../components/AudioPlayer/Extended/Scrollbar/Scrollbar";
 
-import { FeaturedWorkContext } from "../../FeaturedWork";
+import { FeaturedWorkContext } from "../../../FeaturedWork";
 
-import closeIcon from "../../../../assets/images/close-icon_black.svg";
+import closeIcon from "../../../../../assets/images/close-icon_black.svg";
 
-import s from "./ExtendedAudioPlayer.module.css";
+import s from "./MobileAudioPlayer.module.css";
 
-const ExtendedAudioPlayer = forwardRef(() => {
+const MobileAudioPlayer = () => {
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const [playingTrackIndex, setPlayingTrackIndex] = useState<number>(null);
   const [selectedTrackIndex, setSelectedTrackIndex] = useState<number>(null);
@@ -39,7 +33,7 @@ const ExtendedAudioPlayer = forwardRef(() => {
     try {
       setPlayingTrackIndex(0);
       setSelectedTrackIndex(0);
-      audioPlayerRef.current.src = currentProject.tracks[0].audioSrc;
+      audioPlayer.src = currentProject.tracks[0].audioSrc;
 
       await new Promise((resolve, reject) => {
         audioPlayer.oncanplaythrough = resolve;
@@ -188,6 +182,6 @@ const ExtendedAudioPlayer = forwardRef(() => {
       </div>
     </div>
   );
-});
+};
 
-export default ExtendedAudioPlayer;
+export default MobileAudioPlayer;

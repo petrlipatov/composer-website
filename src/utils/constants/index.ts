@@ -1,3 +1,7 @@
+export const FIRST_TRACK_INDEX = 0;
+
+export const GALLERY_IMAGES_ON_PAGE_MOBILE = 6;
+
 export const PROJECTS_GENRES = [
   "Film",
   "Commercial",
@@ -236,12 +240,12 @@ export const PROJECTS = [
         duration: "3:00",
       },
       {
-        name: "Stardust",
+        name: "Stardust1",
         audioSrc: "/audio/GOING-FAR-AWAY-_VINTAGE-HARMONY__1_.mp3",
         duration: "3:00",
       },
       {
-        name: "Stardust",
+        name: "Stardust2",
         audioSrc: "/audio/GOING-FAR-AWAY-_VINTAGE-HARMONY__1_.mp3",
         duration: "3:00",
       },
@@ -577,5 +581,3 @@ export const GALLERY_IMAGES = [
     desc: "photo description photo description",
   },
 ];
-
-export const GALLERY_IMAGES_ON_PAGE_MOBILE = 6;

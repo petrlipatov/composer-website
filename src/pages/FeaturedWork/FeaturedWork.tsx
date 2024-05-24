@@ -5,19 +5,22 @@ import {
   createContext,
   useEffect,
   MutableRefObject,
+  Dispatch,
+  SetStateAction,
 } from "react";
 import cn from "classnames";
+
+import AudioPlayer from "./Sections/AudioPlayer/AudioPlayer";
+import Tags from "./Sections/Tags/Tags";
+import ProjectsSuspensed from "./Sections/ProjectsSuspensed/ProjectsSuspensed";
 
 import HTMLAudioTag from "../../components/HTMLAudioTag/HTMLAudioTag";
 import Header from "../../components/Header/Header";
 import VideoPopup from "../../components/VideoPopup/VideoPopup";
 
-import Tags from "./Sections/Tags/Tags";
-import ProjectsSuspensed from "./Sections/ProjectsSuspensed/ProjectsSuspensed";
-import ExtendedAudioPlayer from "./Sections/ExtendedAudioPlayer/ExtendedAudioPlayer";
+import useIsMobile from "../../utils/hooks/useIsMobile";
 
 import { ProjectData } from "../../types";
-
 import { PROJECTS } from "../../utils/constants";
 
 import s from "./FeaturedWork.module.css";
@@ -29,11 +32,15 @@ interface FeaturedWorkContext {
   currentProject: ProjectData;
   filteredProjects: ProjectData[];
   audioPlayerRef: MutableRefObject<HTMLAudioElement>;
-  setSelectedTags: React.Dispatch<React.SetStateAction<string[]>>;
-  setCurrentProject: React.Dispatch<React.SetStateAction<ProjectData>>;
-  setVideoID: React.Dispatch<React.SetStateAction<string>>;
-  setIsPlayerOpened: React.Dispatch<React.SetStateAction<boolean>>;
-  setIsVideoPopupOpened: React.Dispatch<React.SetStateAction<boolean>>;
+  selectedProjectIndex: number;
+  selectedTrackIndex: number;
+  setSelectedTags: Dispatch<SetStateAction<string[]>>;
+  setCurrentProject: Dispatch<SetStateAction<ProjectData>>;
+  setVideoID: Dispatch<SetStateAction<string>>;
+  setIsPlayerOpened: Dispatch<SetStateAction<boolean>>;
+  setIsVideoPopupOpened: Dispatch<SetStateAction<boolean>>;
+  setSelectedProjectIndex: Dispatch<SetStateAction<number>>;
+  setSelectedTrackIndex: Dispatch<SetStateAction<number>>;
 }
 
 export const FeaturedWorkContext = createContext<FeaturedWorkContext>(null);
@@ -41,12 +48,18 @@ export const FeaturedWorkContext = createContext<FeaturedWorkContext>(null);
 function FeaturedWork() {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [filteredProjects, setFilteredProjects] = useState<ProjectData[]>([]);
-  const [currentProject, setCurrentProject] = useState<ProjectData>(null);
-  const [isPlayerOpened, setIsPlayerOpened] = useState(false);
   const [videoID, setVideoID] = useState<string>("");
+  const [currentProject, setCurrentProject] = useState<ProjectData>(null);
+
   const [isVideoPopupOpened, setIsVideoPopupOpened] = useState(false);
+  const [isPlayerOpened, setIsPlayerOpened] = useState(false);
+
+  const [selectedTrackIndex, setSelectedTrackIndex] = useState(null);
+  const [selectedProjectIndex, setSelectedProjectIndex] =
+    useState<number>(null);
 
   const audioPlayerRef = useRef<HTMLAudioElement>();
+  const isMobile = useIsMobile();
 
   const contextValue = useMemo(
     () => ({
@@ -56,11 +69,15 @@ function FeaturedWork() {
       selectedTags,
       filteredProjects,
       audioPlayerRef,
+      selectedProjectIndex,
+      selectedTrackIndex,
       setSelectedTags,
       setCurrentProject,
       setIsPlayerOpened,
       setIsVideoPopupOpened,
       setVideoID,
+      setSelectedProjectIndex,
+      setSelectedTrackIndex,
     }),
     [
       videoID,
@@ -68,11 +85,15 @@ function FeaturedWork() {
       selectedTags,
       currentProject,
       filteredProjects,
+      selectedProjectIndex,
+      selectedTrackIndex,
       setSelectedTags,
       setCurrentProject,
       setIsPlayerOpened,
       setIsVideoPopupOpened,
       setVideoID,
+      setSelectedProjectIndex,
+      setSelectedTrackIndex,
     ]
   );
 
@@ -86,7 +107,11 @@ function FeaturedWork() {
     [selectedTags]
   );
 
-  const content = cn(s.content, isPlayerOpened ? s.contentShortened : "");
+  const content = cn(
+    s.content,
+    isPlayerOpened && isMobile ? s.mobilePlayerOpened : "",
+    isPlayerOpened && !isMobile ? s.desktopPlayerOpened : ""
+  );
 
   return (
     <FeaturedWorkContext.Provider value={contextValue}>
@@ -99,7 +124,7 @@ function FeaturedWork() {
           <ProjectsSuspensed />
         </div>
 
-        {isPlayerOpened && <ExtendedAudioPlayer />}
+        {isPlayerOpened && <AudioPlayer />}
 
         {isVideoPopupOpened && (
           <VideoPopup

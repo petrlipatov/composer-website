@@ -14,6 +14,21 @@
 .timeScrubber {
   width: 100%;
   background-color: rgba(0, 0, 0, 1);
+  cursor: pointer;
+}
+
+@keyframes flash {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.timeScrubber:hover {
+  animation: flash 0.5s 1;
 }
 
 .timeValue {

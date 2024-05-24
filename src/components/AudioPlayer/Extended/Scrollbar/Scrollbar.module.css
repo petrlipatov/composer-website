@@ -1,7 +1,6 @@
 .container {
   padding-top: 8px;
   display: grid;
-  height: 100%;
   grid-template-rows: auto;
   grid-template-columns: 1fr 50px;
   overflow: hidden;
@@ -83,6 +82,5 @@
 
   .button {
     width: 10px;
-    /* border: 1px solid black; */
   }
 }

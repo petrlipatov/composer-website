@@ -1,14 +1,3 @@
-.container {
-  position: relative;
-  display: inline-block;
-  /* padding-left: 15px;
-  padding-right: 15px; */
-}
-
-.container:hover .player {
-  display: block;
-}
-
 .artworkContainer {
   position: relative;
 }
@@ -18,4 +7,12 @@
   position: absolute;
   background-color: #e7397a;
   inset: 0;
+}
+
+.container:hover .player {
+  display: block;
+}
+
+.playerActive {
+  display: block;
 }

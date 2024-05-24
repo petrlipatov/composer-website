@@ -32,6 +32,21 @@
   align-items: center;
   font-size: 12px;
   transform: translateY(4.5px);
+  cursor: pointer;
+}
+
+@keyframes flash {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.videoButtonContainer:hover {
+  animation: flash 0.5s 1;
 }
 
 .videoIcon {
