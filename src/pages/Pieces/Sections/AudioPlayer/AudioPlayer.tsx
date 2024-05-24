@@ -35,13 +35,13 @@ const AudioPlayer = () => {
       }
 
       return () => {
-        if (audioPlayerRef) {
+        if (audioPlayer) {
           audioPlayer.removeEventListener("playing", onPlayingHandler);
           audioPlayer.removeEventListener("ended", onEndedHandler);
         }
       };
     },
-    [audioPlayer, audioPlayerRef]
+    [audioPlayer]
   );
 
   const handlePlayPauseClick = () => {
@@ -93,8 +93,6 @@ const AudioPlayer = () => {
     <div className={s.player}>
       <div className={s.content}>
         <Artwork src={currentAudioData?.imageSrc} />
-
-        {/* <div className={s.promise}>{promise}</div> */}
 
         <div className={s.playerControls}>
           <Title>{currentAudioData?.name}</Title>

@@ -23,6 +23,7 @@ function ControlButtons({
         type="button"
         className={s.playNextButton}
         onClick={() => handlePlayNextClick("prev")}
+        onTouchStart={() => handlePlayNextClick("prev")}
       >
         <img
           className={cn(s.icon, s.iconPlayPrevious)}
@@ -35,6 +36,7 @@ function ControlButtons({
         type="button"
         className={s.playButton}
         onClick={handlePlayPauseClick}
+        onTouchStart={handlePlayPauseClick}
       >
         <img
           className={s.icon}
@@ -55,6 +57,7 @@ function ControlButtons({
         type="button"
         className={s.playNextButton}
         onClick={() => handlePlayNextClick("next")}
+        onTouchStart={() => handlePlayNextClick("next")}
       >
         <img className={s.icon} src={playNextSrc} alt="play-next-button" />
       </button>
