@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { formatTime } from "../../../../../utils/helpers/formatTime";
 import s from "./ProgressBar.module.css";
 import ProgressBarLoader from "../../../../../components/AudioPlayer/Shared/ProgressBarLoader/ProgressBarLoader";
@@ -17,14 +17,24 @@ const ProgressBar = () => {
   const bufferedBar = bufferedBarRef.current;
   const audioPlayer = audioPlayerRef.current;
 
+  const updateBufferedAndElapsedTime = useCallback(() => {
+    if (audioPlayer) {
+      setElapsedTime(Math.round(audioPlayer.currentTime));
+      if (audioPlayer.buffered?.length) {
+        setBuffered(
+          Math.round(audioPlayer.buffered.end(audioPlayer.buffered.length - 1))
+        );
+      }
+    }
+  }, [audioPlayer]);
+
   useEffect(() => {
     if (audioPlayer) {
       audioPlayer.onloadedmetadata = () => {
         setDuration(audioPlayer.duration);
       };
-      audioPlayer.ontimeupdate = () => {
-        setElapsedTime(Math.round(audioPlayer.currentTime));
-      };
+      audioPlayer.ontimeupdate = () => updateBufferedAndElapsedTime();
+
       audioPlayer.onwaiting = () => setIsLoading(true);
 
       audioPlayer.onplaying = () => setIsLoading(false);
@@ -47,17 +57,6 @@ const ProgressBar = () => {
       }
     },
     [elapsedTime, progressBar]
-  );
-
-  useEffect(
-    function updateBuffered1() {
-      if (audioPlayer) {
-        for (let i = 0; i < audioPlayer.buffered.length; i++) {
-          setBuffered(audioPlayer.buffered.end(i));
-        }
-      }
-    },
-    [audioPlayer, audioPlayer.buffered]
   );
 
   useEffect(
@@ -97,10 +96,8 @@ const ProgressBar = () => {
           <div className={s.buffered} ref={bufferedBarRef} />
         </div>
       )}
-      <div>
-        <div className={s.timeValue}>{formatTime(duration)}</div>
-        <div className={s.timeValue}>{formatTime(buffered)}</div>
-      </div>
+
+      <div className={s.timeValue}>{formatTime(duration)}</div>
     </div>
   );
 };
