@@ -34,17 +34,11 @@ const MobileAudioPlayer = () => {
       setPlayingTrackIndex(0);
       setSelectedTrackIndex(0);
       audioPlayer.src = currentProject.tracks[0].audioSrc;
-
-      await new Promise((resolve, reject) => {
-        audioPlayer.oncanplaythrough = resolve;
-        audioPlayer.onerror = reject;
-      });
-
       audioPlayer.play();
     } catch (err) {
       console.log("Error", err);
     }
-  }, [audioPlayer, audioPlayerRef, currentProject?.tracks]);
+  }, [audioPlayer, currentProject?.tracks]);
 
   useEffect(
     function playWhenComponentIsMounted() {
