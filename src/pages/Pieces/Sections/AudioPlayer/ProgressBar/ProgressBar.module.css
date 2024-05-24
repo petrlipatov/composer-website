@@ -43,13 +43,23 @@
 }
 
 .buffered {
-  border-top: 0.5px solid black;
+  /* border-top: 0.5px solid black; */
   position: absolute;
   background-image: linear-gradient(black, black);
   background-size: 0% 100%;
   background-repeat: no-repeat;
   inset: 0;
   transition: background-size 2s ease;
+  z-index: 2;
+}
+
+.length {
+  position: absolute;
+  top: 1.7px;
+  bottom: 1.7px;
+  left: 0;
+  right: 0;
+  background-color: black;
   z-index: 1;
 }
 
@@ -66,7 +76,7 @@ input[type="range"] {
   background-repeat: no-repeat;
   inset: 0;
   -webkit-appearance: none;
-  z-index: 2;
+  z-index: 3;
 }
 
 input[type="range"]::-webkit-slider-thumb {

@@ -91,6 +91,7 @@ const ProgressBar = () => {
         <ProgressBarLoader />
       ) : (
         <div className={s.scrubberContainer}>
+          <div className={s.length} />
           <input
             className={s.timeScrubber}
             type="range"
@@ -100,6 +101,7 @@ const ProgressBar = () => {
             onChange={onScrubberChange}
             ref={progressBarRef}
           />
+
           <div className={s.buffered} ref={bufferedBarRef} />
         </div>
       )}
