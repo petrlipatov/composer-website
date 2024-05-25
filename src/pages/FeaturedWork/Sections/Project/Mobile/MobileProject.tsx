@@ -13,6 +13,7 @@ import hedphonesIconSrc from "../../../../../assets/images/headphone50.svg";
 
 import s from "./MobileProject.module.css";
 import Artwork from "../../../../../components/Project/Artwork/Artwork";
+import { FIRST_TRACK_INDEX } from "../../../../../utils/constants";
 
 const MobileProject = ({
   index,
@@ -21,11 +22,15 @@ const MobileProject = ({
   setSelectedProjectIndex,
 }: ProjectProps) => {
   const {
+    currentProject,
+    audioPlayerRef,
     setIsPlayerOpened,
     setCurrentProject,
     setVideoID,
     setIsVideoPopupOpened,
   } = useContext(FeaturedWorkContext);
+
+  const audioPlayer = audioPlayerRef.current;
 
   useEffect(() => {
     if (isSelected) {
@@ -44,6 +49,8 @@ const MobileProject = ({
   function handleListenClick() {
     setIsPlayerOpened(true);
     setCurrentProject(data);
+    audioPlayer.src = data.tracks[FIRST_TRACK_INDEX].audioSrc;
+    audioPlayer.play();
   }
 
   function handleWatchClick() {

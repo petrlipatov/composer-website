@@ -16,8 +16,10 @@ import s from "./MobileAudioPlayer.module.css";
 
 const MobileAudioPlayer = () => {
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
-  const [playingTrackIndex, setPlayingTrackIndex] = useState<number>(null);
-  const [selectedTrackIndex, setSelectedTrackIndex] = useState<number>(null);
+  const [playingTrackIndex, setPlayingTrackIndex] =
+    useState<number>(FIRST_TRACK_INDEX);
+  const [selectedTrackIndex, setSelectedTrackIndex] =
+    useState<number>(FIRST_TRACK_INDEX);
 
   const {
     currentProject,
@@ -29,30 +31,30 @@ const MobileAudioPlayer = () => {
 
   const audioPlayer = audioPlayerRef.current;
 
-  useEffect(
-    function playFirstTrackOnMount() {
-      const playAudio = () => {
-        setPlayingTrackIndex(FIRST_TRACK_INDEX);
-        setSelectedTrackIndex(FIRST_TRACK_INDEX);
-        audioPlayer.src = currentProject.tracks[FIRST_TRACK_INDEX].audioSrc;
-        console.log("callback");
-        audioPlayer.play().catch((err) => {
-          console.log("Error playing audio:", err);
-        });
-      };
+  // useEffect(
+  //   function playFirstTrackOnMount() {
+  //     const playAudio = () => {
+  //       setPlayingTrackIndex(FIRST_TRACK_INDEX);
+  //       setSelectedTrackIndex(FIRST_TRACK_INDEX);
+  //       audioPlayer.src = currentProject.tracks[FIRST_TRACK_INDEX].audioSrc;
+  //       console.log("callback");
+  //       audioPlayer.play().catch((err) => {
+  //         console.log("Error playing audio:", err);
+  //       });
+  //     };
 
-      if (audioPlayer) {
-        audioPlayer.addEventListener("canplay", playAudio, { once: true });
-      }
+  //     if (audioPlayer) {
+  //       audioPlayer.addEventListener("canplay", playAudio, { once: true });
+  //     }
 
-      return () => {
-        if (audioPlayer) {
-          audioPlayer.removeEventListener("canplay", playAudio);
-        }
-      };
-    },
-    [audioPlayer, currentProject.tracks]
-  );
+  //     return () => {
+  //       if (audioPlayer) {
+  //         audioPlayer.removeEventListener("canplay", playAudio);
+  //       }
+  //     };
+  //   },
+  //   [audioPlayer, currentProject.tracks]
+  // );
 
   useEffect(
     function setListenersOnPlayerStates() {
