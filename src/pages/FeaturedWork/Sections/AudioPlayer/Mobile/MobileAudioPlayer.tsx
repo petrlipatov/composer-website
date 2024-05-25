@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState, useCallback } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import ProgressBar from "../ProgressBar/ProgressBar";
 import ControlButtons from "../../../../../components/AudioPlayer/Shared/ControlButtons/ControlButtons";
@@ -21,7 +21,6 @@ const MobileAudioPlayer = () => {
 
   const {
     currentProject,
-    isPlayerOpened,
     setIsPlayerOpened,
     setVideoID,
     setIsVideoPopupOpened,
@@ -35,8 +34,9 @@ const MobileAudioPlayer = () => {
       setPlayingTrackIndex(FIRST_TRACK_INDEX);
       setSelectedTrackIndex(FIRST_TRACK_INDEX);
       audioPlayer.src = currentProject.tracks[FIRST_TRACK_INDEX].audioSrc;
-
+      console.log("useEffect");
       const playAudio = () => {
+        console.log("callback");
         audioPlayer.play().catch((err) => {
           console.log("Error playing audio:", err);
         });
