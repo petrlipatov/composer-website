@@ -10,6 +10,7 @@ import Scrollbar from "../../../../../components/AudioPlayer/Extended/Scrollbar/
 import { FeaturedWorkContext } from "../../../FeaturedWork";
 
 import closeIcon from "../../../../../assets/images/close-icon_black.svg";
+import { FIRST_TRACK_INDEX } from "../../../../../utils/constants";
 
 import s from "./MobileAudioPlayer.module.css";
 
@@ -30,10 +31,14 @@ const MobileAudioPlayer = () => {
   const audioPlayer = audioPlayerRef.current;
 
   const playFirstTrack = useCallback(() => {
-    setPlayingTrackIndex(0);
-    setSelectedTrackIndex(0);
-    audioPlayer.src = currentProject.tracks[0].audioSrc;
-    audioPlayer.play();
+    try {
+      setPlayingTrackIndex(FIRST_TRACK_INDEX);
+      setSelectedTrackIndex(FIRST_TRACK_INDEX);
+      audioPlayer.src = currentProject.tracks[FIRST_TRACK_INDEX].audioSrc;
+      audioPlayer.play();
+    } catch (err) {
+      console.log(err);
+    }
   }, [audioPlayer, currentProject.tracks]);
 
   useEffect(

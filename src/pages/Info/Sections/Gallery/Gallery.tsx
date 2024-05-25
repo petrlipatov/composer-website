@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
-import s from "./Gallery.module.css";
+
+import Modal from "../../../../components/Modal/Modal.tsx";
+
 import {
   GALLERY_IMAGES,
   GALLERY_IMAGES_ON_PAGE_MOBILE,
-} from "../../../../utils/constants/index.ts";
-import Modal from "../../../../components/Modal/Modal.tsx";
+} from "../../_constants.ts";
+
+import s from "./Gallery.module.css";
 
 function Gallery() {
   const [pageNumber, setPageNumber] = useState<number>(1);

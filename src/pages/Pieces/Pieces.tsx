@@ -1,13 +1,4 @@
-import {
-  useState,
-  useRef,
-  useMemo,
-  createContext,
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  MutableRefObject,
-} from "react";
+import { useState, useRef, useMemo, createContext, useEffect } from "react";
 
 import AudioPlayer from "./Sections/AudioPlayer/AudioPlayer";
 import Header from "../../components/Header/Header";
@@ -17,31 +8,13 @@ import VideoPopup from "../../components/VideoPopup/VideoPopup";
 import Tags from "./Sections/Tags/Tags";
 import Tracks from "./Sections/Tracks/Tracks";
 
-import { AudioTrackData } from "../../types";
-import { PIECES } from "../../utils/constants";
+import { PIECES, DEFAULT_CONTEXT } from "./_constants";
+
+import { AudioTrackData, ContextTypes, currentAudioData } from "./_types";
 
 import s from "./Pieces.module.css";
 
-export type currentAudioData = AudioTrackData & {
-  index: number;
-};
-
-interface PiecesContext {
-  videoID: string;
-  selectedTags: string[];
-  filteredPieces: AudioTrackData[];
-  currentAudioData: currentAudioData;
-  isPlayerOpened: boolean;
-  isVideoPopupOpened: boolean;
-  audioPlayerRef: MutableRefObject<HTMLAudioElement>;
-  setVideoID: Dispatch<SetStateAction<string>>;
-  setSelectedTags: Dispatch<SetStateAction<string[]>>;
-  setCurrentAudioData: Dispatch<SetStateAction<currentAudioData>>;
-  setIsPlayerOpened: Dispatch<SetStateAction<boolean>>;
-  setIsVideoPopupOpened: Dispatch<SetStateAction<boolean>>;
-}
-
-export const PiecesContext = createContext<PiecesContext>(null);
+export const PiecesContext = createContext<ContextTypes>(DEFAULT_CONTEXT);
 
 function Pieces() {
   const [videoID, setVideoID] = useState<string>("");

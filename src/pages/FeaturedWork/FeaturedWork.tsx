@@ -1,49 +1,21 @@
-import {
-  useMemo,
-  useRef,
-  useState,
-  createContext,
-  useEffect,
-  MutableRefObject,
-  Dispatch,
-  SetStateAction,
-} from "react";
+import { useMemo, useRef, useState, createContext, useEffect } from "react";
 import cn from "classnames";
 
 import AudioPlayer from "./Sections/AudioPlayer/AudioPlayer";
 import Tags from "./Sections/Tags/Tags";
 import ProjectsSuspensed from "./Sections/ProjectsSuspensed/ProjectsSuspensed";
-
 import HTMLAudioTag from "../../components/HTMLAudioTag/HTMLAudioTag";
 import Header from "../../components/Header/Header";
 import VideoPopup from "../../components/VideoPopup/VideoPopup";
 
 import useIsMobile from "../../utils/hooks/useIsMobile";
 
-import { ProjectData } from "../../types";
-import { PROJECTS } from "../../utils/constants";
+import { DEFAULT_CONTEXT, PROJECTS } from "./_constants";
+import { ContextTypes, ProjectData } from "./_types";
 
 import s from "./FeaturedWork.module.css";
 
-interface FeaturedWorkContext {
-  videoID: string;
-  isPlayerOpened: boolean;
-  selectedTags: string[];
-  currentProject: ProjectData;
-  filteredProjects: ProjectData[];
-  audioPlayerRef: MutableRefObject<HTMLAudioElement>;
-  selectedProjectIndex: number;
-  selectedTrackIndex: number;
-  setSelectedTags: Dispatch<SetStateAction<string[]>>;
-  setCurrentProject: Dispatch<SetStateAction<ProjectData>>;
-  setVideoID: Dispatch<SetStateAction<string>>;
-  setIsPlayerOpened: Dispatch<SetStateAction<boolean>>;
-  setIsVideoPopupOpened: Dispatch<SetStateAction<boolean>>;
-  setSelectedProjectIndex: Dispatch<SetStateAction<number>>;
-  setSelectedTrackIndex: Dispatch<SetStateAction<number>>;
-}
-
-export const FeaturedWorkContext = createContext<FeaturedWorkContext>(null);
+export const FeaturedWorkContext = createContext<ContextTypes>(DEFAULT_CONTEXT);
 
 function FeaturedWork() {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);

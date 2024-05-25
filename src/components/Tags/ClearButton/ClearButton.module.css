@@ -1,0 +1,34 @@
+.clearButton {
+  all: unset;
+  font-weight: 600;
+  color: #e7397a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.clearButton:active {
+  opacity: 0;
+}
+
+@keyframes flash {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.clearButton:hover {
+  animation: flash 0.3s 1;
+}
+
+.closeIcon {
+  margin-right: 6px;
+  height: 12px;
+  width: 12px;
+}

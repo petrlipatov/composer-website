@@ -12,12 +12,16 @@
     opacity: 1;
   }
   50% {
-    opacity: 0.5;
+    opacity: 0.7;
   }
 }
 
 .container:hover {
-  animation: flash 0.5s 1;
+  animation: flash 0.3s 1;
+}
+
+.container:active {
+  opacity: 0;
 }
 
 .button {

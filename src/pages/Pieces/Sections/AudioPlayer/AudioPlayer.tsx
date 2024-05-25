@@ -57,8 +57,8 @@ const AudioPlayer = () => {
     let nextSongIndex = 0;
 
     prevOrNext === "next"
-      ? (nextSongIndex = currentAudioData.index + 1)
-      : (nextSongIndex = currentAudioData.index - 1);
+      ? (nextSongIndex = currentAudioData?.index + 1)
+      : (nextSongIndex = currentAudioData?.index - 1);
 
     const nextTrack = filteredPieces[nextSongIndex];
 
@@ -76,7 +76,7 @@ const AudioPlayer = () => {
 
   const handleVideoClick = () => {
     setIsPlayerOpened(false);
-    setVideoID(currentAudioData.videoSrc);
+    setVideoID(currentAudioData?.videoSrc);
     audioPlayer.pause();
     audioPlayer.src = "";
     setIsVideoPopupOpened(true);

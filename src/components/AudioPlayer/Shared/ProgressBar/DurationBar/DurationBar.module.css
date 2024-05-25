@@ -1,0 +1,9 @@
+.durationBar {
+  position: absolute;
+  top: 1.7px;
+  bottom: 1.7px;
+  left: 0;
+  right: 0;
+  background-color: black;
+  z-index: 1;
+}

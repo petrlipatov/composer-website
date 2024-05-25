@@ -5,7 +5,7 @@
   cursor: pointer;
 }
 
-/* @keyframes flash {
+@keyframes flash {
   0%,
   100% {
     opacity: 1;
@@ -13,14 +13,13 @@
   50% {
     opacity: 0.7;
   }
-} */
-
-/* .track:hover {
+}
+.track:hover {
   animation: flash 0.5s 1;
-} */
+}
 
 .track:active {
-  color: white;
+  opacity: 0;
 }
 
 .trackPlaying {

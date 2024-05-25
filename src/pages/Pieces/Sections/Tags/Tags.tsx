@@ -1,12 +1,13 @@
 import { useContext } from "react";
 
+import Tag from "../../../../components/Tags/Tag/Tag";
+import ClearButton from "../../../../components/Tags/ClearButton/ClearButton";
+
 import { PiecesContext } from "../../Pieces";
 
-import { PIECES_GENRES } from "../../../../utils/constants";
-import closeIconSrc from "../../../../assets/images/close-icon.svg";
+import { PIECES_GENRES } from "../../_constants";
 
 import s from "./Tags.module.css";
-import Tag from "../../../../components/Tag/Tag";
 
 function Tags() {
   const { selectedTags, filteredPieces, setIsPlayerOpened, setSelectedTags } =
@@ -45,10 +46,7 @@ function Tags() {
             key={i}
           />
         ))}
-        <div className={s.tagsButton} onClick={handleClearTagsClick}>
-          <img className={s.closeIcon} src={closeIconSrc} />
-          No filter
-        </div>
+        <ClearButton handleClearTagsClick={handleClearTagsClick} />
       </div>
     </div>
   );

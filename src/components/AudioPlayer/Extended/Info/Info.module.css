@@ -30,7 +30,7 @@
 .videoButtonContainer {
   display: flex;
   align-items: center;
-  font-size: 12px;
+  font-size: 10px;
   transform: translateY(4.5px);
   cursor: pointer;
 }
@@ -41,12 +41,16 @@
     opacity: 1;
   }
   50% {
-    opacity: 0.5;
+    opacity: 0.7;
   }
 }
 
 .videoButtonContainer:hover {
-  animation: flash 0.5s 1;
+  animation: flash 0.7s 1;
+}
+
+.videoButtonContainer:active {
+  opacity: 0;
 }
 
 .videoIcon {

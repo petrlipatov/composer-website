@@ -9,23 +9,14 @@
   justify-items: center;
   padding-left: 8px;
   padding-right: 8px;
-  position: relative;
 }
 
-.scrubberContainer {
+.progressBar {
   position: relative;
   display: flex;
   width: 100%;
-  /* border: 1px solid green; */
-  height: 4px;
-  /* overflow: hidden; */
-}
 
-.timeScrubber {
-  /* background-color: black; */
-  /* width: 100%;
-  height: 1px;
-  color: black; */
+  height: 4px;
 }
 
 @keyframes flash {
@@ -38,58 +29,6 @@
   }
 }
 
-.timeScrubber:hover {
+.progressBar:hover {
   animation: flash 0.5s 1;
-}
-
-.buffered {
-  /* border-top: 0.5px solid black; */
-  position: absolute;
-  background-image: linear-gradient(black, black);
-  background-size: 0% 100%;
-  background-repeat: no-repeat;
-  inset: 0;
-  transition: background-size 2s ease;
-  z-index: 2;
-}
-
-.length {
-  position: absolute;
-  top: 1.7px;
-  bottom: 1.7px;
-  left: 0;
-  right: 0;
-  background-color: black;
-  z-index: 1;
-}
-
-.timeValue {
-  color: black;
-  font-size: 14px;
-}
-
-input[type="range"] {
-  all: unset;
-  position: absolute;
-  background-image: linear-gradient(white, white);
-  background-size: 0% 100%;
-  background-repeat: no-repeat;
-  inset: 0;
-  -webkit-appearance: none;
-  z-index: 3;
-}
-
-input[type="range"]::-webkit-slider-thumb {
-  opacity: 0;
-}
-
-input[type="range"]::-moz-range-thumb {
-  opacity: 0;
-}
-
-input[type="range"]::-webkit-slider-runnable-track {
-  background: transparent;
-  border: none;
-  box-shadow: none;
-  -webkit-appearance: none;
 }
