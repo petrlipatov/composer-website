@@ -18,3 +18,9 @@
     padding-left: 0;
   }
 }
+
+@media (min-width: 720px) {
+  .pageTitle {
+    visibility: hidden;
+  }
+}

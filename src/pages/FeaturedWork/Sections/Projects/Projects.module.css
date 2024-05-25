@@ -10,8 +10,8 @@
 
 @media (min-width: 720px) {
   .section {
-    grid-template-columns: 320px 320px 320px;
-    width: 75%;
+    grid-template-columns: 310px 310px 310px;
+    width: 70%;
     gap: 32px;
     row-gap: 24px;
     justify-self: center;

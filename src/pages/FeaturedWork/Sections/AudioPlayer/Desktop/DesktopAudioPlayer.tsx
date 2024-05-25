@@ -52,13 +52,6 @@ const DesktopAudioPlayer = () => {
     [audioPlayer]
   );
 
-  // useEffect(() => {
-  //   if (selectedTrackIndex || selectedTrackIndex === 0) {
-  //     audioPlayer.src = currentProject.tracks[selectedTrackIndex].audioSrc;
-  //     audioPlayer.play();
-  //   }
-  // }, [selectedTrackIndex, audioPlayer, currentProject.tracks]);
-
   const handlePlayPauseClick = () => {
     if (!selectedTrackIndex && selectedTrackIndex !== 0) {
       setSelectedTrackIndex(FIRST_TRACK_INDEX);
