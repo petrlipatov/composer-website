@@ -31,11 +31,10 @@ const MobileAudioPlayer = () => {
 
   useEffect(
     function playFirstTrackOnMount() {
-      setPlayingTrackIndex(FIRST_TRACK_INDEX);
-      setSelectedTrackIndex(FIRST_TRACK_INDEX);
-      audioPlayer.src = currentProject.tracks[FIRST_TRACK_INDEX].audioSrc;
-      console.log("useEffect");
       const playAudio = () => {
+        setPlayingTrackIndex(FIRST_TRACK_INDEX);
+        setSelectedTrackIndex(FIRST_TRACK_INDEX);
+        audioPlayer.src = currentProject.tracks[FIRST_TRACK_INDEX].audioSrc;
         console.log("callback");
         audioPlayer.play().catch((err) => {
           console.log("Error playing audio:", err);
