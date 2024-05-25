@@ -10,7 +10,7 @@ import cn from "classnames";
 
 import AudioTitle from "./AudioTitle/AudioTitle";
 import { PiecesContext } from "../../pages/Pieces/Pieces";
-import { AudioTrackData } from "../../types";
+import { AudioTrackData } from "../../pages/Pieces/_types";
 
 import tvIconSrc from "../../assets/images/tv.svg";
 import hedphonesIconSrc from "../../assets/images/headphone50.svg";
