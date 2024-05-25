@@ -22,7 +22,6 @@ const MobileProject = ({
   setSelectedProjectIndex,
 }: ProjectProps) => {
   const {
-    currentProject,
     audioPlayerRef,
     setIsPlayerOpened,
     setCurrentProject,

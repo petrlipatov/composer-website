@@ -5,10 +5,11 @@ import TimeValue from "../../../../../components/AudioPlayer/Shared/ProgressBar/
 import { FeaturedWorkContext } from "../../../FeaturedWork";
 import { formatTime } from "../../../../../utils/helpers/formatTime";
 
-import s from "./ProgressBar.module.css";
 import ScrubberBar from "../../../../../components/AudioPlayer/Shared/ProgressBar/ScrubberBar/ScrubberBar";
 import DurationBar from "../../../../../components/AudioPlayer/Shared/ProgressBar/DurationBar/DurationBar";
 import BufferedBar from "../../../../../components/AudioPlayer/Shared/ProgressBar/BufferedBar/BufferedBar";
+
+import s from "./ProgressBar.module.css";
 
 const ProgressBar = () => {
   const [duration, setDuration] = useState(0);
@@ -25,13 +26,7 @@ const ProgressBar = () => {
 
   useEffect(() => {
     function updateBufferedAndElapsedTime() {
-      if (!audioPlayer) {
-        return;
-      }
-
       const currentTime = Math.round(audioPlayer.currentTime);
-      setElapsedTime(currentTime);
-
       const bufferedRanges = audioPlayer.buffered;
       const hasBufferedRanges = bufferedRanges && bufferedRanges.length > 0;
 
@@ -40,24 +35,24 @@ const ProgressBar = () => {
         const bufferedEndTime = Math.round(
           bufferedRanges.end(lastBufferedIndex)
         );
-        setBuffered(bufferedEndTime);
+        if (currentTime <= bufferedEndTime) {
+          setElapsedTime(currentTime);
+          setBuffered(bufferedEndTime);
+        } else {
+          audioPlayer.currentTime = bufferedEndTime;
+          setElapsedTime(bufferedEndTime);
+          setBuffered(bufferedEndTime);
+        }
       }
     }
 
     if (audioPlayer) {
-      audioPlayer.onloadedmetadata = () => {
-        setDuration(audioPlayer.duration);
-      };
+      audioPlayer.onloadedmetadata = () => setDuration(audioPlayer.duration);
       audioPlayer.ontimeupdate = () => updateBufferedAndElapsedTime();
-
       audioPlayer.onwaiting = () => setIsLoading(true);
-
       audioPlayer.onplaying = () => setIsLoading(false);
-
       audioPlayer.onstalled = () => setIsLoading(false);
-
       audioPlayer.onerror = () => setIsLoading(false);
-
       audioPlayer.onended = () => setElapsedTime(0);
     }
   }, [audioPlayer]);
