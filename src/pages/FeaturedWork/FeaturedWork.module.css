@@ -22,10 +22,6 @@
   height: auto;
 }
 
-.desktopPlayerOpened {
-  /* grid-template-rows: min-content min-content 1fr; */
-}
-
 @media (min-width: 380px) {
   .content {
     width: 96%;

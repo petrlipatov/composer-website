@@ -2,6 +2,8 @@
   gap: 16px;
   margin-top: 28px;
   position: relative;
+  flex-shrink: 0;
+  padding-bottom: 24px;
 }
 
 .tagsList {
@@ -10,6 +12,7 @@
   gap: 8px;
   row-gap: 8px;
   flex-wrap: wrap;
+  flex-shrink: 0;
 }
 
 @media (min-width: 720px) {
@@ -17,5 +20,6 @@
     width: 70%;
     justify-self: center;
     margin-top: 48px;
+    padding-bottom: 0;
   }
 }

@@ -2,7 +2,6 @@
   position: relative;
   display: grid;
   grid-template-columns: 48% 48%;
-  margin-top: 24px;
   gap: 8px;
   row-gap: 16px;
   overflow-y: scroll;
