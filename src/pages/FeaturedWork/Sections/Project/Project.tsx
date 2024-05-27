@@ -7,6 +7,8 @@ import useIsMobile from "../../../../utils/hooks/useIsMobile";
 
 import { ProjectProps } from "./types";
 
+import s from "./Project.module.css";
+
 const Project = memo(
   ({
     index,
@@ -18,7 +20,7 @@ const Project = memo(
     const isMobile = useIsMobile();
 
     return (
-      <div style={{ ...styles }}>
+      <div className={s.project} style={{ ...styles }}>
         {isMobile ? (
           <MobileProject
             index={index}

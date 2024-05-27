@@ -1,26 +1,4 @@
 .section {
-  position: relative;
-  display: grid;
-  grid-template-columns: 48% 48%;
-  gap: 8px;
-  row-gap: 16px;
-  overflow-y: scroll;
-}
-
-@media (min-width: 720px) {
-  .section {
-    grid-template-columns: 310px 310px 310px;
-    width: 70%;
-    gap: 32px;
-    row-gap: 24px;
-    justify-self: center;
-    margin-top: 48px;
-  }
-}
-/* Projects.module.css */
-
-.outerbox {
-  border: 1px solid red;
   overflow-y: scroll;
   width: 100%;
   flex-grow: 1;
@@ -28,12 +6,12 @@
   overflow-y: scroll;
 }
 
-.innerbox {
-  position: relative;
+@media (min-width: 720px) {
+  .section {
+    width: 70%;
+    justify-self: center;
+  }
 }
 
-.item {
-  border: 1px solid blue;
-  box-sizing: border-box;
-  display: inline-block;
+.contentContainer {
 }

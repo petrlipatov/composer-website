@@ -4,16 +4,31 @@ import s from "./Projects.module.css";
 import {
   useCallback,
   useContext,
-  useLayoutEffect,
+  useEffect,
   useMemo,
   useRef,
   useState,
 } from "react";
 import Project from "../Project/Project";
+import { PORTRAIT_PROJECT_ASPECT_RATIO } from "../../../../utils/constants";
+import {
+  PROJECT_LEFT_PADDING_MOBILE,
+  PROJECT_LEFT_PADDING_DESKTOP,
+  TABLE_COLUMNS_MOBILE,
+  TABLE_COLUMNS_DESKTOP,
+} from "../../_constants";
 
 export default function Projects() {
-  const [width, setWidth] = useState(0);
+  const [sectionWidth, setSectionWidth] = useState(0);
   const [scrollTop, setScrollTop] = useState(0);
+
+  const sectionRef = useRef(null);
+
+  useEffect(function calculateSectionWidthOnMount() {
+    if (sectionRef.current) {
+      setSectionWidth(sectionRef.current.offsetWidth);
+    }
+  }, []);
 
   const {
     isPlayerOpened,
@@ -22,46 +37,63 @@ export default function Projects() {
     setSelectedProjectIndex,
   } = useContext(FeaturedWorkContext);
 
+  const isMobile = useIsMobile();
+
+  const tableColumnsCount = isMobile
+    ? TABLE_COLUMNS_MOBILE
+    : TABLE_COLUMNS_DESKTOP;
+
+  const tableColumnGaps = tableColumnsCount - 1;
+
+  const projectLeftPadding = isMobile
+    ? PROJECT_LEFT_PADDING_MOBILE
+    : PROJECT_LEFT_PADDING_DESKTOP;
+
+  // const projectAspectRatio = isMobile
+  //   ? PORTRAIT_PROJECT_ASPECT_RATIO
+  //   : PORTRAIT_PROJECT_ASPECT_RATIO;
+
+  const projectsCount = filteredProjects.length;
+
+  const projectWidth =
+    (sectionWidth - projectLeftPadding * tableColumnGaps) / tableColumnsCount;
+  const projectHeight = projectWidth / PORTRAIT_PROJECT_ASPECT_RATIO;
+
+  const contentHeight =
+    Math.ceil(projectsCount / tableColumnsCount) * projectHeight;
+
+  const visibleRowsStartIndex = useMemo(
+    () => Math.max(0, Math.floor(scrollTop / projectHeight)),
+    [scrollTop, projectHeight]
+  );
+  const visibleRowsEndIndex = visibleRowsStartIndex + 3;
+
   const setSelectedProjectIndexCached = useCallback(setSelectedProjectIndex, [
     setSelectedProjectIndex,
   ]);
 
-  const count = filteredProjects.length;
-  const isMobile = useIsMobile();
-  const itemWidth = (width - 5) / 2;
-  const itemHeight = itemWidth / 0.66089965397;
-  const columns = 2;
-  const rowHeight = itemHeight;
-  const ref = useRef(null);
+  const displayedProjects = useMemo(() => {
+    const result = [];
 
-  useLayoutEffect(() => {
-    if (ref.current) {
-      const elementWidth = ref.current.offsetWidth;
-      setWidth(elementWidth);
-    }
-  }, []);
+    // loop through table rows (filteredProjects / 2)
+    for (
+      let rowIndex = visibleRowsStartIndex;
+      rowIndex < visibleRowsEndIndex;
+      rowIndex++
+    ) {
+      const offsetFromTop = visibleRowsStartIndex * projectHeight;
 
-  const contentHeight = Math.ceil(count / columns) * rowHeight;
+      // for every row loop through each column
+      // and map filteredProjects array to table(matrix) structure
 
-  const startIndex = useMemo(
-    () => Math.max(0, Math.floor(scrollTop / rowHeight)),
-    [scrollTop, rowHeight]
-  );
+      for (let colIndex = 0; colIndex < tableColumnsCount; colIndex++) {
+        const projectIndex = rowIndex * tableColumnsCount + colIndex;
+        const isRightElement = colIndex !== 0;
+        // if project exists, push it to result array
 
-  const rows = startIndex + 3;
-
-  function displayMovieItems() {
-    const displayedItems = [];
-
-    for (let rowIndex = startIndex; rowIndex < rows; rowIndex++) {
-      const offsetFromTop = startIndex * rowHeight;
-
-      for (let colIndex = 0; colIndex < columns; colIndex++) {
-        const projectIndex = rowIndex * columns + colIndex;
-
-        if (projectIndex < count) {
+        if (projectIndex < projectsCount) {
           const project = filteredProjects[projectIndex];
-          displayedItems.push(
+          result.push(
             <Project
               index={projectIndex}
               data={project}
@@ -69,23 +101,31 @@ export default function Projects() {
               setSelectedProjectIndex={setSelectedProjectIndexCached}
               key={project.name}
               styles={{
-                transform: `translate(${0}px, ${offsetFromTop}px)`,
-                width: `${width / columns - 5}px`,
-                height: "auto",
-                position: "relative",
-                display: "inline-block",
-                aspectRatio: 191 / 289,
-                border: "1px solid red",
-                overflow: "hidden",
+                transform: `translateY(${offsetFromTop}px)`,
+                width: `${projectWidth}px`,
+                aspectRatio: `${PORTRAIT_PROJECT_ASPECT_RATIO}`,
+                marginLeft: isRightElement
+                  ? `${projectLeftPadding - 2}px`
+                  : null,
               }}
             />
           );
         }
       }
     }
-
-    return displayedItems;
-  }
+    return result;
+  }, [
+    projectLeftPadding,
+    tableColumnsCount,
+    visibleRowsStartIndex,
+    visibleRowsEndIndex,
+    projectsCount,
+    projectHeight,
+    projectWidth,
+    filteredProjects,
+    selectedProjectIndex,
+    setSelectedProjectIndexCached,
+  ]);
 
   function onScroll(event) {
     setScrollTop(event.currentTarget.scrollTop);
@@ -93,22 +133,19 @@ export default function Projects() {
 
   return (
     <div
-      className={s.outerbox}
+      className={s.section}
       onScroll={onScroll}
-      ref={ref}
+      ref={sectionRef}
       style={isMobile && isPlayerOpened ? { display: "none" } : {}}
     >
-      <div>{`scrollTop: ${scrollTop}`}</div>
-      <div>{`itemHeight: ${itemHeight}`}</div>
-      <div>{`itemWidth: ${width / 2}`}</div>
       <div
-        className={s.innerbox}
+        className={s.contentContainer}
         style={{
           position: "relative",
           height: `${contentHeight}px`,
         }}
       >
-        {displayMovieItems()}
+        {displayedProjects}
       </div>
     </div>
   );

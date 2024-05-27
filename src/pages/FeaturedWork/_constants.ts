@@ -20,7 +20,7 @@ export const PROJECTS = [
     genre: "TV Drama",
     year: "2021",
     tags: ["Film"],
-    imageSrc: "/images/projects/project1.webp",
+    imageSrc: "/images/projects/project4.webp",
     videoSrc: "u0dBG0AL3Cs",
     tracks: [
       {
@@ -65,7 +65,7 @@ export const PROJECTS = [
     genre: "TV Drama",
     year: "2021",
     tags: ["Ad"],
-    imageSrc: "/images/projects/project2.webp",
+    imageSrc: "/images/projects/project4.webp",
     videoSrc: "u0dBG0AL3Cs",
     tracks: [
       {
@@ -101,7 +101,7 @@ export const PROJECTS = [
     genre: "TV Drama",
     year: "2021",
     tags: ["Mystery", "Thriller"],
-    imageSrc: "/images/projects/project1.webp",
+    imageSrc: "/images/projects/project4.webp",
     videoSrc: "u0dBG0AL3Cs",
     tracks: [
       {
@@ -126,7 +126,7 @@ export const PROJECTS = [
     genre: "TV Drama",
     year: "2021",
     tags: ["Piano", "Orchestral", "Vintage"],
-    imageSrc: "/images/projects/project2.webp",
+    imageSrc: "/images/projects/project4.webp",
     videoSrc: "u0dBG0AL3Cs",
     tracks: [
       {
@@ -151,7 +151,7 @@ export const PROJECTS = [
     genre: "TV Drama",
     year: "2021",
     tags: ["Comedy", "Action"],
-    imageSrc: "/images/projects/project1.webp",
+    imageSrc: "/images/projects/project4.webp",
     videoSrc: "u0dBG0AL3Cs",
     tracks: [
       {
@@ -176,7 +176,7 @@ export const PROJECTS = [
     genre: "TV Drama",
     year: "2021",
     tags: ["Game", "Fantasy"],
-    imageSrc: "/images/projects/project2.webp",
+    imageSrc: "/images/projects/project4.webp",
     videoSrc: "u0dBG0AL3Cs",
     tracks: [
       {
@@ -201,7 +201,7 @@ export const PROJECTS = [
     genre: "TV Drama",
     year: "2021",
     tags: ["Game", "Fantasy"],
-    imageSrc: "/images/projects/project2.webp",
+    imageSrc: "/images/projects/project4.webp",
     videoSrc: "u0dBG0AL3Cs",
     tracks: [
       {
@@ -226,7 +226,7 @@ export const PROJECTS = [
     genre: "TV Drama",
     year: "2021",
     tags: ["Game", "Fantasy"],
-    imageSrc: "/images/projects/project2.webp",
+    imageSrc: "/images/projects/project4.webp",
     videoSrc: "u0dBG0AL3Cs",
     tracks: [
       {
@@ -251,7 +251,7 @@ export const PROJECTS = [
     genre: "TV Drama",
     year: "2021",
     tags: ["Game", "Fantasy"],
-    imageSrc: "/images/projects/project2.webp",
+    imageSrc: "/images/projects/project4.webp",
     videoSrc: "u0dBG0AL3Cs",
     tracks: [
       {
@@ -276,7 +276,7 @@ export const PROJECTS = [
     genre: "TV Drama",
     year: "2021",
     tags: ["Game", "Fantasy"],
-    imageSrc: "/images/projects/project2.webp",
+    imageSrc: "/images/projects/project4.webp",
     videoSrc: "u0dBG0AL3Cs",
     tracks: [
       {
@@ -301,7 +301,7 @@ export const PROJECTS = [
     genre: "TV Drama",
     year: "2021",
     tags: ["Game", "Fantasy"],
-    imageSrc: "/images/projects/project2.webp",
+    imageSrc: "/images/projects/project4.webp",
     videoSrc: "u0dBG0AL3Cs",
     tracks: [
       {
@@ -326,7 +326,7 @@ export const PROJECTS = [
     genre: "TV Drama",
     year: "2021",
     tags: ["Game", "Fantasy"],
-    imageSrc: "/images/projects/project2.webp",
+    imageSrc: "/images/projects/project4.webp",
     videoSrc: "u0dBG0AL3Cs",
     tracks: [
       {
@@ -351,7 +351,7 @@ export const PROJECTS = [
     genre: "TV Drama",
     year: "2021",
     tags: ["Game", "Fantasy"],
-    imageSrc: "/images/projects/project2.webp",
+    imageSrc: "/images/projects/project4.webp",
     videoSrc: "u0dBG0AL3Cs",
     tracks: [
       {
@@ -376,7 +376,7 @@ export const PROJECTS = [
     genre: "TV Drama",
     year: "2021",
     tags: ["Game", "Fantasy"],
-    imageSrc: "/images/projects/project2.webp",
+    imageSrc: "/images/projects/project4.webp",
     videoSrc: "u0dBG0AL3Cs",
     tracks: [
       {
@@ -401,7 +401,7 @@ export const PROJECTS = [
     genre: "TV Drama",
     year: "2021",
     tags: ["Game", "Fantasy"],
-    imageSrc: "/images/projects/project2.webp",
+    imageSrc: "/images/projects/project4.webp",
     videoSrc: "u0dBG0AL3Cs",
     tracks: [
       {
@@ -426,7 +426,7 @@ export const PROJECTS = [
     genre: "TV Drama",
     year: "2021",
     tags: ["Game", "Fantasy"],
-    imageSrc: "/images/projects/project2.webp",
+    imageSrc: "/images/projects/project4.webp",
     videoSrc: "u0dBG0AL3Cs",
     tracks: [
       {
@@ -451,7 +451,7 @@ export const PROJECTS = [
     genre: "TV Drama",
     year: "2021",
     tags: ["Game", "Fantasy"],
-    imageSrc: "/images/projects/project2.webp",
+    imageSrc: "/images/projects/project4.webp",
     videoSrc: "u0dBG0AL3Cs",
     tracks: [
       {
@@ -476,7 +476,7 @@ export const PROJECTS = [
     genre: "TV Drama",
     year: "2021",
     tags: ["Game", "Fantasy"],
-    imageSrc: "/images/projects/project2.webp",
+    imageSrc: "/images/projects/project4.webp",
     videoSrc: "u0dBG0AL3Cs",
     tracks: [
       {
@@ -525,3 +525,9 @@ export const DEFAULT_CONTEXT: ContextTypes = {
   setSelectedProjectIndex: () => {},
   setSelectedTrackIndex: () => {},
 };
+
+export const TABLE_COLUMNS_MOBILE = 2;
+export const TABLE_COLUMNS_DESKTOP = 3;
+
+export const PROJECT_LEFT_PADDING_MOBILE = 8;
+export const PROJECT_LEFT_PADDING_DESKTOP = 16;

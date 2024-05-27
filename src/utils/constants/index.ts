@@ -1,1 +1,3 @@
 export const FIRST_TRACK_INDEX = 0;
+
+export const PORTRAIT_PROJECT_ASPECT_RATIO = 0.65;
