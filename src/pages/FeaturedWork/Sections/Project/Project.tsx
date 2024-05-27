@@ -8,11 +8,17 @@ import useIsMobile from "../../../../utils/hooks/useIsMobile";
 import { ProjectProps } from "./types";
 
 const Project = memo(
-  ({ index, data, isSelected, setSelectedProjectIndex }: ProjectProps) => {
+  ({
+    index,
+    data,
+    isSelected,
+    styles,
+    setSelectedProjectIndex,
+  }: ProjectProps) => {
     const isMobile = useIsMobile();
 
     return (
-      <div>
+      <div style={{ ...styles }}>
         {isMobile ? (
           <MobileProject
             index={index}

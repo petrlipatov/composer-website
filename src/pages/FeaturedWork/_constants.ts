@@ -346,6 +346,156 @@ export const PROJECTS = [
       },
     ],
   },
+  {
+    name: "Project #13",
+    genre: "TV Drama",
+    year: "2021",
+    tags: ["Game", "Fantasy"],
+    imageSrc: "/images/projects/project2.webp",
+    videoSrc: "u0dBG0AL3Cs",
+    tracks: [
+      {
+        name: "I Thought It Would Be Fun",
+        audioSrc: "/audio/Free_Test_Data_2MB_MP3.mp3",
+        duration: "3:00",
+      },
+      {
+        name: "Worn Out",
+        audioSrc: "/audio/Theory-of-Light-Master.mp3",
+        duration: "3:00",
+      },
+      {
+        name: "Threat Serenade",
+        audioSrc: "/audio/GOING-FAR-AWAY-_VINTAGE-HARMONY__1_.mp3",
+        duration: "3:00",
+      },
+    ],
+  },
+  {
+    name: "Project #14",
+    genre: "TV Drama",
+    year: "2021",
+    tags: ["Game", "Fantasy"],
+    imageSrc: "/images/projects/project2.webp",
+    videoSrc: "u0dBG0AL3Cs",
+    tracks: [
+      {
+        name: "I Thought It Would Be Fun",
+        audioSrc: "/audio/Free_Test_Data_2MB_MP3.mp3",
+        duration: "3:00",
+      },
+      {
+        name: "Worn Out",
+        audioSrc: "/audio/Theory-of-Light-Master.mp3",
+        duration: "3:00",
+      },
+      {
+        name: "Threat Serenade",
+        audioSrc: "/audio/GOING-FAR-AWAY-_VINTAGE-HARMONY__1_.mp3",
+        duration: "3:00",
+      },
+    ],
+  },
+  {
+    name: "Project #15",
+    genre: "TV Drama",
+    year: "2021",
+    tags: ["Game", "Fantasy"],
+    imageSrc: "/images/projects/project2.webp",
+    videoSrc: "u0dBG0AL3Cs",
+    tracks: [
+      {
+        name: "I Thought It Would Be Fun",
+        audioSrc: "/audio/Free_Test_Data_2MB_MP3.mp3",
+        duration: "3:00",
+      },
+      {
+        name: "Worn Out",
+        audioSrc: "/audio/Theory-of-Light-Master.mp3",
+        duration: "3:00",
+      },
+      {
+        name: "Threat Serenade",
+        audioSrc: "/audio/GOING-FAR-AWAY-_VINTAGE-HARMONY__1_.mp3",
+        duration: "3:00",
+      },
+    ],
+  },
+  {
+    name: "Project #16",
+    genre: "TV Drama",
+    year: "2021",
+    tags: ["Game", "Fantasy"],
+    imageSrc: "/images/projects/project2.webp",
+    videoSrc: "u0dBG0AL3Cs",
+    tracks: [
+      {
+        name: "I Thought It Would Be Fun",
+        audioSrc: "/audio/Free_Test_Data_2MB_MP3.mp3",
+        duration: "3:00",
+      },
+      {
+        name: "Worn Out",
+        audioSrc: "/audio/Theory-of-Light-Master.mp3",
+        duration: "3:00",
+      },
+      {
+        name: "Threat Serenade",
+        audioSrc: "/audio/GOING-FAR-AWAY-_VINTAGE-HARMONY__1_.mp3",
+        duration: "3:00",
+      },
+    ],
+  },
+  {
+    name: "Project #17",
+    genre: "TV Drama",
+    year: "2021",
+    tags: ["Game", "Fantasy"],
+    imageSrc: "/images/projects/project2.webp",
+    videoSrc: "u0dBG0AL3Cs",
+    tracks: [
+      {
+        name: "I Thought It Would Be Fun",
+        audioSrc: "/audio/Free_Test_Data_2MB_MP3.mp3",
+        duration: "3:00",
+      },
+      {
+        name: "Worn Out",
+        audioSrc: "/audio/Theory-of-Light-Master.mp3",
+        duration: "3:00",
+      },
+      {
+        name: "Threat Serenade",
+        audioSrc: "/audio/GOING-FAR-AWAY-_VINTAGE-HARMONY__1_.mp3",
+        duration: "3:00",
+      },
+    ],
+  },
+  {
+    name: "Project #18",
+    genre: "TV Drama",
+    year: "2021",
+    tags: ["Game", "Fantasy"],
+    imageSrc: "/images/projects/project2.webp",
+    videoSrc: "u0dBG0AL3Cs",
+    tracks: [
+      {
+        name: "I Thought It Would Be Fun",
+        audioSrc: "/audio/Free_Test_Data_2MB_MP3.mp3",
+        duration: "3:00",
+      },
+      {
+        name: "Worn Out",
+        audioSrc: "/audio/Theory-of-Light-Master.mp3",
+        duration: "3:00",
+      },
+      {
+        name: "Threat Serenade",
+        audioSrc: "/audio/GOING-FAR-AWAY-_VINTAGE-HARMONY__1_.mp3",
+        duration: "3:00",
+      },
+    ],
+  },
 ];
 
 export const DEFAULT_CONTEXT: ContextTypes = {

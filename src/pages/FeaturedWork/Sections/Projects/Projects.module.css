@@ -17,3 +17,23 @@
     margin-top: 48px;
   }
 }
+/* Projects.module.css */
+
+.outerbox {
+  border: 1px solid red;
+  overflow-y: scroll;
+  width: 100%;
+  flex-grow: 1;
+  position: relative;
+  overflow-y: scroll;
+}
+
+.innerbox {
+  position: relative;
+}
+
+.item {
+  border: 1px solid blue;
+  box-sizing: border-box;
+  display: inline-block;
+}
