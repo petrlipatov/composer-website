@@ -5,12 +5,14 @@ import { useCallback, useContext, useMemo, useRef, useState } from "react";
 import Project from "../Project/Project";
 
 import {
-  PROJECT_LEFT_PADDING_MOBILE,
-  PROJECT_LEFT_PADDING_DESKTOP,
+  PROJECT_LEFT_MARGIN_MOBILE,
+  PROJECT_LEFT_MARGIN_DESKTOP,
   TABLE_COLUMNS_MOBILE,
   TABLE_COLUMNS_DESKTOP,
   PROJECT_ASPECT_RATIO_MOBILE,
   PROJECT_ASPECT_RATIO_DESKTOP,
+  PROJECT_TOP_MARGIN_MOBILE,
+  PROJECT_TOP_MARGIN_DESKTOP,
 } from "../../_constants";
 import useWidthResizeListener from "../../../../utils/hooks/useWidthResizeListener";
 
@@ -39,19 +41,23 @@ export default function Projects() {
 
   const tableColumnGaps = tableColumnsCount - 1;
 
-  const projectLeftPadding = isMobile
-    ? PROJECT_LEFT_PADDING_MOBILE
-    : PROJECT_LEFT_PADDING_DESKTOP;
-
   const projectAspectRatio = isMobile
     ? PROJECT_ASPECT_RATIO_MOBILE
     : PROJECT_ASPECT_RATIO_DESKTOP;
 
+  const projectLeftMargin = isMobile
+    ? PROJECT_LEFT_MARGIN_MOBILE
+    : PROJECT_LEFT_MARGIN_DESKTOP;
+
+  const projectTopMargin = isMobile
+    ? PROJECT_TOP_MARGIN_MOBILE
+    : PROJECT_TOP_MARGIN_DESKTOP;
+
   // Calculate project dimensions
 
   const projectWidth =
-    (sectionWidth - projectLeftPadding * tableColumnGaps) / tableColumnsCount;
-  const projectHeight = projectWidth / projectAspectRatio;
+    (sectionWidth - projectLeftMargin * tableColumnGaps) / tableColumnsCount;
+  const projectHeight = projectWidth / projectAspectRatio + projectTopMargin;
 
   const projectsTotalCount = filteredProjects.length;
   const contentHeight =
@@ -84,7 +90,8 @@ export default function Projects() {
           transform: `translateY(${offsetFromTop}px)`,
           width: `${projectWidth}px`,
           aspectRatio: `${projectAspectRatio}`,
-          marginLeft: isRightElement ? `${projectLeftPadding - 2}px` : null,
+          marginLeft: isRightElement ? `${projectLeftMargin - 2}px` : null,
+          marginTop: projectTopMargin,
         }}
       />
     );
@@ -129,7 +136,7 @@ export default function Projects() {
     visibleRowsStartIndex,
     filteredProjects,
     projectAspectRatio,
-    projectLeftPadding,
+    projectLeftMargin,
     projectWidth,
     projectsTotalCount,
     selectedProjectIndex,

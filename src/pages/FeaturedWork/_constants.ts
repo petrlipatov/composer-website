@@ -529,8 +529,11 @@ export const DEFAULT_CONTEXT: ContextTypes = {
 export const TABLE_COLUMNS_MOBILE = 2;
 export const TABLE_COLUMNS_DESKTOP = 3;
 
-export const PROJECT_LEFT_PADDING_MOBILE = 8;
-export const PROJECT_LEFT_PADDING_DESKTOP = 16;
+export const PROJECT_LEFT_MARGIN_MOBILE = 8;
+export const PROJECT_LEFT_MARGIN_DESKTOP = 16;
+
+export const PROJECT_TOP_MARGIN_MOBILE = 4;
+export const PROJECT_TOP_MARGIN_DESKTOP = 16;
 
 export const PROJECT_ASPECT_RATIO_MOBILE = 0.65;
 export const PROJECT_ASPECT_RATIO_DESKTOP = 0.7;

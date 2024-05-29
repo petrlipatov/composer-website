@@ -1,6 +1,6 @@
 import { useCallback, useContext, useMemo, useRef, useState } from "react";
 
-import AudioTrack from "../../../../components/AudioTrack/AudioTrack";
+import AudioTrack from "../AudioTrack/AudioTrack";
 
 import { PiecesContext } from "../../Pieces";
 
@@ -110,7 +110,7 @@ const Tracks = () => {
     };
 
     // loop itarates over rows
-    // and generates Projects for each row with generateProjectsForSingleRow()
+    // and generates AudioTracks for each row with generateProjectsForSingleRow()
 
     const result = [];
     for (
@@ -133,7 +133,14 @@ const Tracks = () => {
     tracksTotalCount,
     selectedTrackIndex,
     tableColumnsCount,
+    trackTopMargin,
+    // loadingTrackIndex,
+    // playingTrackIndex,
+    // pausedTrackIndex,
     setSelectedTrackIndexCached,
+    // setPausedTrackIndexCached,
+    // setPlayingTrackIndexCached,
+    // setLoadingTrackIndexCached,
   ]);
 
   function onScroll(event) {
@@ -141,11 +148,10 @@ const Tracks = () => {
   }
 
   return (
-    <div className={s.section} onScroll={onScroll} ref={sectionRef}>
+    <div className={s.tracksSection} onScroll={onScroll} ref={sectionRef}>
       <div
-        className={s.contentContainer}
+        className={s.tracksContainer}
         style={{
-          position: "relative",
           height: `${contentHeight}px`,
         }}
       >

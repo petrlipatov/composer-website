@@ -3,17 +3,17 @@ import {
   SetStateAction,
   useContext,
   useEffect,
-  useState,
   memo,
+  useState,
 } from "react";
 import cn from "classnames";
 
 import AudioTitle from "./AudioTitle/AudioTitle";
-import { PiecesContext } from "../../pages/Pieces/Pieces";
-import { AudioTrackData } from "../../pages/Pieces/_types";
+import { PiecesContext } from "../../Pieces";
+import { AudioTrackData } from "../../_types";
 
-import tvIconSrc from "../../assets/images/tv.svg";
-import hedphonesIconSrc from "../../assets/images/headphone50.svg";
+import tvIconSrc from "../../../../assets/images/tv.svg";
+import hedphonesIconSrc from "../../../../assets/images/headphone50.svg";
 
 import s from "./AudioTrack.module.css";
 
@@ -28,15 +28,11 @@ type AudioTrackProps = {
 const AudioTrack = memo(
   ({
     index,
-    isSelected,
     data,
+    isSelected,
     extraStyles,
     setSelectedTrackIndex,
   }: AudioTrackProps) => {
-    const [isPaused, setIsPaused] = useState(false);
-    const [isPlaying, setIsPlaying] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
-
     const {
       setIsPlayerOpened,
       setCurrentAudioData,
@@ -44,6 +40,10 @@ const AudioTrack = memo(
       setIsVideoPopupOpened,
       audioPlayerRef,
     } = useContext(PiecesContext);
+
+    const [isPlaying, setIsPlaying] = useState(null);
+    const [isPaused, setIsPaused] = useState(null);
+    const [isLoading, setIsLoading] = useState(null);
 
     const audioPlayer = audioPlayerRef.current;
 
@@ -83,33 +83,37 @@ const AudioTrack = memo(
           }
         };
       },
-      [audioPlayerRef, audioPlayer, data.audioSrc]
+      [audioPlayerRef, audioPlayer, data.audioSrc, index]
     );
 
     useEffect(
       function highlightWhenSelected() {
         if (audioPlayer?.src.includes(data.audioSrc)) {
-          setSelectedTrackIndex(index);
+          setIsPlaying(true);
+
+          if (audioPlayer.paused) {
+            setIsPaused(true);
+          }
         }
       },
       [
-        audioPlayerRef,
-        audioPlayer?.src,
         data.audioSrc,
-        setSelectedTrackIndex,
+        audioPlayer,
+        audioPlayer?.src,
         index,
+        setSelectedTrackIndex,
       ]
     );
 
     useEffect(
       function clearTrackStates() {
         if (!audioPlayer?.src.includes(data.audioSrc)) {
-          setIsPaused(false);
-          setIsLoading(false);
-          setIsPlaying(false);
+          setIsPlaying(null);
+          setIsLoading(null);
+          setIsPaused(null);
         }
       },
-      [audioPlayerRef, audioPlayer?.src, data.audioSrc]
+      [audioPlayerRef, audioPlayer?.src, data.audioSrc, index]
     );
 
     useEffect(() => {

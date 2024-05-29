@@ -1,14 +1,20 @@
-.section {
+.tracksSection {
   position: relative;
-
   margin-top: 24px;
-
   overflow-y: scroll;
 }
 
-@media (min-width: 720px) {
-  .section {
-    width: 70%;
+@media (min-width: 1280px) {
+  .tracksSection {
+    width: 900px;
+    justify-self: center;
+    margin-top: 48px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .tracksSection {
+    width: 1000px;
     justify-self: center;
     margin-top: 48px;
   }

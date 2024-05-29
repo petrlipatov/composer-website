@@ -1,5 +1,6 @@
 .clearButton {
   all: unset;
+  padding: 8px;
   font-weight: 600;
   color: #e7397a;
   display: flex;

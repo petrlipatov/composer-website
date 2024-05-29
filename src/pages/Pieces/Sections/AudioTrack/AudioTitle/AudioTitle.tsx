@@ -1,5 +1,5 @@
 import s from "./AudioTitle.module.css";
-import AnimatedEqualizer from "../../AnimatedEqualizer/AnimatedEqualizer";
+import AnimatedEqualizer from "../../../../../components/AnimatedEqualizer/AnimatedEqualizer";
 
 type AudioTitleProps = {
   name: string;

@@ -1,4 +1,4 @@
-.section {
+.tagsSection {
   gap: 16px;
   margin-top: 28px;
   position: relative;
@@ -12,10 +12,17 @@
   flex-wrap: wrap;
 }
 
-@media (min-width: 720px) {
-  .section {
+@media (min-width: 1280px) {
+  .tagsSection {
+    width: 900px;
     justify-self: center;
     margin-top: 48px;
-    width: 70%;
+  }
+}
+
+@media (min-width: 1440px) {
+  .tagsSection {
+    width: 1000px;
+    margin-top: 48px;
   }
 }
