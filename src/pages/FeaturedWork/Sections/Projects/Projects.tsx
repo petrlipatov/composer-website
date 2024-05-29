@@ -140,8 +140,9 @@ export default function Projects() {
     projectWidth,
     projectsTotalCount,
     selectedProjectIndex,
-    setSelectedProjectIndexCached,
     tableColumnsCount,
+    projectTopMargin,
+    setSelectedProjectIndexCached,
   ]);
 
   function onScroll(event) {

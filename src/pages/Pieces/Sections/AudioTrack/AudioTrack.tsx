@@ -130,8 +130,7 @@ const AudioTrack = memo(
       setSelectedTrackIndex(index);
     }
 
-    function handleWatchClick(e) {
-      e.stopPropagation();
+    function handleWatchClick() {
       setIsPlayerOpened(false);
       audioPlayer.pause();
       audioPlayer.src = "";
@@ -139,8 +138,7 @@ const AudioTrack = memo(
       setIsVideoPopupOpened(true);
     }
 
-    function handleListenClick(e) {
-      e.stopPropagation();
+    function handleListenClick() {
       audioPlayer.src = data.audioSrc;
       audioPlayer.play();
       setIsPlayerOpened(true);
