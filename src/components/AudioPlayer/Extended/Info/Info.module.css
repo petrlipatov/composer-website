@@ -60,8 +60,26 @@
   margin-right: 4px;
 }
 
-@media (min-width: 700px) {
+@media (min-width: 720px) {
   .projectInfoSection {
     margin-left: 16px;
+  }
+
+  .artwork {
+    height: 80px;
+  }
+
+  .projectInfoContainer {
+    font-size: 10px;
+  }
+}
+
+@media (min-width: 1480px) {
+  .artwork {
+    height: 90px;
+  }
+
+  .projectInfoContainer {
+    font-size: 12px;
   }
 }

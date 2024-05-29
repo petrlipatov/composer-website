@@ -6,4 +6,4 @@ export default defineConfig({
   plugins: [react()],
 });
 
-process.env.BROWSER = "firefox";
+// process.env.BROWSER = "firefox";

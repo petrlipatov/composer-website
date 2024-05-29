@@ -10,6 +10,23 @@
   .section {
     width: 70%;
     justify-self: center;
+    margin-top: 48px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .section {
+    width: 900px;
+    justify-self: center;
+    margin-top: 48px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .section {
+    width: 1000px;
+    justify-self: center;
+    margin-top: 48px;
   }
 }
 

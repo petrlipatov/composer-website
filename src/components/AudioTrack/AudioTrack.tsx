@@ -21,11 +21,18 @@ type AudioTrackProps = {
   index: number;
   data: AudioTrackData;
   isSelected: boolean;
+  extraStyles: any;
   setSelectedTrackIndex: Dispatch<SetStateAction<number>>;
 };
 
 const AudioTrack = memo(
-  ({ index, isSelected, data, setSelectedTrackIndex }: AudioTrackProps) => {
+  ({
+    index,
+    isSelected,
+    data,
+    extraStyles,
+    setSelectedTrackIndex,
+  }: AudioTrackProps) => {
     const [isPaused, setIsPaused] = useState(false);
     const [isPlaying, setIsPlaying] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -141,7 +148,7 @@ const AudioTrack = memo(
     });
 
     return (
-      <div className={s.track}>
+      <div className={s.track} style={{ ...extraStyles }}>
         <div className={s.trackImageContainer} onClick={handleTrackClick}>
           <img className={s.trackImage} src={data.imageSrc} />
 

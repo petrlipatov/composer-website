@@ -6,5 +6,5 @@ export type ProjectProps = {
   data: ProjectData;
   isSelected: boolean;
   setSelectedProjectIndex: Dispatch<React.SetStateAction<number>>;
-  styles?: any;
+  customStyles?: any;
 };

@@ -1,34 +1,22 @@
 import useIsMobile from "../../../../utils/hooks/useIsMobile";
 import { FeaturedWorkContext } from "../../FeaturedWork";
 import s from "./Projects.module.css";
-import {
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { useCallback, useContext, useMemo, useRef, useState } from "react";
 import Project from "../Project/Project";
-import { PORTRAIT_PROJECT_ASPECT_RATIO } from "../../../../utils/constants";
+
 import {
   PROJECT_LEFT_PADDING_MOBILE,
   PROJECT_LEFT_PADDING_DESKTOP,
   TABLE_COLUMNS_MOBILE,
   TABLE_COLUMNS_DESKTOP,
+  PROJECT_ASPECT_RATIO_MOBILE,
+  PROJECT_ASPECT_RATIO_DESKTOP,
 } from "../../_constants";
+import useWidthResizeListener from "../../../../utils/hooks/useWidthResizeListener";
 
 export default function Projects() {
   const [sectionWidth, setSectionWidth] = useState(0);
   const [scrollTop, setScrollTop] = useState(0);
-
-  const sectionRef = useRef(null);
-
-  useEffect(function calculateSectionWidthOnMount() {
-    if (sectionRef.current) {
-      setSectionWidth(sectionRef.current.offsetWidth);
-    }
-  }, []);
 
   const {
     isPlayerOpened,
@@ -36,6 +24,12 @@ export default function Projects() {
     selectedProjectIndex,
     setSelectedProjectIndex,
   } = useContext(FeaturedWorkContext);
+
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useWidthResizeListener(sectionRef, setSectionWidth);
+
+  // Determine table configuration based on device type
 
   const isMobile = useIsMobile();
 
@@ -49,18 +43,19 @@ export default function Projects() {
     ? PROJECT_LEFT_PADDING_MOBILE
     : PROJECT_LEFT_PADDING_DESKTOP;
 
-  // const projectAspectRatio = isMobile
-  //   ? PORTRAIT_PROJECT_ASPECT_RATIO
-  //   : PORTRAIT_PROJECT_ASPECT_RATIO;
+  const projectAspectRatio = isMobile
+    ? PROJECT_ASPECT_RATIO_MOBILE
+    : PROJECT_ASPECT_RATIO_DESKTOP;
 
-  const projectsCount = filteredProjects.length;
+  // Calculate project dimensions
 
   const projectWidth =
     (sectionWidth - projectLeftPadding * tableColumnGaps) / tableColumnsCount;
-  const projectHeight = projectWidth / PORTRAIT_PROJECT_ASPECT_RATIO;
+  const projectHeight = projectWidth / projectAspectRatio;
 
+  const projectsTotalCount = filteredProjects.length;
   const contentHeight =
-    Math.ceil(projectsCount / tableColumnsCount) * projectHeight;
+    Math.ceil(projectsTotalCount / tableColumnsCount) * projectHeight;
 
   const visibleRowsStartIndex = useMemo(
     () => Math.max(0, Math.floor(scrollTop / projectHeight)),
@@ -73,58 +68,73 @@ export default function Projects() {
   ]);
 
   const displayedProjects = useMemo(() => {
-    const result = [];
+    const generateProjectElement = (
+      project,
+      projectIndex,
+      offsetFromTop,
+      isRightElement
+    ) => (
+      <Project
+        index={projectIndex}
+        data={project}
+        isSelected={selectedProjectIndex === projectIndex}
+        setSelectedProjectIndex={setSelectedProjectIndexCached}
+        key={project.name}
+        customStyles={{
+          transform: `translateY(${offsetFromTop}px)`,
+          width: `${projectWidth}px`,
+          aspectRatio: `${projectAspectRatio}`,
+          marginLeft: isRightElement ? `${projectLeftPadding - 2}px` : null,
+        }}
+      />
+    );
 
-    // loop through table rows (filteredProjects / 2)
+    const generateProjectsForSingleRow = (rowIndex, offsetFromTop) => {
+      const rowOfProjects = [];
+      for (let colIndex = 0; colIndex < tableColumnsCount; colIndex++) {
+        const projectIndex = rowIndex * tableColumnsCount + colIndex;
+        if (projectIndex < projectsTotalCount) {
+          const project = filteredProjects[projectIndex];
+          const isRightElement = colIndex !== 0;
+          rowOfProjects.push(
+            generateProjectElement(
+              project,
+              projectIndex,
+              offsetFromTop,
+              isRightElement
+            )
+          );
+        }
+      }
+      return rowOfProjects;
+    };
+
+    // loop itarates over rows
+    // and generates Projects for each row with generateProjectsForSingleRow()
+
+    const result = [];
     for (
       let rowIndex = visibleRowsStartIndex;
       rowIndex < visibleRowsEndIndex;
       rowIndex++
     ) {
       const offsetFromTop = visibleRowsStartIndex * projectHeight;
-
-      // for every row loop through each column
-      // and map filteredProjects array to table(matrix) structure
-
-      for (let colIndex = 0; colIndex < tableColumnsCount; colIndex++) {
-        const projectIndex = rowIndex * tableColumnsCount + colIndex;
-        const isRightElement = colIndex !== 0;
-        // if project exists, push it to result array
-
-        if (projectIndex < projectsCount) {
-          const project = filteredProjects[projectIndex];
-          result.push(
-            <Project
-              index={projectIndex}
-              data={project}
-              isSelected={selectedProjectIndex === projectIndex}
-              setSelectedProjectIndex={setSelectedProjectIndexCached}
-              key={project.name}
-              styles={{
-                transform: `translateY(${offsetFromTop}px)`,
-                width: `${projectWidth}px`,
-                aspectRatio: `${PORTRAIT_PROJECT_ASPECT_RATIO}`,
-                marginLeft: isRightElement
-                  ? `${projectLeftPadding - 2}px`
-                  : null,
-              }}
-            />
-          );
-        }
-      }
+      result.push(...generateProjectsForSingleRow(rowIndex, offsetFromTop));
     }
+
     return result;
   }, [
-    projectLeftPadding,
-    tableColumnsCount,
-    visibleRowsStartIndex,
-    visibleRowsEndIndex,
-    projectsCount,
     projectHeight,
-    projectWidth,
+    visibleRowsEndIndex,
+    visibleRowsStartIndex,
     filteredProjects,
+    projectAspectRatio,
+    projectLeftPadding,
+    projectWidth,
+    projectsTotalCount,
     selectedProjectIndex,
     setSelectedProjectIndexCached,
+    tableColumnsCount,
   ]);
 
   function onScroll(event) {

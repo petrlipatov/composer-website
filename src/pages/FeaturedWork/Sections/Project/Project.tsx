@@ -14,13 +14,13 @@ const Project = memo(
     index,
     data,
     isSelected,
-    styles,
+    customStyles,
     setSelectedProjectIndex,
   }: ProjectProps) => {
     const isMobile = useIsMobile();
 
     return (
-      <div className={s.project} style={{ ...styles }}>
+      <div className={s.project} style={{ ...customStyles }}>
         {isMobile ? (
           <MobileProject
             index={index}

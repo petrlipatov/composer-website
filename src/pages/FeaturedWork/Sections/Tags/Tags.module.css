@@ -15,11 +15,17 @@
   flex-shrink: 0;
 }
 
-@media (min-width: 720px) {
+@media (min-width: 1280px) {
   .section {
-    width: 70%;
+    width: 900px;
     justify-self: center;
     margin-top: 48px;
     padding-bottom: 0;
+  }
+}
+
+@media (min-width: 1440px) {
+  .section {
+    width: 1000px;
   }
 }
