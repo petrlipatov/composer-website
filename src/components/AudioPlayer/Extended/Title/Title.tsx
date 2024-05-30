@@ -1,4 +1,4 @@
-import { ProjectData } from "../../../../types";
+import { ProjectData } from "../../../../pages/FeaturedWork/_types";
 import s from "./Title.module.css";
 
 type Props = {
