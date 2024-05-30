@@ -1,4 +1,4 @@
-import React, { useRef, RefObject, useState, Suspense } from "react";
+import React, { useRef, useState, useEffect, Suspense } from "react";
 import { Link } from "react-router-dom";
 
 import Modal from "../../components/Modal/Modal";
@@ -11,10 +11,30 @@ const YouTubePlayer = React.lazy(
   () => import("../../components/VideoPopup/YoutubePlayer/YoutubePlayer")
 );
 
+const imageSources = [
+  "/images/home/flower1_414x753.webp",
+  "/images/home/flower2_414x753.webp",
+  "/images/home/flower3_414x753.webp",
+];
+
 function Home() {
   const [isPopupOpened, setPopupState] = useState(false);
+  const [loadedImages, setLoadedImages] = useState([false, false, false]);
+  const pageRef = useRef(null);
 
-  const pageRef: RefObject<HTMLDivElement> = useRef(null);
+  useEffect(() => {
+    imageSources.forEach((src, index) => {
+      const img = new Image();
+      img.src = src;
+      img.onload = () => {
+        setLoadedImages((prevLoadedImages) => {
+          const newLoadedImages = [...prevLoadedImages];
+          newLoadedImages[index] = true;
+          return newLoadedImages;
+        });
+      };
+    });
+  }, []);
 
   function openPopup() {
     setPopupState(true);
@@ -22,37 +42,29 @@ function Home() {
 
   return (
     <div className={s.page} ref={pageRef}>
-      <div className={s.content} ref={pageRef}>
+      <div className={s.content}>
         <Logo />
         <div className={s.nav}>
           <div className={s.link} onClick={openPopup}>
             Showreel
           </div>
-
           <Link to="work" className={s.link}>
             Featured Work
           </Link>
-
           <Link to="pieces" className={s.link}>
             Pieces
           </Link>
-
           <Link to="info" className={s.link}>
             Info
           </Link>
         </div>
-        <div
-          className={s.image}
-          style={{ backgroundImage: `url(/images/home/flower1_414x753.webp)` }}
-        />
-        <div
-          className={s.image}
-          style={{ backgroundImage: `url(/images/home/flower2_414x753.webp)` }}
-        />
-        <div
-          className={s.image}
-          style={{ backgroundImage: `url(/images/home/flower3_414x753.webp)` }}
-        />
+        {imageSources.map((src, index) => (
+          <div
+            key={index}
+            className={`${s.image} ${loadedImages[index] ? s.fadeIn : ""}`}
+            style={{ backgroundImage: `url(${src})` }}
+          />
+        ))}
         {isPopupOpened && (
           <Modal setPopupState={setPopupState}>
             <Suspense fallback={<Preloader content={"🐥"} />}>
