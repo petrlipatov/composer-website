@@ -51,4 +51,22 @@
   .content {
     margin-top: 24px;
   }
+
+  .tag {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .tagsSection {
+    width: 900px;
+    margin-top: 32px;
+    align-self: center;
+  }
+}
+
+@media (min-width: 1440px) {
+  .tagsSection {
+    width: 1000px;
+  }
 }

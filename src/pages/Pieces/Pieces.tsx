@@ -23,6 +23,7 @@ function Pieces() {
   const [filteredPieces, setFilteredPieces] = useState<AudioTrackData[]>([]);
   const [isPlayerOpened, setIsPlayerOpened] = useState(false);
   const [isVideoPopupOpened, setIsVideoPopupOpened] = useState(false);
+  const [selectedTrackIndex, setSelectedTrackIndex] = useState<number>(null);
 
   const audioPlayerRef = useRef<HTMLAudioElement>();
 
@@ -35,11 +36,13 @@ function Pieces() {
       isPlayerOpened,
       isVideoPopupOpened,
       audioPlayerRef,
+      selectedTrackIndex,
       setVideoID,
       setSelectedTags,
       setCurrentAudioData,
       setIsPlayerOpened,
       setIsVideoPopupOpened,
+      setSelectedTrackIndex,
     }),
     [
       videoID,
@@ -48,11 +51,13 @@ function Pieces() {
       currentAudioData,
       isPlayerOpened,
       isVideoPopupOpened,
+      selectedTrackIndex,
       setVideoID,
       setSelectedTags,
       setCurrentAudioData,
       setIsPlayerOpened,
       setIsVideoPopupOpened,
+      setSelectedTrackIndex,
     ]
   );
 
@@ -70,10 +75,8 @@ function Pieces() {
     <PiecesContext.Provider value={contextValue}>
       <div className={s.page}>
         <div className={s.content}>
-          <Header>{"Pieces"}</Header>
-
+          <Header>Pieces</Header>
           <Tags />
-
           <Tracks />
         </div>
 

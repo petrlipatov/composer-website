@@ -1,8 +1,18 @@
-import useIsMobile from "../../../../utils/hooks/useIsMobile";
-import { FeaturedWorkContext } from "../../FeaturedWork";
-import s from "./Projects.module.css";
 import { useCallback, useContext, useMemo, useRef, useState } from "react";
+
 import Project from "../Project/Project";
+
+import useIsMobile from "../../../../utils/hooks/useIsMobile";
+import useWidthResizeListener from "../../../../utils/hooks/useWidthResizeListener";
+
+import {
+  generateElementsForSingleRow,
+  getContentHeight,
+  getElementHeight,
+  getElementWidth,
+} from "../../../../utils/helpers/virtualizedList";
+
+import { FeaturedWorkContext } from "../../FeaturedWork";
 
 import {
   PROJECT_LEFT_MARGIN_MOBILE,
@@ -14,7 +24,8 @@ import {
   PROJECT_TOP_MARGIN_MOBILE,
   PROJECT_TOP_MARGIN_DESKTOP,
 } from "../../_constants";
-import useWidthResizeListener from "../../../../utils/hooks/useWidthResizeListener";
+
+import s from "./Projects.module.css";
 
 export default function Projects() {
   const [sectionWidth, setSectionWidth] = useState(0);
@@ -39,7 +50,7 @@ export default function Projects() {
     ? TABLE_COLUMNS_MOBILE
     : TABLE_COLUMNS_DESKTOP;
 
-  const tableColumnGaps = tableColumnsCount - 1;
+  const tableColumnGapsCount = tableColumnsCount - 1;
 
   const projectAspectRatio = isMobile
     ? PROJECT_ASPECT_RATIO_MOBILE
@@ -55,31 +66,44 @@ export default function Projects() {
 
   // Calculate project dimensions
 
-  const projectWidth =
-    (sectionWidth - projectLeftMargin * tableColumnGaps) / tableColumnsCount;
-  const projectHeight = projectWidth / projectAspectRatio + projectTopMargin;
+  const projectWidth = getElementWidth(
+    sectionWidth,
+    projectLeftMargin,
+    tableColumnGapsCount,
+    tableColumnsCount
+  );
+
+  const projectHeight = getElementHeight(
+    projectWidth,
+    projectAspectRatio,
+    projectTopMargin
+  );
+
+  // Calculate content dimensions
 
   const projectsTotalCount = filteredProjects.length;
-  const contentHeight =
-    Math.ceil(projectsTotalCount / tableColumnsCount) * projectHeight;
 
-  const visibleRowsStartIndex = useMemo(
+  const contentHeight = getContentHeight(
+    projectsTotalCount,
+    projectHeight,
+    tableColumnsCount
+  );
+
+  // Calculate visible content dimensions
+
+  const visibleRowsSliceStartIndex = useMemo(
     () => Math.max(0, Math.floor(scrollTop / projectHeight)),
     [scrollTop, projectHeight]
   );
-  const visibleRowsEndIndex = visibleRowsStartIndex + 3;
+
+  const visibleRowsSliceEndIndex = visibleRowsSliceStartIndex + 3;
 
   const setSelectedProjectIndexCached = useCallback(setSelectedProjectIndex, [
     setSelectedProjectIndex,
   ]);
 
-  const displayedProjects = useMemo(() => {
-    const generateProjectElement = (
-      project,
-      projectIndex,
-      offsetFromTop,
-      isRightElement
-    ) => (
+  const generateProjectElement = useCallback(
+    (project, projectIndex, offsetFromTop, isRightElement) => (
       <Project
         index={projectIndex}
         data={project}
@@ -90,69 +114,63 @@ export default function Projects() {
           transform: `translateY(${offsetFromTop}px)`,
           width: `${projectWidth}px`,
           aspectRatio: `${projectAspectRatio}`,
-          marginLeft: isRightElement ? `${projectLeftMargin - 2}px` : null,
+          marginLeft: isRightElement ? `${projectLeftMargin}px` : null,
           marginTop: projectTopMargin,
         }}
       />
-    );
+    ),
+    [
+      projectAspectRatio,
+      projectLeftMargin,
+      projectWidth,
+      projectTopMargin,
+      selectedProjectIndex,
+      setSelectedProjectIndexCached,
+    ]
+  );
 
-    const generateProjectsForSingleRow = (rowIndex, offsetFromTop) => {
-      const rowOfProjects = [];
-      for (let colIndex = 0; colIndex < tableColumnsCount; colIndex++) {
-        const projectIndex = rowIndex * tableColumnsCount + colIndex;
-        if (projectIndex < projectsTotalCount) {
-          const project = filteredProjects[projectIndex];
-          const isRightElement = colIndex !== 0;
-          rowOfProjects.push(
-            generateProjectElement(
-              project,
-              projectIndex,
-              offsetFromTop,
-              isRightElement
-            )
-          );
-        }
-      }
-      return rowOfProjects;
-    };
-
+  const displayedProjects = useMemo(() => {
     // loop itarates over rows
     // and generates Projects for each row with generateProjectsForSingleRow()
 
     const result = [];
     for (
-      let rowIndex = visibleRowsStartIndex;
-      rowIndex < visibleRowsEndIndex;
+      let rowIndex = visibleRowsSliceStartIndex;
+      rowIndex < visibleRowsSliceEndIndex;
       rowIndex++
     ) {
-      const offsetFromTop = visibleRowsStartIndex * projectHeight;
-      result.push(...generateProjectsForSingleRow(rowIndex, offsetFromTop));
+      const offsetFromTop = visibleRowsSliceStartIndex * projectHeight;
+      result.push(
+        ...generateElementsForSingleRow(
+          rowIndex,
+          offsetFromTop,
+          tableColumnsCount,
+          projectsTotalCount,
+          filteredProjects,
+          generateProjectElement
+        )
+      );
     }
 
     return result;
   }, [
-    projectHeight,
-    visibleRowsEndIndex,
-    visibleRowsStartIndex,
+    visibleRowsSliceEndIndex,
+    visibleRowsSliceStartIndex,
     filteredProjects,
-    projectAspectRatio,
-    projectLeftMargin,
-    projectWidth,
+    projectHeight,
     projectsTotalCount,
-    selectedProjectIndex,
+
     tableColumnsCount,
-    projectTopMargin,
-    setSelectedProjectIndexCached,
+
+    generateProjectElement,
   ]);
 
-  function onScroll(event) {
-    setScrollTop(event.currentTarget.scrollTop);
-  }
+  const handleScroll = (e) => setScrollTop(e.currentTarget.scrollTop);
 
   return (
     <div
-      className={s.section}
-      onScroll={onScroll}
+      className={s.projectsSection}
+      onScroll={handleScroll}
       ref={sectionRef}
       style={isMobile && isPlayerOpened ? { display: "none" } : {}}
     >

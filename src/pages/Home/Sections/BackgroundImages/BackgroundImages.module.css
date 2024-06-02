@@ -1,0 +1,83 @@
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes move1 {
+  0%,
+  100% {
+    opacity: 0;
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(var(--translate-x), var(--translate-y))
+      scale(var(--scale));
+  }
+}
+
+@keyframes move2 {
+  0%,
+  100% {
+    opacity: 0;
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(var(--translate-x), var(--translate-y))
+      scale(var(--scale));
+  }
+}
+
+@keyframes move3 {
+  0%,
+  100% {
+    opacity: 0;
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(var(--translate-x), var(--translate-y))
+      scale(var(--scale));
+  }
+}
+
+.image {
+  opacity: 0;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  height: 100%;
+  left: 5%;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: -1;
+  transition: opacity 1s ease-out;
+}
+
+.fadeIn {
+  opacity: 1;
+}
+
+.image1 {
+  animation: move1 15s infinite ease-in-out;
+}
+
+.image2 {
+  animation: move2 15s infinite ease-in-out;
+}
+
+.image3 {
+  animation: move3 15s infinite ease-in-out;
+}
+
+@media (min-width: 720px) {
+  .image {
+    margin-top: 5%;
+    height: 80%;
+    left: 0;
+  }
+}

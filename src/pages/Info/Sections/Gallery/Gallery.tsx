@@ -4,10 +4,12 @@ import Modal from "../../../../components/Modal/Modal.tsx";
 
 import {
   GALLERY_IMAGES,
-  GALLERY_IMAGES_ON_PAGE_MOBILE,
+  GALLERY_IMAGES_COUNT_MOBILE,
+  GALLERY_IMAGES_COUNT_DESKTOP,
 } from "../../_constants.ts";
 
 import s from "./Gallery.module.css";
+import useIsMobile from "../../../../utils/hooks/useIsMobile.ts";
 
 function Gallery() {
   const [pageNumber, setPageNumber] = useState<number>(1);
@@ -15,18 +17,19 @@ function Gallery() {
   const [isPopupOpened, setIsPopupOpened] = useState<boolean>();
   const [selectedImage, setSelectedImage] = useState({ img: "", desc: "" });
 
-  useEffect(() => {
-    const rightIndex = pageNumber * GALLERY_IMAGES_ON_PAGE_MOBILE;
-    const newSlice = GALLERY_IMAGES.slice(
-      rightIndex - GALLERY_IMAGES_ON_PAGE_MOBILE,
-      rightIndex
-    );
-    setImagesSlice(newSlice);
-  }, [pageNumber]);
+  const isMobile = useIsMobile();
 
-  const pagesCount = Math.ceil(
-    GALLERY_IMAGES.length / GALLERY_IMAGES_ON_PAGE_MOBILE
-  );
+  const imagesCount = isMobile
+    ? GALLERY_IMAGES_COUNT_MOBILE
+    : GALLERY_IMAGES_COUNT_DESKTOP;
+
+  useEffect(() => {
+    const rightIndex = pageNumber * imagesCount;
+    const newSlice = GALLERY_IMAGES.slice(rightIndex - imagesCount, rightIndex);
+    setImagesSlice(newSlice);
+  }, [pageNumber, imagesCount]);
+
+  const pagesCount = Math.ceil(GALLERY_IMAGES.length / imagesCount);
 
   const goToPreviousPage = () => {
     if (pageNumber > 1) {

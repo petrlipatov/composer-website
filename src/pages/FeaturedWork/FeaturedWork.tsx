@@ -89,7 +89,7 @@ function FeaturedWork() {
     <FeaturedWorkContext.Provider value={contextValue}>
       <div className={s.page}>
         <div className={content}>
-          <Header>{"Featured Work"}</Header>
+          <Header>Featured Work</Header>
 
           <Tags />
 

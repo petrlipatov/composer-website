@@ -48,6 +48,7 @@
   position: absolute;
   width: 4px;
   background-color: black;
+  transition: top linear 30ms;
 }
 
 .button {

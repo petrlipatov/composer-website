@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 
 import ProgressBar from "../ProgressBar/ProgressBar";
 import ControlButtons from "../../../../../components/AudioPlayer/Shared/ControlButtons/ControlButtons";
@@ -12,6 +12,7 @@ import { FeaturedWorkContext } from "../../../FeaturedWork";
 import { FIRST_TRACK_INDEX } from "../../../../../utils/constants";
 
 import s from "./DesktopAudioPlayer.module.css";
+import useAudioPlayerListeners from "../../../../../utils/hooks/useAudioPlayerListeners";
 
 const DesktopAudioPlayer = () => {
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
@@ -29,28 +30,7 @@ const DesktopAudioPlayer = () => {
 
   const audioPlayer = audioPlayerRef.current;
 
-  useEffect(
-    function setListenersOnPlayerStates() {
-      const onPlayingHandler = () => setIsAudioPlaying(true);
-      const onPauseHandler = () => setIsAudioPlaying(false);
-      const onEndedHandler = () => setIsAudioPlaying(false);
-
-      if (audioPlayer) {
-        audioPlayer.addEventListener("playing", onPlayingHandler);
-        audioPlayer.addEventListener("pause", onPauseHandler);
-        audioPlayer.addEventListener("ended", onEndedHandler);
-      }
-
-      return () => {
-        if (audioPlayer) {
-          audioPlayer.removeEventListener("playing", onPlayingHandler);
-          audioPlayer.removeEventListener("pause", onPauseHandler);
-          audioPlayer.removeEventListener("ended", onEndedHandler);
-        }
-      };
-    },
-    [audioPlayer]
-  );
+  useAudioPlayerListeners(audioPlayer, setIsAudioPlaying);
 
   const handlePlayPauseClick = () => {
     if (!selectedTrackIndex && selectedTrackIndex !== 0) {

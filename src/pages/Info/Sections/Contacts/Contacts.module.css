@@ -3,6 +3,7 @@
   flex-wrap: wrap;
   margin-top: 48px;
   gap: 8px;
+  align-self: center;
 }
 
 .contactsButton {
@@ -14,4 +15,22 @@
   flex-grow: 1;
   text-align: center;
   font-weight: 600;
+  cursor: pointer;
+}
+
+@media (min-width: 1280px) {
+  .section {
+    width: 900px;
+    margin-top: 90px;
+  }
+
+  .contactsButton {
+    padding: 60px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .section {
+    width: 1000px;
+  }
 }

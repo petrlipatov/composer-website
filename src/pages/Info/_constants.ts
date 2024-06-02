@@ -1,4 +1,5 @@
-export const GALLERY_IMAGES_ON_PAGE_MOBILE = 6;
+export const GALLERY_IMAGES_COUNT_MOBILE = 6;
+export const GALLERY_IMAGES_COUNT_DESKTOP = 6;
 
 export const GALLERY_IMAGES = [
   {

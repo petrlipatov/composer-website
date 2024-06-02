@@ -4,7 +4,7 @@ import Logo from "../Logo/Logo";
 
 function Header({ children }) {
   return (
-    <div className={s.nav}>
+    <div className={s.navSection}>
       <Link to="/" className={s.pageTitle}>
         {children}
       </Link>

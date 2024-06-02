@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { PiecesContext } from "../../Pieces";
 import ProgressBar from "./ProgressBar/ProgressBar";
 
@@ -8,6 +8,11 @@ import Title from "../../../../components/AudioPlayer/Simple/Title/Title";
 import Artwork from "../../../../components/AudioPlayer/Simple/Artwork/Artwork";
 import VideoButton from "../../../../components/AudioPlayer/Simple/VideoButton/VideoButton";
 import CloseButton from "../../../../components/AudioPlayer/Simple/CloseButton/CloseButton";
+import useAudioPlayerListeners from "../../../../utils/hooks/useAudioPlayerListeners";
+import {
+  PlayPauseCallback,
+  VideoCalback,
+} from "../../../../utils/helpers/audioPlayer";
 
 const AudioPlayer = () => {
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
@@ -24,33 +29,10 @@ const AudioPlayer = () => {
 
   const audioPlayer = audioPlayerRef.current;
 
-  useEffect(
-    function togglePlayingStatus() {
-      const onPlayingHandler = () => setIsAudioPlaying(true);
-      const onEndedHandler = () => setIsAudioPlaying(false);
-
-      if (audioPlayer) {
-        audioPlayer.addEventListener("playing", onPlayingHandler);
-        audioPlayer.addEventListener("ended", onEndedHandler);
-      }
-
-      return () => {
-        if (audioPlayer) {
-          audioPlayer.removeEventListener("playing", onPlayingHandler);
-          audioPlayer.removeEventListener("ended", onEndedHandler);
-        }
-      };
-    },
-    [audioPlayer]
-  );
+  useAudioPlayerListeners(audioPlayer, setIsAudioPlaying);
 
   const handlePlayPauseClick = () => {
-    if (isAudioPlaying) {
-      audioPlayer.pause();
-    } else {
-      audioPlayer.play();
-    }
-    setIsAudioPlaying(!isAudioPlaying);
+    PlayPauseCallback(audioPlayer, isAudioPlaying);
   };
 
   const handlePlayNextClick = (prevOrNext) => {
@@ -75,11 +57,13 @@ const AudioPlayer = () => {
   };
 
   const handleVideoClick = () => {
-    setIsPlayerOpened(false);
-    setVideoID(currentAudioData?.videoSrc);
-    audioPlayer.pause();
-    audioPlayer.src = "";
-    setIsVideoPopupOpened(true);
+    VideoCalback(
+      audioPlayer,
+      currentAudioData,
+      setIsPlayerOpened,
+      setVideoID,
+      setIsVideoPopupOpened
+    );
   };
 
   const handleCloseClick = () => {

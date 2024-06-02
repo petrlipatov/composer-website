@@ -1,4 +1,4 @@
-.section {
+.projectsSection {
   overflow-y: scroll;
   width: 100%;
   flex-grow: 1;
@@ -6,27 +6,16 @@
   overflow-y: scroll;
 }
 
-@media (min-width: 720px) {
-  .section {
-    width: 70%;
-    justify-self: center;
-    margin-top: 48px;
-  }
-}
-
 @media (min-width: 1280px) {
-  .section {
+  .projectsSection {
     width: 900px;
     justify-self: center;
-    margin-top: 48px;
+    margin-top: 32px;
   }
 }
 
 @media (min-width: 1440px) {
-  .section {
+  .projectsSection {
     width: 1000px;
-    justify-self: center;
-    margin-top: 48px;
   }
 }
-

@@ -28,30 +28,30 @@ const Scrollbar = ({ children }: { children: React.ReactNode }) => {
     }
   }
 
-  function handleThumbPosition() {
-    if (
-      !contentRef.current ||
-      !scrollTrackRef.current ||
-      !scrollThumbRef.current
-    ) {
-      return;
+  useEffect(() => {
+    function handleThumbPosition() {
+      if (
+        !contentRef.current ||
+        !scrollTrackRef.current ||
+        !scrollThumbRef.current
+      ) {
+        return;
+      }
+
+      const { scrollTop: contentTop, scrollHeight: contentHeight } =
+        contentRef.current;
+      const { clientHeight: trackHeight } = scrollTrackRef.current;
+
+      let newTop = Math.ceil((contentTop / contentHeight) * trackHeight);
+      newTop = Math.min(newTop, trackHeight - thumbHeight);
+
+      const thumb = scrollThumbRef.current;
+
+      requestAnimationFrame(() => {
+        thumb.style.top = `${newTop}px`;
+      });
     }
 
-    const { scrollTop: contentTop, scrollHeight: contentHeight } =
-      contentRef.current;
-    const { clientHeight: trackHeight } = scrollTrackRef.current;
-
-    let newTop = Math.ceil((contentTop / contentHeight) * trackHeight);
-    newTop = Math.min(newTop, trackHeight - thumbHeight);
-
-    const thumb = scrollThumbRef.current;
-
-    requestAnimationFrame(() => {
-      thumb.style.top = `${newTop}px`;
-    });
-  }
-
-  useEffect(() => {
     if (contentRef.current) {
       const content = contentRef.current;
       const { clientHeight: contentVisible, scrollHeight: contentTotalHeight } =
@@ -74,7 +74,7 @@ const Scrollbar = ({ children }: { children: React.ReactNode }) => {
         content.removeEventListener("scroll", handleThumbPosition);
       };
     }
-  }, [thumbHeight, scrollTrackRef?.current, contentRef?.current]);
+  }, [thumbHeight]);
 
   function handleTouchStart(e: React.TouchEvent<HTMLDivElement>) {
     e.stopPropagation();

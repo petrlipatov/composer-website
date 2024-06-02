@@ -37,6 +37,10 @@ function Tags() {
     setSelectedTags([]);
   };
 
+  const isButtonDisabled = (selectedTags) => {
+    return selectedTags.length === 0;
+  };
+
   const isTagSelected = (tag: string) => {
     return selectedTags.includes(tag);
   };
@@ -46,7 +50,7 @@ function Tags() {
   };
 
   return (
-    <div className={s.section}>
+    <div className={s.tagsSection}>
       <div className={s.tagsList}>
         {PROJECTS_GENRES.map((genre, i) => (
           <Tag
@@ -58,7 +62,10 @@ function Tags() {
           />
         ))}
 
-        <ClearButton handleClearTagsClick={handleClearTagsClick} />
+        <ClearButton
+          isDisabled={isButtonDisabled(selectedTags)}
+          handleClearTagsClick={handleClearTagsClick}
+        />
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 
 import ProgressBar from "../ProgressBar/ProgressBar";
 import ControlButtons from "../../../../../components/AudioPlayer/Shared/ControlButtons/ControlButtons";
@@ -13,6 +13,8 @@ import closeIcon from "../../../../../assets/images/close-icon_black.svg";
 import { FIRST_TRACK_INDEX } from "../../../../../utils/constants";
 
 import s from "./MobileAudioPlayer.module.css";
+import { VideoCalback } from "../../../../../utils/helpers/audioPlayer";
+import useAudioPlayerListeners from "../../../../../utils/hooks/useAudioPlayerListeners";
 
 const MobileAudioPlayer = () => {
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
@@ -31,28 +33,7 @@ const MobileAudioPlayer = () => {
 
   const audioPlayer = audioPlayerRef.current;
 
-  useEffect(
-    function setListenersOnPlayerStates() {
-      const onPlayingHandler = () => setIsAudioPlaying(true);
-      const onPauseHandler = () => setIsAudioPlaying(false);
-      const onEndedHandler = () => setIsAudioPlaying(false);
-
-      if (audioPlayer) {
-        audioPlayer.addEventListener("playing", onPlayingHandler);
-        audioPlayer.addEventListener("pause", onPauseHandler);
-        audioPlayer.addEventListener("ended", onEndedHandler);
-      }
-
-      return () => {
-        if (audioPlayer) {
-          audioPlayer.removeEventListener("playing", onPlayingHandler);
-          audioPlayer.removeEventListener("pause", onPauseHandler);
-          audioPlayer.removeEventListener("ended", onEndedHandler);
-        }
-      };
-    },
-    [audioPlayer]
-  );
+  useAudioPlayerListeners(audioPlayer, setIsAudioPlaying);
 
   const isTrackPlaying = (i) => {
     return isAudioPlaying && playingTrackIndex === i;
@@ -109,12 +90,14 @@ const MobileAudioPlayer = () => {
     setSelectedTrackIndex(null);
   };
 
-  const handleVideoClick = (e) => {
-    e.stopPropagation();
-    setIsPlayerOpened(false);
-    setVideoID(currentProject.videoSrc);
-    audioPlayer.src = "";
-    setIsVideoPopupOpened(true);
+  const handleVideoClick = () => {
+    VideoCalback(
+      audioPlayer,
+      currentProject,
+      setIsPlayerOpened,
+      setVideoID,
+      setIsVideoPopupOpened
+    );
   };
 
   return (

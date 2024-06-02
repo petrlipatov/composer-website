@@ -1,11 +1,8 @@
-import cn from "classnames";
-
-import playSrc from "../../../../assets/images/play.svg";
-import pauseSrc from "../../../../assets/images/pause.svg";
-import playNextSrc from "../../../../assets/images/play-next.svg";
-
 import s from "./ControlButtons.module.css";
 import useIsMobile from "../../../../utils/hooks/useIsMobile";
+import PlayIcon from "../../../Icons/PlayIcon/PlayIcon";
+import PauseIcon from "../../../Icons/PauseIcon/PauseIcon";
+import NextIcon from "../../../Icons/NextIcon/NextIcon";
 
 type Props = {
   handlePlayPauseClick: () => void;
@@ -38,11 +35,7 @@ function ControlButtons({
         onClick={() => handlePlayNextClickDesktop("prev")}
         onTouchEnd={() => handlePlayNextClick("prev")}
       >
-        <img
-          className={cn(s.icon, s.iconPlayPrevious)}
-          src={playNextSrc}
-          alt="play-next-button"
-        />
+        <NextIcon customStyles={s.icon} isRotated={true} />
       </button>
 
       <button
@@ -51,19 +44,8 @@ function ControlButtons({
         onClick={handlePlayPauseClickDesktop}
         onTouchEnd={handlePlayPauseClick}
       >
-        <img
-          className={s.icon}
-          src={pauseSrc}
-          alt="pause-button"
-          style={isAudioPlaying ? {} : { display: "none" }}
-        />
-
-        <img
-          className={s.icon}
-          src={playSrc}
-          alt="play-button"
-          style={isAudioPlaying ? { display: "none" } : {}}
-        />
+        <PauseIcon isAudioPlaying={isAudioPlaying} customStyles={s.icon} />
+        <PlayIcon isAudioPlaying={isAudioPlaying} customStyles={s.icon} />
       </button>
 
       <button
@@ -72,7 +54,7 @@ function ControlButtons({
         onClick={() => handlePlayNextClickDesktop("next")}
         onTouchEnd={() => handlePlayNextClick("next")}
       >
-        <img className={s.icon} src={playNextSrc} alt="play-next-button" />
+        <NextIcon customStyles={s.icon} />
       </button>
     </div>
   );

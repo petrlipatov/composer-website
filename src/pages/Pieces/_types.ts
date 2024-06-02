@@ -20,11 +20,13 @@ export interface ContextTypes {
   isPlayerOpened: boolean;
   isVideoPopupOpened: boolean;
   audioPlayerRef: MutableRefObject<HTMLAudioElement>;
+  selectedTrackIndex: number;
   setVideoID: Dispatch<SetStateAction<string>>;
   setSelectedTags: Dispatch<SetStateAction<string[]>>;
   setCurrentAudioData: Dispatch<SetStateAction<currentAudioData>>;
   setIsPlayerOpened: Dispatch<SetStateAction<boolean>>;
   setIsVideoPopupOpened: Dispatch<SetStateAction<boolean>>;
+  setSelectedTrackIndex: Dispatch<SetStateAction<number>>;
 }
 
 export type genres =

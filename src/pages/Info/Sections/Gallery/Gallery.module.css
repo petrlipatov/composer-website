@@ -2,7 +2,6 @@
   margin-top: 16px;
   display: flex;
   flex-direction: column;
-  /* overflow: hidden; */
   align-items: center;
   justify-content: center;
   overflow: hidden;
@@ -42,7 +41,6 @@
   display: flex;
   justify-content: center;
   height: 10%;
-  /* border: 1px solid red; */
 }
 
 .pagesCount {
@@ -61,4 +59,31 @@
 .popupImage {
   width: 100%;
   height: auto;
+}
+
+@media (min-width: 1280px) {
+  .section {
+    width: 900px;
+    align-self: center;
+  }
+  .imagesGrid {
+    margin-top: 32px;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    width: 100%;
+  }
+
+  .pagesCount {
+    font-size: 18px;
+  }
+
+  .button {
+    cursor: pointer;
+  }
+}
+
+@media (min-width: 1440px) {
+  .section {
+    width: 1000px;
+  }
 }

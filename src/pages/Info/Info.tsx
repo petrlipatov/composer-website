@@ -7,6 +7,7 @@ import Contacts from "./Sections/Contacts/Contacts";
 import s from "./Info.module.css";
 import Gallery from "./Sections/Gallery/Gallery";
 import Header from "../../components/Header/Header";
+import SoundSpecs from "./Sections/SoundSpecs/SoundSpecs";
 
 enum SECTION_TAGS {
   about,
@@ -65,6 +66,7 @@ function Info() {
         {selectedTag === SECTION_TAGS.about && <About />}
         {selectedTag === SECTION_TAGS.contacts && <Contacts />}
         {selectedTag === SECTION_TAGS.gallery && <Gallery />}
+        {selectedTag === SECTION_TAGS.specs && <SoundSpecs />}
 
         <div className={s.gallerySection}></div>
       </div>

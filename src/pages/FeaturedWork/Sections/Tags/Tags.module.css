@@ -1,9 +1,10 @@
-.section {
+.tagsSection {
   gap: 16px;
   margin-top: 28px;
   position: relative;
   flex-shrink: 0;
   padding-bottom: 24px;
+  justify-self: center;
 }
 
 .tagsList {

@@ -10,10 +10,21 @@ import { PIECES_GENRES } from "../../_constants";
 import s from "./Tags.module.css";
 
 function Tags() {
-  const { selectedTags, filteredPieces, setIsPlayerOpened, setSelectedTags } =
-    useContext(PiecesContext);
+  const {
+    audioPlayerRef,
+    selectedTags,
+    filteredPieces,
+    setIsPlayerOpened,
+    setSelectedTags,
+    setSelectedTrackIndex,
+  } = useContext(PiecesContext);
+
+  const audioPlayer = audioPlayerRef.current;
 
   const handleTagClick = (tag: string) => {
+    audioPlayer.pause();
+    audioPlayer.src = "";
+    setSelectedTrackIndex(null);
     setIsPlayerOpened(false);
     if (selectedTags.includes(tag)) {
       setSelectedTags(selectedTags.filter((t) => t !== tag));
@@ -24,6 +35,10 @@ function Tags() {
 
   const handleClearTagsClick = () => {
     setSelectedTags([]);
+  };
+
+  const isButtonDisabled = (selectedTags) => {
+    return selectedTags.length === 0;
   };
 
   const isTagSelected = (tag: string) => {
@@ -46,7 +61,10 @@ function Tags() {
             key={i}
           />
         ))}
-        <ClearButton handleClearTagsClick={handleClearTagsClick} />
+        <ClearButton
+          isDisabled={isButtonDisabled(selectedTags)}
+          handleClearTagsClick={handleClearTagsClick}
+        />
       </div>
     </div>
   );

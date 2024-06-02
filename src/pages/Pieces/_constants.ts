@@ -193,6 +193,7 @@ export const PIECES = [
 
 export const DEFAULT_CONTEXT: ContextTypes = {
   videoID: "",
+  selectedTrackIndex: null,
   selectedTags: [],
   filteredPieces: [],
   currentAudioData: {
@@ -213,6 +214,7 @@ export const DEFAULT_CONTEXT: ContextTypes = {
   setCurrentAudioData: () => {},
   setIsPlayerOpened: () => {},
   setIsVideoPopupOpened: () => {},
+  setSelectedTrackIndex: () => {},
 };
 
 export const TABLE_COLUMNS_MOBILE = 2;
