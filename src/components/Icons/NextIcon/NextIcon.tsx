@@ -3,13 +3,13 @@
 // import s from "./PauseIcon.module.css";
 
 type Props = {
-  customStyles?: string;
+  className?: string;
   isFilled?: boolean;
   isRotated?: boolean;
 };
 
 const NextIcon = ({
-  customStyles,
+  className,
   isRotated = false,
   isFilled = false,
 }: Props) => {
@@ -17,7 +17,7 @@ const NextIcon = ({
     <svg
       viewBox="3 3 18 18"
       xmlns="http://www.w3.org/2000/svg"
-      className={customStyles}
+      className={className}
       fill={isFilled ? "#000000" : "none"}
       stroke={isFilled ? "none" : "#000000"}
       strokeWidth="1"

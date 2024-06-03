@@ -3,7 +3,6 @@ import cn from "classnames";
 
 import AudioPlayer from "./Sections/AudioPlayer/AudioPlayer";
 import Tags from "./Sections/Tags/Tags";
-import ProjectsSuspensed from "./Sections/ProjectsSuspensed/ProjectsSuspensed";
 import HTMLAudioTag from "../../components/HTMLAudioTag/HTMLAudioTag";
 import Header from "../../components/Header/Header";
 import VideoPopup from "../../components/VideoPopup/VideoPopup";
@@ -14,6 +13,7 @@ import { DEFAULT_CONTEXT, PROJECTS } from "./_constants";
 import { ContextTypes, ProjectData } from "./_types";
 
 import s from "./FeaturedWork.module.css";
+import Projects from "./Sections/Projects/Projects";
 
 export const FeaturedWorkContext = createContext<ContextTypes>(DEFAULT_CONTEXT);
 
@@ -90,10 +90,8 @@ function FeaturedWork() {
       <div className={s.page}>
         <div className={content}>
           <Header>Featured Work</Header>
-
           <Tags />
-
-          <ProjectsSuspensed />
+          <Projects />
         </div>
 
         {isPlayerOpened && <AudioPlayer />}

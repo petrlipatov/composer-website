@@ -1,5 +1,4 @@
 import { useState } from "react";
-import cn from "classnames";
 
 import About from "./Sections/About/About";
 import Contacts from "./Sections/Contacts/Contacts";
@@ -8,6 +7,7 @@ import s from "./Info.module.css";
 import Gallery from "./Sections/Gallery/Gallery";
 import Header from "../../components/Header/Header";
 import SoundSpecs from "./Sections/SoundSpecs/SoundSpecs";
+import Tag from "../../components/Tags/Tag/Tag";
 
 enum SECTION_TAGS {
   about,
@@ -22,45 +22,36 @@ function Info() {
   return (
     <div className={s.page}>
       <div className={s.content}>
-        <Header>{"Info"}</Header>
+        <Header>Info</Header>
 
         <div className={s.tagsSection}>
-          <button
-            className={cn(
-              s.tag,
-              selectedTag === SECTION_TAGS.about ? s.tagSelected : ""
-            )}
+          <Tag
             onClick={() => setSelectedTag(SECTION_TAGS.about)}
+            isSelected={selectedTag === SECTION_TAGS.about}
           >
             About
-          </button>
-          <button
-            className={cn(
-              s.tag,
-              selectedTag === SECTION_TAGS.contacts ? s.tagSelected : ""
-            )}
+          </Tag>
+
+          <Tag
             onClick={() => setSelectedTag(SECTION_TAGS.contacts)}
+            isSelected={selectedTag === SECTION_TAGS.contacts}
           >
             Contacts
-          </button>
-          <button
-            className={cn(
-              s.tag,
-              selectedTag === SECTION_TAGS.gallery ? s.tagSelected : ""
-            )}
+          </Tag>
+
+          <Tag
             onClick={() => setSelectedTag(SECTION_TAGS.gallery)}
+            isSelected={selectedTag === SECTION_TAGS.gallery}
           >
             Gallery
-          </button>
-          <button
-            className={cn(
-              s.tag,
-              selectedTag === SECTION_TAGS.specs ? s.tagSelected : ""
-            )}
+          </Tag>
+
+          <Tag
             onClick={() => setSelectedTag(SECTION_TAGS.specs)}
+            isSelected={selectedTag === SECTION_TAGS.specs}
           >
             Sound Specs
-          </button>
+          </Tag>
         </div>
 
         {selectedTag === SECTION_TAGS.about && <About />}

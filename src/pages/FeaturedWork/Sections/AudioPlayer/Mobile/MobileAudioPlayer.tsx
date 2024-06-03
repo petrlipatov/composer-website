@@ -6,15 +6,15 @@ import Title from "../../../../../components/AudioPlayer/Extended/Title/Title";
 import AudioTrack from "../../../../../components/AudioPlayer/Extended/AudioTrack/AudioTrack";
 import Info from "../../../../../components/AudioPlayer/Extended/Info/Info";
 import Scrollbar from "../../../../../components/AudioPlayer/Extended/Scrollbar/Scrollbar";
+import CloseButton from "../../../../../components/AudioPlayer/Simple/CloseButton/CloseButton";
 
 import { FeaturedWorkContext } from "../../../FeaturedWork";
+import { VideoCalback } from "../../../../../utils/helpers/audioPlayer";
+import useAudioPlayerListeners from "../../../../../utils/hooks/useAudioPlayerListeners";
 
-import closeIcon from "../../../../../assets/images/close-icon_black.svg";
 import { FIRST_TRACK_INDEX } from "../../../../../utils/constants";
 
 import s from "./MobileAudioPlayer.module.css";
-import { VideoCalback } from "../../../../../utils/helpers/audioPlayer";
-import useAudioPlayerListeners from "../../../../../utils/hooks/useAudioPlayerListeners";
 
 const MobileAudioPlayer = () => {
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
@@ -102,10 +102,8 @@ const MobileAudioPlayer = () => {
 
   return (
     <div className={s.section}>
-      <img className={s.closeIcon} src={closeIcon} onClick={handleCloseClick} />
-
+      <CloseButton onClick={handleCloseClick} />
       <Info data={currentProject} handleVideoClick={handleVideoClick} />
-
       <Scrollbar>
         {currentProject?.tracks.map((track, i) => {
           return (

@@ -1,14 +1,15 @@
 import cn from "classnames";
 import s from "./Tag.module.css";
+import { ReactNode } from "react";
 
 type TagProps = {
-  name: string;
+  children: ReactNode;
   isSelected: boolean;
-  isDisabled: boolean;
+  isDisabled?: boolean;
   onClick: () => void;
 };
 
-function Tag({ name, isSelected, isDisabled, onClick }: TagProps) {
+function Tag({ children, isSelected, isDisabled = false, onClick }: TagProps) {
   return (
     <button
       type="button"
@@ -20,7 +21,7 @@ function Tag({ name, isSelected, isDisabled, onClick }: TagProps) {
       onClick={onClick}
       disabled={isDisabled}
     >
-      {name}
+      {children}
     </button>
   );
 }

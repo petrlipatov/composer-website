@@ -30,31 +30,31 @@ function ControlButtons({
   return (
     <div className={s.container}>
       <button
-        type="button"
         className={s.playNextButton}
         onClick={() => handlePlayNextClickDesktop("prev")}
         onTouchEnd={() => handlePlayNextClick("prev")}
+        type="button"
       >
-        <NextIcon customStyles={s.icon} isRotated={true} />
+        <NextIcon className={s.icon} isRotated={true} />
       </button>
 
       <button
-        type="button"
         className={s.playButton}
         onClick={handlePlayPauseClickDesktop}
         onTouchEnd={handlePlayPauseClick}
+        type="button"
       >
         <PauseIcon isAudioPlaying={isAudioPlaying} customStyles={s.icon} />
         <PlayIcon isAudioPlaying={isAudioPlaying} customStyles={s.icon} />
       </button>
 
       <button
-        type="button"
         className={s.playNextButton}
         onClick={() => handlePlayNextClickDesktop("next")}
         onTouchEnd={() => handlePlayNextClick("next")}
+        type="button"
       >
-        <NextIcon customStyles={s.icon} />
+        <NextIcon className={s.icon} />
       </button>
     </div>
   );

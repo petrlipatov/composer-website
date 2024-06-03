@@ -28,8 +28,16 @@
   animation: flash 0.3s 1;
 }
 
-.disabled {
+.clearButton.disabled {
   color: grey;
+}
+
+.clearButton.disabled:hover {
+  animation: none;
+}
+
+.clearButton.disabled:active {
+  opacity: 1;
 }
 
 .icon {

@@ -88,7 +88,7 @@ const AudioPlayer = () => {
           <ProgressBar />
         </div>
         <VideoButton handleVideoClick={handleVideoClick} />
-        <CloseButton handleCloseClick={handleCloseClick} />
+        <CloseButton onClick={handleCloseClick} />
       </div>
     </div>
   );

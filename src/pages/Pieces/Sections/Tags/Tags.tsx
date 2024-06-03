@@ -54,12 +54,13 @@ function Tags() {
       <div className={s.tagsList}>
         {PIECES_GENRES.map((genre, i) => (
           <Tag
-            name={genre}
             isSelected={isTagSelected(genre)}
             isDisabled={isTagDisabled(genre)}
             onClick={() => handleTagClick(genre)}
             key={i}
-          />
+          >
+            {genre}
+          </Tag>
         ))}
         <ClearButton
           isDisabled={isButtonDisabled(selectedTags)}

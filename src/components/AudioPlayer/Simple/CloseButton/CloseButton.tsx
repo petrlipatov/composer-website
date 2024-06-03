@@ -1,18 +1,18 @@
-import closeIconSrc from "../../../../assets/images/close-icon_black.svg";
+import { BLACK_COLOR } from "../../../../utils/constants";
+import Button from "../../../Button/Button";
+import CloseIcon from "../../../Icons/CloseIcon/CloseIcon";
 
 import s from "./CloseButton.module.css";
 
 type Props = {
-  handleCloseClick: () => void;
+  onClick: () => void;
 };
 
-function CloseButton({ handleCloseClick }: Props) {
+function CloseButton({ onClick }: Props) {
   return (
-    <img
-      className={s.closeIcon}
-      src={closeIconSrc}
-      onClick={handleCloseClick}
-    />
+    <Button className={s.closeButton} onClick={onClick}>
+      <CloseIcon className={s.closeIcon} color={BLACK_COLOR} />
+    </Button>
   );
 }
 
