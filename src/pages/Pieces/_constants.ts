@@ -226,4 +226,4 @@ export const TRACK_LEFT_MARGIN_DESKTOP = 8;
 export const TRACK_TOP_MARGIN_MOBILE = 8;
 export const TRACK_TOP_MARGIN_DESKTOP = 2;
 
-export const TRACK_ASPECT_RATIO = 194 / 215;
+export const TRACK_ASPECT_RATIO = 190.5 / 211.12;

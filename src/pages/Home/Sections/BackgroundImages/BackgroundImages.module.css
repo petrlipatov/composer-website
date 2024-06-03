@@ -7,7 +7,7 @@
   }
 }
 
-@keyframes move1 {
+/* @keyframes move1 {
   0%,
   100% {
     opacity: 0;
@@ -42,10 +42,9 @@
     transform: translate(var(--translate-x), var(--translate-y))
       scale(var(--scale));
   }
-}
+} */
 
 .image {
-  opacity: 0;
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
@@ -55,14 +54,18 @@
   top: 0;
   width: 100%;
   z-index: -1;
-  transition: opacity 1s ease-out;
 }
 
 .fadeIn {
+  transition: opacity 1s ease-out;
   opacity: 1;
 }
 
-.image1 {
+.noFadeIn {
+  opacity: 1;
+}
+
+/* .image1 {
   animation: move1 15s infinite ease-in-out;
 }
 
@@ -72,7 +75,7 @@
 
 .image3 {
   animation: move3 15s infinite ease-in-out;
-}
+} */
 
 @media (min-width: 720px) {
   .image {

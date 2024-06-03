@@ -15,8 +15,8 @@ function Tag({ children, isSelected, isDisabled = false, onClick }: TagProps) {
       type="button"
       className={cn(
         s.tag,
-        isSelected ? s.tagSelected : "",
-        isDisabled ? s.tagDisabled : ""
+        isSelected ? s.selected : "",
+        isDisabled ? s.disabled : ""
       )}
       onClick={onClick}
       disabled={isDisabled}

@@ -5,6 +5,7 @@
   align-items: end;
   justify-content: space-between;
   overflow: hidden;
+  margin-top: 4px;
   margin-bottom: 8px;
   height: 16px;
 }

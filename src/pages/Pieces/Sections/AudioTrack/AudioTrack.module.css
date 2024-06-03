@@ -9,6 +9,7 @@
 }
 
 .trackImage {
+  display: block;
   height: auto;
   width: 100%;
 }
@@ -27,8 +28,6 @@
     display: block;
   }
 }
-
-
 
 .trackImageMaskSelected {
   display: block;

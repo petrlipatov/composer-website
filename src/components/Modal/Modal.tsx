@@ -1,7 +1,8 @@
 import { createPortal } from "react-dom";
 import s from "./Modal.module.css";
-import closeIconSrc from "./../../assets/images/close-icon.svg";
-import React, { Dispatch, SetStateAction, ReactNode } from "react";
+import { Dispatch, SetStateAction, ReactNode } from "react";
+import CloseIcon from "../Icons/CloseIcon/CloseIcon";
+import { PRIMARY_ACCENT_COLOR } from "../../utils/constants";
 
 type ModalProps = {
   setPopupState: Dispatch<SetStateAction<boolean>>;
@@ -11,22 +12,21 @@ type ModalProps = {
 function Modal({ setPopupState, children }: ModalProps) {
   const rootContainer = document.getElementById("modal");
 
-  const handlePopupTouch = () => {
+  const handlePopupClick = () => {
     setPopupState(false);
   };
 
   return createPortal(
     <div
       className={s.container}
-      onTouchStart={handlePopupTouch}
-      onClick={handlePopupTouch}
+      onTouchStart={handlePopupClick}
+      onClick={handlePopupClick}
     >
       <div className={s.content}>
-        <button
-          className={s.closeIcon}
-          style={{ backgroundImage: `url(${closeIconSrc})` }}
-          onClick={handlePopupTouch}
-        />
+        <button className={s.closeButton} onClick={handlePopupClick}>
+          <CloseIcon color={PRIMARY_ACCENT_COLOR} />
+        </button>
+
         {children}
       </div>
     </div>,
