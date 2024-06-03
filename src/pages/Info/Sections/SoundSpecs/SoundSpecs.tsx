@@ -17,9 +17,6 @@ function SoundSpecs() {
           <li className={s.item}>Valhalla</li>
           <li className={s.item}>BrainWorx (Plugin Alliance)</li>
           <li className={s.item}>Tokyo Dawn Labs</li>
-        </ul>
-
-        <ul className={s.list}>
           <li className={s.item}>Spitfire Audio</li>
           <li className={s.item}>SAMPROJECT</li>
           <li className={s.item}>Native Instruments</li>
@@ -27,17 +24,17 @@ function SoundSpecs() {
           <li className={s.item}>Crow Hill</li>
         </ul>
 
-        <ul className={s.list}>
+        {/* <ul className={s.list}>
           <li className={s.item}>Arturia</li>
           <li className={s.item}>Waves</li>
           <li className={s.item}>SugarBytes</li>
           <li className={s.item}>Dada Life</li>
-        </ul>
+        </ul> */}
       </div>
       <div>
         <h3 className={s.subHeading}>Gear</h3>
         <ul className={s.list}>
-          <li className={s.item}>UAD</li>
+          <li className={s.item}>UAD Apollo</li>
           <li className={s.item}>RME</li>
           <li className={s.item}>Martin</li>
           <li className={s.item}>Fender</li>
