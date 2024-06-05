@@ -16,6 +16,7 @@ import s from "./AudioTrack.module.css";
 import TvIcon from "../../../../components/Icons/TvIcon/TvIcon";
 import HeadphonesIcon from "../../../../components/Icons/HeadphonesIcon/HeadphonesIcon";
 import TrackButton from "./TrackButton/TrackButton";
+import HorizontalOverlayButton from "../../../../components/Buttons/HorizontalOverlayButton/HorizontalOverlayButton";
 
 type AudioTrackProps = {
   index: number;
@@ -155,15 +156,15 @@ const AudioTrack = memo(
           <img className={s.artwork} src={data.imageSrc} />
 
           <div className={trackButtonsClasses}>
-            <TrackButton onClick={handleListenClick}>
+            <HorizontalOverlayButton onClick={handleListenClick}>
               <HeadphonesIcon className={s.Icon} />
               <div className={s.iconCaption}>Listen</div>
-            </TrackButton>
+            </HorizontalOverlayButton>
 
-            <TrackButton onClick={handleWatchClick}>
+            <HorizontalOverlayButton onClick={handleWatchClick}>
               <TvIcon className={s.Icon} />
               <div className={s.iconCaption}>Watch</div>
-            </TrackButton>
+            </HorizontalOverlayButton>
           </div>
         </div>
 

@@ -1,10 +1,10 @@
-.imageContainer {
+.container {
   position: relative;
   min-height: 228px;
   min-width: 171px;
 }
 
-.projectImageMask {
+.projectButtons {
   display: none;
   position: absolute;
   top: 0;
@@ -14,52 +14,45 @@
   padding-top: 100%;
 }
 
-.projectImageMaskSelected {
+.projectButtonsActive {
   display: block;
 }
 
-.imageMaskButtonLeft {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 4%;
-  left: 4%;
-  width: 44%;
-  height: 92%;
-  background-color: rgba(231, 57, 121, 1);
+.Icon {
+  width: 35px;
+  height: auto;
 }
 
-.imageMaskButtonRight {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 4%;
-  right: 4%;
-  width: 44%;
-  height: 92%;
-  background-color: rgba(231, 57, 121, 1);
-}
-
-.imageMaskIcon {
-  width: 45px;
-  height: 45px;
-}
-
-.imageMaskIconLeft {
-  width: 37px;
-  height: 37px;
-  transform: translateY(-0.5px);
-}
-
-.imageMaskCaption {
+.iconCaption {
   font-size: 12px;
   font-weight: 600;
+  margin-top: 8px;
 }
 
-.imageMaskCaptionLeft {
-  transform: translateY(4px);
+.trackButton {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 4%;
+  width: 44%;
+  height: 92%;
+  background-color: rgba(231, 57, 121, 1);
+}
+
+.trackButton:first-of-type {
+  left: 4%;
+}
+
+.trackButton:last-of-type {
+  right: 4%;
+}
+
+.container {
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: end;
 }

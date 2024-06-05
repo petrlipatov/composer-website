@@ -1,5 +1,5 @@
 import { BLACK_COLOR } from "../../../../utils/constants";
-import Button from "../../../Button/Button";
+import Button from "../../../Buttons/Button/Button";
 import CloseIcon from "../../../Icons/CloseIcon/CloseIcon";
 
 import s from "./CloseButton.module.css";

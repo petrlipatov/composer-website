@@ -1,6 +1,6 @@
-import { ProjectData } from "../../../../pages/FeaturedWork/_types";
+import TvIcon from "../../../Icons/TvIcon/TvIcon";
 
-import videoIcon from "../../../../assets/images/tv.svg";
+import { ProjectData } from "../../../../pages/FeaturedWork/_types";
 
 import s from "./Info.module.css";
 
@@ -17,7 +17,7 @@ function Info({ data, handleVideoClick }: Props) {
           <div>{data?.year}</div>
         </div>
         <div className={s.videoButtonContainer} onClick={handleVideoClick}>
-          <img className={s.videoIcon} src={videoIcon} />
+          <TvIcon className={s.videoIcon} />
           <div>watch compilation</div>
         </div>
       </div>

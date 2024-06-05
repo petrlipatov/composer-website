@@ -3,17 +3,18 @@ import cn from "classnames";
 
 import Title from "../../../../../components/Project/Title/Title";
 import Description from "../../../../../components/Project/Description/Description";
+import Artwork from "../../../../../components/Project/Artwork/Artwork";
+import TvIcon from "../../../../../components/Icons/TvIcon/TvIcon";
+import HeadphonesIcon from "../../../../../components/Icons/HeadphonesIcon/HeadphonesIcon";
 
 import { FeaturedWorkContext } from "../../../FeaturedWork";
 
+import { FIRST_TRACK_INDEX } from "../../../../../utils/constants";
+
 import { ProjectProps } from "../types";
 
-import tvIconSrc from "../../../../../assets/images/tv.svg";
-import hedphonesIconSrc from "../../../../../assets/images/headphone50.svg";
-
 import s from "./MobileProject.module.css";
-import Artwork from "../../../../../components/Project/Artwork/Artwork";
-import { FIRST_TRACK_INDEX } from "../../../../../utils/constants";
+import HorizontalOverlayButton from "../../../../../components/Buttons/HorizontalOverlayButton/HorizontalOverlayButton";
 
 const MobileProject = ({
   index,
@@ -57,29 +58,25 @@ const MobileProject = ({
     setIsVideoPopupOpened(true);
   }
 
-  const projectImageMaskClasses = cn(s.projectImageMask, {
-    [s.projectImageMaskSelected]: isSelected,
+  const projectButtonsClasses = cn(s.projectButtons, {
+    [s.projectButtonsActive]: isSelected,
   });
 
   return (
     <>
-      <div className={s.imageContainer} onClick={handleProjectClick}>
+      <div className={s.container} onClick={handleProjectClick}>
         <Artwork src={data.imageSrc} />
 
-        <div className={projectImageMaskClasses}>
-          <div className={s.imageMaskButtonLeft} onClick={handleListenClick}>
-            <img
-              className={cn(s.imageMaskIcon, s.imageMaskIconLeft)}
-              src={hedphonesIconSrc}
-            />
-            <div className={cn(s.imageMaskCaption, s.imageMaskCaptionLeft)}>
-              Listen
-            </div>
-          </div>
-          <div className={s.imageMaskButtonRight} onClick={handleWatchClick}>
-            <img className={cn(s.imageMaskIcon)} src={tvIconSrc} />
-            <div className={s.imageMaskCaption}>Watch</div>
-          </div>
+        <div className={projectButtonsClasses}>
+          <HorizontalOverlayButton onClick={handleListenClick}>
+            <HeadphonesIcon className={s.icon} />
+            <div className={s.iconCaption}>Listen</div>
+          </HorizontalOverlayButton>
+
+          <HorizontalOverlayButton onClick={handleWatchClick}>
+            <TvIcon className={s.icon} />
+            <div className={s.iconCaption}>Watch</div>
+          </HorizontalOverlayButton>
         </div>
       </div>
 

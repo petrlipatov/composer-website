@@ -1,4 +1,4 @@
-import videoIconSrc from "../../../../assets/images/tv.svg";
+import TvIcon from "../../../Icons/TvIcon/TvIcon";
 
 import s from "./VideoButton.module.css";
 
@@ -9,11 +9,7 @@ type Props = {
 function VideoButton({ handleVideoClick }: Props) {
   return (
     <div className={s.container} onClick={handleVideoClick}>
-      <img
-        className={s.videoIcon}
-        src={videoIconSrc}
-        onClick={handleVideoClick}
-      />
+      <TvIcon className={s.videoIcon} />
       <button className={s.button}>Watch video</button>
     </div>
   );
