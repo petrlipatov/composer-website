@@ -1,5 +1,5 @@
 import s from "./AudioTitle.module.css";
-import AnimatedEqualizer from "../../../../../components/AnimatedEqualizer/AnimatedEqualizer";
+import Equalizer from "../../../../../components/Equalizer/Equalizer";
 
 type AudioTitleProps = {
   name: string;
@@ -25,12 +25,12 @@ const AudioTitle = ({
             <div className={s.bigTitleTextContainer}>
               <p className={s.titlePlaying}>{name}</p>
             </div>
-            {isLoading || isPaused ? "" : <AnimatedEqualizer />}
+            {isLoading || isPaused ? "" : <Equalizer />}
           </>
         ) : (
           <>
             <div className={s.titlePlaying}>{name}</div>
-            {isLoading || isPaused ? "" : <AnimatedEqualizer />}
+            {isLoading || isPaused ? "" : <Equalizer />}
           </>
         )
       ) : (

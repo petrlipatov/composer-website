@@ -1,0 +1,32 @@
+.nav {
+  position: absolute;
+  font-size: 12px;
+  left: 0;
+  top: 0;
+}
+
+.linkNav {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  display: block;
+  margin-top: 6px;
+  text-decoration: none;
+  width: 300px;
+  color: #808080;
+}
+
+.linkNav:hover {
+  color: black;
+}
+
+.linkNav.active {
+  text-decoration: underline;
+  color: black;
+}
+
+@media (max-width: 720px) {
+  .nav {
+    display: none;
+  }
+}

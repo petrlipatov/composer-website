@@ -24,9 +24,9 @@ import {
   TRACK_TOP_MARGIN_DESKTOP,
 } from "../../_constants";
 
-import s from "./Tracks.module.css";
+import s from "./AudioTracks.module.css";
 
-const Tracks = () => {
+const AudioTracks = () => {
   const [sectionWidth, setSectionWidth] = useState(0);
   const [scrollTop, setScrollTop] = useState(0);
   const { filteredPieces, selectedTrackIndex, setSelectedTrackIndex } =
@@ -168,4 +168,4 @@ const Tracks = () => {
   );
 };
 
-export default Tracks;
+export default AudioTracks;

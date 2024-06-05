@@ -1,13 +1,13 @@
 import s from "./Header.module.css";
-import { Link } from "react-router-dom";
 import Logo from "../Logo/Logo";
+import DesktopNavigation from "../NavigationMenu/Desktop/DesktopNavigationMenu";
+import MobileNavigation from "../NavigationMenu/Mobile/MobileNavigationMenu";
 
 function Header({ children }) {
   return (
     <div className={s.navSection}>
-      <Link to="/" className={s.pageTitle}>
-        {children}
-      </Link>
+      <MobileNavigation>{children}</MobileNavigation>
+      <DesktopNavigation>{children}</DesktopNavigation>
       <Logo />
     </div>
   );

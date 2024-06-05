@@ -30,6 +30,7 @@
   height: 80%;
   width: auto;
   object-fit: cover;
+  cursor: pointer;
 }
 
 .caption {

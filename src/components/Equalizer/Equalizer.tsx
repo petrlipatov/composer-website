@@ -1,4 +1,4 @@
-import s from "./AnimatedEqualizer.module.css";
+import s from "./Equalizer.module.css";
 import cn from "classnames";
 
 function EqualizerIcon({ color }: { color?: string }) {

@@ -6,13 +6,14 @@ import HTMLAudioTag from "../../components/HTMLAudioTag/HTMLAudioTag";
 import VideoPopup from "../../components/VideoPopup/VideoPopup";
 
 import Tags from "./Sections/Tags/Tags";
-import Tracks from "./Sections/Tracks/Tracks";
+import AudioTracks from "./Sections/AudioTracks/AudioTracks";
 
 import { PIECES, DEFAULT_CONTEXT } from "./_constants";
 
 import { AudioTrackData, ContextTypes, currentAudioData } from "./_types";
 
 import s from "./Pieces.module.css";
+import { PAGES } from "../../utils/constants";
 
 export const PiecesContext = createContext<ContextTypes>(DEFAULT_CONTEXT);
 
@@ -75,9 +76,9 @@ function Pieces() {
     <PiecesContext.Provider value={contextValue}>
       <div className={s.page}>
         <div className={s.content}>
-          <Header>Pieces</Header>
+          <Header>{PAGES.pieces}</Header>
           <Tags />
-          <Tracks />
+          <AudioTracks />
         </div>
 
         {isPlayerOpened && <AudioPlayer />}

@@ -1,6 +1,6 @@
 import cn from "classnames";
 
-import AnimatedEqualizer from "../../../AnimatedEqualizer/AnimatedEqualizer";
+import Equalizer from "../../../Equalizer/Equalizer";
 
 import s from "./AudioTrack.module.css";
 import { SyntheticEvent } from "react";
@@ -36,7 +36,7 @@ function AudioTrack({
       onClick={handleTrackClickWithStopPropagation}
     >
       {isTrackPlaying ? (
-        <AnimatedEqualizer color={"black"} />
+        <Equalizer color={"black"} />
       ) : (
         <div className={s.trackIndex}>{index + 1}</div>
       )}

@@ -1,0 +1,27 @@
+.trackButton {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 4%;
+  width: 44%;
+  height: 92%;
+  background-color: rgba(231, 57, 121, 1);
+}
+
+.trackButton:first-of-type {
+  left: 4%;
+}
+
+.trackButton:last-of-type {
+  right: 4%;
+}
+
+.container {
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: end;
+}

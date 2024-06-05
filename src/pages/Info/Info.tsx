@@ -8,6 +8,7 @@ import Gallery from "./Sections/Gallery/Gallery";
 import Header from "../../components/Header/Header";
 import SoundSpecs from "./Sections/SoundSpecs/SoundSpecs";
 import Tag from "../../components/Tags/Tag/Tag";
+import { PAGES } from "../../utils/constants";
 
 enum SECTION_TAGS {
   about,
@@ -22,7 +23,7 @@ function Info() {
   return (
     <div className={s.page}>
       <div className={s.content}>
-        <Header>Info</Header>
+        <Header>{PAGES.info}</Header>
 
         <div className={s.tagsSection}>
           <Tag

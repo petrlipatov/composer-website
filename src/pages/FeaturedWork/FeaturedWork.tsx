@@ -14,6 +14,7 @@ import { ContextTypes, ProjectData } from "./_types";
 
 import s from "./FeaturedWork.module.css";
 import Projects from "./Sections/Projects/Projects";
+import { PAGES } from "../../utils/constants";
 
 export const FeaturedWorkContext = createContext<ContextTypes>(DEFAULT_CONTEXT);
 
@@ -89,7 +90,7 @@ function FeaturedWork() {
     <FeaturedWorkContext.Provider value={contextValue}>
       <div className={s.page}>
         <div className={content}>
-          <Header>Featured Work</Header>
+          <Header>{PAGES.featured}</Header>
           <Tags />
           <Projects />
         </div>

@@ -4,17 +4,17 @@
   overflow: hidden;
 }
 
-.trackImageContainer {
+.artworkContainer {
   position: relative;
 }
 
-.trackImage {
+.artwork {
   display: block;
   height: auto;
   width: 100%;
 }
 
-.trackImageMask {
+.trackButtons {
   display: none;
   position: absolute;
   top: 0;
@@ -24,57 +24,22 @@
 }
 
 @media (min-width: 900px) {
-  .trackImageContainer:hover .trackImageMask {
+  .artworkContainer:hover .trackButtons {
     display: block;
   }
 }
 
-.trackImageMaskSelected {
+.trackButtonsActive {
   display: block;
 }
 
-.imageMaskButtonLeft {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 4%;
-  left: 4%;
-  width: 44%;
-  height: 92%;
-  background-color: rgba(231, 57, 121, 1);
+.Icon {
+  width: 35px;
+  height: auto;
 }
 
-.imageMaskButtonRight {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 4%;
-  right: 4%;
-  width: 44%;
-  height: 92%;
-  background-color: rgba(231, 57, 121, 1);
-}
-
-.imageMaskIcon {
-  width: 45px;
-  height: 45px;
-}
-
-.imageMaskIconLeft {
-  width: 37px;
-  height: 37px;
-  transform: translateY(-0.5px);
-}
-
-.imageMaskCaption {
+.iconCaption {
   font-size: 12px;
   font-weight: 600;
-}
-
-.imageMaskCaptionLeft {
-  transform: translateY(4px);
+  margin-top: 8px;
 }

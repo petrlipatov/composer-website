@@ -12,10 +12,10 @@ import AudioTitle from "./AudioTitle/AudioTitle";
 import { PiecesContext } from "../../Pieces";
 import { AudioTrackData } from "../../_types";
 
-import tvIconSrc from "../../../../assets/images/tv.svg";
-import hedphonesIconSrc from "../../../../assets/images/headphone50.svg";
-
 import s from "./AudioTrack.module.css";
+import TvIcon from "../../../../components/Icons/TvIcon/TvIcon";
+import HeadphonesIcon from "../../../../components/Icons/HeadphonesIcon/HeadphonesIcon";
+import TrackButton from "./TrackButton/TrackButton";
 
 type AudioTrackProps = {
   index: number;
@@ -116,15 +116,15 @@ const AudioTrack = memo(
       [audioPlayerRef, audioPlayer?.src, data.audioSrc, index]
     );
 
-    useEffect(() => {
-      if (isSelected) {
-        const timer = setTimeout(() => {
-          setSelectedTrackIndex(null);
-        }, 5000);
+    // useEffect(() => {
+    //   if (isSelected) {
+    //     const timer = setTimeout(() => {
+    //       setSelectedTrackIndex(null);
+    //     }, 5000);
 
-        return () => clearTimeout(timer);
-      }
-    }, [isSelected, setSelectedTrackIndex, index]);
+    //     return () => clearTimeout(timer);
+    //   }
+    // }, [isSelected, setSelectedTrackIndex, index]);
 
     function handleTrackClick() {
       setSelectedTrackIndex(index);
@@ -145,29 +145,25 @@ const AudioTrack = memo(
       setCurrentAudioData({ ...data, index });
     }
 
-    const trackImageMaskClasses = cn(s.trackImageMask, {
-      [s.trackImageMaskSelected]: isSelected,
+    const trackButtonsClasses = cn(s.trackButtons, {
+      [s.trackButtonsActive]: isSelected,
     });
 
     return (
       <div className={s.track} style={{ ...extraStyles }}>
-        <div className={s.trackImageContainer} onClick={handleTrackClick}>
-          <img className={s.trackImage} src={data.imageSrc} />
+        <div className={s.artworkContainer} onClick={handleTrackClick}>
+          <img className={s.artwork} src={data.imageSrc} />
 
-          <div className={trackImageMaskClasses}>
-            <div className={s.imageMaskButtonLeft} onClick={handleListenClick}>
-              <img
-                className={cn(s.imageMaskIcon, s.imageMaskIconLeft)}
-                src={hedphonesIconSrc}
-              />
-              <div className={cn(s.imageMaskCaption, s.imageMaskCaptionLeft)}>
-                Listen
-              </div>
-            </div>
-            <div className={s.imageMaskButtonRight} onClick={handleWatchClick}>
-              <img className={cn(s.imageMaskIcon)} src={tvIconSrc} />
-              <div className={s.imageMaskCaption}>Watch</div>
-            </div>
+          <div className={trackButtonsClasses}>
+            <TrackButton onClick={handleListenClick}>
+              <HeadphonesIcon className={s.Icon} />
+              <div className={s.iconCaption}>Listen</div>
+            </TrackButton>
+
+            <TrackButton onClick={handleWatchClick}>
+              <TvIcon className={s.Icon} />
+              <div className={s.iconCaption}>Watch</div>
+            </TrackButton>
           </div>
         </div>
 

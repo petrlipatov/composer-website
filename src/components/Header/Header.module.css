@@ -2,25 +2,5 @@
   align-items: center;
   display: flex;
   justify-content: space-between;
-}
-
-.pageTitle {
-  text-decoration: none;
-  color: inherit;
-  font-size: 12px;
-  text-decoration: underline;
-  padding-bottom: 12px;
-  padding-left: 4px;
-}
-
-@media (min-width: 380px) {
-  .pageTitle {
-    padding-left: 0;
-  }
-}
-
-@media (min-width: 720px) {
-  .pageTitle {
-    visibility: hidden;
-  }
+  position: relative;
 }
