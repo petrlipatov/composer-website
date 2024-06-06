@@ -5,9 +5,9 @@ const HeadphonesIcon = ({ className, isFilled = false }) => {
       xmlns="http://www.w3.org/2000/svg"
       fill={isFilled ? "#000000" : "none"}
       stroke={isFilled ? "none" : "#000000"}
-      stroke-width="1.2"
-      stroke-linecap="round"
-      stroke-linejoin="miter"
+      strokeWidth="1.2"
+      strokeLinecap="round"
+      strokeLinejoin="miter"
       className={className}
     >
       <rect x="2" y="14" width="6" height="8" rx="0" />

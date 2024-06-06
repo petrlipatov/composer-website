@@ -1,10 +1,14 @@
-import React, { useEffect, useRef, useState } from "react";
+import { ReactNode, forwardRef, useEffect, useRef, useState } from "react";
 import cn from "classnames";
 import { throttle } from "../../../../utils/helpers/throttle";
 import s from "./Scrollbar.module.css";
 import ChevronIcon from "../../../Icons/ChevronIcon/ChevronIcon";
 
-const Scrollbar = ({ children }: { children: React.ReactNode }) => {
+type Props = {
+  children: ReactNode;
+};
+
+const Scrollbar = forwardRef<HTMLDivElement, Props>(({ children }, ref) => {
   const [isVisible, setIsVisible] = useState<boolean>();
   const [thumbHeight, setThumbHeight] = useState<number>(20);
   const [isDragging, setIsDragging] = useState(false);
@@ -136,7 +140,7 @@ const Scrollbar = ({ children }: { children: React.ReactNode }) => {
   }
 
   return (
-    <div className={s.container}>
+    <div className={s.container} ref={ref}>
       <div className={s.content} ref={contentRef}>
         {children}
       </div>
@@ -178,6 +182,6 @@ const Scrollbar = ({ children }: { children: React.ReactNode }) => {
       )}
     </div>
   );
-};
+});
 
 export default Scrollbar;

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 
 import ProgressBar from "../ProgressBar/ProgressBar";
 import ControlButtons from "../../../../../components/AudioPlayer/Shared/ControlButtons/ControlButtons";
@@ -31,9 +31,30 @@ const MobileAudioPlayer = () => {
     audioPlayerRef,
   } = useContext(FeaturedWorkContext);
 
+  const tracksContainerRef = useRef(null);
+  const tracksRefs = useRef([]);
+
+  const tracksContainer = tracksContainerRef.current;
   const audioPlayer = audioPlayerRef.current;
 
   usePlayingAudioStates(audioPlayer, setIsAudioPlaying);
+
+  useEffect(() => {
+    const selectedTrackRef = tracksRefs.current[selectedTrackIndex];
+
+    if (selectedTrackRef && tracksContainer) {
+      const { top, bottom } = selectedTrackRef.getBoundingClientRect();
+      const { top: containerTop, bottom: containerBottom } =
+        tracksContainer.getBoundingClientRect();
+      const isTrackVisible = top >= containerTop && bottom <= containerBottom;
+      if (!isTrackVisible) {
+        selectedTrackRef.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+      }
+    }
+  }, [selectedTrackIndex, tracksContainer]);
 
   const isTrackPlaying = (i) => {
     return isAudioPlaying && playingTrackIndex === i;
@@ -104,8 +125,8 @@ const MobileAudioPlayer = () => {
     <div className={s.section}>
       <CloseButton onClick={handleCloseClick} />
       <Info data={currentProject} handleVideoClick={handleVideoClick} />
-      <Scrollbar>
-        {currentProject?.tracks.map((track, i) => {
+      <Scrollbar ref={tracksContainerRef}>
+        {currentProject.tracks.map((track, i) => {
           return (
             <AudioTrack
               key={i}
@@ -114,6 +135,7 @@ const MobileAudioPlayer = () => {
               isTrackPlaying={isTrackPlaying(i)}
               isTrackSelected={isTrackSelected(i)}
               handleTrackClick={handleTrackClick}
+              ref={(el) => (tracksRefs.current[i] = el)}
             />
           );
         })}
