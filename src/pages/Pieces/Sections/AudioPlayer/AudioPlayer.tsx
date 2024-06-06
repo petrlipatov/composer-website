@@ -8,7 +8,7 @@ import Title from "../../../../components/AudioPlayer/Simple/Title/Title";
 import Artwork from "../../../../components/AudioPlayer/Simple/Artwork/Artwork";
 import VideoButton from "../../../../components/AudioPlayer/Simple/VideoButton/VideoButton";
 import CloseButton from "../../../../components/AudioPlayer/Simple/CloseButton/CloseButton";
-import useAudioPlayerListeners from "../../../../utils/hooks/useAudioPlayerListeners";
+import usePlayingAudioStates from "../../../../utils/hooks/usePlayingAudioStates";
 import {
   PlayPauseCallback,
   VideoCalback,
@@ -29,7 +29,7 @@ const AudioPlayer = () => {
 
   const audioPlayer = audioPlayerRef.current;
 
-  useAudioPlayerListeners(audioPlayer, setIsAudioPlaying);
+  usePlayingAudioStates(audioPlayer, setIsAudioPlaying);
 
   const handlePlayPauseClick = () => {
     PlayPauseCallback(audioPlayer, isAudioPlaying);

@@ -12,7 +12,7 @@ import { FeaturedWorkContext } from "../../../FeaturedWork";
 import { FIRST_TRACK_INDEX } from "../../../../../utils/constants";
 
 import s from "./DesktopAudioPlayer.module.css";
-import useAudioPlayerListeners from "../../../../../utils/hooks/useAudioPlayerListeners";
+import usePlayingAudioStates from "../../../../../utils/hooks/usePlayingAudioStates";
 
 const DesktopAudioPlayer = () => {
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
@@ -30,7 +30,7 @@ const DesktopAudioPlayer = () => {
 
   const audioPlayer = audioPlayerRef.current;
 
-  useAudioPlayerListeners(audioPlayer, setIsAudioPlaying);
+  usePlayingAudioStates(audioPlayer, setIsAudioPlaying);
 
   const handlePlayPauseClick = () => {
     if (!selectedTrackIndex && selectedTrackIndex !== 0) {

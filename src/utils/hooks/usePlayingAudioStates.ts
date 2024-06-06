@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const useAudioPlayerListeners = (audioPlayer, setIsAudioPlaying) => {
+const usePlayingAudioStates = (audioPlayer, setIsAudioPlaying) => {
   useEffect(() => {
     const onPlayingHandler = () => setIsAudioPlaying(true);
     const onPauseHandler = () => setIsAudioPlaying(false);
@@ -22,4 +22,4 @@ const useAudioPlayerListeners = (audioPlayer, setIsAudioPlaying) => {
   }, [audioPlayer, setIsAudioPlaying]);
 };
 
-export default useAudioPlayerListeners;
+export default usePlayingAudioStates;

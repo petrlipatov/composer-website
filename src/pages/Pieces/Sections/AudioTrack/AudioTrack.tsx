@@ -15,7 +15,6 @@ import { AudioTrackData } from "../../_types";
 import s from "./AudioTrack.module.css";
 import TvIcon from "../../../../components/Icons/TvIcon/TvIcon";
 import HeadphonesIcon from "../../../../components/Icons/HeadphonesIcon/HeadphonesIcon";
-import TrackButton from "./TrackButton/TrackButton";
 import HorizontalOverlayButton from "../../../../components/Buttons/HorizontalOverlayButton/HorizontalOverlayButton";
 
 type AudioTrackProps = {
@@ -117,15 +116,15 @@ const AudioTrack = memo(
       [audioPlayerRef, audioPlayer?.src, data.audioSrc, index]
     );
 
-    // useEffect(() => {
-    //   if (isSelected) {
-    //     const timer = setTimeout(() => {
-    //       setSelectedTrackIndex(null);
-    //     }, 5000);
+    useEffect(() => {
+      if (isSelected) {
+        const timer = setTimeout(() => {
+          setSelectedTrackIndex(null);
+        }, 5000);
 
-    //     return () => clearTimeout(timer);
-    //   }
-    // }, [isSelected, setSelectedTrackIndex, index]);
+        return () => clearTimeout(timer);
+      }
+    }, [isSelected, setSelectedTrackIndex, index]);
 
     function handleTrackClick() {
       setSelectedTrackIndex(index);

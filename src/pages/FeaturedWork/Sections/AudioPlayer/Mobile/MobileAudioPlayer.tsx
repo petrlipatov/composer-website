@@ -10,7 +10,7 @@ import CloseButton from "../../../../../components/AudioPlayer/Simple/CloseButto
 
 import { FeaturedWorkContext } from "../../../FeaturedWork";
 import { VideoCalback } from "../../../../../utils/helpers/audioPlayer";
-import useAudioPlayerListeners from "../../../../../utils/hooks/useAudioPlayerListeners";
+import usePlayingAudioStates from "../../../../../utils/hooks/usePlayingAudioStates";
 
 import { FIRST_TRACK_INDEX } from "../../../../../utils/constants";
 
@@ -33,7 +33,7 @@ const MobileAudioPlayer = () => {
 
   const audioPlayer = audioPlayerRef.current;
 
-  useAudioPlayerListeners(audioPlayer, setIsAudioPlaying);
+  usePlayingAudioStates(audioPlayer, setIsAudioPlaying);
 
   const isTrackPlaying = (i) => {
     return isAudioPlaying && playingTrackIndex === i;

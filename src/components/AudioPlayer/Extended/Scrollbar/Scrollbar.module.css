@@ -45,25 +45,26 @@
 }
 
 .thumb {
-  position: absolute;
   width: 4px;
   background-color: black;
-  transition: top linear 30ms;
 }
 
 .button {
-  border: 0;
-  background-color: transparent;
-  background-image: url("../../../../assets/images/chevron-single-up.svg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
+  all: unset;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 20px;
   width: 20px;
 }
 
-.buttonDown {
-  background-image: url("../../../../assets/images/chevron-single-down.svg");
+.chevron {
+  width: 15px;
+  height: 15px;
+}
+
+.chevronDown {
+  transform: rotate(180deg);
 }
 
 @media (min-width: 720px) {

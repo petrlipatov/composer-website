@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import cn from "classnames";
 import { throttle } from "../../../../utils/helpers/throttle";
 import s from "./Scrollbar.module.css";
+import ChevronIcon from "../../../Icons/ChevronIcon/ChevronIcon";
 
 const Scrollbar = ({ children }: { children: React.ReactNode }) => {
   const [isVisible, setIsVisible] = useState<boolean>();
@@ -48,7 +49,7 @@ const Scrollbar = ({ children }: { children: React.ReactNode }) => {
       const thumb = scrollThumbRef.current;
 
       requestAnimationFrame(() => {
-        thumb.style.top = `${newTop}px`;
+        thumb.style.transform = `translateY(${newTop}px)`;
       });
     }
 
@@ -150,7 +151,9 @@ const Scrollbar = ({ children }: { children: React.ReactNode }) => {
           <button
             className={cn(s.button, s.buttonUp)}
             onClick={() => handleScrollButton("up")}
-          />
+          >
+            <ChevronIcon className={cn(s.chevron)} />
+          </button>
 
           <div
             className={s.trackAndThumb}
@@ -168,7 +171,9 @@ const Scrollbar = ({ children }: { children: React.ReactNode }) => {
           <button
             className={cn(s.button, s.buttonDown)}
             onClick={() => handleScrollButton("down")}
-          />
+          >
+            <ChevronIcon className={cn(s.chevron, s.chevronDown)} />
+          </button>
         </div>
       )}
     </div>
