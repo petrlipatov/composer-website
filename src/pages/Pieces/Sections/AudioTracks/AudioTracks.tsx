@@ -69,8 +69,6 @@ const AudioTracks = () => {
     trackTopMargin
   );
 
-  // const trackHeight = trackWidth / TRACK_ASPECT_RATIO + trackTopMargin;
-
   const tracksTotalCount = filteredPieces.length;
 
   const contentHeight = getContentHeight(

@@ -4,6 +4,7 @@
   white-space: nowrap;
   flex-grow: 1;
   align-self: center;
+  font-size: 15px;
 }
 
 .heading {
@@ -45,12 +46,6 @@
   flex-grow: 1;
   text-align: center;
   cursor: pointer;
-}
-
-@media (min-width: 375px) {
-  .section {
-    font-size: 15px;
-  }
 }
 
 @media (min-width: 414px) {

@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import styles from "./Layout.module.css";
-import { useState, useEffect, useRef, RefObject, createContext } from "react";
-import { trackViewportSize } from "../../utils/helpers/trackViewportSize";
+import { useState, useRef, RefObject, createContext } from "react";
+import { useTrackViewportSize } from "../../utils/hooks/useTrackViewportSize";
 
 export const ScreenSizeContext = createContext(null);
 
@@ -13,9 +13,7 @@ function Layout() {
 
   const layoutRef: RefObject<HTMLDivElement> = useRef(null);
 
-  useEffect(() => {
-    trackViewportSize(setScreenSize);
-  }, []);
+  useTrackViewportSize(setScreenSize);
 
   return (
     <div

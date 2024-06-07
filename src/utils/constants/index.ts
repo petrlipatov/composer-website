@@ -7,6 +7,7 @@ export const DISABLED_COLOR = "#808080";
 export const BLACK_COLOR = "#000000";
 
 export enum PAGES {
+  home = "Home",
   pieces = "Pieces",
   featured = "Featured Work",
   info = "Info",

@@ -7,6 +7,9 @@ const DesktopNavigationMenu = ({ children }) => {
   let currentPage: PAGES;
 
   switch (children) {
+    case PAGES.home:
+      currentPage = PAGES.home;
+      break;
     case PAGES.featured:
       currentPage = PAGES.featured;
       break;
@@ -20,7 +23,13 @@ const DesktopNavigationMenu = ({ children }) => {
 
   return (
     <div className={s.nav}>
-      <div className={cn(s.linkNav)}>Showreel</div>
+      <Link
+        to="/"
+        className={cn(s.linkNav, currentPage === PAGES.home ? s.active : "")}
+      >
+        {PAGES.home}
+      </Link>
+
       <Link
         to="/work"
         className={cn(
@@ -28,19 +37,19 @@ const DesktopNavigationMenu = ({ children }) => {
           currentPage === PAGES.featured ? s.active : ""
         )}
       >
-        Featured Work
+        {PAGES.featured}
       </Link>
       <Link
         to="/pieces"
         className={cn(s.linkNav, currentPage === PAGES.pieces ? s.active : "")}
       >
-        Pieces
+        {PAGES.pieces}
       </Link>
       <Link
         to="/info"
         className={cn(s.linkNav, currentPage === PAGES.info ? s.active : "")}
       >
-        Info
+        {PAGES.info}
       </Link>
     </div>
   );

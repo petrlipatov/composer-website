@@ -9,18 +9,19 @@ import VideoButton from "../../../../../components/AudioPlayer/Simple/VideoButto
 
 import { FeaturedWorkContext } from "../../../FeaturedWork";
 
-import {
-  FIRST_TRACK_INDEX,
-  PLAYER_CONTROLS,
-} from "../../../../../utils/constants";
-
-import s from "./DesktopAudioPlayer.module.css";
 import usePlayingAudioStates from "../../../../../utils/hooks/usePlayingAudioStates";
 import {
   playPauseCallback,
   watchVideoCallback,
 } from "../../../../../utils/helpers/audioPlayer";
 import { calcNextTrackIndex, calcPrevTrackIndex } from "../_helpers";
+
+import {
+  FIRST_TRACK_INDEX,
+  PLAYER_CONTROLS,
+} from "../../../../../utils/constants";
+
+import s from "./DesktopAudioPlayer.module.css";
 
 const DesktopAudioPlayer = () => {
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
@@ -41,7 +42,7 @@ const DesktopAudioPlayer = () => {
   usePlayingAudioStates(audioPlayer, setIsAudioPlaying);
 
   const handlePlayPauseClick = () => {
-    if (!selectedTrackIndex && selectedTrackIndex !== 0) {
+    if (selectedTrackIndex === null) {
       setSelectedTrackIndex(FIRST_TRACK_INDEX);
       audioPlayer.src = currentProject.tracks[FIRST_TRACK_INDEX].audioSrc;
     }
