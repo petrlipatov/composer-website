@@ -9,12 +9,19 @@ import Scrollbar from "../../../../../components/AudioPlayer/Extended/Scrollbar/
 import CloseButton from "../../../../../components/AudioPlayer/Simple/CloseButton/CloseButton";
 
 import { FeaturedWorkContext } from "../../../FeaturedWork";
-import { VideoCalback } from "../../../../../utils/helpers/audioPlayer";
+import {
+  playPauseCallback,
+  watchVideoCallback,
+} from "../../../../../utils/helpers/audioPlayer";
 import usePlayingAudioStates from "../../../../../utils/hooks/usePlayingAudioStates";
 
-import { FIRST_TRACK_INDEX } from "../../../../../utils/constants";
+import {
+  FIRST_TRACK_INDEX,
+  PLAYER_CONTROLS,
+} from "../../../../../utils/constants";
 
 import s from "./MobileAudioPlayer.module.css";
+import { calcNextTrackIndex, calcPrevTrackIndex } from "../_helpers";
 
 const MobileAudioPlayer = () => {
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
@@ -34,27 +41,30 @@ const MobileAudioPlayer = () => {
   const tracksContainerRef = useRef(null);
   const tracksRefs = useRef([]);
 
-  const tracksContainer = tracksContainerRef.current;
   const audioPlayer = audioPlayerRef.current;
 
   usePlayingAudioStates(audioPlayer, setIsAudioPlaying);
 
-  useEffect(() => {
-    const selectedTrackRef = tracksRefs.current[selectedTrackIndex];
+  useEffect(
+    function scrollSelectedTrackIntoView() {
+      const tracksContainer = tracksContainerRef.current;
+      const selectedTrack = tracksRefs.current[selectedTrackIndex];
 
-    if (selectedTrackRef && tracksContainer) {
-      const { top, bottom } = selectedTrackRef.getBoundingClientRect();
-      const { top: containerTop, bottom: containerBottom } =
-        tracksContainer.getBoundingClientRect();
-      const isTrackVisible = top >= containerTop && bottom <= containerBottom;
-      if (!isTrackVisible) {
-        selectedTrackRef.scrollIntoView({
-          behavior: "smooth",
-          block: "center",
-        });
+      if (selectedTrack && tracksContainer) {
+        const { top, bottom } = selectedTrack.getBoundingClientRect();
+        const { top: containerTop, bottom: containerBottom } =
+          tracksContainer.getBoundingClientRect();
+        const isTrackVisible = top >= containerTop && bottom <= containerBottom;
+        if (!isTrackVisible) {
+          selectedTrack.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+          });
+        }
       }
-    }
-  }, [selectedTrackIndex, tracksContainer]);
+    },
+    [selectedTrackIndex]
+  );
 
   const isTrackPlaying = (i) => {
     return isAudioPlaying && playingTrackIndex === i;
@@ -65,28 +75,18 @@ const MobileAudioPlayer = () => {
   };
 
   const handlePlayPauseClick = () => {
-    if (isAudioPlaying) {
-      audioPlayer.pause();
-    } else {
-      audioPlayer.play();
-    }
+    playPauseCallback(audioPlayer, isAudioPlaying);
   };
 
-  const handlePlayNextClick = (prevOrNext: "next" | "prev") => {
+  const handlePlayNextClick = (prevOrNext: PLAYER_CONTROLS) => {
     const tracksMaxIndex = currentProject.tracks.length - 1;
     let nextTrackIndex;
 
-    if (prevOrNext === "next") {
-      playingTrackIndex + 1 > tracksMaxIndex
-        ? (nextTrackIndex = 0)
-        : (nextTrackIndex = playingTrackIndex + 1);
-    }
+    if (prevOrNext === PLAYER_CONTROLS.next)
+      nextTrackIndex = calcNextTrackIndex(selectedTrackIndex, tracksMaxIndex);
 
-    if (prevOrNext === "prev") {
-      playingTrackIndex - 1 < 0
-        ? (nextTrackIndex = tracksMaxIndex)
-        : (nextTrackIndex = playingTrackIndex - 1);
-    }
+    if (prevOrNext === PLAYER_CONTROLS.prev)
+      nextTrackIndex = calcPrevTrackIndex(selectedTrackIndex, tracksMaxIndex);
 
     setSelectedTrackIndex(nextTrackIndex);
     setPlayingTrackIndex(nextTrackIndex);
@@ -112,7 +112,7 @@ const MobileAudioPlayer = () => {
   };
 
   const handleVideoClick = () => {
-    VideoCalback(
+    watchVideoCallback(
       audioPlayer,
       currentProject,
       setIsPlayerOpened,

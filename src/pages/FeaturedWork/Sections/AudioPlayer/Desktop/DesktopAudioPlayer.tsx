@@ -9,10 +9,18 @@ import VideoButton from "../../../../../components/AudioPlayer/Simple/VideoButto
 
 import { FeaturedWorkContext } from "../../../FeaturedWork";
 
-import { FIRST_TRACK_INDEX } from "../../../../../utils/constants";
+import {
+  FIRST_TRACK_INDEX,
+  PLAYER_CONTROLS,
+} from "../../../../../utils/constants";
 
 import s from "./DesktopAudioPlayer.module.css";
 import usePlayingAudioStates from "../../../../../utils/hooks/usePlayingAudioStates";
+import {
+  playPauseCallback,
+  watchVideoCallback,
+} from "../../../../../utils/helpers/audioPlayer";
+import { calcNextTrackIndex, calcPrevTrackIndex } from "../_helpers";
 
 const DesktopAudioPlayer = () => {
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
@@ -38,35 +46,23 @@ const DesktopAudioPlayer = () => {
       audioPlayer.src = currentProject.tracks[FIRST_TRACK_INDEX].audioSrc;
     }
 
-    if (isAudioPlaying) {
-      audioPlayer.pause();
-    } else {
-      audioPlayer.play();
-    }
+    playPauseCallback(audioPlayer, isAudioPlaying);
   };
 
-  const handlePlayNextClick = (prevOrNext: "next" | "prev") => {
+  const handlePlayNextClick = (prevOrNext: PLAYER_CONTROLS) => {
     const tracksMaxIndex = currentProject.tracks.length - 1;
     let nextTrackIndex;
 
-    if (prevOrNext === "next") {
-      selectedTrackIndex + 1 > tracksMaxIndex
-        ? (nextTrackIndex = 0)
-        : (nextTrackIndex = selectedTrackIndex + 1);
-    }
+    if (prevOrNext === PLAYER_CONTROLS.next)
+      nextTrackIndex = calcNextTrackIndex(selectedTrackIndex, tracksMaxIndex);
 
-    if (prevOrNext === "prev") {
-      selectedTrackIndex - 1 < 0
-        ? (nextTrackIndex = tracksMaxIndex)
-        : (nextTrackIndex = selectedTrackIndex - 1);
-    }
+    if (prevOrNext === PLAYER_CONTROLS.prev)
+      nextTrackIndex = calcPrevTrackIndex(selectedTrackIndex, tracksMaxIndex);
 
     setSelectedTrackIndex(nextTrackIndex);
     audioPlayer.src = currentProject.tracks[nextTrackIndex].audioSrc;
 
-    if (isAudioPlaying) {
-      audioPlayer.play();
-    }
+    if (isAudioPlaying) audioPlayer.play();
   };
 
   const handleCloseClick = () => {
@@ -77,10 +73,13 @@ const DesktopAudioPlayer = () => {
   };
 
   const handleVideoClick = () => {
-    setVideoID(currentProject.videoSrc);
-    setIsVideoPopupOpened(true);
-    audioPlayer.pause();
-    audioPlayer.currentTime = 0;
+    watchVideoCallback(
+      audioPlayer,
+      currentProject,
+      setIsPlayerOpened,
+      setVideoID,
+      setIsVideoPopupOpened
+    );
   };
 
   return (

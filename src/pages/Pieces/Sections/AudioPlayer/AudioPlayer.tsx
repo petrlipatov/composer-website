@@ -10,8 +10,8 @@ import VideoButton from "../../../../components/AudioPlayer/Simple/VideoButton/V
 import CloseButton from "../../../../components/AudioPlayer/Simple/CloseButton/CloseButton";
 import usePlayingAudioStates from "../../../../utils/hooks/usePlayingAudioStates";
 import {
-  PlayPauseCallback,
-  VideoCalback,
+  playPauseCallback,
+  watchVideoCallback,
 } from "../../../../utils/helpers/audioPlayer";
 
 const AudioPlayer = () => {
@@ -25,6 +25,7 @@ const AudioPlayer = () => {
     setCurrentAudioData,
     setVideoID,
     setIsVideoPopupOpened,
+    setSelectedTrackIndex,
   } = useContext(PiecesContext);
 
   const audioPlayer = audioPlayerRef.current;
@@ -32,7 +33,7 @@ const AudioPlayer = () => {
   usePlayingAudioStates(audioPlayer, setIsAudioPlaying);
 
   const handlePlayPauseClick = () => {
-    PlayPauseCallback(audioPlayer, isAudioPlaying);
+    playPauseCallback(audioPlayer, isAudioPlaying);
   };
 
   const handlePlayNextClick = (prevOrNext) => {
@@ -46,6 +47,7 @@ const AudioPlayer = () => {
 
     if (nextTrack) {
       audioPlayer.src = nextTrack.audioSrc;
+      setSelectedTrackIndex(nextSongIndex);
       setCurrentAudioData({
         index: filteredPieces.indexOf(nextTrack),
         ...nextTrack,
@@ -57,7 +59,7 @@ const AudioPlayer = () => {
   };
 
   const handleVideoClick = () => {
-    VideoCalback(
+    watchVideoCallback(
       audioPlayer,
       currentAudioData,
       setIsPlayerOpened,

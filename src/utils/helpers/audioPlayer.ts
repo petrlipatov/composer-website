@@ -1,4 +1,4 @@
-export const PlayPauseCallback = (audioPlayer, isAudioPlaying) => {
+export const playPauseCallback = (audioPlayer, isAudioPlaying) => {
   if (isAudioPlaying) {
     audioPlayer.pause();
   } else {
@@ -6,7 +6,7 @@ export const PlayPauseCallback = (audioPlayer, isAudioPlaying) => {
   }
 };
 
-export const VideoCalback = (
+export const watchVideoCallback = (
   audioPlayer,
   currentAudioData,
   setIsPlayerOpened,

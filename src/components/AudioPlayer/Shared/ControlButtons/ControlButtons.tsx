@@ -1,12 +1,13 @@
-import s from "./ControlButtons.module.css";
 import useIsMobile from "../../../../utils/hooks/useIsMobile";
 import PlayIcon from "../../../Icons/PlayIcon/PlayIcon";
 import PauseIcon from "../../../Icons/PauseIcon/PauseIcon";
 import NextIcon from "../../../Icons/NextIcon/NextIcon";
+import { PLAYER_CONTROLS } from "../../../../utils/constants";
+import s from "./ControlButtons.module.css";
 
 type Props = {
   handlePlayPauseClick: () => void;
-  handlePlayNextClick: (arg: "next" | "prev") => void;
+  handlePlayNextClick: (arg: PLAYER_CONTROLS) => void;
   isAudioPlaying: boolean;
 };
 
@@ -22,7 +23,7 @@ function ControlButtons({
     handlePlayPauseClick();
   };
 
-  const handlePlayNextClickDesktop = (str: "next" | "prev") => {
+  const handlePlayNextClickDesktop = (str: PLAYER_CONTROLS) => {
     if (isMobile) return;
     handlePlayNextClick(str);
   };
@@ -31,8 +32,8 @@ function ControlButtons({
     <div className={s.container}>
       <button
         className={s.playNextButton}
-        onClick={() => handlePlayNextClickDesktop("prev")}
-        onTouchEnd={() => handlePlayNextClick("prev")}
+        onClick={() => handlePlayNextClickDesktop(PLAYER_CONTROLS.prev)}
+        onTouchEnd={() => handlePlayNextClick(PLAYER_CONTROLS.prev)}
         type="button"
       >
         <NextIcon className={s.icon} isRotated={true} />
@@ -50,8 +51,8 @@ function ControlButtons({
 
       <button
         className={s.playNextButton}
-        onClick={() => handlePlayNextClickDesktop("next")}
-        onTouchEnd={() => handlePlayNextClick("next")}
+        onClick={() => handlePlayNextClickDesktop(PLAYER_CONTROLS.next)}
+        onTouchEnd={() => handlePlayNextClick(PLAYER_CONTROLS.next)}
         type="button"
       >
         <NextIcon className={s.icon} />

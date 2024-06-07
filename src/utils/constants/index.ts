@@ -11,3 +11,8 @@ export enum PAGES {
   featured = "Featured Work",
   info = "Info",
 }
+
+export enum PLAYER_CONTROLS {
+  next = "next",
+  prev = "prev",
+}
