@@ -159,9 +159,7 @@ export default function Projects() {
     filteredProjects,
     projectHeight,
     projectsTotalCount,
-
     tableColumnsCount,
-
     generateProjectElement,
   ]);
 

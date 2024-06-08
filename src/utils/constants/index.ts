@@ -17,3 +17,8 @@ export enum PLAYER_CONTROLS {
   next = "next",
   prev = "prev",
 }
+
+export enum TRANSITION {
+  none = "none",
+  smooth = "background-size 2.5s ease",
+}

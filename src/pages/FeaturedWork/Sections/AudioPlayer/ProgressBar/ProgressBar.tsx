@@ -14,6 +14,7 @@ import useBufferedProgressUpdate from "../../../../../utils/hooks/useBufferedPro
 import useAudioEventsForProgressBar from "../../../../../utils/hooks/useAudioEventsForProgressBar";
 
 import s from "./ProgressBar.module.css";
+import { TRANSITION } from "../../../../../utils/constants";
 
 const ProgressBar = () => {
   const [duration, setDuration] = useState(0);
@@ -45,8 +46,12 @@ const ProgressBar = () => {
   );
 
   const onScrubberChange = (e: ChangeEvent<HTMLInputElement>) => {
+    e.target.style.transition = TRANSITION.none;
     const newTime = e.target.value;
     audioPlayer.currentTime = Number(newTime);
+    setTimeout(() => {
+      e.target.style.transition = TRANSITION.smooth;
+    }, 100);
   };
 
   return (
