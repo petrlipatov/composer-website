@@ -1,4 +1,10 @@
-import { ChangeEvent, useContext, useRef, useState } from "react";
+import {
+  ChangeEvent,
+  useContext,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 
 import ScrubberLoader from "../../../../../components/AudioPlayer/Shared/ProgressBar/ScrubberLoader/ScrubberLoader";
 import TimeValue from "../../../../../components/AudioPlayer/Shared/ProgressBar/TimeValue/TimeValue";
@@ -21,7 +27,8 @@ const ProgressBar = () => {
   const [elapsedTime, setElapsedTime] = useState(0);
   const [buffered, setBuffered] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-  const { audioPlayerRef } = useContext(FeaturedWorkContext);
+  const { audioPlayerRef, selectedTrackIndex } =
+    useContext(FeaturedWorkContext);
   const progressBarRef = useRef<HTMLInputElement>();
   const bufferedBarRef = useRef<HTMLDivElement>();
 
@@ -45,10 +52,22 @@ const ProgressBar = () => {
     audioPlayer.currentTime
   );
 
+  useLayoutEffect(() => {
+    progressBarRef.current.style.transition = TRANSITION.none;
+    bufferedBarRef.current.style.transition = TRANSITION.none;
+
+    setTimeout(() => {
+      progressBarRef.current.style.transition = TRANSITION.smooth;
+      bufferedBarRef.current.style.transition = TRANSITION.smooth;
+    }, 100);
+  }, [selectedTrackIndex]);
+
   const onScrubberChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.target.style.transition = TRANSITION.none;
+
     const newTime = e.target.value;
     audioPlayer.currentTime = Number(newTime);
+
     setTimeout(() => {
       e.target.style.transition = TRANSITION.smooth;
     }, 100);

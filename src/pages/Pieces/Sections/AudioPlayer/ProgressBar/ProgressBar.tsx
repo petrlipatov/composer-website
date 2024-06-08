@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useLayoutEffect, useRef, useState } from "react";
 
 import { formatTime } from "../../../../../utils/helpers/formatTime";
 
@@ -25,7 +25,7 @@ const ProgressBar = () => {
 
   const progressBarRef = useRef<HTMLInputElement>();
   const bufferedBarRef = useRef<HTMLInputElement>();
-  const { audioPlayerRef } = useContext(PiecesContext);
+  const { audioPlayerRef, selectedTrackIndex } = useContext(PiecesContext);
 
   const progressBar = progressBarRef.current;
   const bufferedBar = bufferedBarRef.current;
@@ -46,6 +46,16 @@ const ProgressBar = () => {
     duration,
     audioPlayer.currentTime
   );
+
+  useLayoutEffect(() => {
+    progressBarRef.current.style.transition = TRANSITION.none;
+    bufferedBarRef.current.style.transition = TRANSITION.none;
+
+    setTimeout(() => {
+      progressBarRef.current.style.transition = TRANSITION.smooth;
+      bufferedBarRef.current.style.transition = TRANSITION.smooth;
+    }, 100);
+  }, [selectedTrackIndex]);
 
   const onScrubberChange = (e) => {
     e.target.style.transition = TRANSITION.none;
