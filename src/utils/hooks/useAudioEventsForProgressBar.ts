@@ -1,11 +1,11 @@
-import { useEffect } from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
 
 const useAudioEventsForProgressBar = (
-  audioPlayer,
-  setDuration,
-  setElapsedTime,
-  setBuffered,
-  setIsLoading
+  audioPlayer: HTMLAudioElement,
+  setDuration: Dispatch<SetStateAction<number>>,
+  setElapsedTime: Dispatch<SetStateAction<number>>,
+  setBuffered: Dispatch<SetStateAction<number>>,
+  setIsLoading: Dispatch<SetStateAction<boolean>>
 ) => {
   useEffect(() => {
     function updateBufferedAndElapsedTime() {
@@ -19,8 +19,8 @@ const useAudioEventsForProgressBar = (
           bufferedRanges.end(lastBufferedIndex)
         );
         if (currentTime <= bufferedEndTime) {
-          setElapsedTime(currentTime);
           setBuffered(bufferedEndTime);
+          setElapsedTime(currentTime);
         } else {
           audioPlayer.currentTime = bufferedEndTime;
           setElapsedTime(bufferedEndTime);

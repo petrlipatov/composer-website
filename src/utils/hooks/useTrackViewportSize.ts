@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
 
 type TrackViewportSizeArgs = {
   height: number;
@@ -6,7 +6,7 @@ type TrackViewportSizeArgs = {
 };
 
 export function useTrackViewportSize(
-  stateSetter: React.Dispatch<React.SetStateAction<TrackViewportSizeArgs>>
+  stateSetter: Dispatch<SetStateAction<TrackViewportSizeArgs>>
 ) {
   useEffect(() => {
     const handleResize = () => {

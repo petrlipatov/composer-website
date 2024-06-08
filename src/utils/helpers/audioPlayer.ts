@@ -1,4 +1,7 @@
-export const playPauseCallback = (audioPlayer, isAudioPlaying) => {
+export const playPauseCallback = (
+  audioPlayer: HTMLAudioElement,
+  isAudioPlaying: boolean
+) => {
   if (isAudioPlaying) {
     audioPlayer.pause();
   } else {

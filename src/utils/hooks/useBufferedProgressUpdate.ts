@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 
 const useBufferedProgressUpdate = (
-  bufferedBar,
-  buffered,
-  duration,
-  currentTime
+  bufferedBar: HTMLDivElement,
+  buffered: number,
+  duration: number,
+  currentTime: number
 ) => {
   useEffect(() => {
     function updateBufferedOnScrubber() {

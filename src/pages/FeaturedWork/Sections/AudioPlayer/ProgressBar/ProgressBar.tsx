@@ -22,7 +22,7 @@ const ProgressBar = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { audioPlayerRef } = useContext(FeaturedWorkContext);
   const progressBarRef = useRef<HTMLInputElement>();
-  const bufferedBarRef = useRef<HTMLInputElement>();
+  const bufferedBarRef = useRef<HTMLDivElement>();
 
   const progressBar = progressBarRef.current;
   const bufferedBar = bufferedBarRef.current;
@@ -52,21 +52,17 @@ const ProgressBar = () => {
   return (
     <div className={s.progressBarContainer}>
       <TimeValue> {formatTime(elapsedTime)}</TimeValue>
-      {isLoading ? (
-        <ScrubberLoader />
-      ) : (
-        <div className={s.progressBar}>
-          <DurationBar />
-          <ScrubberBar
-            elapsedTime={elapsedTime}
-            duration={duration}
-            onScrubberChange={onScrubberChange}
-            ref={progressBarRef}
-          />
-          <BufferedBar ref={bufferedBarRef} />
-        </div>
-      )}
-
+      <div className={s.progressBar}>
+        <ScrubberLoader isLoading={isLoading} />
+        <ScrubberBar
+          elapsedTime={elapsedTime}
+          duration={duration}
+          onScrubberChange={onScrubberChange}
+          ref={progressBarRef}
+        />
+        <DurationBar />
+        <BufferedBar ref={bufferedBarRef} />
+      </div>
       <TimeValue> {formatTime(duration)}</TimeValue>
     </div>
   );

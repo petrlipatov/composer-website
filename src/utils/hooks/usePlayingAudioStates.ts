@@ -1,6 +1,9 @@
-import { useEffect } from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
 
-const usePlayingAudioStates = (audioPlayer, setIsAudioPlaying) => {
+const usePlayingAudioStates = (
+  audioPlayer: HTMLAudioElement,
+  setIsAudioPlaying: Dispatch<SetStateAction<boolean>>
+) => {
   useEffect(() => {
     const onPlayingHandler = () => setIsAudioPlaying(true);
     const onPauseHandler = () => setIsAudioPlaying(false);

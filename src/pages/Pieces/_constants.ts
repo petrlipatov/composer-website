@@ -221,7 +221,7 @@ export const TABLE_COLUMNS_MOBILE = 2;
 export const TABLE_COLUMNS_DESKTOP = 3;
 
 export const TRACK_LEFT_MARGIN_MOBILE = 8;
-export const TRACK_LEFT_MARGIN_DESKTOP = 8;
+export const TRACK_LEFT_MARGIN_DESKTOP = 16;
 
 export const TRACK_TOP_MARGIN_MOBILE = 8;
 export const TRACK_TOP_MARGIN_DESKTOP = 2;

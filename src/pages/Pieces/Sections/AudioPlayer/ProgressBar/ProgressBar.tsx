@@ -47,27 +47,30 @@ const ProgressBar = () => {
   );
 
   const onScrubberChange = (e) => {
+    e.target.style.transition = "background-size 0.1s ease";
     const newTime = e.target.value;
     audioPlayer.currentTime = newTime;
+    setTimeout(() => {
+      e.target.style.transition = "background-size 2.5s ease";
+    }, 100);
   };
 
   return (
     <div className={s.progressBarContainer}>
       <TimeValue> {formatTime(elapsedTime)}</TimeValue>
-      {isLoading ? (
-        <ScrubberLoader />
-      ) : (
-        <div className={s.progressBar}>
-          <DurationBar />
-          <ScrubberBar
-            elapsedTime={elapsedTime}
-            duration={duration}
-            onScrubberChange={onScrubberChange}
-            ref={progressBarRef}
-          />
-          <BufferedBar ref={bufferedBarRef} />
-        </div>
-      )}
+
+      <div className={s.progressBar}>
+        <ScrubberLoader isLoading={isLoading} />
+        <ScrubberBar
+          elapsedTime={elapsedTime}
+          duration={duration}
+          onScrubberChange={onScrubberChange}
+          ref={progressBarRef}
+        />
+        <DurationBar />
+        <BufferedBar ref={bufferedBarRef} />
+      </div>
+
       <TimeValue> {formatTime(duration)}</TimeValue>
     </div>
   );

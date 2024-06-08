@@ -1,8 +1,10 @@
-import { forwardRef } from "react";
+import { forwardRef, memo } from "react";
 import s from "./BufferedBar.module.css";
 
-const BufferedBar = forwardRef<HTMLInputElement>((_, ref) => (
-  <div className={s.bufferedBar} ref={ref} />
-));
+const BufferedBar = memo(
+  forwardRef<HTMLDivElement>((_, ref) => (
+    <div className={s.bufferedBar} ref={ref} />
+  ))
+);
 
 export default BufferedBar;

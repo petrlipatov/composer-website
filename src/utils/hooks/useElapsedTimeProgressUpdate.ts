@@ -1,6 +1,10 @@
 import { useEffect } from "react";
 
-const useElapsedTimeProgressUpdate = (progressBar, elapsedTime, duration) => {
+const useElapsedTimeProgressUpdate = (
+  progressBar: HTMLInputElement,
+  elapsedTime: number,
+  duration: number
+) => {
   useEffect(() => {
     function updateElapsedProgress() {
       if (progressBar) {
