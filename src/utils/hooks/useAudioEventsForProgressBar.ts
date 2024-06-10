@@ -33,6 +33,7 @@ const useAudioEventsForProgressBar = (
       audioPlayer.onloadedmetadata = () => {
         setDuration(audioPlayer.duration);
         setElapsedTime(0);
+        setBuffered(0);
       };
       audioPlayer.ontimeupdate = updateBufferedAndElapsedTime;
       audioPlayer.onwaiting = () => setIsLoading(true);
