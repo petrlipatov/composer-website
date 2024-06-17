@@ -1,7 +1,6 @@
 .section {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  margin-top: 24px;
 }
 
 .subHeading {
@@ -16,7 +15,7 @@
 }
 
 .item {
-  margin-top: 4px;
+  margin-top: 8px;
 }
 
 @media (min-width: 1280px) {
@@ -34,5 +33,6 @@
 @media (min-width: 1440px) {
   .section {
     width: 1000px;
+    margin-top: 48px;
   }
 }

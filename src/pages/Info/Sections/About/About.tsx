@@ -1,3 +1,5 @@
+import portraitSrc from "../../../../assets/images/portrait.jpg";
+import { YOUTUBE_LINK } from "../../_constants";
 import s from "./About.module.css";
 
 function About() {
@@ -54,21 +56,36 @@ function About() {
         </ul>
       </div>
 
-      <div className={s.image}></div>
-
-      <div className={s.linksSection}>
-        <button className={s.linkButton} style={{ backgroundColor: "#FF0101" }}>
-          YouTube
-        </button>
-        <button className={s.linkButton} style={{ backgroundColor: "#CD1CFB" }}>
-          Instagram
-        </button>
-        <button className={s.linkButton} style={{ backgroundColor: "#EAB90A" }}>
-          IMDB
-        </button>
-        <button className={s.linkButton} style={{ backgroundColor: "#1FD861" }}>
-          Spotify
-        </button>
+      <div>
+        <img className={s.image} src={portraitSrc} />
+        <div className={s.linksSection}>
+          <a
+            href={YOUTUBE_LINK}
+            className={s.linkButton}
+            style={{ backgroundColor: "#FF0101" }}
+            target="_blank"
+          >
+            YouTube
+          </a>
+          <button
+            className={s.linkButton}
+            style={{ backgroundColor: "#CD1CFB" }}
+          >
+            Instagram
+          </button>
+          <button
+            className={s.linkButton}
+            style={{ backgroundColor: "#EAB90A" }}
+          >
+            IMDB
+          </button>
+          <button
+            className={s.linkButton}
+            style={{ backgroundColor: "#1FD861" }}
+          >
+            Spotify
+          </button>
+        </div>
       </div>
     </div>
   );

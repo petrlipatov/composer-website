@@ -1,3 +1,5 @@
+export const YOUTUBE_LINK = "https://www.youtube.com/@lizatikhonovamusic";
+
 export const GALLERY_IMAGES_COUNT_MOBILE = 6;
 export const GALLERY_IMAGES_COUNT_DESKTOP = 6;
 

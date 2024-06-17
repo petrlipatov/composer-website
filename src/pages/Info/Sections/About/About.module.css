@@ -20,9 +20,7 @@
 
 .image {
   display: none;
-  background-image: url("images/gallery/portrait.webp");
-  background-repeat: no-repeat;
-  background-size: contain;
+  width: 100%;
 }
 
 .linksSection {
@@ -57,22 +55,36 @@
 @media (min-width: 1280px) {
   .section {
     width: 900px;
-    margin-top: 32px;
+    margin-top: 48px;
     font-size: 20px;
     display: grid;
     grid-template-columns: 1fr 1fr;
+  }
+
+  .heading {
+    margin-top: 8px;
+  }
+  .heading:first-of-type {
+    margin-top: 0;
+  }
+
+  .list {
+    margin-top: 8px;
   }
 
   .image {
     display: block;
   }
 
-  .heading {
+  .linksSection {
     margin-top: 8px;
+    position: relative;
+    gap: 8px;
   }
-
-  .list {
-    margin-top: 8px;
+  .linkButton {
+    font-size: 14px;
+    width: 40%;
+    padding: 14px;
   }
 }
 

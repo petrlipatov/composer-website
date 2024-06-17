@@ -66,9 +66,9 @@
   .section {
     width: 900px;
     align-self: center;
+    margin-top: 48px;
   }
   .imagesGrid {
-    margin-top: 32px;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
     width: 100%;
