@@ -22,7 +22,7 @@ const DesktopNavigationMenu = ({ children }) => {
   }
 
   return (
-    <div className={s.nav}>
+    <nav className={s.nav}>
       <Link
         to="/"
         className={cn(s.linkNav, currentPage === PAGES.home ? s.active : "")}
@@ -51,7 +51,7 @@ const DesktopNavigationMenu = ({ children }) => {
       >
         {PAGES.info}
       </Link>
-    </div>
+    </nav>
   );
 };
 

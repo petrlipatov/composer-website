@@ -5,11 +5,11 @@ import MobileNavigation from "../NavigationMenu/Mobile/MobileNavigationMenu";
 
 function Header({ children }) {
   return (
-    <div className={s.navSection}>
+    <header className={s.header}>
       <MobileNavigation>{children}</MobileNavigation>
       <DesktopNavigation>{children}</DesktopNavigation>
       <Logo />
-    </div>
+    </header>
   );
 }
 

@@ -50,7 +50,7 @@ function Tags() {
   };
 
   return (
-    <div className={s.tagsSection}>
+    <section className={s.tags}>
       <div className={s.tagsList}>
         {PROJECTS_GENRES.map((genre, i) => (
           <Tag
@@ -68,7 +68,7 @@ function Tags() {
           handleClearTagsClick={handleClearTagsClick}
         />
       </div>
-    </div>
+    </section>
   );
 }
 

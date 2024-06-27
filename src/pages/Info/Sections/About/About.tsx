@@ -4,7 +4,7 @@ import s from "./About.module.css";
 
 function About() {
   return (
-    <div className={s.section}>
+    <section className={s.about}>
       <div className={s.aboutText}>
         <div className={s.heading}>Composer</div>
         <ul className={s.list}>
@@ -87,7 +87,7 @@ function About() {
           </button>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 

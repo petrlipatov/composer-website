@@ -166,8 +166,8 @@ export default function Projects() {
   const handleScroll = (e) => setScrollTop(e.currentTarget.scrollTop);
 
   return (
-    <div
-      className={s.projectsSection}
+    <section
+      className={s.projects}
       onScroll={handleScroll}
       ref={sectionRef}
       style={isMobile && isPlayerOpened ? { display: "none" } : {}}
@@ -181,6 +181,6 @@ export default function Projects() {
       >
         {displayedProjects}
       </div>
-    </div>
+    </section>
   );
 }

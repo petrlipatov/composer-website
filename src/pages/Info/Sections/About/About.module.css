@@ -1,4 +1,4 @@
-.section {
+.about {
   margin-top: 24px;
   overflow: scroll;
   white-space: nowrap;
@@ -53,7 +53,7 @@
 }
 
 @media (min-width: 1280px) {
-  .section {
+  .about {
     width: 900px;
     margin-top: 48px;
     font-size: 20px;
@@ -89,7 +89,7 @@
 }
 
 @media (min-width: 1440px) {
-  .section {
+  .about {
     width: 1000px;
   }
 }

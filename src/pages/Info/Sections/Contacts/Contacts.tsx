@@ -2,7 +2,7 @@ import s from "./Contacts.module.css";
 
 function Contacts() {
   return (
-    <div className={s.section}>
+    <section className={s.contacts}>
       <button
         className={s.contactsButton}
         style={{ backgroundColor: "#13C230" }}
@@ -84,7 +84,7 @@ function Contacts() {
       >
         Amazon music
       </button>
-    </div>
+    </section>
   );
 }
 

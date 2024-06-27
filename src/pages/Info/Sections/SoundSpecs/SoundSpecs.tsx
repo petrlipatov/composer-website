@@ -2,7 +2,7 @@ import s from "./SoundSpecs.module.css";
 
 function SoundSpecs() {
   return (
-    <div className={s.section}>
+    <section className={s.specs}>
       <div className={""}>
         {/* <h3 className={s.subHeading}>Plugins and Instruments licenses</h3> */}
         <h3 className={s.subHeading}>Licenses</h3>
@@ -45,7 +45,7 @@ function SoundSpecs() {
           <li className={s.item}>Macbook Pro M1 MAX</li>
         </ul>
       </div>
-    </div>
+    </section>
   );
 }
 

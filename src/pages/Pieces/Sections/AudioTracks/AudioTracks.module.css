@@ -1,11 +1,11 @@
-.tracksSection {
+.tracks {
   position: relative;
   margin-top: 24px;
   overflow-y: scroll;
 }
 
 @media (min-width: 1280px) {
-  .tracksSection {
+  .tracks {
     width: 900px;
     justify-self: center;
     margin-top: 48px;
@@ -13,7 +13,7 @@
 }
 
 @media (min-width: 1440px) {
-  .tracksSection {
+  .tracks {
     width: 1000px;
     justify-self: center;
     margin-top: 48px;

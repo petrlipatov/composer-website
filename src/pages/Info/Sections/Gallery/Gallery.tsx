@@ -49,7 +49,7 @@ function Gallery() {
   };
 
   return (
-    <div className={s.section}>
+    <section className={s.gallery}>
       <div className={s.imagesGrid}>
         {imagesSlice.map((el, i) => {
           return (
@@ -86,7 +86,7 @@ function Gallery() {
           {/* </Suspense> */}
         </Modal>
       )}
-    </div>
+    </section>
   );
 }
 

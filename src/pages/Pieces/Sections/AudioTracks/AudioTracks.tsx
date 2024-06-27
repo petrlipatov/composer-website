@@ -153,7 +153,7 @@ const AudioTracks = () => {
   }
 
   return (
-    <div className={s.tracksSection} onScroll={onScroll} ref={sectionRef}>
+    <section className={s.tracks} onScroll={onScroll} ref={sectionRef}>
       <div
         className={s.tracksContainer}
         style={{
@@ -162,7 +162,7 @@ const AudioTracks = () => {
       >
         {displayedTracks}
       </div>
-    </div>
+    </section>
   );
 };
 

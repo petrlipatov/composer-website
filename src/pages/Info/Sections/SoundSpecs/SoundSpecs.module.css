@@ -1,4 +1,4 @@
-.section {
+.specs {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
@@ -19,7 +19,7 @@
 }
 
 @media (min-width: 1280px) {
-  .section {
+  .specs {
     align-self: center;
     margin-top: 32px;
     width: 900px;
@@ -31,7 +31,7 @@
 }
 
 @media (min-width: 1440px) {
-  .section {
+  .specs {
     width: 1000px;
     margin-top: 48px;
   }
