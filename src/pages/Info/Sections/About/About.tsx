@@ -1,5 +1,4 @@
-import portraitSrc from "../../../../assets/images/portrait.jpg";
-import { YOUTUBE_LINK } from "../../_constants";
+import { PORTRAIT_IMAGE, YOUTUBE_LINK } from "../../_constants";
 import s from "./About.module.css";
 
 function About() {
@@ -57,7 +56,7 @@ function About() {
       </div>
 
       <div>
-        <img className={s.image} src={portraitSrc} />
+        <img className={s.image} src={PORTRAIT_IMAGE} />
         <div className={s.linksSection}>
           <a
             href={YOUTUBE_LINK}
