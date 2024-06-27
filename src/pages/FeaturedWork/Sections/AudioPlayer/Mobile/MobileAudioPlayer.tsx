@@ -79,6 +79,10 @@ const MobileAudioPlayer = () => {
   };
 
   const handlePlayNextClick = (prevOrNext: PLAYER_CONTROLS) => {
+
+
+
+    
     const tracksMaxIndex = currentProject.tracks.length - 1;
     let nextTrackIndex;
 

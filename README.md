@@ -1,19 +1,19 @@
-# Проект: Портфолио Композитора
+# Music Composer Portfolio App
 
-## Описание
+## Desc
 
-В процессе разработки я отказался от использования готовых решений типа виртуализации и аудио-плеера.
+A platform for a composer to showcase her music. The platform is highly efficient, relying exclusively on TypeScript and React without utilizing any other third-party libraries.
 
-## Cтек
+## Tech
 
 - React
 - TypeScript
 - HTML Audio
 
-## Особенности
+## Highlights
 
-- Собственная реализация виртуализации, фроттлинга, мобильного скролла и интерфейса для аудио плеера с отображением буфферизации.
-- Оптимизации для мобильных устройств в соответствии с Web Vitals.
-- Mobile-first подход.
+- Custom implementation of virtualization, throttling, mobile scroll, and audio player interface with buffering.
+- Optimizations for mobile devices according to Web Vitals.
+- Mobile-first approach.
 
-[Ссылка на приложение](https://lipatov.nomoredomainswork.ru/)
+[Link to the application](https://lipatov.nomoredomainswork.ru/)
