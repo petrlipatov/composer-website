@@ -64,10 +64,14 @@ export default function Projects() {
     ? PROJECT_TOP_MARGIN_MOBILE
     : PROJECT_TOP_MARGIN_DESKTOP;
 
+  const scrollWidth = isMobile ? 0 : 13;
+
+  const sectionWidthWithoutScroll = sectionWidth - scrollWidth;
+
   // Calculate project dimensions
 
   const projectWidth = getElementWidth(
-    sectionWidth,
+    sectionWidthWithoutScroll,
     projectLeftMargin,
     tableColumnGapsCount,
     tableColumnsCount

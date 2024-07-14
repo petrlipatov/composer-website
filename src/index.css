@@ -1,5 +1,7 @@
 * {
   box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: #c3c2c2 #d6d6d6;
 }
 
 html {

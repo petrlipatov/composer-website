@@ -54,10 +54,14 @@ const AudioTracks = () => {
     ? TRACK_TOP_MARGIN_MOBILE
     : TRACK_TOP_MARGIN_DESKTOP;
 
+  const scrollWidth = isMobile ? 0 : 13;
+
+  const sectionWidthWithoutScroll = sectionWidth - scrollWidth;
+
   // Calculate track dimensions
 
   const trackWidth = getElementWidth(
-    sectionWidth,
+    sectionWidthWithoutScroll,
     trackLeftMargin,
     tableColumnGapsCount,
     tableColumnsCount
