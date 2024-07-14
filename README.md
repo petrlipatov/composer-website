@@ -14,7 +14,7 @@ A platform for a composer to showcase her music. The platform is highly efficien
 
 ## Highlights
 
-- Custom implementation of virtualization, mobile scroll, audio player interface.
+- Custom implementations of list virtualization, mobile scroll, audio player interface.
 - Optimizations for mobile devices according to Web Vitals.
 - Mobile-first approach.
 
