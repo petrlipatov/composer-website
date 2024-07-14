@@ -1,5 +1,7 @@
 # Music Composer Portfolio App
 
+<img src="public/images/cover.jpeg" alt="Description" style="width: 100%; height: auto;" />
+
 ## Desc
 
 A platform for a composer to showcase her music. The platform is highly efficient, relying exclusively on TypeScript and React without utilizing any other third-party libraries.
