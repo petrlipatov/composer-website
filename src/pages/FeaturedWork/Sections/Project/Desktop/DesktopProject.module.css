@@ -7,6 +7,7 @@
   position: absolute;
   background-color: #e7397a;
   inset: 0;
+  overflow: hidden;
 }
 
 .container:hover .player {

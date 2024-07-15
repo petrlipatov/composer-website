@@ -7,11 +7,13 @@
   align-items: flex-end;
   margin-left: 4px;
   margin-right: 4px;
+  gap: 1px;
+  position: relative;
 }
 
 .playing__bar {
   display: inline-block;
-  width: 30%;
+  width: 27%;
   height: 100%;
   animation: up-and-down 1.3s ease infinite alternate;
   margin-bottom: 2px;
