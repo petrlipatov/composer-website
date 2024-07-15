@@ -79,10 +79,6 @@ const MobileAudioPlayer = () => {
   };
 
   const handlePlayNextClick = (prevOrNext: PLAYER_CONTROLS) => {
-
-
-
-    
     const tracksMaxIndex = currentProject.tracks.length - 1;
     let nextTrackIndex;
 
@@ -126,7 +122,7 @@ const MobileAudioPlayer = () => {
   };
 
   return (
-    <div className={s.section}>
+    <section className={s.player}>
       <CloseButton onClick={handleCloseClick} />
       <Info data={currentProject} handleVideoClick={handleVideoClick} />
       <Scrollbar ref={tracksContainerRef}>
@@ -159,7 +155,7 @@ const MobileAudioPlayer = () => {
 
         <ProgressBar />
       </div>
-    </div>
+    </section>
   );
 };
 
