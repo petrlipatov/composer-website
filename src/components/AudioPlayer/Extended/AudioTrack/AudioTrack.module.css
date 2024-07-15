@@ -3,6 +3,7 @@
   display: flex;
   margin-top: 24px;
   cursor: pointer;
+  line-height: 16px;
 }
 
 @keyframes flash {
@@ -34,7 +35,6 @@
   word-spacing: -2px;
   margin-left: 16px;
   width: 80%;
-  line-height: 16px;
 }
 
 .trackIndex {
@@ -61,11 +61,11 @@
   }
 
   .duration {
-    margin-right: 8px;
+    margin-right: 20px;
   }
 
   .trackIndex {
-    margin-left: 16px;
+    margin-left: 20px;
   }
 }
 
