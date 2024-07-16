@@ -13,7 +13,7 @@
   grid-template-rows: min-content min-content 1fr;
   margin-top: 16px;
   overflow: hidden;
-  width: 98%;
+  width: 99%;
 }
 
 .mobilePlayerOpened {
@@ -23,7 +23,7 @@
 
 @media (min-width: 380px) {
   .content {
-    width: 96%;
+    width: 98%;
   }
 }
 
