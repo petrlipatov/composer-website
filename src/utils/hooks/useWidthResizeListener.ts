@@ -11,9 +11,7 @@ function useWidthResizeListener(
 ) {
   useLayoutEffect(() => {
     const updateSectionWidth = () => {
-      if (ref.current) {
-        setElementWidth(ref.current.offsetWidth);
-      }
+      if (ref.current) setElementWidth(ref.current.offsetWidth - 1);
     };
 
     updateSectionWidth();

@@ -169,6 +169,8 @@ export default function Projects() {
 
   const handleScroll = (e) => setScrollTop(e.currentTarget.scrollTop);
 
+  console.log(displayedProjects);
+
   return (
     <section
       className={s.projects}

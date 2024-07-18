@@ -1,9 +1,13 @@
 .artworkContainer {
   position: relative;
+  overflow: hidden;
 }
 
 .player {
-  display: none;
+  visibility: hidden;
+  display: flex;
+
+  flex-direction: column;
   position: absolute;
   background-color: #e7397a;
   inset: 0;
@@ -11,9 +15,9 @@
 }
 
 .container:hover .player {
-  display: block;
+  visibility: visible;
 }
 
 .playerActive {
-  display: block;
+  visibility: visible;
 }

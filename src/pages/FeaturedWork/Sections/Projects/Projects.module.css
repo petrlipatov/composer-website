@@ -3,7 +3,6 @@
   width: 100%;
   flex-grow: 1;
   position: relative;
-  overflow-y: scroll;
 }
 
 @media (min-width: 1280px) {

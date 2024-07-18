@@ -67,7 +67,6 @@ const Scrollbar = forwardRef<HTMLDivElement, Props>(({ children }, ref) => {
       } else {
         setIsVisible(true);
       }
-
       observer.current = new ResizeObserver(() => {
         handleThumbResize();
       });
@@ -82,7 +81,7 @@ const Scrollbar = forwardRef<HTMLDivElement, Props>(({ children }, ref) => {
   }, [thumbHeight]);
 
   function handleTouchStart(e: React.TouchEvent<HTMLDivElement>) {
-    e.stopPropagation();
+    // e.stopPropagation();
 
     const touch = e.touches[0];
 

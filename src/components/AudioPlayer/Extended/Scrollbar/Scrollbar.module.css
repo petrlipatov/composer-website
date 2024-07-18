@@ -4,17 +4,15 @@
   grid-template-rows: auto;
   grid-template-columns: 1fr 50px;
   overflow: hidden;
-  position: relative;
   flex-grow: 1;
 }
 
 .content {
   -ms-overflow-style: none;
   overflow-y: scroll;
-  scrollbar-width: 0;
-  height: 100%;
   margin-left: 24px;
   scrollbar-width: none;
+  overflow: scroll;
 }
 
 .content::-webkit-scrollbar {
@@ -28,6 +26,7 @@
   grid-auto-flow: row;
   grid-template: auto 1fr auto/ 1fr;
   place-items: center;
+  overflow: hidden;
 }
 
 .trackAndThumb {
@@ -72,7 +71,7 @@
 @media (min-width: 720px) {
   .container {
     padding-top: 0;
-    grid-template-columns: 1fr 10px;
+    grid-template-columns: 1fr 20px;
   }
 
   .content {

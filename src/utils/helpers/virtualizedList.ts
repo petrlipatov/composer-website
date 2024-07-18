@@ -4,9 +4,9 @@ export function getElementWidth(
   tableColumnGapsCount,
   tableColumnsCount
 ) {
-  return Math.floor(
+  return (
     (sectionWidth - elementLeftMargin * tableColumnGapsCount) /
-      tableColumnsCount
+    tableColumnsCount
   );
 }
 
