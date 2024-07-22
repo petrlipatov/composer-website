@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction, useEffect } from "react";
+// import { TRANSITION } from "../constants";
 
 const useAudioEventsForProgressBar = (
   audioPlayer: HTMLAudioElement,
