@@ -1,4 +1,4 @@
-import { useContext, useLayoutEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 
 import { formatTime } from "../../../../../utils/helpers/formatTime";
 
@@ -47,7 +47,7 @@ const ProgressBar = () => {
     audioPlayer.currentTime
   );
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     progressBarRef.current.style.transition = TRANSITION.none;
     bufferedBarRef.current.style.transition = TRANSITION.none;
 
