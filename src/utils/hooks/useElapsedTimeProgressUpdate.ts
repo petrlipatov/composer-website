@@ -3,14 +3,24 @@ import { useEffect } from "react";
 const useElapsedTimeProgressUpdate = (
   progressBar: HTMLInputElement,
   elapsedTime: number,
-  duration: number
+  duration: number,
+  isUserScrubbing: boolean
 ) => {
   useEffect(() => {
     function updateElapsedProgress() {
       if (progressBar) {
-        const max = duration;
+        const max = Number(duration);
+
+        if (elapsedTime === 0 || isUserScrubbing) {
+          progressBar.style.transition = "none";
+        }
+
+        if (elapsedTime > 0 && !isUserScrubbing) {
+          progressBar.style.transition = "background-size 2s ease";
+        }
+
         const progressValue = elapsedTime;
-        const relativeProgressVal = ((progressValue / +max) * 100).toFixed(1);
+        const relativeProgressVal = ((progressValue / max) * 100).toFixed(1);
         progressBar.style.backgroundSize = `${relativeProgressVal}% 100%`;
       }
     }

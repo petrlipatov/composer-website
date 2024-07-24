@@ -1,4 +1,11 @@
-import { useState, useRef, useMemo, createContext, useEffect } from "react";
+import {
+  useState,
+  useRef,
+  useMemo,
+  createContext,
+  useEffect,
+  useCallback,
+} from "react";
 
 import AudioPlayer from "./Sections/AudioPlayer/AudioPlayer";
 import Header from "../../components/Header/Header";
@@ -13,7 +20,7 @@ import { PIECES, DEFAULT_CONTEXT, PLAYER_STATE } from "./_constants";
 import { trackData, ContextTypes, playerState } from "./_types";
 
 import s from "./Pieces.module.css";
-import { PAGES, TRANSITION } from "../../utils/constants";
+import { PAGES } from "../../utils/constants";
 import { setIsLoading, setIsPlaying } from "../../utils/helpers/piecesPlayer";
 
 export const PiecesContext = createContext<ContextTypes>(DEFAULT_CONTEXT);
@@ -24,6 +31,7 @@ function Pieces() {
   const [filteredPieces, setFilteredPieces] = useState<trackData[]>([]);
   const [isVideoPopupOpened, setIsVideoPopupOpened] = useState(false);
   const [selectedTrackIndex, setSelectedTrackIndex] = useState<number>(null);
+  const [isUserScrubbing, setIsUserScrubbing] = useState<boolean>(false);
 
   const [buffered, setBuffered] = useState(0);
   const [elapsed, setElapsed] = useState(0);
@@ -38,14 +46,14 @@ function Pieces() {
 
   const audioPlayerRef = useRef<HTMLAudioElement>();
 
-  const onScrubberChange = (e) => {
-    e.target.style.transition = TRANSITION.none;
+  const onScrubberChange = useCallback((e) => {
+    setIsUserScrubbing(true);
     const newTime = e.target.value;
     audioPlayerRef.current.currentTime = newTime;
     setTimeout(() => {
-      e.target.style.transition = TRANSITION.smooth;
-    }, 100);
-  };
+      setIsUserScrubbing(false);
+    }, 300);
+  }, []);
 
   const contextValue = useMemo(
     () => ({
@@ -58,6 +66,7 @@ function Pieces() {
       buffered,
       elapsed,
       duration,
+      isUserScrubbing,
       setVideoID,
       setSelectedTags,
       setIsVideoPopupOpened,
@@ -75,6 +84,7 @@ function Pieces() {
       buffered,
       elapsed,
       duration,
+      isUserScrubbing,
       setPlayer,
       setVideoID,
       setSelectedTags,

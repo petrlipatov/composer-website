@@ -225,6 +225,7 @@ export const DEFAULT_CONTEXT: ContextTypes = {
   buffered: 0,
   elapsed: 0,
   duration: 0,
+  isUserScrubbing: false,
   setVideoID: () => {},
   setSelectedTags: () => {},
   setIsVideoPopupOpened: () => {},

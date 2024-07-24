@@ -31,6 +31,7 @@ export interface ContextTypes {
   buffered: number;
   elapsed: number;
   duration: number;
+  isUserScrubbing: boolean;
   setVideoID: Dispatch<SetStateAction<string>>;
   setSelectedTags: Dispatch<SetStateAction<string[]>>;
   setIsVideoPopupOpened: Dispatch<SetStateAction<boolean>>;

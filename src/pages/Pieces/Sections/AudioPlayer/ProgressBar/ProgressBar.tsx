@@ -19,14 +19,26 @@ const ProgressBar = () => {
   const progressBarRef = useRef<HTMLInputElement>();
   const bufferedBarRef = useRef<HTMLInputElement>();
 
-  const { player, buffered, duration, elapsed, onScrubberChange } =
-    useContext(PiecesContext);
+  const {
+    player,
+    buffered,
+    duration,
+    elapsed,
+    isUserScrubbing,
+    onScrubberChange,
+  } = useContext(PiecesContext);
 
   const progressBar = progressBarRef.current;
   const bufferedBar = bufferedBarRef.current;
 
-  useElapsedTimeProgressUpdate(progressBar, elapsed, duration);
-  useBufferedProgressUpdate(bufferedBar, buffered, duration, elapsed);
+  useElapsedTimeProgressUpdate(progressBar, elapsed, duration, isUserScrubbing);
+  useBufferedProgressUpdate(
+    bufferedBar,
+    buffered,
+    duration,
+    elapsed,
+    isUserScrubbing
+  );
 
   return (
     <div className={s.progressBarContainer}>
@@ -39,10 +51,9 @@ const ProgressBar = () => {
           duration={duration}
           onScrubberChange={onScrubberChange}
           ref={progressBarRef}
-          key={player.src}
         />
         <DurationBar />
-        <BufferedBar ref={bufferedBarRef} key={player.data.name} />
+        <BufferedBar ref={bufferedBarRef} />
       </div>
 
       <TimeValue> {formatTime(duration)}</TimeValue>
