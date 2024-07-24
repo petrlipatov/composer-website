@@ -1,7 +1,7 @@
 import { useMemo, useRef, useState, createContext, useEffect } from "react";
 import cn from "classnames";
 
-import AudioPlayer from "./Sections/AudioPlayer/AudioPlayer";
+// import AudioPlayer from "./Sections/AudioPlayer/AudioPlayer";
 import Tags from "./Sections/Tags/Tags";
 
 import HTMLAudioTag from "../../components/HTMLAudioTag/HTMLAudioTag";
@@ -96,7 +96,7 @@ function FeaturedWork() {
           <Projects />
         </div>
 
-        {isPlayerOpened && <AudioPlayer />}
+        {/* {isPlayerOpened && <AudioPlayer />} */}
 
         {isVideoPopupOpened && (
           <VideoPopup
