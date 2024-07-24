@@ -1,25 +1,23 @@
-import {
-  Dispatch,
-  SetStateAction,
-  useContext,
-  useEffect,
-  memo,
-  useState,
-} from "react";
+import { Dispatch, SetStateAction, useContext, useEffect, memo } from "react";
 import cn from "classnames";
 
 import AudioTitle from "./AudioTitle/AudioTitle";
 import { PiecesContext } from "../../Pieces";
-import { AudioTrackData } from "../../_types";
+import { trackData } from "../../_types";
 
 import s from "./AudioTrack.module.css";
 import TvIcon from "../../../../components/Icons/TvIcon/TvIcon";
 import HeadphonesIcon from "../../../../components/Icons/HeadphonesIcon/HeadphonesIcon";
 import HorizontalOverlayButton from "../../../../components/Buttons/HorizontalOverlayButton/HorizontalOverlayButton";
+import {
+  terminatePlayer,
+  setTrackAndPlay,
+} from "../../../../utils/helpers/piecesPlayer";
+import { PLAYER_STATE } from "../../_constants";
 
 type AudioTrackProps = {
   index: number;
-  data: AudioTrackData;
+  data: trackData;
   isSelected: boolean;
   extraStyles: any;
   setSelectedTrackIndex: Dispatch<SetStateAction<number>>;
@@ -33,116 +31,55 @@ const AudioTrack = memo(
     extraStyles,
     setSelectedTrackIndex,
   }: AudioTrackProps) => {
-    const {
-      setIsPlayerOpened,
-      setCurrentAudioData,
-      setVideoID,
-      setIsVideoPopupOpened,
-      audioPlayerRef,
-    } = useContext(PiecesContext);
+    const { setVideoID, setIsVideoPopupOpened, setPlayer, player } =
+      useContext(PiecesContext);
 
-    const [isPlaying, setIsPlaying] = useState(null);
-    const [isPaused, setIsPaused] = useState(null);
-    const [isLoading, setIsLoading] = useState(null);
+    const isPlaying = () => {
+      return (
+        player.status === PLAYER_STATE.Playing &&
+        player.data?.audio === data.audio
+      );
+    };
 
-    const audioPlayer = audioPlayerRef.current;
+    const isPaused = () => {
+      return (
+        player.status === PLAYER_STATE.Paused &&
+        player.data?.audio === data.audio
+      );
+    };
 
-    useEffect(
-      function mountPlayerListeners() {
-        const onPlayingHandler = () => {
-          if (audioPlayer.src.includes(data.audioSrc)) {
-            setIsPlaying(true);
-            setIsLoading(false);
-            setIsPaused(false);
-          }
-        };
-
-        const onLoadingHandler = () => {
-          if (audioPlayer.src.includes(data.audioSrc)) {
-            setIsLoading(true);
-          }
-        };
-
-        const onPauseHandler = () => {
-          if (audioPlayer.src.includes(data.audioSrc)) {
-            setIsPaused(true);
-          }
-        };
-
-        if (audioPlayerRef) {
-          audioPlayer.addEventListener("playing", onPlayingHandler);
-          audioPlayer.addEventListener("waiting", onLoadingHandler);
-          audioPlayer.addEventListener("pause", onPauseHandler);
-        }
-
-        return () => {
-          if (audioPlayerRef) {
-            audioPlayer.removeEventListener("playing", onPlayingHandler);
-            audioPlayer.removeEventListener("waiting", onLoadingHandler);
-            audioPlayer.removeEventListener("pause", onLoadingHandler);
-          }
-        };
-      },
-      [audioPlayerRef, audioPlayer, data.audioSrc, index]
-    );
+    const isLoading = () => {
+      return (
+        player.status === PLAYER_STATE.Loading &&
+        player.data?.audio === data.audio
+      );
+    };
 
     useEffect(
-      function highlightWhenSelected() {
-        if (audioPlayer?.src.includes(data.audioSrc)) {
-          setIsPlaying(true);
+      function clearTrackSelection() {
+        if (isSelected) {
+          const timer = setTimeout(() => {
+            setSelectedTrackIndex(null);
+          }, 5000);
 
-          if (audioPlayer.paused) {
-            setIsPaused(true);
-          }
+          return () => clearTimeout(timer);
         }
       },
-      [
-        data.audioSrc,
-        audioPlayer,
-        audioPlayer?.src,
-        index,
-        setSelectedTrackIndex,
-      ]
+      [isSelected, setSelectedTrackIndex, index]
     );
-
-    useEffect(
-      function clearTrackStates() {
-        if (!audioPlayer?.src.includes(data.audioSrc)) {
-          setIsPlaying(null);
-          setIsLoading(null);
-          setIsPaused(null);
-        }
-      },
-      [audioPlayerRef, audioPlayer?.src, data.audioSrc, index]
-    );
-
-    useEffect(() => {
-      if (isSelected) {
-        const timer = setTimeout(() => {
-          setSelectedTrackIndex(null);
-        }, 5000);
-
-        return () => clearTimeout(timer);
-      }
-    }, [isSelected, setSelectedTrackIndex, index]);
 
     function handleTrackClick() {
       setSelectedTrackIndex(index);
     }
 
-    function handleWatchClick() {
-      setIsPlayerOpened(false);
-      audioPlayer.pause();
-      audioPlayer.src = "";
-      setVideoID(data.videoSrc);
+    function handleWatchButton() {
+      terminatePlayer(setPlayer);
+      setVideoID(data.video);
       setIsVideoPopupOpened(true);
     }
 
-    function handleListenClick() {
-      audioPlayer.src = data.audioSrc;
-      audioPlayer.play();
-      setIsPlayerOpened(true);
-      setCurrentAudioData({ ...data, index });
+    function handleListenButton() {
+      setTrackAndPlay(setPlayer, data, index);
     }
 
     const trackButtonsClasses = cn(s.trackButtons, {
@@ -152,15 +89,15 @@ const AudioTrack = memo(
     return (
       <div className={s.track} style={{ ...extraStyles }}>
         <div className={s.artworkContainer} onClick={handleTrackClick}>
-          <img className={s.artwork} src={data.imageSrc} />
+          <img className={s.artwork} src={data.image} />
 
           <div className={trackButtonsClasses}>
-            <HorizontalOverlayButton onClick={handleListenClick}>
+            <HorizontalOverlayButton onClick={handleListenButton}>
               <HeadphonesIcon className={s.Icon} />
               <div className={s.iconCaption}>Listen</div>
             </HorizontalOverlayButton>
 
-            <HorizontalOverlayButton onClick={handleWatchClick}>
+            <HorizontalOverlayButton onClick={handleWatchButton}>
               <TvIcon className={s.Icon} />
               <div className={s.iconCaption}>Watch</div>
             </HorizontalOverlayButton>
@@ -168,9 +105,9 @@ const AudioTrack = memo(
         </div>
 
         <AudioTitle
-          isPlaying={isPlaying}
-          isLoading={isLoading}
-          isPaused={isPaused}
+          isPlaying={isPlaying()}
+          isLoading={isLoading()}
+          isPaused={isPaused()}
           name={data.name}
         />
       </div>

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { forwardRef, useContext } from "react";
 import { PiecesContext } from "../../Pieces";
 import ProgressBar from "./ProgressBar/ProgressBar";
 
@@ -8,84 +8,69 @@ import Title from "../../../../components/AudioPlayer/Simple/Title/Title";
 import Artwork from "../../../../components/AudioPlayer/Simple/Artwork/Artwork";
 import VideoButton from "../../../../components/AudioPlayer/Simple/VideoButton/VideoButton";
 import CloseButton from "../../../../components/AudioPlayer/Simple/CloseButton/CloseButton";
-import usePlayingAudioStates from "../../../../utils/hooks/usePlayingAudioStates";
 import {
-  playPauseCallback,
-  watchVideoCallback,
-} from "../../../../utils/helpers/audioPlayer";
+  terminatePlayer,
+  playPauseTrack,
+  setNextTrack,
+} from "../../../../utils/helpers/piecesPlayer";
+import { PLAYER_STATE } from "../../_constants";
+
+forwardRef;
 
 const AudioPlayer = () => {
-  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
-
   const {
     filteredPieces,
-    currentAudioData,
-    audioPlayerRef,
-    setIsPlayerOpened,
-    setCurrentAudioData,
-    setVideoID,
+    player,
     setIsVideoPopupOpened,
     setSelectedTrackIndex,
+    setPlayer,
+    setVideoID,
   } = useContext(PiecesContext);
 
-  const audioPlayer = audioPlayerRef.current;
-
-  usePlayingAudioStates(audioPlayer, setIsAudioPlaying);
-
   const handlePlayPauseClick = () => {
-    playPauseCallback(audioPlayer, isAudioPlaying);
+    playPauseTrack(player, setPlayer);
   };
 
-  const handlePlayNextClick = (prevOrNext) => {
-    let nextSongIndex = 0;
+  const handlePlayNextClick = (direction: "next" | "prev") => {
+    let nextTrackIndex: number;
 
-    prevOrNext === "next"
-      ? (nextSongIndex = currentAudioData?.index + 1)
-      : (nextSongIndex = currentAudioData?.index - 1);
-
-    const nextTrack = filteredPieces[nextSongIndex];
-
-    if (nextTrack) {
-      audioPlayer.src = nextTrack.audioSrc;
-      setSelectedTrackIndex(nextSongIndex);
-      setCurrentAudioData({
-        index: filteredPieces.indexOf(nextTrack),
-        ...nextTrack,
-      });
+    switch (direction) {
+      case "next":
+        nextTrackIndex = player.data.index + 1;
+        break;
+      case "prev":
+        nextTrackIndex = player.data.index - 1;
+        break;
     }
-    if (nextTrack && isAudioPlaying) {
-      audioPlayer.play();
+
+    const nextTrackData = filteredPieces[nextTrackIndex];
+
+    if (nextTrackData) {
+      setNextTrack(player, setPlayer, nextTrackIndex, nextTrackData);
+      setSelectedTrackIndex(nextTrackIndex);
     }
   };
 
   const handleVideoClick = () => {
-    watchVideoCallback(
-      audioPlayer,
-      currentAudioData,
-      setIsPlayerOpened,
-      setVideoID,
-      setIsVideoPopupOpened
-    );
+    setVideoID(player.data.video);
+    setIsVideoPopupOpened(true);
+    terminatePlayer(setPlayer);
   };
 
   const handleCloseClick = () => {
-    audioPlayer.pause();
-    audioPlayer.src = "";
-    setIsAudioPlaying(false);
-    setIsPlayerOpened(false);
+    terminatePlayer(setPlayer);
   };
 
   return (
     <div className={s.player}>
       <div className={s.content}>
-        <Artwork src={currentAudioData?.imageSrc} />
-
+        <Artwork src={player.data.image} />
         <div className={s.playerControls}>
-          <Title>{currentAudioData?.name}</Title>
+          <Title>{player.data.name}</Title>
           <ControlButtons
             handlePlayPauseClick={handlePlayPauseClick}
             handlePlayNextClick={handlePlayNextClick}
-            isAudioPlaying={isAudioPlaying}
+            isAudioPlaying={player.status === PLAYER_STATE.Playing}
           />
           <ProgressBar />
         </div>

@@ -8,57 +8,79 @@ import VideoPopup from "../../components/VideoPopup/VideoPopup";
 import Tags from "./Sections/Tags/Tags";
 import AudioTracks from "./Sections/AudioTracks/AudioTracks";
 
-import { PIECES, DEFAULT_CONTEXT } from "./_constants";
+import { PIECES, DEFAULT_CONTEXT, PLAYER_STATE } from "./_constants";
 
-import { AudioTrackData, ContextTypes, currentAudioData } from "./_types";
+import { trackData, ContextTypes, playerState } from "./_types";
 
 import s from "./Pieces.module.css";
-import { PAGES } from "../../utils/constants";
+import { PAGES, TRANSITION } from "../../utils/constants";
+import { setIsLoading, setIsPlaying } from "../../utils/helpers/piecesPlayer";
 
 export const PiecesContext = createContext<ContextTypes>(DEFAULT_CONTEXT);
 
 function Pieces() {
   const [videoID, setVideoID] = useState<string>("");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
-  const [currentAudioData, setCurrentAudioData] = useState<currentAudioData>();
-  const [filteredPieces, setFilteredPieces] = useState<AudioTrackData[]>([]);
-  const [isPlayerOpened, setIsPlayerOpened] = useState(false);
+  const [filteredPieces, setFilteredPieces] = useState<trackData[]>([]);
   const [isVideoPopupOpened, setIsVideoPopupOpened] = useState(false);
   const [selectedTrackIndex, setSelectedTrackIndex] = useState<number>(null);
 
+  const [buffered, setBuffered] = useState(0);
+  const [elapsed, setElapsed] = useState(0);
+  const [duration, setDuration] = useState(0);
+
+  const [player, setPlayer] = useState<playerState>({
+    status: PLAYER_STATE.Paused,
+    src: "",
+    data: null,
+    isOpened: false,
+  });
+
   const audioPlayerRef = useRef<HTMLAudioElement>();
+
+  const onScrubberChange = (e) => {
+    e.target.style.transition = TRANSITION.none;
+    const newTime = e.target.value;
+    audioPlayerRef.current.currentTime = newTime;
+    setTimeout(() => {
+      e.target.style.transition = TRANSITION.smooth;
+    }, 100);
+  };
 
   const contextValue = useMemo(
     () => ({
       videoID,
       selectedTags,
       filteredPieces,
-      currentAudioData,
-      isPlayerOpened,
       isVideoPopupOpened,
-      audioPlayerRef,
       selectedTrackIndex,
+      player,
+      buffered,
+      elapsed,
+      duration,
       setVideoID,
       setSelectedTags,
-      setCurrentAudioData,
-      setIsPlayerOpened,
       setIsVideoPopupOpened,
       setSelectedTrackIndex,
+      setPlayer,
+      onScrubberChange,
     }),
     [
       videoID,
       selectedTags,
       filteredPieces,
-      currentAudioData,
-      isPlayerOpened,
       isVideoPopupOpened,
       selectedTrackIndex,
+      player,
+      buffered,
+      elapsed,
+      duration,
+      setPlayer,
       setVideoID,
       setSelectedTags,
-      setCurrentAudioData,
-      setIsPlayerOpened,
       setIsVideoPopupOpened,
       setSelectedTrackIndex,
+      onScrubberChange,
     ]
   );
 
@@ -72,6 +94,74 @@ function Pieces() {
     [selectedTags]
   );
 
+  useEffect(
+    function togglePlayerPlayPause() {
+      switch (player.status) {
+        case PLAYER_STATE.Playing:
+          if (!audioPlayerRef.current.src.includes(player.src)) {
+            audioPlayerRef.current.src = player.src;
+          }
+          audioPlayerRef.current.play();
+          break;
+        case PLAYER_STATE.Paused:
+          audioPlayerRef.current.pause();
+          break;
+      }
+    },
+    [player]
+  );
+
+  useEffect(function listenBufferedAndElapsedProgress() {
+    const audioPlayer = audioPlayerRef.current;
+
+    function updateBufferedAndElapsedTime() {
+      const currentTime = Math.round(audioPlayer.currentTime);
+      const bufferedRanges = audioPlayer.buffered;
+      const hasBufferedRanges = bufferedRanges && bufferedRanges.length > 0;
+
+      if (hasBufferedRanges) {
+        const lastBufferedIndex = bufferedRanges.length - 1;
+        const bufferedEndTime = Math.round(
+          bufferedRanges.end(lastBufferedIndex)
+        );
+        if (currentTime <= bufferedEndTime) {
+          setBuffered(bufferedEndTime);
+          setElapsed(currentTime);
+        } else {
+          audioPlayer.currentTime = bufferedEndTime;
+          setElapsed(bufferedEndTime);
+          setBuffered(bufferedEndTime);
+        }
+      }
+    }
+
+    if (audioPlayer) {
+      audioPlayer.onloadedmetadata = () => {
+        setDuration(audioPlayer.duration);
+        setElapsed(0);
+        setBuffered(0);
+      };
+      audioPlayer.ontimeupdate = updateBufferedAndElapsedTime;
+      audioPlayer.onwaiting = () => setIsLoading(setPlayer);
+      audioPlayer.onplaying = () => setIsPlaying(setPlayer);
+      // audioPlayer.onstalled = () => setIsLoading(false);
+      // audioPlayer.onerror = () => setIsLoading(false);
+      // audioPlayer.onended = () => setElapsed(0);
+    }
+
+    return () => {
+      if (audioPlayer) {
+        audioPlayer.onloadedmetadata = null;
+        audioPlayer.ontimeupdate = null;
+        audioPlayer.onwaiting = null;
+        audioPlayer.onplaying = null;
+        audioPlayer.onstalled = null;
+        audioPlayer.onerror = null;
+        audioPlayer.onended = null;
+      }
+    };
+  }, []);
+
   return (
     <PiecesContext.Provider value={contextValue}>
       <div className={s.page}>
@@ -81,7 +171,9 @@ function Pieces() {
           <AudioTracks />
         </div>
 
-        {isPlayerOpened && <AudioPlayer />}
+        <HTMLAudioTag ref={audioPlayerRef} />
+
+        {player.isOpened && <AudioPlayer />}
 
         {isVideoPopupOpened && (
           <VideoPopup
@@ -89,7 +181,6 @@ function Pieces() {
             setIsVideoPopupOpened={setIsVideoPopupOpened}
           />
         )}
-        <HTMLAudioTag ref={audioPlayerRef} />
       </div>
     </PiecesContext.Provider>
   );

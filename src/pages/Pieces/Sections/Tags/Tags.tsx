@@ -8,24 +8,20 @@ import { PiecesContext } from "../../Pieces";
 import { PIECES_GENRES } from "../../_constants";
 
 import s from "./Tags.module.css";
+import { terminatePlayer } from "../../../../utils/helpers/piecesPlayer";
 
 function Tags() {
   const {
-    audioPlayerRef,
     selectedTags,
     filteredPieces,
-    setIsPlayerOpened,
     setSelectedTags,
     setSelectedTrackIndex,
+    setPlayer,
   } = useContext(PiecesContext);
 
-  const audioPlayer = audioPlayerRef.current;
-
   const handleTagClick = (tag: string) => {
-    audioPlayer.pause();
-    audioPlayer.src = "";
     setSelectedTrackIndex(null);
-    setIsPlayerOpened(false);
+    terminatePlayer(setPlayer);
     if (selectedTags.includes(tag)) {
       setSelectedTags(selectedTags.filter((t) => t !== tag));
     } else {

@@ -1,32 +1,42 @@
-import { Dispatch, MutableRefObject, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from "react";
 
-export type AudioTrackData = {
+export type trackData = {
   name: string;
   tags: string[];
-  imageSrc: string;
-  audioSrc: string;
-  videoSrc: string;
+  image: string;
+  audio: string;
+  video: string;
 };
 
-export type currentAudioData = AudioTrackData & {
+export type trackDataWithIndex = trackData & {
   index: number;
 };
+
+export type playerState = {
+  src: string;
+  data: trackDataWithIndex;
+  status: "playing" | "paused" | "loading" | "ended";
+  isOpened: boolean;
+};
+
+export type playerStateSetter = Dispatch<SetStateAction<playerState>>;
 
 export interface ContextTypes {
   videoID: string;
   selectedTags: string[];
-  filteredPieces: AudioTrackData[];
-  currentAudioData: currentAudioData;
-  isPlayerOpened: boolean;
+  filteredPieces: trackData[];
   isVideoPopupOpened: boolean;
-  audioPlayerRef: MutableRefObject<HTMLAudioElement>;
   selectedTrackIndex: number;
+  player: playerState;
+  buffered: number;
+  elapsed: number;
+  duration: number;
   setVideoID: Dispatch<SetStateAction<string>>;
   setSelectedTags: Dispatch<SetStateAction<string[]>>;
-  setCurrentAudioData: Dispatch<SetStateAction<currentAudioData>>;
-  setIsPlayerOpened: Dispatch<SetStateAction<boolean>>;
   setIsVideoPopupOpened: Dispatch<SetStateAction<boolean>>;
   setSelectedTrackIndex: Dispatch<SetStateAction<number>>;
+  setPlayer: playerStateSetter;
+  onScrubberChange: (e: any) => void;
 }
 
 export type genres =
