@@ -90,6 +90,7 @@ const AudioPlayer = () => {
           setDuration(audioPlayer.duration);
           setElapsed(0);
           setBuffered(0);
+          setIsUserScrubbing(false);
         };
         audioPlayer.ontimeupdate = updateBufferedAndElapsedTime;
         audioPlayer.onwaiting = () =>
@@ -169,6 +170,7 @@ const AudioPlayer = () => {
         });
 
         setSelectedTrackIndex(nextTrackIndex);
+        setIsUserScrubbing(true);
       }
     },
     [
