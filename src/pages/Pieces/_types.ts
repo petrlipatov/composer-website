@@ -40,7 +40,7 @@ export interface ContextTypes {
   selectedTags: string[];
   filteredPieces: trackData[];
   isVideoPopupOpened: boolean;
-  // selectedTrackIndex: number;
+  selectedTrackIndex: number;
   player: PlayerState;
   // buffered: number;
   // elapsed: number;
@@ -49,7 +49,7 @@ export interface ContextTypes {
   setVideoID: Dispatch<SetStateAction<string>>;
   setSelectedTags: Dispatch<SetStateAction<string[]>>;
   setIsVideoPopupOpened: Dispatch<SetStateAction<boolean>>;
-  // setSelectedTrackIndex: Dispatch<SetStateAction<number>>;
+  setSelectedTrackIndex: Dispatch<SetStateAction<number>>;
   // onScrubberChange: (e: any) => void;
 }
 
