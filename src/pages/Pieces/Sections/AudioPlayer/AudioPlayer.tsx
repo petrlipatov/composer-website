@@ -42,6 +42,10 @@ const AudioPlayer = () => {
 
   const dispatchPlayerAction = useContext(PlayerDispatchContext);
 
+  useEffect(() => {
+    if (buffered !== 0) setIsUserScrubbing(false);
+  }, [buffered]);
+
   useEffect(
     function togglePlayerPlayPause() {
       switch (player.status) {
@@ -98,8 +102,6 @@ const AudioPlayer = () => {
           dispatchPlayerAction({ type: PLAYER_ACTION_TYPE.AUDIO_PLAYED });
         audioPlayer.onpause = () =>
           dispatchPlayerAction({ type: PLAYER_ACTION_TYPE.AUDIO_PAUSED });
-        audioPlayer.onplay = () => setIsUserScrubbing(false);
-
         // audioPlayer.onstalled = () => setIsLoading(false);
         // audioPlayer.onerror = () => setIsLoading(false);
         // audioPlayer.onended = () => setElapsed(0);

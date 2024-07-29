@@ -14,12 +14,6 @@ const useElapsedTimeProgressUpdate = (
       const progressValue = elapsedTime;
       const relativeProgressVal = ((progressValue / max) * 100).toFixed(1);
 
-      // if (elapsedTime === 0 || isUserScrubbing) {
-      //   progressBar.style.transition = "none";
-      // } else {
-      //   progressBar.style.transition = "background-size 2s ease";
-      // }
-
       progressBar.style.backgroundSize = `${relativeProgressVal}% 100%`;
     }
 
