@@ -1,14 +1,14 @@
-import { useContext } from "react";
+import { useCallback, useContext } from "react";
 
 import Tag from "../../../../components/Tags/Tag/Tag";
 import ClearButton from "../../../../components/Tags/ClearButton/ClearButton";
 
-import { PiecesContext } from "../../Pieces";
+import { PlayerContext, PlayerDispatchContext } from "../../Pieces";
 
 import { PIECES_GENRES } from "../../_constants";
+import { PLAYER_ACTION_TYPE } from "../../_types";
 
 import s from "./Tags.module.css";
-import { terminatePlayer } from "../../../../utils/helpers/piecesPlayer";
 
 function Tags() {
   const {
@@ -16,12 +16,13 @@ function Tags() {
     filteredPieces,
     setSelectedTags,
     setSelectedTrackIndex,
-    setPlayer,
-  } = useContext(PiecesContext);
+  } = useContext(PlayerContext);
+
+  const dispatchPlayerAction = useContext(PlayerDispatchContext);
 
   const handleTagClick = (tag: string) => {
+    dispatchPlayerAction({ type: PLAYER_ACTION_TYPE.PLAYER_TERMINATED });
     setSelectedTrackIndex(null);
-    terminatePlayer(setPlayer);
     if (selectedTags.includes(tag)) {
       setSelectedTags(selectedTags.filter((t) => t !== tag));
     } else {
@@ -29,9 +30,9 @@ function Tags() {
     }
   };
 
-  const handleClearTagsClick = () => {
+  const handleClearTagsClick = useCallback(() => {
     setSelectedTags([]);
-  };
+  }, [setSelectedTags]);
 
   const isButtonDisabled = (selectedTags) => {
     return selectedTags.length === 0;

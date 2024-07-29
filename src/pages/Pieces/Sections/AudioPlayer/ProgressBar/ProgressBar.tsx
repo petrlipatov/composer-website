@@ -7,45 +7,35 @@ import ScrubberBar from "../../../../../components/AudioPlayer/Shared/ProgressBa
 import DurationBar from "../../../../../components/AudioPlayer/Shared/ProgressBar/DurationBar/DurationBar";
 import BufferedBar from "../../../../../components/AudioPlayer/Shared/ProgressBar/BufferedBar/BufferedBar";
 import TimeValue from "../../../../../components/AudioPlayer/Shared/ProgressBar/TimeValue/TimeValue";
-import useElapsedTimeProgressUpdate from "../../../../../utils/hooks/useElapsedTimeProgressUpdate";
-import useBufferedProgressUpdate from "../../../../../utils/hooks/useBufferedProgressUpdate";
+// import useElapsedTimeProgressUpdate from "../../../../../utils/hooks/useElapsedTimeProgressUpdate";
+// import useBufferedProgressUpdate from "../../../../../utils/hooks/useBufferedProgressUpdate";
 
-import { PiecesContext } from "../../../Pieces";
+import { PlayerContext } from "../../../Pieces";
 
 import s from "./ProgressBar.module.css";
-import { PLAYER_STATE } from "../../../_constants";
+import { PLAYER_STATUS } from "../../../_constants";
 
-const ProgressBar = () => {
+const ProgressBar = ({
+  // buffered,
+  duration,
+  elapsed,
+  // isUserScrubbing,
+  onScrubberChange,
+}) => {
   const progressBarRef = useRef<HTMLInputElement>();
   const bufferedBarRef = useRef<HTMLInputElement>();
 
-  const {
-    player,
-    buffered,
-    duration,
-    elapsed,
-    isUserScrubbing,
-    onScrubberChange,
-  } = useContext(PiecesContext);
+  const { player } = useContext(PlayerContext);
 
-  const progressBar = progressBarRef.current;
-  const bufferedBar = bufferedBarRef.current;
-
-  useElapsedTimeProgressUpdate(progressBar, elapsed, duration, isUserScrubbing);
-  useBufferedProgressUpdate(
-    bufferedBar,
-    buffered,
-    duration,
-    elapsed,
-    isUserScrubbing
-  );
+  // const progressBar = progressBarRef.current;
+  // const bufferedBar = bufferedBarRef.current;
 
   return (
     <div className={s.progressBarContainer}>
       <TimeValue> {formatTime(elapsed)}</TimeValue>
 
       <div className={s.progressBar}>
-        <ScrubberLoader isLoading={player.status === PLAYER_STATE.Loading} />
+        <ScrubberLoader isLoading={player.status === PLAYER_STATUS.LOADING} />
         <ScrubberBar
           elapsedTime={elapsed}
           duration={duration}

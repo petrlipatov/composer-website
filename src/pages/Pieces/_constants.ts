@@ -1,10 +1,10 @@
 import { ContextTypes } from "./_types";
 
-export enum PLAYER_STATE {
-  Playing = "playing",
-  Paused = "paused",
-  Loading = "loading",
-  Ended = "ended",
+export enum PLAYER_STATUS {
+  PLAYING = "playing",
+  PAUSED = "paused",
+  LOADING = "loading",
+  ENDED = "ended",
 }
 
 export const PIECES_GENRES = [
@@ -206,7 +206,6 @@ export const PIECES = [
 export const DEFAULT_CONTEXT: ContextTypes = {
   player: {
     status: "paused",
-    src: "",
     isOpened: false,
     data: {
       index: null,
@@ -222,16 +221,10 @@ export const DEFAULT_CONTEXT: ContextTypes = {
   selectedTags: [],
   filteredPieces: [],
   isVideoPopupOpened: false,
-  buffered: 0,
-  elapsed: 0,
-  duration: 0,
-  isUserScrubbing: false,
   setVideoID: () => {},
   setSelectedTags: () => {},
   setIsVideoPopupOpened: () => {},
   setSelectedTrackIndex: () => {},
-  setPlayer: () => {},
-  onScrubberChange: () => {},
 };
 
 export const TABLE_COLUMNS_MOBILE = 2;
@@ -242,5 +235,8 @@ export const TRACK_LEFT_MARGIN_DESKTOP = 16;
 
 export const TRACK_TOP_MARGIN_MOBILE = 8;
 export const TRACK_TOP_MARGIN_DESKTOP = 2;
+
+export const SCROLL_WIDTH_MOBILE = 0;
+export const SCROLL_WIDTH_DESKTOP = 13;
 
 export const TRACK_ASPECT_RATIO = 190.5 / 211.12;

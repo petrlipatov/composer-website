@@ -2,7 +2,7 @@ import { useCallback, useContext, useMemo, useRef, useState } from "react";
 
 import AudioTrack from "../AudioTrack/AudioTrack";
 
-import { PiecesContext } from "../../Pieces";
+import { PlayerContext } from "../../Pieces";
 
 import useElementWidthListener from "../../../../utils/hooks/useWidthResizeListener";
 import useIsMobile from "../../../../utils/hooks/useIsMobile";
@@ -22,6 +22,8 @@ import {
   TRACK_ASPECT_RATIO,
   TRACK_TOP_MARGIN_MOBILE,
   TRACK_TOP_MARGIN_DESKTOP,
+  SCROLL_WIDTH_MOBILE,
+  SCROLL_WIDTH_DESKTOP,
 } from "../../_constants";
 
 import s from "./AudioTracks.module.css";
@@ -29,8 +31,9 @@ import s from "./AudioTracks.module.css";
 const AudioTracks = () => {
   const [sectionWidth, setSectionWidth] = useState(0);
   const [scrollTop, setScrollTop] = useState(0);
+
   const { filteredPieces, selectedTrackIndex, setSelectedTrackIndex } =
-    useContext(PiecesContext);
+    useContext(PlayerContext);
 
   const sectionRef = useRef<HTMLDivElement>(null);
 
@@ -54,7 +57,7 @@ const AudioTracks = () => {
     ? TRACK_TOP_MARGIN_MOBILE
     : TRACK_TOP_MARGIN_DESKTOP;
 
-  const scrollWidth = isMobile ? 0 : 13;
+  const scrollWidth = isMobile ? SCROLL_WIDTH_MOBILE : SCROLL_WIDTH_DESKTOP;
 
   const sectionWidthWithoutScroll = sectionWidth - scrollWidth;
 

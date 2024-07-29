@@ -2,18 +2,20 @@ import { Dispatch, SetStateAction, useContext, useEffect, memo } from "react";
 import cn from "classnames";
 
 import AudioTitle from "./AudioTitle/AudioTitle";
-import { PiecesContext } from "../../Pieces";
-import { trackData } from "../../_types";
+import { PlayerContext, PlayerDispatchContext } from "../../Pieces";
+import { PLAYER_ACTION_TYPE, trackData } from "../../_types";
 
 import s from "./AudioTrack.module.css";
 import TvIcon from "../../../../components/Icons/TvIcon/TvIcon";
 import HeadphonesIcon from "../../../../components/Icons/HeadphonesIcon/HeadphonesIcon";
 import HorizontalOverlayButton from "../../../../components/Buttons/HorizontalOverlayButton/HorizontalOverlayButton";
-import {
-  terminatePlayer,
-  setTrackAndPlay,
-} from "../../../../utils/helpers/piecesPlayer";
-import { PLAYER_STATE } from "../../_constants";
+// import {
+//   terminatePlayer,
+//   setTrack,
+//   openPlayer,
+//   setPlaying,
+// } from "../../../../utils/helpers/piecesPlayer";
+import { PLAYER_STATUS } from "../../_constants";
 
 type AudioTrackProps = {
   index: number;
@@ -31,26 +33,28 @@ const AudioTrack = memo(
     extraStyles,
     setSelectedTrackIndex,
   }: AudioTrackProps) => {
-    const { setVideoID, setIsVideoPopupOpened, setPlayer, player } =
-      useContext(PiecesContext);
+    const { setVideoID, setIsVideoPopupOpened, player } =
+      useContext(PlayerContext);
+
+    const dispatchPlayerAction = useContext(PlayerDispatchContext);
 
     const isPlaying = () => {
       return (
-        player.status === PLAYER_STATE.Playing &&
+        player.status === PLAYER_STATUS.PLAYING &&
         player.data?.audio === data.audio
       );
     };
 
     const isPaused = () => {
       return (
-        player.status === PLAYER_STATE.Paused &&
+        player.status === PLAYER_STATUS.PAUSED &&
         player.data?.audio === data.audio
       );
     };
 
     const isLoading = () => {
       return (
-        player.status === PLAYER_STATE.Loading &&
+        player.status === PLAYER_STATUS.LOADING &&
         player.data?.audio === data.audio
       );
     };
@@ -73,13 +77,18 @@ const AudioTrack = memo(
     }
 
     function handleWatchButton() {
-      terminatePlayer(setPlayer);
+      dispatchPlayerAction({ type: PLAYER_ACTION_TYPE.PLAYER_TERMINATED });
       setVideoID(data.video);
       setIsVideoPopupOpened(true);
     }
 
     function handleListenButton() {
-      setTrackAndPlay(setPlayer, data, index);
+      dispatchPlayerAction({
+        type: PLAYER_ACTION_TYPE.TRACK_DATA_SET,
+        payload: { ...data, index },
+      });
+      dispatchPlayerAction({ type: PLAYER_ACTION_TYPE.PLAYER_OPENED });
+      dispatchPlayerAction({ type: PLAYER_ACTION_TYPE.AUDIO_PLAYED });
     }
 
     const trackButtonsClasses = cn(s.trackButtons, {

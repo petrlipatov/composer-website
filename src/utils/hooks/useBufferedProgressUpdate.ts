@@ -12,13 +12,13 @@ const useBufferedProgressUpdate = (
       if (bufferedBar) {
         const max = Number(duration);
 
-        if (buffered === 0 || isUserScrubbing) {
-          bufferedBar.style.transition = "none";
-        }
+        // if (buffered === 0 || isUserScrubbing) {
+        //   bufferedBar.style.transition = "none";
+        // }
 
-        if (buffered > 0 && !isUserScrubbing) {
-          bufferedBar.style.transition = "background-size 2s ease";
-        }
+        // if (buffered > 0 && !isUserScrubbing) {
+        //   bufferedBar.style.transition = "background-size 2s ease";
+        // }
 
         const progressValue = buffered;
         const relativeProgressVal = ((progressValue / max) * 100).toFixed(0);
@@ -33,7 +33,7 @@ const useBufferedProgressUpdate = (
         bufferedBar.style.backgroundSize = "0% 100%";
       }
     };
-  }, [buffered, bufferedBar, duration, currentTime]);
+  }, [buffered, bufferedBar, duration, currentTime, isUserScrubbing]);
 };
 
 export default useBufferedProgressUpdate;
