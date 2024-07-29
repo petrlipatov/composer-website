@@ -90,7 +90,6 @@ const AudioPlayer = () => {
           setDuration(audioPlayer.duration);
           setElapsed(0);
           setBuffered(0);
-          setIsUserScrubbing(false);
         };
         audioPlayer.ontimeupdate = updateBufferedAndElapsedTime;
         audioPlayer.onwaiting = () =>
@@ -99,6 +98,8 @@ const AudioPlayer = () => {
           dispatchPlayerAction({ type: PLAYER_ACTION_TYPE.AUDIO_PLAYED });
         audioPlayer.onpause = () =>
           dispatchPlayerAction({ type: PLAYER_ACTION_TYPE.AUDIO_PAUSED });
+        audioPlayer.onplay = () => setIsUserScrubbing(false);
+
         // audioPlayer.onstalled = () => setIsLoading(false);
         // audioPlayer.onerror = () => setIsLoading(false);
         // audioPlayer.onended = () => setElapsed(0);
