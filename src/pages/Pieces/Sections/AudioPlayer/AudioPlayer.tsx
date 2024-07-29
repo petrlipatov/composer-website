@@ -134,12 +134,12 @@ const AudioPlayer = () => {
   );
 
   const onScrubberChange = useCallback((e) => {
-    progressBarRef.current.style.transition = "none";
+    setIsUserScrubbing(true);
     const newTime = e.target.value;
     audioPlayerRef.current.currentTime = newTime;
 
     setTimeout(() => {
-      progressBarRef.current.style.transition = "background-size 2.5s ease";
+      setIsUserScrubbing(false);
     }, 300);
   }, []);
 
@@ -211,10 +211,14 @@ const AudioPlayer = () => {
                 elapsedTime={elapsed}
                 duration={duration}
                 onScrubberChange={onScrubberChange}
+                isUserScrubbing={isUserScrubbing}
                 ref={progressBarRef}
               />
               <DurationBar />
-              <BufferedBar ref={bufferedBarRef} />
+              <BufferedBar
+                isUserScrubbing={isUserScrubbing}
+                ref={bufferedBarRef}
+              />
             </div>
 
             <TimeValue> {formatTime(duration)}</TimeValue>
