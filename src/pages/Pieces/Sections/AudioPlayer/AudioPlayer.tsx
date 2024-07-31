@@ -23,6 +23,7 @@ import useElapsedTimeProgress from "../../../../utils/hooks/useElapsedTimeProgre
 import useBufferedAudioProgress from "../../../../utils/hooks/useBufferedAudioProgress";
 // import { updateBufferedAndElapsedTime } from "../../../../utils/helpers/audioPlayer";
 import useAudioPlayerEvents from "../../../../utils/hooks/useAudioPlayerEvents";
+import usePlayPauseToggler from "../../../../utils/hooks/usePlayPauseToggler";
 
 const AudioPlayer = () => {
   const [buffered, setBuffered] = useState(0);
@@ -52,23 +53,7 @@ const AudioPlayer = () => {
     [buffered]
   );
 
-  useEffect(
-    function togglePlayerPlayPause() {
-      switch (player.status) {
-        case PLAYER_STATUS.PLAYING:
-          if (!audioPlayerRef.current.src.includes(player.data.audio)) {
-            audioPlayerRef.current.src = player.data.audio;
-          }
-
-          audioPlayerRef.current.play();
-          break;
-        case PLAYER_STATUS.PAUSED:
-          audioPlayerRef.current.pause();
-          break;
-      }
-    },
-    [player]
-  );
+  usePlayPauseToggler(audioPlayerRef, player);
 
   useAudioPlayerEvents(
     audioPlayerRef,
