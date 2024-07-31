@@ -1,12 +1,12 @@
-import { useEffect } from "react";
+import { MutableRefObject, useEffect } from "react";
 
-const useElapsedTimeProgressUpdate = (
-  progressBar: HTMLInputElement,
+const useElapsedTimeProgress = (
+  progressBarRef: MutableRefObject<HTMLDivElement>,
   elapsedTime: number,
-  duration: number,
-  isUserScrubbing: boolean
+  duration: number
 ) => {
   useEffect(() => {
+    const progressBar = progressBarRef.current;
     function updateElapsedProgress() {
       if (!progressBar) return;
 
@@ -24,7 +24,7 @@ const useElapsedTimeProgressUpdate = (
         progressBar.style.backgroundSize = "0% 100%";
       }
     };
-  }, [elapsedTime, progressBar, duration, isUserScrubbing]);
+  }, [elapsedTime, progressBarRef, duration]);
 };
 
-export default useElapsedTimeProgressUpdate;
+export default useElapsedTimeProgress;

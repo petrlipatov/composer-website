@@ -19,8 +19,10 @@ import BufferedBar from "../../../../components/AudioPlayer/Shared/ProgressBar/B
 import DurationBar from "../../../../components/AudioPlayer/Shared/ProgressBar/DurationBar/DurationBar";
 import ScrubberLoader from "../../../../components/AudioPlayer/Shared/ProgressBar/ScrubberLoader/ScrubberLoader";
 import ScrubberBar from "../../../../components/AudioPlayer/Shared/ProgressBar/ScrubberBar/ScrubberBar";
-import useElapsedTimeProgressUpdate from "../../../../utils/hooks/useElapsedTimeProgressUpdate";
-import useBufferedProgressUpdate from "../../../../utils/hooks/useBufferedProgressUpdate";
+import useElapsedTimeProgress from "../../../../utils/hooks/useElapsedTimeProgress";
+import useBufferedAudioProgress from "../../../../utils/hooks/useBufferedAudioProgress";
+// import { updateBufferedAndElapsedTime } from "../../../../utils/helpers/audioPlayer";
+import useAudioPlayerEvents from "../../../../utils/hooks/useAudioPlayerEvents";
 
 const AudioPlayer = () => {
   const [buffered, setBuffered] = useState(0);
@@ -64,78 +66,16 @@ const AudioPlayer = () => {
     [player]
   );
 
-  useEffect(
-    function listenBufferedAndElapsedProgress() {
-      const audioPlayer = audioPlayerRef.current;
-
-      function updateBufferedAndElapsedTime() {
-        const currentTime = Math.round(audioPlayer.currentTime);
-        const bufferedRanges = audioPlayer.buffered;
-        const hasBufferedRanges = bufferedRanges && bufferedRanges.length > 0;
-
-        if (hasBufferedRanges) {
-          const lastBufferedIndex = bufferedRanges.length - 1;
-          const bufferedEndTime = Math.round(
-            bufferedRanges.end(lastBufferedIndex)
-          );
-          if (currentTime <= bufferedEndTime) {
-            setBuffered(bufferedEndTime);
-            setElapsed(currentTime);
-          } else {
-            audioPlayer.currentTime = bufferedEndTime;
-            setElapsed(bufferedEndTime);
-            setBuffered(bufferedEndTime);
-          }
-        }
-      }
-
-      if (audioPlayer) {
-        audioPlayer.onloadedmetadata = () => {
-          setDuration(audioPlayer.duration);
-          setElapsed(0);
-          setBuffered(0);
-        };
-        audioPlayer.ontimeupdate = updateBufferedAndElapsedTime;
-        audioPlayer.onwaiting = () =>
-          dispatchPlayerAction({ type: PLAYER_ACTION_TYPE.AUDIO_LOADING });
-        audioPlayer.onplaying = () =>
-          dispatchPlayerAction({ type: PLAYER_ACTION_TYPE.AUDIO_PLAYED });
-        audioPlayer.onpause = () =>
-          dispatchPlayerAction({ type: PLAYER_ACTION_TYPE.AUDIO_PAUSED });
-        // audioPlayer.onstalled = () => setIsLoading(false);
-        // audioPlayer.onerror = () => setIsLoading(false);
-        // audioPlayer.onended = () => setElapsed(0);
-      }
-
-      return () => {
-        if (audioPlayer) {
-          audioPlayer.onloadedmetadata = null;
-          audioPlayer.ontimeupdate = null;
-          audioPlayer.onwaiting = null;
-          audioPlayer.onplaying = null;
-          audioPlayer.onstalled = null;
-          audioPlayer.onerror = null;
-          audioPlayer.onended = null;
-        }
-      };
-    },
-    [dispatchPlayerAction]
+  useAudioPlayerEvents(
+    audioPlayerRef,
+    setDuration,
+    setElapsed,
+    setBuffered,
+    dispatchPlayerAction
   );
 
-  useElapsedTimeProgressUpdate(
-    progressBarRef.current,
-    elapsed,
-    duration,
-    isUserScrubbing
-  );
-
-  useBufferedProgressUpdate(
-    bufferedBarRef.current,
-    buffered,
-    duration,
-    elapsed,
-    isUserScrubbing
-  );
+  useElapsedTimeProgress(progressBarRef, elapsed, duration);
+  useBufferedAudioProgress(bufferedBarRef, buffered, duration, elapsed);
 
   const onScrubberChange = useCallback((e) => {
     setIsUserScrubbing(true);
