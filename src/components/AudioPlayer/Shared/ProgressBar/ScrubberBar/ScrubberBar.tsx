@@ -6,11 +6,14 @@ type Props = {
   elapsedTime: number;
   duration: number;
   onScrubberChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  isUserScrubbing: boolean;
+  progressTransitionAnimation: boolean;
 };
 
 const Scrubber = forwardRef<HTMLInputElement, Props>(
-  ({ isUserScrubbing, elapsedTime, duration, onScrubberChange }, ref) => {
+  (
+    { progressTransitionAnimation, elapsedTime, duration, onScrubberChange },
+    ref
+  ) => {
     return (
       <input
         className={s.timeScrubber}
@@ -21,7 +24,9 @@ const Scrubber = forwardRef<HTMLInputElement, Props>(
         onChange={onScrubberChange}
         ref={ref}
         style={{
-          transition: isUserScrubbing ? TRANSITION.none : TRANSITION.smooth,
+          transition: progressTransitionAnimation
+            ? TRANSITION.smooth
+            : TRANSITION.none,
         }}
       />
     );

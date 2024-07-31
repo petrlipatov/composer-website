@@ -28,7 +28,8 @@ const AudioPlayer = () => {
   const [buffered, setBuffered] = useState(0);
   const [elapsed, setElapsed] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [isUserScrubbing, setIsUserScrubbing] = useState(false);
+  const [progressTransitionAnimation, setProgressTransitionAnimation] =
+    useState(false);
 
   const audioPlayerRef = useRef<HTMLAudioElement>();
   const progressBarRef = useRef<HTMLInputElement>();
@@ -44,9 +45,12 @@ const AudioPlayer = () => {
 
   const dispatchPlayerAction = useContext(PlayerDispatchContext);
 
-  useEffect(() => {
-    if (buffered !== 0) setIsUserScrubbing(false);
-  }, [buffered]);
+  useEffect(
+    function showTransitionAnimationWhenBuffered() {
+      if (buffered !== 0) setProgressTransitionAnimation(true);
+    },
+    [buffered]
+  );
 
   useEffect(
     function togglePlayerPlayPause() {
@@ -78,12 +82,12 @@ const AudioPlayer = () => {
   useBufferedAudioProgress(bufferedBarRef, buffered, duration, elapsed);
 
   const onScrubberChange = useCallback((e) => {
-    setIsUserScrubbing(true);
+    setProgressTransitionAnimation(false);
     const newTime = e.target.value;
     audioPlayerRef.current.currentTime = newTime;
 
     setTimeout(() => {
-      setIsUserScrubbing(false);
+      setProgressTransitionAnimation(true);
     }, 300);
   }, []);
 
@@ -113,7 +117,7 @@ const AudioPlayer = () => {
         });
 
         setSelectedTrackIndex(nextTrackIndex);
-        setIsUserScrubbing(true);
+        setProgressTransitionAnimation(false);
       }
     },
     [
@@ -156,12 +160,12 @@ const AudioPlayer = () => {
                 elapsedTime={elapsed}
                 duration={duration}
                 onScrubberChange={onScrubberChange}
-                isUserScrubbing={isUserScrubbing}
+                progressTransitionAnimation={progressTransitionAnimation}
                 ref={progressBarRef}
               />
               <DurationBar />
               <BufferedBar
-                isUserScrubbing={isUserScrubbing}
+                progressTransitionAnimation={progressTransitionAnimation}
                 ref={bufferedBarRef}
               />
             </div>

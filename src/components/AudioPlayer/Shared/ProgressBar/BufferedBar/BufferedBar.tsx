@@ -3,14 +3,16 @@ import s from "./BufferedBar.module.css";
 import { TRANSITION } from "../../../../../utils/constants";
 
 const BufferedBar = memo(
-  forwardRef<HTMLDivElement, { isUserScrubbing: boolean }>(
-    ({ isUserScrubbing }, ref) => {
+  forwardRef<HTMLDivElement, { progressTransitionAnimation: boolean }>(
+    ({ progressTransitionAnimation }, ref) => {
       return (
         <div
           className={s.bufferedBar}
           ref={ref}
           style={{
-            transition: isUserScrubbing ? TRANSITION.none : TRANSITION.smooth,
+            transition: progressTransitionAnimation
+              ? TRANSITION.smooth
+              : TRANSITION.none,
           }}
         />
       );
