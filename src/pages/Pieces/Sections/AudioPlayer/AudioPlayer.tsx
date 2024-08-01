@@ -1,6 +1,5 @@
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { PlayerContext, PlayerDispatchContext } from "../../Pieces";
-// import ProgressBar from "./ProgressBar/ProgressBar";
 
 import s from "./AudioPlayer.module.css";
 import ControlButtons from "../../../../components/AudioPlayer/Shared/ControlButtons/ControlButtons";
@@ -8,22 +7,21 @@ import Title from "../../../../components/AudioPlayer/Simple/Title/Title";
 import Artwork from "../../../../components/AudioPlayer/Simple/Artwork/Artwork";
 import VideoButton from "../../../../components/AudioPlayer/Simple/VideoButton/VideoButton";
 import CloseButton from "../../../../components/AudioPlayer/Simple/CloseButton/CloseButton";
-
-import { PLAYER_STATUS } from "../../_constants";
-import { PLAYER_ACTION_TYPE } from "../../_types";
 import HTMLAudioTag from "../../../../components/HTMLAudioTag/HTMLAudioTag";
 import TimeValue from "../../../../components/AudioPlayer/Shared/ProgressBar/TimeValue/TimeValue";
-import { formatTime } from "../../../../utils/helpers/formatTime";
-
 import BufferedBar from "../../../../components/AudioPlayer/Shared/ProgressBar/BufferedBar/BufferedBar";
 import DurationBar from "../../../../components/AudioPlayer/Shared/ProgressBar/DurationBar/DurationBar";
 import ScrubberLoader from "../../../../components/AudioPlayer/Shared/ProgressBar/ScrubberLoader/ScrubberLoader";
 import ScrubberBar from "../../../../components/AudioPlayer/Shared/ProgressBar/ScrubberBar/ScrubberBar";
+
+import { formatTime } from "../../../../utils/helpers/formatTime";
 import useElapsedTimeProgress from "../../../../utils/hooks/useElapsedTimeProgress";
 import useBufferedAudioProgress from "../../../../utils/hooks/useBufferedAudioProgress";
-// import { updateBufferedAndElapsedTime } from "../../../../utils/helpers/audioPlayer";
 import useAudioPlayerEvents from "../../../../utils/hooks/useAudioPlayerEvents";
 import usePlayPauseToggler from "../../../../utils/hooks/usePlayPauseToggler";
+
+import { PLAYER_STATUS } from "../../_constants";
+import { PLAYER_ACTION_TYPE } from "../../_types";
 
 const AudioPlayer = () => {
   const [buffered, setBuffered] = useState(0);
@@ -34,7 +32,7 @@ const AudioPlayer = () => {
 
   const audioPlayerRef = useRef<HTMLAudioElement>();
   const progressBarRef = useRef<HTMLInputElement>();
-  const bufferedBarRef = useRef<HTMLInputElement>();
+  const bufferedBarRef = useRef<HTMLDivElement>();
 
   const {
     filteredPieces,
