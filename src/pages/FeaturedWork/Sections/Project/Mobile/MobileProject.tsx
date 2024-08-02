@@ -27,10 +27,6 @@ const MobileProject = ({
   const { dispatchPlayerAction, setVideoID, setIsVideoPopupOpened } =
     useContext(FeaturedWorkContext);
 
-  // const audioPlayer = audioPlayerRef.current;
-
-  console.log("моб");
-
   useEffect(() => {
     if (isSelected) {
       const timer = setTimeout(() => {

@@ -40,8 +40,6 @@ ProjectProps) => {
     dispatchPlayerAction,
   } = useContext(FeaturedWorkContext);
 
-  console.log("деск");
-
   const isTrackPlaying = (i) => {
     return (
       selectedProjectIndex === projectIndex &&

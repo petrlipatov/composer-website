@@ -46,12 +46,12 @@ export const PROJECTS = [
     tracks: [
       {
         name: "Long Happy Life (by GROB)",
-        audio: "/audio/Free_Test_Data_2MB_MP3.mp3",
+        audio: "/audio/Theory-of-Light-Master.mp3",
         duration: "1:16",
       },
       {
         name: "Moya Oborona (by GROB)",
-        audio: "/audio/Theory-of-Light-Master.mp3",
+        audio: "/audio/Free_Test_Data_2MB_MP3.mp3",
         duration: "1:16",
       },
       {
@@ -61,7 +61,7 @@ export const PROJECTS = [
       },
       {
         name: "Turn Of Events",
-        audio: "/audio/Theory-of-Light-Master.mp3",
+        audio: "/audio/Free_Test_Data_2MB_MP3.mp3",
         duration: "2:57",
       },
     ],

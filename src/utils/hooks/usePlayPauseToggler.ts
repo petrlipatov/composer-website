@@ -11,15 +11,20 @@ const usePlayPauseToggler = (
   useEffect(() => {
     if (audioPlayerRef.current) {
       const isExtendedPlayer = "selectedTrackIndex" in player;
+
       const getAudioSrc = () =>
         isExtendedPlayer
           ? player.data.tracks[player.selectedTrackIndex].audio
           : player.data.audio;
+
+      console.log(player.data.tracks[player.selectedTrackIndex].audio);
+
       const updateAudioSourceIfDifferent = (audioSrc) => {
         if (!audioPlayerRef.current.src.includes(audioSrc)) {
           audioPlayerRef.current.src = audioSrc;
         }
       };
+
       if (player.status === PLAYER_STATUS.PLAYING) {
         updateAudioSourceIfDifferent(getAudioSrc());
         audioPlayerRef.current.play();

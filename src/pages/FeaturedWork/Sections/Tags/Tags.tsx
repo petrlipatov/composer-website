@@ -7,25 +7,22 @@ import { PROJECTS_GENRES } from "../../_constants";
 import s from "./Tags.module.css";
 import Tag from "../../../../components/Tags/Tag/Tag";
 import ClearButton from "../../../../components/Tags/ClearButton/ClearButton";
+import { EXTENDED_PLAYER_ACTION_TYPE } from "../../_types";
 
 function Tags() {
   const {
     selectedTags,
     filteredProjects,
-    audioPlayerRef,
-    setIsPlayerOpened,
     setSelectedTags,
-    setSelectedTrackIndex,
+    dispatchPlayerAction,
     setSelectedProjectIndex,
   } = useContext(FeaturedWorkContext);
 
-  const audioPlayer = audioPlayerRef.current;
-
   const handleTagClick = (tag: string) => {
-    audioPlayer.pause();
     setSelectedProjectIndex(null);
-    setSelectedTrackIndex(null);
-    setIsPlayerOpened(false);
+    dispatchPlayerAction({
+      type: EXTENDED_PLAYER_ACTION_TYPE.PLAYER_TERMINATED,
+    });
     if (selectedTags.includes(tag)) {
       setSelectedTags(selectedTags.filter((t) => t !== tag));
     } else {
