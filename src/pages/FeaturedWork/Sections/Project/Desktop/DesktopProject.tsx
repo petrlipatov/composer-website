@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import cn from "classnames";
 
 import Artwork from "../../../../../components/Project/Artwork/Artwork";
@@ -14,95 +14,98 @@ import { FeaturedWorkContext } from "../../../FeaturedWork";
 import { ProjectProps } from "../types";
 
 import s from "./DesktopProject.module.css";
+import {
+  FIRST_TRACK_INDEX,
+  PLAYER_STATUS,
+} from "../../../../../utils/constants";
+import { EXTENDED_PLAYER_ACTION_TYPE } from "../../../_types";
+// import { PLAYER_STATUS } from "../../../../../utils/constants";
 
 const DesktopProject = ({
   index: projectIndex,
   data,
   isSelected,
-  setSelectedProjectIndex,
-}: ProjectProps) => {
+}: //
+ProjectProps) => {
   const {
     selectedProjectIndex,
-    selectedTrackIndex,
-    audioPlayerRef,
-    setCurrentProject,
-    setIsPlayerOpened,
-    setSelectedTrackIndex,
-    setVideoID,
-    setIsVideoPopupOpened,
+    // selectedTrackIndex,
+    // setCurrentProject,
+    // setIsPlayerOpened,
+    setSelectedProjectIndex,
+    // setSelectedTrackIndex,
+    player,
+    // setVideoID,
+    // setIsVideoPopupOpened,
+    dispatchPlayerAction,
   } = useContext(FeaturedWorkContext);
-  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
 
-  const audioPlayer = audioPlayerRef.current;
+  console.log("деск");
 
-  useEffect(
-    function setListenersOnPlayerStates() {
-      const onPlayingHandler = () => setIsAudioPlaying(true);
-      const onPauseHandler = () => setIsAudioPlaying(false);
-      const onEndedHandler = () => setIsAudioPlaying(false);
-
-      if (audioPlayer) {
-        audioPlayer.addEventListener("playing", onPlayingHandler);
-        audioPlayer.addEventListener("pause", onPauseHandler);
-        audioPlayer.addEventListener("ended", onEndedHandler);
-      }
-
-      return () => {
-        if (audioPlayer) {
-          audioPlayer.removeEventListener("playing", onPlayingHandler);
-          audioPlayer.removeEventListener("pause", onPauseHandler);
-          audioPlayer.removeEventListener("ended", onEndedHandler);
-        }
-      };
-    },
-    [audioPlayer]
-  );
-
-  const isTrackPlaying = (trackIndex) => {
+  const isTrackPlaying = (i) => {
     return (
       selectedProjectIndex === projectIndex &&
-      isAudioPlaying &&
-      selectedTrackIndex === trackIndex
+      player.status === PLAYER_STATUS.PLAYING &&
+      player.selectedTrackIndex === i
     );
   };
 
   const isTrackSelected = (trackIndex) => {
     return (
-      selectedProjectIndex === projectIndex && selectedTrackIndex === trackIndex
+      selectedProjectIndex === projectIndex &&
+      player.selectedTrackIndex === trackIndex
     );
   };
 
   const handleVideoClick = () => {
-    setVideoID(data.videoSrc);
-    setIsVideoPopupOpened(true);
-    audioPlayer.pause();
-    audioPlayer.currentTime = 0;
+    // setVideoID(data.videoSrc);
+    // setIsVideoPopupOpened(true);
+    // audioPlayer.pause();
+    // audioPlayer.currentTime = 0;
   };
 
   const handleProjectClick = () => {
     if (selectedProjectIndex !== projectIndex) {
-      setSelectedTrackIndex(null);
       setSelectedProjectIndex(projectIndex);
-      setCurrentProject(data);
-      setIsPlayerOpened(true);
-      audioPlayer.pause();
-      audioPlayer.currentTime = 0;
+
+      dispatchPlayerAction({ type: EXTENDED_PLAYER_ACTION_TYPE.AUDIO_PAUSED });
+
+      dispatchPlayerAction({
+        type: EXTENDED_PLAYER_ACTION_TYPE.PROJECT_DATA_SET,
+        payload: data,
+      });
+
+      dispatchPlayerAction({
+        type: EXTENDED_PLAYER_ACTION_TYPE.TRACK_SELECTED,
+        payload: FIRST_TRACK_INDEX,
+      });
+
+      dispatchPlayerAction({ type: EXTENDED_PLAYER_ACTION_TYPE.PLAYER_OPENED });
+      dispatchPlayerAction({ type: EXTENDED_PLAYER_ACTION_TYPE.AUDIO_PLAYED });
     }
   };
 
-  const handleTrackClick = (src: string, trackIndex: number) => {
+  const handleTrackClick = (trackIndex: number) => {
     setSelectedProjectIndex(projectIndex);
-    setCurrentProject(data);
-    setIsPlayerOpened(true);
-    setSelectedTrackIndex(trackIndex);
-    audioPlayer.src = src;
-    audioPlayer.play();
+
+    dispatchPlayerAction({
+      type: EXTENDED_PLAYER_ACTION_TYPE.PROJECT_DATA_SET,
+      payload: data,
+    });
+
+    dispatchPlayerAction({
+      type: EXTENDED_PLAYER_ACTION_TYPE.TRACK_SELECTED,
+      payload: trackIndex,
+    });
+
+    dispatchPlayerAction({ type: EXTENDED_PLAYER_ACTION_TYPE.AUDIO_PLAYED });
+    dispatchPlayerAction({ type: EXTENDED_PLAYER_ACTION_TYPE.PLAYER_OPENED });
   };
 
   return (
     <div className={s.container}>
       <div className={s.artworkContainer}>
-        <Artwork src={data.imageSrc} />
+        <Artwork src={data.image} />
 
         <div
           className={cn(s.player, isSelected ? s.playerActive : "")}

@@ -12,9 +12,9 @@ type Props = {
   track: {
     name: string;
     duration: string;
-    audioSrc: string;
+    audio: string;
   };
-  handleTrackClick: (src: string, index: number) => void;
+  handleTrackClick: (index: number) => void;
 };
 
 const AudioTrack = forwardRef<HTMLDivElement, Props>(
@@ -24,7 +24,7 @@ const AudioTrack = forwardRef<HTMLDivElement, Props>(
   ) => {
     const handleTrackClickWithStopPropagation = (e: SyntheticEvent) => {
       e.stopPropagation();
-      handleTrackClick(track.audioSrc, index);
+      handleTrackClick(index);
     };
 
     return (

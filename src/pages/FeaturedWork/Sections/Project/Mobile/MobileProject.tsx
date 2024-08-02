@@ -16,21 +16,20 @@ import { ProjectProps } from "../types";
 import s from "./MobileProject.module.css";
 import HorizontalOverlayButton from "../../../../../components/Buttons/HorizontalOverlayButton/HorizontalOverlayButton";
 
+import { EXTENDED_PLAYER_ACTION_TYPE } from "../../../_types";
+
 const MobileProject = ({
   index,
   data,
   isSelected,
   setSelectedProjectIndex,
 }: ProjectProps) => {
-  const {
-    audioPlayerRef,
-    setIsPlayerOpened,
-    setCurrentProject,
-    setVideoID,
-    setIsVideoPopupOpened,
-  } = useContext(FeaturedWorkContext);
+  const { dispatchPlayerAction, setVideoID, setIsVideoPopupOpened } =
+    useContext(FeaturedWorkContext);
 
-  const audioPlayer = audioPlayerRef.current;
+  // const audioPlayer = audioPlayerRef.current;
+
+  console.log("моб");
 
   useEffect(() => {
     if (isSelected) {
@@ -47,14 +46,22 @@ const MobileProject = ({
   }
 
   function handleListenClick() {
-    setIsPlayerOpened(true);
-    setCurrentProject(data);
-    audioPlayer.src = data.tracks[FIRST_TRACK_INDEX].audioSrc;
-    audioPlayer.play();
+    console.log("test");
+    dispatchPlayerAction({ type: EXTENDED_PLAYER_ACTION_TYPE.AUDIO_PLAYED });
+    dispatchPlayerAction({
+      type: EXTENDED_PLAYER_ACTION_TYPE.PROJECT_DATA_SET,
+      payload: data,
+    });
+    dispatchPlayerAction({
+      type: EXTENDED_PLAYER_ACTION_TYPE.TRACK_SELECTED,
+      payload: FIRST_TRACK_INDEX,
+    });
+
+    dispatchPlayerAction({ type: EXTENDED_PLAYER_ACTION_TYPE.PLAYER_OPENED });
   }
 
   function handleWatchClick() {
-    setVideoID(data.videoSrc);
+    setVideoID(data.video);
     setIsVideoPopupOpened(true);
   }
 
@@ -65,7 +72,7 @@ const MobileProject = ({
   return (
     <>
       <div className={s.container} onClick={handleProjectClick}>
-        <Artwork src={data.imageSrc} />
+        <Artwork src={data.image} />
 
         <div className={projectButtonsClasses}>
           <HorizontalOverlayButton onClick={handleListenClick}>

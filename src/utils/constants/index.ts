@@ -6,6 +6,13 @@ export const DISABLED_COLOR = "#808080";
 
 export const BLACK_COLOR = "#000000";
 
+export enum PLAYER_STATUS {
+  PLAYING = "playing",
+  PAUSED = "paused",
+  LOADING = "loading",
+  ENDED = "ended",
+}
+
 export enum PAGES {
   home = "Home",
   pieces = "Pieces",

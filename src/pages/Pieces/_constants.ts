@@ -1,12 +1,5 @@
 import { ContextTypes } from "./_types";
 
-export enum PLAYER_STATUS {
-  PLAYING = "playing",
-  PAUSED = "paused",
-  LOADING = "loading",
-  ENDED = "ended",
-}
-
 export const PIECES_GENRES = [
   "Piano",
   "Orchestral",

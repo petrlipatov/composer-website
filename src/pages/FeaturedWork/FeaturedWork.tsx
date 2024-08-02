@@ -1,75 +1,135 @@
-import { useMemo, useRef, useState, createContext, useEffect } from "react";
+import {
+  useMemo,
+  useRef,
+  useState,
+  createContext,
+  useEffect,
+  useReducer,
+} from "react";
 import cn from "classnames";
 
-// import AudioPlayer from "./Sections/AudioPlayer/AudioPlayer";
+import AudioPlayer from "./Sections/AudioPlayer/AudioPlayer";
 import Tags from "./Sections/Tags/Tags";
 
-import HTMLAudioTag from "../../components/HTMLAudioTag/HTMLAudioTag";
 import Header from "../../components/Header/Header";
 import VideoPopup from "../../components/VideoPopup/VideoPopup";
 
 import useIsMobile from "../../utils/hooks/useIsMobile";
 
 import { DEFAULT_CONTEXT, PROJECTS } from "./_constants";
-import { ContextTypes, ProjectData } from "./_types";
+
+import {
+  ContextTypes,
+  ExtendedPlayerAction,
+  ExtendedPlayerState,
+  ProjectData,
+  SelectedTrackIndex,
+} from "./_types";
 
 import s from "./FeaturedWork.module.css";
 import Projects from "./Sections/Projects/Projects";
-import { PAGES } from "../../utils/constants";
+import { PAGES, PLAYER_STATUS } from "../../utils/constants";
 
 export const FeaturedWorkContext = createContext<ContextTypes>(DEFAULT_CONTEXT);
+
+function reducer(state: ExtendedPlayerState, action: ExtendedPlayerAction) {
+  switch (action.type) {
+    case "AUDIO_PLAYED": {
+      return {
+        ...state,
+        status: PLAYER_STATUS.PLAYING,
+      };
+    }
+    case "AUDIO_PAUSED": {
+      return {
+        ...state,
+        status: PLAYER_STATUS.PAUSED,
+      };
+    }
+    case "AUDIO_LOADING": {
+      return {
+        ...state,
+        status: PLAYER_STATUS.LOADING,
+      };
+    }
+    case "AUDIO_TOGGLED": {
+      return {
+        ...state,
+        status:
+          state.status === PLAYER_STATUS.PLAYING
+            ? PLAYER_STATUS.PAUSED
+            : PLAYER_STATUS.PLAYING,
+      };
+    }
+
+    case "PROJECT_DATA_SET": {
+      return {
+        ...state,
+        data: action.payload as ProjectData,
+      };
+    }
+    case "TRACK_SELECTED": {
+      return {
+        ...state,
+        selectedTrackIndex: action.payload as SelectedTrackIndex,
+      };
+    }
+    case "PLAYER_OPENED": {
+      return {
+        ...state,
+        isOpened: true,
+      };
+    }
+
+    case "PLAYER_TERMINATED": {
+      return {
+        status: PLAYER_STATUS.PAUSED,
+        data: null,
+        isOpened: false,
+        selectedTrackIndex: null,
+      };
+    }
+  }
+}
 
 function FeaturedWork() {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [filteredProjects, setFilteredProjects] = useState<ProjectData[]>([]);
   const [videoID, setVideoID] = useState<string>("");
-  const [currentProject, setCurrentProject] = useState<ProjectData>(null);
-
   const [isVideoPopupOpened, setIsVideoPopupOpened] = useState(false);
-  const [isPlayerOpened, setIsPlayerOpened] = useState(false);
-
-  const [selectedTrackIndex, setSelectedTrackIndex] = useState(null);
   const [selectedProjectIndex, setSelectedProjectIndex] =
     useState<number>(null);
+
+  const [player, dispatchPlayerAction] = useReducer(reducer, {
+    status: PLAYER_STATUS.PAUSED,
+    data: null,
+    selectedTrackIndex: null,
+    isOpened: false,
+  });
 
   const audioPlayerRef = useRef<HTMLAudioElement>();
   const isMobile = useIsMobile();
 
   const contextValue = useMemo(
     () => ({
+      player,
       videoID,
-      currentProject,
-      isPlayerOpened,
       selectedTags,
       filteredProjects,
       audioPlayerRef,
       selectedProjectIndex,
-      selectedTrackIndex,
+      dispatchPlayerAction,
       setSelectedTags,
-      setCurrentProject,
-      setIsPlayerOpened,
       setIsVideoPopupOpened,
       setVideoID,
       setSelectedProjectIndex,
-      setSelectedTrackIndex,
     }),
-    [
-      videoID,
-      isPlayerOpened,
-      selectedTags,
-      currentProject,
-      filteredProjects,
-      selectedProjectIndex,
-      selectedTrackIndex,
-      setSelectedTags,
-      setCurrentProject,
-      setIsPlayerOpened,
-      setIsVideoPopupOpened,
-      setVideoID,
-      setSelectedProjectIndex,
-      setSelectedTrackIndex,
-    ]
+    [player, videoID, selectedTags, filteredProjects, selectedProjectIndex]
   );
+
+  useEffect(() => {
+    console.log(player);
+  }, [player]);
 
   useEffect(
     function filterProjectsByTags() {
@@ -83,8 +143,8 @@ function FeaturedWork() {
 
   const content = cn(
     s.content,
-    isPlayerOpened && isMobile ? s.mobilePlayerOpened : "",
-    isPlayerOpened && !isMobile ? s.desktopPlayerOpened : ""
+    player.isOpened && isMobile ? s.mobilePlayerOpened : "",
+    player.isOpened && !isMobile ? s.desktopPlayerOpened : ""
   );
 
   return (
@@ -96,7 +156,7 @@ function FeaturedWork() {
           <Projects />
         </div>
 
-        {/* {isPlayerOpened && <AudioPlayer />} */}
+        {player.isOpened && <AudioPlayer />}
 
         {isVideoPopupOpened && (
           <VideoPopup
@@ -104,7 +164,6 @@ function FeaturedWork() {
             setIsVideoPopupOpened={setIsVideoPopupOpened}
           />
         )}
-        <HTMLAudioTag ref={audioPlayerRef} />
       </div>
     </FeaturedWorkContext.Provider>
   );

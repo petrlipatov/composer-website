@@ -26,13 +26,14 @@ import {
 } from "../../_constants";
 
 import s from "./Projects.module.css";
+// import PlayIcon from "../../../../components/Icons/PlayIcon/PlayIcon";
 
 export default function Projects() {
   const [sectionWidth, setSectionWidth] = useState(0);
   const [scrollTop, setScrollTop] = useState(0);
 
   const {
-    isPlayerOpened,
+    player,
     filteredProjects,
     selectedProjectIndex,
     setSelectedProjectIndex,
@@ -169,14 +170,12 @@ export default function Projects() {
 
   const handleScroll = (e) => setScrollTop(e.currentTarget.scrollTop);
 
-  console.log(displayedProjects);
-
   return (
     <section
       className={s.projects}
       onScroll={handleScroll}
       ref={sectionRef}
-      style={isMobile && isPlayerOpened ? { display: "none" } : {}}
+      style={isMobile && player.isOpened ? { display: "none" } : {}}
     >
       <div
         className={s.contentContainer}

@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useRef, useState } from "react";
+import { useCallback, useContext, useRef, useState } from "react";
 import { PlayerContext, PlayerDispatchContext } from "../../Pieces";
 
 import s from "./AudioPlayer.module.css";
@@ -20,14 +20,16 @@ import useBufferedAudioProgress from "../../../../utils/hooks/useBufferedAudioPr
 import useAudioPlayerEvents from "../../../../utils/hooks/useAudioPlayerEvents";
 import usePlayPauseToggler from "../../../../utils/hooks/usePlayPauseToggler";
 
-import { PLAYER_STATUS } from "../../_constants";
 import { PLAYER_ACTION_TYPE } from "../../_types";
+import { PLAYER_CONTROLS, PLAYER_STATUS } from "../../../../utils/constants";
+import { handleScrubberChange } from "../../../../utils/helpers/audioPlayer";
+import useTransitionOnProgressBarWhenBuffered from "../../../../utils/hooks/useTransitionOnProgressBarWhenBuffered";
 
 const AudioPlayer = () => {
   const [buffered, setBuffered] = useState(0);
   const [elapsed, setElapsed] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [progressTransitionAnimation, setProgressTransitionAnimation] =
+  const [isTransitionOnProgressBar, setIsTransitionOnProgressBar] =
     useState(false);
 
   const audioPlayerRef = useRef<HTMLAudioElement>();
@@ -44,11 +46,9 @@ const AudioPlayer = () => {
 
   const dispatchPlayerAction = useContext(PlayerDispatchContext);
 
-  useEffect(
-    function showTransitionAnimationWhenBuffered() {
-      if (buffered !== 0) setProgressTransitionAnimation(true);
-    },
-    [buffered]
+  useTransitionOnProgressBarWhenBuffered(
+    buffered,
+    setIsTransitionOnProgressBar
   );
 
   usePlayPauseToggler(audioPlayerRef, player);
@@ -65,13 +65,7 @@ const AudioPlayer = () => {
   useBufferedAudioProgress(bufferedBarRef, buffered, duration, elapsed);
 
   const onScrubberChange = useCallback((e) => {
-    setProgressTransitionAnimation(false);
-    const newTime = e.target.value;
-    audioPlayerRef.current.currentTime = newTime;
-
-    setTimeout(() => {
-      setProgressTransitionAnimation(true);
-    }, 300);
+    handleScrubberChange(e, audioPlayerRef, setIsTransitionOnProgressBar);
   }, []);
 
   const handlePlayPauseClick = useCallback(() => {
@@ -79,14 +73,14 @@ const AudioPlayer = () => {
   }, [dispatchPlayerAction]);
 
   const handlePlayNextClick = useCallback(
-    (direction: "next" | "prev") => {
+    (direction: PLAYER_CONTROLS) => {
       let nextTrackIndex: number;
 
       switch (direction) {
-        case "next":
+        case PLAYER_CONTROLS.next:
           nextTrackIndex = player.data.index + 1;
           break;
-        case "prev":
+        case PLAYER_CONTROLS.prev:
           nextTrackIndex = player.data.index - 1;
           break;
       }
@@ -100,7 +94,7 @@ const AudioPlayer = () => {
         });
 
         setSelectedTrackIndex(nextTrackIndex);
-        setProgressTransitionAnimation(false);
+        setIsTransitionOnProgressBar(false);
       }
     },
     [
@@ -143,12 +137,12 @@ const AudioPlayer = () => {
                 elapsedTime={elapsed}
                 duration={duration}
                 onScrubberChange={onScrubberChange}
-                progressTransitionAnimation={progressTransitionAnimation}
+                progressTransitionAnimation={isTransitionOnProgressBar}
                 ref={progressBarRef}
               />
               <DurationBar />
               <BufferedBar
-                progressTransitionAnimation={progressTransitionAnimation}
+                progressTransitionAnimation={isTransitionOnProgressBar}
                 ref={bufferedBarRef}
               />
             </div>

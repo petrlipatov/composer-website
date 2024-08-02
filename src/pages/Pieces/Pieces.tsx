@@ -14,12 +14,12 @@ import VideoPopup from "../../components/VideoPopup/VideoPopup";
 import Tags from "./Sections/Tags/Tags";
 import AudioTracks from "./Sections/AudioTracks/AudioTracks";
 
-import { PIECES, DEFAULT_CONTEXT, PLAYER_STATUS } from "./_constants";
+import { PAGES, PLAYER_STATUS } from "../../utils/constants";
+import { PIECES, DEFAULT_CONTEXT } from "./_constants";
 
 import { trackData, ContextTypes, PlayerState, PlayerAction } from "./_types";
 
 import s from "./Pieces.module.css";
-import { PAGES } from "../../utils/constants";
 
 export const PlayerContext = createContext<ContextTypes>(DEFAULT_CONTEXT);
 export const PlayerDispatchContext = createContext<Dispatch<PlayerAction>>(

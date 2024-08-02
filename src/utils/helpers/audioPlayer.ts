@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, MutableRefObject, SetStateAction } from "react";
 
 export function updateBufferedAndElapsedTime(
   audioPlayer: HTMLAudioElement,
@@ -22,3 +22,19 @@ export function updateBufferedAndElapsedTime(
     }
   }
 }
+
+export const handleScrubberChange = (
+  e,
+  audioPlayerRef: MutableRefObject<HTMLAudioElement>,
+  progressBarTransitionSetter: Dispatch<SetStateAction<boolean>>
+) => {
+  progressBarTransitionSetter(false);
+  const newTime = e.target.value;
+  if (audioPlayerRef.current) {
+    audioPlayerRef.current.currentTime = newTime;
+  }
+
+  setTimeout(() => {
+    progressBarTransitionSetter(true);
+  }, 300);
+};

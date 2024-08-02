@@ -1,106 +1,210 @@
-// import { useContext, useState } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 
 // import ProgressBar from "../ProgressBar/ProgressBar";
-// import ControlButtons from "../../../../../components/AudioPlayer/Shared/ControlButtons/ControlButtons";
-// import Title from "../../../../../components/AudioPlayer/Simple/Title/Title";
-// import Artwork from "../../../../../components/AudioPlayer/Simple/Artwork/Artwork";
-// import CloseButton from "../../../../../components/AudioPlayer/Simple/CloseButton/CloseButton";
-// import VideoButton from "../../../../../components/AudioPlayer/Simple/VideoButton/VideoButton";
+import ControlButtons from "../../../../../components/AudioPlayer/Shared/ControlButtons/ControlButtons";
+import Title from "../../../../../components/AudioPlayer/Simple/Title/Title";
+import Artwork from "../../../../../components/AudioPlayer/Simple/Artwork/Artwork";
+import CloseButton from "../../../../../components/AudioPlayer/Simple/CloseButton/CloseButton";
+import VideoButton from "../../../../../components/AudioPlayer/Simple/VideoButton/VideoButton";
+import HTMLAudioTag from "../../../../../components/HTMLAudioTag/HTMLAudioTag";
+import DurationBar from "../../../../../components/AudioPlayer/Shared/ProgressBar/DurationBar/DurationBar";
+import BufferedBar from "../../../../../components/AudioPlayer/Shared/ProgressBar/BufferedBar/BufferedBar";
+import ScrubberLoader from "../../../../../components/AudioPlayer/Shared/ProgressBar/ScrubberLoader/ScrubberLoader";
+import ScrubberBar from "../../../../../components/AudioPlayer/Shared/ProgressBar/ScrubberBar/ScrubberBar";
 
-// import { FeaturedWorkContext } from "../../../FeaturedWork";
+import { FeaturedWorkContext } from "../../../FeaturedWork";
 
-// import usePlayingAudioStates from "../../../../../utils/hooks/usePlayingAudioStates";
-// import {
-//   playPauseCallback,
-//   watchVideoCallback,
-// } from "../../../../../utils/helpers/audioPlayer";
-// import { calcNextTrackIndex, calcPrevTrackIndex } from "../_helpers";
+import { getNextTrackIndex } from "../_helpers";
 
-// import {
-//   FIRST_TRACK_INDEX,
-//   PLAYER_CONTROLS,
-// } from "../../../../../utils/constants";
+import { EXTENDED_PLAYER_ACTION_TYPE } from "../../../_types";
+import {
+  FIRST_TRACK_INDEX,
+  PLAYER_CONTROLS,
+  PLAYER_STATUS,
+} from "../../../../../utils/constants";
 
-// import s from "./DesktopAudioPlayer.module.css";
+import s from "./DesktopAudioPlayer.module.css";
+import TimeValue from "../../../../../components/AudioPlayer/Shared/ProgressBar/TimeValue/TimeValue";
+import { formatTime } from "../../../../../utils/helpers/formatTime";
+import useElapsedTimeProgress from "../../../../../utils/hooks/useElapsedTimeProgress";
+import useBufferedAudioProgress from "../../../../../utils/hooks/useBufferedAudioProgress";
+import {
+  handleScrubberChange,
+  updateBufferedAndElapsedTime,
+} from "../../../../../utils/helpers/audioPlayer";
+import usePlayPauseToggler from "../../../../../utils/hooks/usePlayPauseToggler";
+import useTransitionOnProgressBarWhenBuffered from "../../../../../utils/hooks/useTransitionOnProgressBarWhenBuffered";
 
-// const DesktopAudioPlayer = () => {
-//   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
+const DesktopAudioPlayer = () => {
+  const [buffered, setBuffered] = useState(0);
+  const [elapsed, setElapsed] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [isTransitionProgressBar, setIsTransitionOnProgressBar] =
+    useState(false);
 
-//   const {
-//     audioPlayerRef,
-//     currentProject,
-//     selectedTrackIndex,
-//     setIsPlayerOpened,
-//     setVideoID,
-//     setIsVideoPopupOpened,
-//     setSelectedProjectIndex,
-//     setSelectedTrackIndex,
-//   } = useContext(FeaturedWorkContext);
+  const {
+    player,
+    dispatchPlayerAction,
+    // setVideoID,
+    // setIsVideoPopupOpened,
+    setSelectedProjectIndex,
+  } = useContext(FeaturedWorkContext);
 
-//   const audioPlayer = audioPlayerRef.current;
+  const progressBarRef = useRef<HTMLInputElement>();
+  const bufferedBarRef = useRef<HTMLDivElement>();
+  const audioPlayerRef = useRef<HTMLAudioElement>();
 
-//   usePlayingAudioStates(audioPlayer, setIsAudioPlaying);
+  usePlayPauseToggler(audioPlayerRef, player);
 
-//   const handlePlayPauseClick = () => {
-//     if (selectedTrackIndex === null) {
-//       setSelectedTrackIndex(FIRST_TRACK_INDEX);
-//       audioPlayer.src = currentProject.tracks[FIRST_TRACK_INDEX].audioSrc;
-//     }
+  useEffect(() => {
+    const audioPlayer = audioPlayerRef.current;
+    if (audioPlayer) {
+      audioPlayer.onloadedmetadata = () => {
+        setElapsed(0);
+        setBuffered(0);
+        setDuration(audioPlayer.duration);
+      };
 
-//     playPauseCallback(audioPlayer, isAudioPlaying);
-//   };
+      audioPlayer.ontimeupdate = () =>
+        updateBufferedAndElapsedTime(
+          audioPlayerRef.current,
+          setBuffered,
+          setElapsed
+        );
+      audioPlayer.onwaiting = () =>
+        dispatchPlayerAction({
+          type: EXTENDED_PLAYER_ACTION_TYPE.AUDIO_LOADING,
+        });
+      audioPlayer.onplaying = () =>
+        dispatchPlayerAction({
+          type: EXTENDED_PLAYER_ACTION_TYPE.AUDIO_PLAYED,
+        });
+      audioPlayer.onpause = () =>
+        dispatchPlayerAction({
+          type: EXTENDED_PLAYER_ACTION_TYPE.AUDIO_PAUSED,
+        });
+      // audioPlayer.onstalled = () => setIsLoading(false);
+      // audioPlayer.onerror = () => setIsLoading(false);
+      // audioPlayer.onended = () => setElapsed(0);
+    }
 
-//   const handlePlayNextClick = (prevOrNext: PLAYER_CONTROLS) => {
-//     const tracksMaxIndex = currentProject.tracks.length - 1;
-//     let nextTrackIndex;
+    return () => {
+      if (audioPlayer) {
+        audioPlayer.onloadedmetadata = null;
+        audioPlayer.ontimeupdate = null;
+        audioPlayer.onwaiting = null;
+        audioPlayer.onplaying = null;
+        audioPlayer.onstalled = null;
+        audioPlayer.onerror = null;
+        audioPlayer.onended = null;
+      }
+    };
+  }, [
+    audioPlayerRef,
+    setDuration,
+    setElapsed,
+    setBuffered,
+    dispatchPlayerAction,
+  ]);
 
-//     if (prevOrNext === PLAYER_CONTROLS.next)
-//       nextTrackIndex = calcNextTrackIndex(selectedTrackIndex, tracksMaxIndex);
+  useElapsedTimeProgress(progressBarRef, elapsed, duration);
+  useBufferedAudioProgress(bufferedBarRef, buffered, duration, elapsed);
 
-//     if (prevOrNext === PLAYER_CONTROLS.prev)
-//       nextTrackIndex = calcPrevTrackIndex(selectedTrackIndex, tracksMaxIndex);
+  useTransitionOnProgressBarWhenBuffered(
+    buffered,
+    setIsTransitionOnProgressBar
+  );
 
-//     setSelectedTrackIndex(nextTrackIndex);
-//     audioPlayer.src = currentProject.tracks[nextTrackIndex].audioSrc;
+  const onScrubberChange = useCallback((e) => {
+    handleScrubberChange(e, audioPlayerRef, setIsTransitionOnProgressBar);
+  }, []);
 
-//     if (isAudioPlaying) audioPlayer.play();
-//   };
+  const handlePlayPauseClick = () => {
+    if (player.selectedTrackIndex === null) {
+      dispatchPlayerAction({
+        type: EXTENDED_PLAYER_ACTION_TYPE.TRACK_SELECTED,
+        payload: FIRST_TRACK_INDEX,
+      });
+    }
+    dispatchPlayerAction({ type: EXTENDED_PLAYER_ACTION_TYPE.AUDIO_TOGGLED });
+  };
 
-//   const handleCloseClick = () => {
-//     audioPlayer.pause();
-//     setIsPlayerOpened(false);
-//     setSelectedTrackIndex(null);
-//     setSelectedProjectIndex(null);
-//   };
+  const handlePlayNextClick = (direction: PLAYER_CONTROLS) => {
+    const nextTrackIndex = getNextTrackIndex(
+      direction,
+      player.selectedTrackIndex,
+      player.data.tracks.length - 1
+    );
 
-//   const handleVideoClick = () => {
-//     watchVideoCallback(
-//       audioPlayer,
-//       currentProject,
-//       setIsPlayerOpened,
-//       setVideoID,
-//       setIsVideoPopupOpened
-//     );
-//   };
+    dispatchPlayerAction({
+      type: EXTENDED_PLAYER_ACTION_TYPE.TRACK_SELECTED,
+      payload: nextTrackIndex,
+    });
+    setIsTransitionOnProgressBar(false);
+  };
 
-//   return (
-//     <div className={s.player}>
-//       <Artwork src={currentProject.imageSrc} />
-//       <div className={s.playerControls}>
-//         <Title>
-//           {currentProject?.tracks[selectedTrackIndex || FIRST_TRACK_INDEX].name}
-//         </Title>
-//         <ControlButtons
-//           handlePlayPauseClick={handlePlayPauseClick}
-//           handlePlayNextClick={handlePlayNextClick}
-//           isAudioPlaying={isAudioPlaying}
-//         />
-//         <ProgressBar />
-//       </div>
-//       <VideoButton handleVideoClick={handleVideoClick} />
-//       <CloseButton onClick={handleCloseClick} />
-//     </div>
-//   );
-// };
+  const handleCloseClick = () => {
+    setSelectedProjectIndex(null);
+    dispatchPlayerAction({
+      type: EXTENDED_PLAYER_ACTION_TYPE.PLAYER_TERMINATED,
+    });
+  };
 
-// export default DesktopAudioPlayer;
+  const handleVideoClick = () => {
+    // watchVideoCallback(
+    //   audioPlayer,
+    //   currentProject,
+    //   setIsPlayerOpened,
+    //   setVideoID,
+    //   setIsVideoPopupOpened
+    // );
+  };
+
+  return (
+    <section className={s.player}>
+      <Artwork src={player.data.image} />
+      <div className={s.playerControls}>
+        <Title>
+          {
+            player.data?.tracks[player.selectedTrackIndex || FIRST_TRACK_INDEX]
+              .name
+          }
+        </Title>
+        <ControlButtons
+          handlePlayPauseClick={handlePlayPauseClick}
+          handlePlayNextClick={handlePlayNextClick}
+          isAudioPlaying={player.status === PLAYER_STATUS.PLAYING}
+        />
+
+        <div className={s.progressBarContainer} key={player.data.name}>
+          <TimeValue> {formatTime(elapsed)}</TimeValue>
+
+          <div className={s.progressBar} key={player.selectedTrackIndex}>
+            <ScrubberLoader
+              isLoading={player.status === PLAYER_STATUS.LOADING}
+            />
+            <ScrubberBar
+              elapsedTime={elapsed}
+              duration={duration}
+              onScrubberChange={onScrubberChange}
+              progressTransitionAnimation={isTransitionProgressBar}
+              ref={progressBarRef}
+            />
+            <DurationBar />
+            <BufferedBar
+              progressTransitionAnimation={isTransitionProgressBar}
+              ref={bufferedBarRef}
+            />
+          </div>
+
+          <TimeValue> {formatTime(duration)}</TimeValue>
+        </div>
+      </div>
+      <VideoButton handleVideoClick={handleVideoClick} />
+      <CloseButton onClick={handleCloseClick} />
+      <HTMLAudioTag ref={audioPlayerRef} />
+    </section>
+  );
+};
+
+export default DesktopAudioPlayer;

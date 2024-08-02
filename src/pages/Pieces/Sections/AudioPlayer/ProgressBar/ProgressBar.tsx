@@ -13,7 +13,7 @@ import TimeValue from "../../../../../components/AudioPlayer/Shared/ProgressBar/
 import { PlayerContext } from "../../../Pieces";
 
 import s from "./ProgressBar.module.css";
-import { PLAYER_STATUS } from "../../../_constants";
+import { PLAYER_STATUS } from "../../../../../utils/constants";
 
 const ProgressBar = ({
   // buffered,

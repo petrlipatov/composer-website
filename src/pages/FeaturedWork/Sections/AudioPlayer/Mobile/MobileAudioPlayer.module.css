@@ -35,6 +35,41 @@
   border-top: 1px solid black;
 }
 
+.progressBarContainer {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  grid-template-columns: 10% 70% 10%;
+  gap: 16px;
+  width: 100%;
+  justify-content: center;
+  justify-items: center;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.progressBar {
+  display: flex;
+  position: relative;
+  height: 4px;
+
+  width: 100%;
+}
+
+@keyframes flash {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.progressBar:hover {
+  animation: flash 0.5s 1;
+}
+
 @media (min-width: 400px) {
   .projectInfoContainer {
     font-size: 14px;

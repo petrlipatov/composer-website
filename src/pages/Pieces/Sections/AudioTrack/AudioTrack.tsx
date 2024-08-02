@@ -9,13 +9,13 @@ import s from "./AudioTrack.module.css";
 import TvIcon from "../../../../components/Icons/TvIcon/TvIcon";
 import HeadphonesIcon from "../../../../components/Icons/HeadphonesIcon/HeadphonesIcon";
 import HorizontalOverlayButton from "../../../../components/Buttons/HorizontalOverlayButton/HorizontalOverlayButton";
+import { PLAYER_STATUS } from "../../../../utils/constants";
 // import {
 //   terminatePlayer,
 //   setTrack,
 //   openPlayer,
 //   setPlaying,
 // } from "../../../../utils/helpers/piecesPlayer";
-import { PLAYER_STATUS } from "../../_constants";
 
 type AudioTrackProps = {
   index: number;
