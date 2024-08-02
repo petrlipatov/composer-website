@@ -17,8 +17,6 @@ const usePlayPauseToggler = (
           ? player.data.tracks[player.selectedTrackIndex].audio
           : player.data.audio;
 
-      console.log(player.data.tracks[player.selectedTrackIndex].audio);
-
       const updateAudioSourceIfDifferent = (audioSrc) => {
         if (!audioPlayerRef.current.src.includes(audioSrc)) {
           audioPlayerRef.current.src = audioSrc;

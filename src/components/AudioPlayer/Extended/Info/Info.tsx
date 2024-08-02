@@ -9,7 +9,7 @@ type Props = { data: ProjectData; handleVideoClick: (e: any) => void };
 function Info({ data, handleVideoClick }: Props) {
   return (
     <div className={s.projectInfoSection}>
-      <img className={s.artwork} src={data?.imageSrc} />
+      <img className={s.artwork} src={data?.image} />
       <div className={s.projectInfoContainer}>
         <div className={s.projectDetailsBlock}>
           <div>{data?.name}</div>
