@@ -56,9 +56,9 @@ function Gallery() {
             <div
               className={s.container}
               key={i}
-              onClick={() => handleImageClick(el.src, el.desc)}
+              onClick={() => handleImageClick(el.image, el.desc)}
             >
-              <img className={s.image} src={el.src} />
+              <img className={s.image} src={el.image} />
               <div className={s.caption}>{el.desc}</div>
             </div>
           );
