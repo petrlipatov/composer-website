@@ -51,18 +51,16 @@ function Gallery() {
   return (
     <section className={s.gallery}>
       <div className={s.imagesGrid}>
-        {imagesSlice.map((el, i) => {
-          return (
-            <div
-              className={s.container}
-              key={i}
-              onClick={() => handleImageClick(el.image, el.desc)}
-            >
-              <img className={s.image} src={el.image} />
-              <div className={s.caption}>{el.desc}</div>
-            </div>
-          );
-        })}
+        {imagesSlice.map((el, i) => (
+          <div
+            className={s.container}
+            key={i}
+            onClick={() => handleImageClick(el.image, el.desc)}
+          >
+            <img className={s.image} src={el.image} />
+            <div className={s.caption}>{el.desc}</div>
+          </div>
+        ))}
       </div>
       <div className={s.pagesCountContainer}>
         <button className={s.button} onClick={goToPreviousPage}>
