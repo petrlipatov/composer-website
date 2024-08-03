@@ -5,11 +5,13 @@
   background-color: #e7397a;
   justify-content: center;
   position: relative;
+  /* border: 1px solid black; */
 }
 
 .content {
   position: relative;
   width: 100%;
+  /* border: 1px dotted black; */
 }
 
 .playerControls {
@@ -17,7 +19,8 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
+  /* border: 1px dotted green; */
 }
 
 @media (min-width: 720px) {
@@ -34,10 +37,6 @@
   .playerControls {
     width: 700px;
   }
-}
-
-.promise {
-  position: absolute;
 }
 
 .progressBarContainer {
