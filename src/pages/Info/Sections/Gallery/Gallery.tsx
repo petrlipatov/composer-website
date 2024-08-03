@@ -10,6 +10,7 @@ import {
 
 import s from "./Gallery.module.css";
 import useIsMobile from "../../../../utils/hooks/useIsMobile.ts";
+import LazyImage from "../../../../components/LazyImage/LazyImage.tsx";
 
 function Gallery() {
   const [pageNumber, setPageNumber] = useState<number>(1);
@@ -51,13 +52,19 @@ function Gallery() {
   return (
     <section className={s.gallery}>
       <div className={s.imagesGrid}>
-        {imagesSlice.map((el, i) => (
+        {imagesSlice.map((el) => (
           <div
             className={s.container}
-            key={i}
+            key={el.image}
             onClick={() => handleImageClick(el.image, el.desc)}
           >
-            <img className={s.image} src={el.image} />
+            {/* <img className={s.image} src={el.image} /> */}
+            <LazyImage
+              src={el.image}
+              containerClassName={s.imageContainer}
+              className={s.image}
+              alt={"album image"}
+            />
             <div className={s.caption}>{el.desc}</div>
           </div>
         ))}
