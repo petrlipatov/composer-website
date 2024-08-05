@@ -18,4 +18,4 @@ A platform for a composer to showcase her music. The platform is highly efficien
 - Optimizations for mobile devices according to Web Vitals.
 - Mobile-first approach.
 
-[Link to the application](https://lipatov.nomoredomainswork.ru/)
+[Link to the application](https://lizatikhonova.com/)
