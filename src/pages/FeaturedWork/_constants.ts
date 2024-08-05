@@ -26,12 +26,12 @@ export const PROJECTS = [
     tracks: [
       {
         name: "Confusion",
-        audio: "/audio/Free_Test_Data_2MB_MP3.mp3",
+        audio: "/audio/confusion.mp3",
         duration: "1:46",
       },
       {
         name: "Desolation",
-        audio: "/audio/Theory-of-Light-Master.mp3",
+        audio: "/audio/desolation.mp3",
         duration: "0:45",
       },
     ],
@@ -46,22 +46,22 @@ export const PROJECTS = [
     tracks: [
       {
         name: "Long Happy Life (by GROB)",
-        audio: "/audio/Theory-of-Light-Master.mp3",
+        audio: "/audio/long-happy-life-by-grob.mp3",
         duration: "1:16",
       },
       {
         name: "Moya Oborona (by GROB)",
-        audio: "/audio/Free_Test_Data_2MB_MP3.mp3",
+        audio: "/audio/moya-oborona-by-grob.mp3",
         duration: "1:16",
       },
       {
         name: "Realisation",
-        audio: "/audio/Theory-of-Light-Master.mp3",
+        audio: "/audio/realisation.mp3",
         duration: "1:16",
       },
       {
         name: "Turn Of Events",
-        audio: "/audio/Free_Test_Data_2MB_MP3.mp3",
+        audio: "/audio/turn-of-events.mp3",
         duration: "2:57",
       },
     ],
@@ -76,27 +76,27 @@ export const PROJECTS = [
     tracks: [
       {
         name: "Count Down",
-        audio: "/audio/Free_Test_Data_2MB_MP3.mp3",
+        audio: "/audio/count-down.mp3",
         duration: "0:11",
       },
       {
         name: "Into Action",
-        audio: "/audio/Theory-of-Light-Master.mp3",
+        audio: "/audio/into-action.mp3",
         duration: "2:39",
       },
       {
         name: "Unfixable",
-        audio: "/audio/GOING-FAR-AWAY-_VINTAGE-HARMONY__1_.mp3",
+        audio: "/audio/unfixible.mp3",
         duration: "1:51",
       },
       {
         name: "Rejection",
-        audio: "/audio/Free_Test_Data_2MB_MP3.mp3",
+        audio: "/audio/rejection.mp3",
         duration: "0:56",
       },
       {
         name: "Over",
-        audio: "/audio/Theory-of-Light-Master.mp3",
+        audio: "/audio/over.mp3",
         duration: "2:07",
       },
     ],
@@ -111,12 +111,12 @@ export const PROJECTS = [
     tracks: [
       {
         name: "Attraction",
-        audio: "/audio/Free_Test_Data_2MB_MP3.mp3",
+        audio: "/audio/attraction.mp3",
         duration: "1:34",
       },
       {
         name: "Passion",
-        audio: "/audio/Theory-of-Light-Master.mp3",
+        audio: "/audio/passion.mp3",
         duration: "1:09",
       },
     ],
@@ -131,12 +131,12 @@ export const PROJECTS = [
     tracks: [
       {
         name: "Keep It Low",
-        audio: "/audio/Free_Test_Data_2MB_MP3.mp3",
+        audio: "/audio/keep-it-low.mp3",
         duration: "1:15",
       },
       {
         name: "Danger Alert",
-        audio: "/audio/Free_Test_Data_2MB_MP3.mp3",
+        audio: "/audio/danger-alert.mp3",
         duration: "0:56",
       },
     ],
@@ -151,7 +151,7 @@ export const PROJECTS = [
     tracks: [
       {
         name: "Never",
-        audio: "/audio/Free_Test_Data_2MB_MP3.mp3",
+        audio: "/audio/never.mp3",
         duration: "2:46",
       },
     ],
@@ -166,17 +166,17 @@ export const PROJECTS = [
     tracks: [
       {
         name: "Closer to the light",
-        audio: "/audio/Free_Test_Data_2MB_MP3.mp3",
+        audio: "/audio/closer-to-the-light.mp3",
         duration: "0:32",
       },
       {
         name: "Distorted",
-        audio: "/audio/Theory-of-Light-Master.mp3",
+        audio: "/audio/distorted.mp3",
         duration: "0:42",
       },
       {
         name: "Relief",
-        audio: "/audio/GOING-FAR-AWAY-_VINTAGE-HARMONY__1_.mp3",
+        audio: "/audio/relief.mp3",
         duration: "1:58",
       },
     ],
@@ -191,47 +191,47 @@ export const PROJECTS = [
     tracks: [
       {
         name: "Rehearsals",
-        audio: "/audio/Free_Test_Data_2MB_MP3.mp3",
+        audio: "/audio/rehearsals.mp3",
         duration: "1:00",
       },
       {
         name: "Fantasy Afternoon",
-        audio: "/audio/Theory-of-Light-Master.mp3",
+        audio: "/audio/fantasy-afternoon.mp3",
         duration: "0:59",
       },
       {
         name: "Rush",
-        audio: "/audio/GOING-FAR-AWAY-_VINTAGE-HARMONY__1_.mp3",
+        audio: "/audio/rush.mp3",
         duration: "1:26",
       },
       {
         name: "Shadow Upon All",
-        audio: "/audio/Free_Test_Data_2MB_MP3.mp3",
+        audio: "/audio/shadow-upon-all.mp3",
         duration: "3:05",
       },
       {
         name: "Electrification",
-        audio: "/audio/Theory-of-Light-Master.mp3",
+        audio: "/audio/electification.mp3",
         duration: "0:58",
       },
       {
         name: "Crispy Streets",
-        audio: "/audio/GOING-FAR-AWAY-_VINTAGE-HARMONY__1_.mp3",
+        audio: "/audio/crispy-streets.mp3",
         duration: "2:05",
       },
       {
         name: "Naive Sunlight",
-        audio: "/audio/Free_Test_Data_2MB_MP3.mp3",
+        audio: "/audio/naive-sunlight.mp3",
         duration: "1:50",
       },
       {
         name: "See Ya",
-        audio: "/audio/Theory-of-Light-Master.mp3",
+        audio: "/audio/see-ya.mp3",
         duration: "1:48",
       },
       {
         name: "Woops",
-        audio: "/audio/Theory-of-Light-Master.mp3",
+        audio: "/audio/woops.mp3",
         duration: "1:38",
       },
     ],
@@ -246,7 +246,7 @@ export const PROJECTS = [
     tracks: [
       {
         name: "Pain Killer",
-        audio: "/audio/Free_Test_Data_2MB_MP3.mp3",
+        audio: "/audio/pain-killer.mp3",
         duration: "0:47",
       },
     ],
@@ -261,7 +261,7 @@ export const PROJECTS = [
     tracks: [
       {
         name: "Laundry Day",
-        audio: "/audio/GOING-FAR-AWAY-_VINTAGE-HARMONY__1_.mp3",
+        audio: "/audio/laundry-day.mp3",
         duration: "1:21",
       },
     ],
@@ -276,7 +276,7 @@ export const PROJECTS = [
     tracks: [
       {
         name: "Slow and Curious",
-        audio: "/audio/Free_Test_Data_2MB_MP3.mp3",
+        audio: "/audio/slow-and-curious.mp3",
         duration: "1:58",
       },
     ],
@@ -291,7 +291,7 @@ export const PROJECTS = [
     tracks: [
       {
         name: "Intersection Point",
-        audio: "/audio/Free_Test_Data_2MB_MP3.mp3",
+        audio: "/audio/intersection-point.mp3",
         duration: "0:59",
       },
     ],
@@ -306,27 +306,27 @@ export const PROJECTS = [
     tracks: [
       {
         name: "Breakthrough",
-        audio: "/audio/Free_Test_Data_2MB_MP3.mp3",
+        audio: "/audio/breakthrough.mp3",
         duration: "5:23",
       },
       {
         name: "Crunchy",
-        audio: "/audio/Theory-of-Light-Master.mp3",
+        audio: "/audio/crunchy.mp3",
         duration: "3:18",
       },
       {
         name: "Step By Step",
-        audio: "/audio/GOING-FAR-AWAY-_VINTAGE-HARMONY__1_.mp3",
+        audio: "/audio/step-by-step.mp3",
         duration: "2:56",
       },
       {
         name: "Wake Up",
-        audio: "/audio/GOING-FAR-AWAY-_VINTAGE-HARMONY__1_.mp3",
+        audio: "/audio/wake-up.mp3",
         duration: "2:10",
       },
       {
         name: "Workout Season",
-        audio: "/audio/GOING-FAR-AWAY-_VINTAGE-HARMONY__1_.mp3",
+        audio: "/audio/workout-season.mp3",
         duration: "1:32",
       },
     ],
@@ -341,12 +341,12 @@ export const PROJECTS = [
     tracks: [
       {
         name: "Don't You Dare",
-        audio: "/audio/Free_Test_Data_2MB_MP3.mp3",
+        audio: "/audio/don't-you-dare.mp3",
         duration: "0:31",
       },
       {
         name: "Sunflakes",
-        audio: "/audio/Theory-of-Light-Master.mp3",
+        audio: "/audio/sunflakes.mp3",
         duration: "4:42",
       },
     ],
@@ -361,7 +361,7 @@ export const PROJECTS = [
     tracks: [
       {
         name: "Blib",
-        audio: "/audio/Free_Test_Data_2MB_MP3.mp3",
+        audio: "/audio/blip.mp3",
         duration: "1:12",
       },
     ],
