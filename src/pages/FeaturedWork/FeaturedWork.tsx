@@ -10,87 +10,20 @@ import cn from "classnames";
 
 import AudioPlayer from "./Sections/AudioPlayer/AudioPlayer";
 import Tags from "./Sections/Tags/Tags";
+import Projects from "./Sections/Projects/Projects";
 
 import Header from "../../components/Header/Header";
 import VideoPopup from "../../components/VideoPopup/VideoPopup";
 
+import reducer from "../../utils/reducers/featured.reducer";
 import useIsMobile from "../../utils/hooks/useIsMobile";
-
+import { PAGES, PLAYER_STATUS } from "../../utils/constants";
 import { DEFAULT_CONTEXT, PROJECTS } from "./_constants";
-
-import {
-  ContextTypes,
-  ExtendedPlayerAction,
-  ExtendedPlayerState,
-  ProjectData,
-  SelectedTrackIndex,
-} from "./_types";
+import { ContextTypes, ProjectData } from "./_types";
 
 import s from "./FeaturedWork.module.css";
-import Projects from "./Sections/Projects/Projects";
-import { PAGES, PLAYER_STATUS } from "../../utils/constants";
 
 export const FeaturedWorkContext = createContext<ContextTypes>(DEFAULT_CONTEXT);
-
-function reducer(state: ExtendedPlayerState, action: ExtendedPlayerAction) {
-  switch (action.type) {
-    case "AUDIO_PLAYED": {
-      return {
-        ...state,
-        status: PLAYER_STATUS.PLAYING,
-      };
-    }
-    case "AUDIO_PAUSED": {
-      return {
-        ...state,
-        status: PLAYER_STATUS.PAUSED,
-      };
-    }
-    case "AUDIO_LOADING": {
-      return {
-        ...state,
-        status: PLAYER_STATUS.LOADING,
-      };
-    }
-    case "AUDIO_TOGGLED": {
-      return {
-        ...state,
-        status:
-          state.status === PLAYER_STATUS.PLAYING
-            ? PLAYER_STATUS.PAUSED
-            : PLAYER_STATUS.PLAYING,
-      };
-    }
-
-    case "PROJECT_DATA_SET": {
-      return {
-        ...state,
-        data: action.payload as ProjectData,
-      };
-    }
-    case "TRACK_SELECTED": {
-      return {
-        ...state,
-        selectedTrackIndex: action.payload as SelectedTrackIndex,
-      };
-    }
-    case "PLAYER_OPENED": {
-      return {
-        ...state,
-        isOpened: true,
-      };
-    }
-
-    case "PLAYER_TERMINATED": {
-      return {
-        status: PLAYER_STATUS.PAUSED,
-        data: null,
-        isOpened: false,
-        selectedTrackIndex: null,
-      };
-    }
-  }
-}
 
 function FeaturedWork() {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
@@ -126,10 +59,6 @@ function FeaturedWork() {
     }),
     [player, videoID, selectedTags, filteredProjects, selectedProjectIndex]
   );
-
-  useEffect(() => {
-    console.log(player);
-  }, [player]);
 
   useEffect(
     function filterProjectsByTags() {

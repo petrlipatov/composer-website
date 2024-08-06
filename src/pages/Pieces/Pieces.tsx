@@ -14,10 +14,10 @@ import VideoPopup from "../../components/VideoPopup/VideoPopup";
 import Tags from "./Sections/Tags/Tags";
 import AudioTracks from "./Sections/AudioTracks/AudioTracks";
 
+import reducer from "../../utils/reducers/pieces.reducer";
 import { PAGES, PLAYER_STATUS } from "../../utils/constants";
 import { PIECES, DEFAULT_CONTEXT } from "./_constants";
-
-import { trackData, ContextTypes, PlayerState, PlayerAction } from "./_types";
+import { trackData, ContextTypes, PlayerAction } from "./_types";
 
 import s from "./Pieces.module.css";
 
@@ -25,59 +25,6 @@ export const PlayerContext = createContext<ContextTypes>(DEFAULT_CONTEXT);
 export const PlayerDispatchContext = createContext<Dispatch<PlayerAction>>(
   () => {}
 );
-
-function reducer(state: PlayerState, action: PlayerAction) {
-  switch (action.type) {
-    case "AUDIO_PLAYED": {
-      return {
-        ...state,
-        status: PLAYER_STATUS.PLAYING,
-      };
-    }
-    case "AUDIO_PAUSED": {
-      return {
-        ...state,
-        status: PLAYER_STATUS.PAUSED,
-      };
-    }
-    case "AUDIO_LOADING": {
-      return {
-        ...state,
-        status: PLAYER_STATUS.LOADING,
-      };
-    }
-    case "AUDIO_TOGGLED": {
-      return {
-        ...state,
-        status:
-          state.status === PLAYER_STATUS.PLAYING
-            ? PLAYER_STATUS.PAUSED
-            : PLAYER_STATUS.PLAYING,
-      };
-    }
-
-    case "TRACK_DATA_SET": {
-      return {
-        ...state,
-        data: action.payload,
-      };
-    }
-    case "PLAYER_OPENED": {
-      return {
-        ...state,
-        isOpened: true,
-      };
-    }
-
-    case "PLAYER_TERMINATED": {
-      return {
-        status: PLAYER_STATUS.PAUSED,
-        data: null,
-        isOpened: false,
-      };
-    }
-  }
-}
 
 function Pieces() {
   const [videoID, setVideoID] = useState<string>("");
