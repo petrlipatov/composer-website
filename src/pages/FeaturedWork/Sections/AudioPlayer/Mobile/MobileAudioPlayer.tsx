@@ -16,8 +16,6 @@ import ScrubberBar from "../../../../../components/AudioPlayer/Shared/ProgressBa
 
 import { FeaturedWorkContext } from "../../../FeaturedWork";
 
-// import usePlayingAudioStates from "../../../../../utils/hooks/usePlayingAudioStates";
-
 import {
   //   FIRST_TRACK_INDEX,
   PLAYER_CONTROLS,
@@ -29,7 +27,6 @@ import { getNextTrackIndex } from "../_helpers";
 import { EXTENDED_PLAYER_ACTION_TYPE } from "../../../_types";
 import TimeValue from "../../../../../components/AudioPlayer/Shared/ProgressBar/TimeValue/TimeValue";
 import { formatTime } from "../../../../../utils/helpers/formatTime";
-// import useAudioPlayerEvents from "../../../../../utils/hooks/useAudioPlayerEvents";
 import useElapsedTimeProgress from "../../../../../utils/hooks/useElapsedTimeProgress";
 import useBufferedAudioProgress from "../../../../../utils/hooks/useBufferedAudioProgress";
 import {
@@ -40,8 +37,6 @@ import useScrollSelectedTrackIntoView from "../../../../../utils/hooks/useScroll
 import useTransitionOnProgressBarWhenBuffered from "../../../../../utils/hooks/useTransitionOnProgressBarWhenBuffered";
 import usePlayPauseToggler from "../../../../../utils/hooks/usePlayPauseToggler";
 
-// import usePlayPauseToggler from "../../../../../utils/hooks/usePlayPauseToggler";
-
 const MobileAudioPlayer = () => {
   const [buffered, setBuffered] = useState(0);
   const [elapsed, setElapsed] = useState(0);
@@ -49,12 +44,8 @@ const MobileAudioPlayer = () => {
   const [isTransitionProgressBar, setIsTransitionOnProgressBar] =
     useState(false);
 
-  const {
-    // setVideoID,
-    // setIsVideoPopupOpened,
-    player,
-    dispatchPlayerAction,
-  } = useContext(FeaturedWorkContext);
+  const { setVideoID, setIsVideoPopupOpened, player, dispatchPlayerAction } =
+    useContext(FeaturedWorkContext);
 
   const progressBarRef = useRef<HTMLInputElement>();
   const bufferedBarRef = useRef<HTMLDivElement>();
@@ -175,13 +166,11 @@ const MobileAudioPlayer = () => {
   };
 
   const handleVideoClick = () => {
-    // watchVideoCallback(
-    //   audioPlayer,
-    //   currentProject,
-    //   setIsPlayerOpened,
-    //   setVideoID,
-    //   setIsVideoPopupOpened
-    // );
+    dispatchPlayerAction({
+      type: EXTENDED_PLAYER_ACTION_TYPE.PLAYER_TERMINATED,
+    });
+    setVideoID(player.data.video);
+    setIsVideoPopupOpened(true);
   };
 
   return (

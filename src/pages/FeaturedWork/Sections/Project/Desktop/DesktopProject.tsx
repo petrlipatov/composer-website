@@ -19,7 +19,6 @@ import {
   PLAYER_STATUS,
 } from "../../../../../utils/constants";
 import { EXTENDED_PLAYER_ACTION_TYPE } from "../../../_types";
-// import { PLAYER_STATUS } from "../../../../../utils/constants";
 
 const DesktopProject = ({
   index: projectIndex,
@@ -29,14 +28,10 @@ const DesktopProject = ({
 ProjectProps) => {
   const {
     selectedProjectIndex,
-    // selectedTrackIndex,
-    // setCurrentProject,
-    // setIsPlayerOpened,
     setSelectedProjectIndex,
-    // setSelectedTrackIndex,
     player,
-    // setVideoID,
-    // setIsVideoPopupOpened,
+    setVideoID,
+    setIsVideoPopupOpened,
     dispatchPlayerAction,
   } = useContext(FeaturedWorkContext);
 
@@ -55,11 +50,13 @@ ProjectProps) => {
     );
   };
 
-  const handleVideoClick = () => {
-    // setVideoID(data.videoSrc);
-    // setIsVideoPopupOpened(true);
-    // audioPlayer.pause();
-    // audioPlayer.currentTime = 0;
+  const handleVideoClick = (e: Event) => {
+    e.stopPropagation();
+    dispatchPlayerAction({
+      type: EXTENDED_PLAYER_ACTION_TYPE.PLAYER_TERMINATED,
+    });
+    setVideoID(data.video);
+    setIsVideoPopupOpened(true);
   };
 
   const handleProjectClick = () => {

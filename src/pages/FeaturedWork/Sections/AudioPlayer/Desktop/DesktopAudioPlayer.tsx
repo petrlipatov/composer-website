@@ -45,8 +45,8 @@ const DesktopAudioPlayer = () => {
   const {
     player,
     dispatchPlayerAction,
-    // setVideoID,
-    // setIsVideoPopupOpened,
+    setVideoID,
+    setIsVideoPopupOpened,
     setSelectedProjectIndex,
   } = useContext(FeaturedWorkContext);
 
@@ -151,13 +151,11 @@ const DesktopAudioPlayer = () => {
   };
 
   const handleVideoClick = () => {
-    // watchVideoCallback(
-    //   audioPlayer,
-    //   currentProject,
-    //   setIsPlayerOpened,
-    //   setVideoID,
-    //   setIsVideoPopupOpened
-    // );
+    dispatchPlayerAction({
+      type: EXTENDED_PLAYER_ACTION_TYPE.PLAYER_TERMINATED,
+    });
+    setVideoID(player.data.video);
+    setIsVideoPopupOpened(true);
   };
 
   return (
