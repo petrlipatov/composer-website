@@ -42,20 +42,14 @@ export type ExtendedPlayerAction = {
 
 export interface ContextTypes {
   videoID: string;
-  // isPlayerOpened: boolean;
   selectedTags: string[];
-  // currentProject: ProjectData;
   filteredProjects: ProjectData[];
   audioPlayerRef: MutableRefObject<HTMLAudioElement>;
   selectedProjectIndex: number;
-  // selectedTrackIndex: number;
   player: ExtendedPlayerState;
   setSelectedTags: Dispatch<SetStateAction<string[]>>;
-  // setCurrentProject: Dispatch<SetStateAction<ProjectData>>;
   setVideoID: Dispatch<SetStateAction<string>>;
-  // setIsPlayerOpened: Dispatch<SetStateAction<boolean>>;
   setIsVideoPopupOpened: Dispatch<SetStateAction<boolean>>;
   setSelectedProjectIndex: Dispatch<SetStateAction<number>>;
-  // setSelectedTrackIndex: Dispatch<SetStateAction<number>>;
   dispatchPlayerAction: Dispatch<ExtendedPlayerAction>;
 }

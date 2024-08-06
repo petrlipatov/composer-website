@@ -42,15 +42,10 @@ export interface ContextTypes {
   isVideoPopupOpened: boolean;
   selectedTrackIndex: number;
   player: PlayerState;
-  // buffered: number;
-  // elapsed: number;
-  // duration: number;
-  // isUserScrubbing: boolean;
   setVideoID: Dispatch<SetStateAction<string>>;
   setSelectedTags: Dispatch<SetStateAction<string[]>>;
   setIsVideoPopupOpened: Dispatch<SetStateAction<boolean>>;
   setSelectedTrackIndex: Dispatch<SetStateAction<number>>;
-  // onScrubberChange: (e: any) => void;
 }
 
 export type genres =
