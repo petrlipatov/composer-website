@@ -6,7 +6,7 @@ import VideoPopup from "../../components/VideoPopup/VideoPopup";
 import Menu from "./Sections/Menu/Menu";
 import BackgroundImages from "./Sections/BackgroundImages/BackgroundImages";
 
-import { SHOWREEL_YT_ID } from "./_constants";
+import { SHOWREEL_YT_ID } from "../../utils/constants";
 
 import s from "./Home.module.css";
 

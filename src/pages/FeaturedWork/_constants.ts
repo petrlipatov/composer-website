@@ -1,6 +1,6 @@
 import { MutableRefObject } from "react";
 import { ContextTypes } from "./_types";
-import { PLAYER_STATUS } from "../../utils/constants";
+import { PLAYER_STATUS, SHOWREEL_YT_ID } from "../../utils/constants";
 
 export const PROJECTS_GENRES = [
   "Film",
@@ -22,7 +22,7 @@ export const PROJECTS = [
     year: "2021",
     tags: ["Film", "Drama", "Mystery", "Action", "Thriller"],
     image: "/images/projects/six-empty-seats.webp",
-    video: "",
+    video: SHOWREEL_YT_ID,
     tracks: [
       {
         name: "Confusion",
@@ -42,7 +42,7 @@ export const PROJECTS = [
     year: "2019",
     tags: ["Film", "Drama"],
     image: "/images/projects/teachers.webp",
-    video: "",
+    video: SHOWREEL_YT_ID,
     tracks: [
       {
         name: "Long Happy Life (by GROB)",
@@ -72,7 +72,7 @@ export const PROJECTS = [
     year: "2020",
     tags: ["Film", "Drama", "Mystery", "Action", "Thriller"],
     image: "/images/projects/call-center.webp",
-    video: "",
+    video: SHOWREEL_YT_ID,
     tracks: [
       {
         name: "Count Down",
@@ -107,7 +107,7 @@ export const PROJECTS = [
     year: "2021",
     tags: ["Film", "Drama", "Comedy"],
     image: "/images/projects/scrunchie.webp",
-    video: "",
+    video: SHOWREEL_YT_ID,
     tracks: [
       {
         name: "Attraction",
@@ -127,7 +127,7 @@ export const PROJECTS = [
     year: "2019",
     tags: ["Film", "Drama", "Action", "Thriller"],
     image: "/images/projects/to-the-lake.webp",
-    video: "",
+    video: SHOWREEL_YT_ID,
     tracks: [
       {
         name: "Keep It Low",
@@ -147,7 +147,7 @@ export const PROJECTS = [
     year: "2019",
     tags: ["Film", "Drama", "Mystery", "Action", "Fantasy"],
     image: "/images/projects/exclusion-zone.webp",
-    video: "",
+    video: SHOWREEL_YT_ID,
     tracks: [
       {
         name: "Never",
@@ -162,7 +162,7 @@ export const PROJECTS = [
     year: "2020",
     tags: ["Film", "Drama", "Mystery", "Action", "Thriller"],
     image: "/images/projects/horizon.webp",
-    video: "",
+    video: SHOWREEL_YT_ID,
     tracks: [
       {
         name: "Closer to the light",
@@ -370,17 +370,7 @@ export const PROJECTS = [
 
 export const DEFAULT_CONTEXT: ContextTypes = {
   videoID: "",
-  // isPlayerOpened: false,
   selectedTags: [],
-  // currentProject: {
-  //   name: "",
-  //   genre: "",
-  //   year: "",
-  //   image: "",
-  //   video: "",
-  //   tags: [],
-  //   tracks: [],
-  // },
   player: {
     status: PLAYER_STATUS.PAUSED,
     data: {
@@ -400,14 +390,11 @@ export const DEFAULT_CONTEXT: ContextTypes = {
     current: null,
   } as MutableRefObject<HTMLAudioElement | null>,
   selectedProjectIndex: null,
-  // selectedTrackIndex: null,
+
   setSelectedTags: () => {},
-  // setCurrentProject: () => {},
   setVideoID: () => {},
-  // setIsPlayerOpened: () => {},
   setIsVideoPopupOpened: () => {},
   setSelectedProjectIndex: () => {},
-  // setSelectedTrackIndex: () => {},
   dispatchPlayerAction: () => {},
 };
 

@@ -1,3 +1,4 @@
+import { SHOWREEL_YT_ID } from "../../utils/constants";
 import { ContextTypes } from "./_types";
 
 export const PIECES_GENRES = [
@@ -25,7 +26,7 @@ export const PIECES = [
     tags: ["Dark", "Misty", "No lyrics", "Vintage"],
     image: "/images/pieces/cats-and-dogs.webp",
     audio: "/audio/cats-and-dogs.mp3",
-    video: "",
+    video: SHOWREEL_YT_ID,
   },
   {
     name: "Dance Ballet",
@@ -53,7 +54,7 @@ export const PIECES = [
     tags: ["No lyrics", "Misty", "Electronic", "Piano", "Smooth"],
     image: "/images/pieces/full-of-wondering.webp",
     audio: "/audio/full-of-wodering.mp3",
-    video: "",
+    video: SHOWREEL_YT_ID,
   },
   {
     name: "Functional",
@@ -67,7 +68,7 @@ export const PIECES = [
     tags: ["Lyrics", "Folkish", "Vintage", "Misty", "Easy"],
     image: "/images/pieces/going-far-away.webp",
     audio: "/audio/going-far-away.mp3",
-    video: "",
+    video: SHOWREEL_YT_ID,
   },
   {
     name: "I Don't know",
@@ -88,14 +89,14 @@ export const PIECES = [
     tags: ["No lyrics", "Intense", "Misty", "Easy", "Folkish", "Vintage"],
     image: "/images/pieces/journey-around-the-fortune.webp",
     audio: "/audio/journey-around-the-fortune.mp3",
-    video: "",
+    video: SHOWREEL_YT_ID,
   },
   {
     name: "Piano Play",
     tags: ["No lyrics", "Intense", "Dark", "Misty", "Piano", "Orchestral"],
     image: "/images/pieces/piano-play.webp",
     audio: "/audio/piano-play.mp3",
-    video: "",
+    video: SHOWREEL_YT_ID,
   },
   {
     name: "Plavno",
@@ -163,7 +164,7 @@ export const PIECES = [
     tags: ["No lyrics", "Intense", "Misty", "Piano"],
     image: "/images/pieces/the-end-of-patiance.webp",
     audio: "/audio/the-end-of-patience.mp3",
-    video: "",
+    video: SHOWREEL_YT_ID,
   },
   {
     name: "Threat Serenade",
@@ -178,7 +179,7 @@ export const PIECES = [
     ],
     image: "/images/pieces/threat-serenade.webp",
     audio: "/audio/threat-serenade.mp3",
-    video: "",
+    video: SHOWREEL_YT_ID,
   },
   {
     name: "Tomorrow",
@@ -192,7 +193,7 @@ export const PIECES = [
     tags: ["Dark", "Misty", "No lyrics", "Vintage"],
     image: "/images/pieces/worn-out.webp",
     audio: "/audio/worn-out.mp3",
-    video: "",
+    video: SHOWREEL_YT_ID,
   },
 ];
 
