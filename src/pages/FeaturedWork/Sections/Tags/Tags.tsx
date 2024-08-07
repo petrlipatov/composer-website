@@ -1,6 +1,9 @@
 import { useContext } from "react";
 
-import { FeaturedWorkContext } from "../../FeaturedWork";
+import {
+  FeaturedWorkContext,
+  FeaturedWorkDispatchContext,
+} from "../../FeaturedWork";
 
 import { PROJECTS_GENRES } from "../../_constants";
 
@@ -14,9 +17,10 @@ function Tags() {
     selectedTags,
     filteredProjects,
     setSelectedTags,
-    dispatchPlayerAction,
     setSelectedProjectIndex,
   } = useContext(FeaturedWorkContext);
+
+  const dispatchPlayerAction = useContext(FeaturedWorkDispatchContext);
 
   const handleTagClick = (tag: string) => {
     setSelectedProjectIndex(null);

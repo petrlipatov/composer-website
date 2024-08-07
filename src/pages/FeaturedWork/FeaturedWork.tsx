@@ -5,6 +5,7 @@ import {
   createContext,
   useEffect,
   useReducer,
+  Dispatch,
 } from "react";
 import cn from "classnames";
 
@@ -19,11 +20,14 @@ import reducer from "../../utils/reducers/featured.reducer";
 import useIsMobile from "../../utils/hooks/useIsMobile";
 import { PAGES, PLAYER_STATUS } from "../../utils/constants";
 import { DEFAULT_CONTEXT, PROJECTS } from "./_constants";
-import { ContextTypes, ProjectData } from "./_types";
+import { ContextTypes, ExtendedPlayerAction, ProjectData } from "./_types";
 
 import s from "./FeaturedWork.module.css";
 
 export const FeaturedWorkContext = createContext<ContextTypes>(DEFAULT_CONTEXT);
+export const FeaturedWorkDispatchContext = createContext<
+  Dispatch<ExtendedPlayerAction>
+>(() => {});
 
 function FeaturedWork() {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
@@ -51,7 +55,6 @@ function FeaturedWork() {
       filteredProjects,
       audioPlayerRef,
       selectedProjectIndex,
-      dispatchPlayerAction,
       setSelectedTags,
       setIsVideoPopupOpened,
       setVideoID,
@@ -78,22 +81,24 @@ function FeaturedWork() {
 
   return (
     <FeaturedWorkContext.Provider value={contextValue}>
-      <div className={s.page}>
-        <div className={content}>
-          <Header>{PAGES.featured}</Header>
-          <Tags />
-          <Projects />
+      <FeaturedWorkDispatchContext.Provider value={dispatchPlayerAction}>
+        <div className={s.page}>
+          <div className={content}>
+            <Header>{PAGES.featured}</Header>
+            <Tags />
+            <Projects />
+          </div>
+
+          {player.isOpened && <AudioPlayer />}
+
+          {isVideoPopupOpened && (
+            <VideoPopup
+              videoID={videoID}
+              setIsVideoPopupOpened={setIsVideoPopupOpened}
+            />
+          )}
         </div>
-
-        {player.isOpened && <AudioPlayer />}
-
-        {isVideoPopupOpened && (
-          <VideoPopup
-            videoID={videoID}
-            setIsVideoPopupOpened={setIsVideoPopupOpened}
-          />
-        )}
-      </div>
+      </FeaturedWorkDispatchContext.Provider>
     </FeaturedWorkContext.Provider>
   );
 }

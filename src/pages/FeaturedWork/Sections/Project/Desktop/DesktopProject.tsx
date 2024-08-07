@@ -9,7 +9,10 @@ import Info from "../../../../../components/AudioPlayer/Extended/Info/Info";
 import Scrollbar from "../../../../../components/AudioPlayer/Extended/Scrollbar/Scrollbar";
 import AudioTrack from "../../../../../components/AudioPlayer/Extended/AudioTrack/AudioTrack";
 
-import { FeaturedWorkContext } from "../../../FeaturedWork";
+import {
+  FeaturedWorkContext,
+  FeaturedWorkDispatchContext,
+} from "../../../FeaturedWork";
 
 import { ProjectProps } from "../types";
 
@@ -24,16 +27,16 @@ const DesktopProject = ({
   index: projectIndex,
   data,
   isSelected,
-}: //
-ProjectProps) => {
+}: ProjectProps) => {
   const {
     selectedProjectIndex,
     setSelectedProjectIndex,
     player,
     setVideoID,
     setIsVideoPopupOpened,
-    dispatchPlayerAction,
   } = useContext(FeaturedWorkContext);
+
+  const dispatchPlayerAction = useContext(FeaturedWorkDispatchContext);
 
   const isTrackPlaying = (i) => {
     return (

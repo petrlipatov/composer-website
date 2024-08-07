@@ -7,7 +7,10 @@ import Artwork from "../../../../../components/Project/Artwork/Artwork";
 import TvIcon from "../../../../../components/Icons/TvIcon/TvIcon";
 import HeadphonesIcon from "../../../../../components/Icons/HeadphonesIcon/HeadphonesIcon";
 
-import { FeaturedWorkContext } from "../../../FeaturedWork";
+import {
+  FeaturedWorkContext,
+  FeaturedWorkDispatchContext,
+} from "../../../FeaturedWork";
 
 import { FIRST_TRACK_INDEX } from "../../../../../utils/constants";
 
@@ -24,8 +27,8 @@ const MobileProject = ({
   isSelected,
   setSelectedProjectIndex,
 }: ProjectProps) => {
-  const { dispatchPlayerAction, setVideoID, setIsVideoPopupOpened } =
-    useContext(FeaturedWorkContext);
+  const { setVideoID, setIsVideoPopupOpened } = useContext(FeaturedWorkContext);
+  const dispatchPlayerAction = useContext(FeaturedWorkDispatchContext);
 
   useEffect(() => {
     if (isSelected) {

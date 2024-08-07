@@ -13,19 +13,17 @@ import DurationBar from "../../../../../components/AudioPlayer/Shared/ProgressBa
 import BufferedBar from "../../../../../components/AudioPlayer/Shared/ProgressBar/BufferedBar/BufferedBar";
 import ScrubberLoader from "../../../../../components/AudioPlayer/Shared/ProgressBar/ScrubberLoader/ScrubberLoader";
 import ScrubberBar from "../../../../../components/AudioPlayer/Shared/ProgressBar/ScrubberBar/ScrubberBar";
-
-import { FeaturedWorkContext } from "../../../FeaturedWork";
+import TimeValue from "../../../../../components/AudioPlayer/Shared/ProgressBar/TimeValue/TimeValue";
 
 import {
-  //   FIRST_TRACK_INDEX,
-  PLAYER_CONTROLS,
-  PLAYER_STATUS,
-} from "../../../../../utils/constants";
+  FeaturedWorkContext,
+  FeaturedWorkDispatchContext,
+} from "../../../FeaturedWork";
 
-import s from "./MobileAudioPlayer.module.css";
+import { PLAYER_CONTROLS, PLAYER_STATUS } from "../../../../../utils/constants";
+
 import { getNextTrackIndex } from "../_helpers";
 import { EXTENDED_PLAYER_ACTION_TYPE } from "../../../_types";
-import TimeValue from "../../../../../components/AudioPlayer/Shared/ProgressBar/TimeValue/TimeValue";
 import { formatTime } from "../../../../../utils/helpers/formatTime";
 import useElapsedTimeProgress from "../../../../../utils/hooks/useElapsedTimeProgress";
 import useBufferedAudioProgress from "../../../../../utils/hooks/useBufferedAudioProgress";
@@ -37,6 +35,8 @@ import useScrollSelectedTrackIntoView from "../../../../../utils/hooks/useScroll
 import useTransitionOnProgressBarWhenBuffered from "../../../../../utils/hooks/useTransitionOnProgressBarWhenBuffered";
 import usePlayPauseToggler from "../../../../../utils/hooks/usePlayPauseToggler";
 
+import s from "./MobileAudioPlayer.module.css";
+
 const MobileAudioPlayer = () => {
   const [buffered, setBuffered] = useState(0);
   const [elapsed, setElapsed] = useState(0);
@@ -44,8 +44,10 @@ const MobileAudioPlayer = () => {
   const [isTransitionProgressBar, setIsTransitionOnProgressBar] =
     useState(false);
 
-  const { setVideoID, setIsVideoPopupOpened, player, dispatchPlayerAction } =
+  const { setVideoID, setIsVideoPopupOpened, player } =
     useContext(FeaturedWorkContext);
+
+  const dispatchPlayerAction = useContext(FeaturedWorkDispatchContext);
 
   const progressBarRef = useRef<HTMLInputElement>();
   const bufferedBarRef = useRef<HTMLDivElement>();

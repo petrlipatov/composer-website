@@ -51,5 +51,4 @@ export interface ContextTypes {
   setVideoID: Dispatch<SetStateAction<string>>;
   setIsVideoPopupOpened: Dispatch<SetStateAction<boolean>>;
   setSelectedProjectIndex: Dispatch<SetStateAction<number>>;
-  dispatchPlayerAction: Dispatch<ExtendedPlayerAction>;
 }

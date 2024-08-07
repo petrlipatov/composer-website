@@ -395,7 +395,6 @@ export const DEFAULT_CONTEXT: ContextTypes = {
   setVideoID: () => {},
   setIsVideoPopupOpened: () => {},
   setSelectedProjectIndex: () => {},
-  dispatchPlayerAction: () => {},
 };
 
 export const TABLE_COLUMNS_MOBILE = 2;

@@ -12,7 +12,10 @@ import BufferedBar from "../../../../../components/AudioPlayer/Shared/ProgressBa
 import ScrubberLoader from "../../../../../components/AudioPlayer/Shared/ProgressBar/ScrubberLoader/ScrubberLoader";
 import ScrubberBar from "../../../../../components/AudioPlayer/Shared/ProgressBar/ScrubberBar/ScrubberBar";
 
-import { FeaturedWorkContext } from "../../../FeaturedWork";
+import {
+  FeaturedWorkContext,
+  FeaturedWorkDispatchContext,
+} from "../../../FeaturedWork";
 
 import { getNextTrackIndex } from "../_helpers";
 
@@ -42,13 +45,10 @@ const DesktopAudioPlayer = () => {
   const [isTransitionProgressBar, setIsTransitionOnProgressBar] =
     useState(false);
 
-  const {
-    player,
-    dispatchPlayerAction,
-    setVideoID,
-    setIsVideoPopupOpened,
-    setSelectedProjectIndex,
-  } = useContext(FeaturedWorkContext);
+  const { player, setVideoID, setIsVideoPopupOpened, setSelectedProjectIndex } =
+    useContext(FeaturedWorkContext);
+
+  const dispatchPlayerAction = useContext(FeaturedWorkDispatchContext);
 
   const progressBarRef = useRef<HTMLInputElement>();
   const bufferedBarRef = useRef<HTMLDivElement>();
