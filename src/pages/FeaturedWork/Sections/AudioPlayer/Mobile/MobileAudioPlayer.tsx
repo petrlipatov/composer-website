@@ -21,7 +21,6 @@ import {
 } from "../../../FeaturedWork";
 
 import { PLAYER_CONTROLS, PLAYER_STATUS } from "../../../../../utils/constants";
-
 import { getNextTrackIndex } from "../_helpers";
 import { EXTENDED_PLAYER_ACTION_TYPE } from "../../../_types";
 import { formatTime } from "../../../../../utils/helpers/formatTime";
