@@ -22,15 +22,18 @@ import usePlayPauseToggler from "../../../../utils/hooks/usePlayPauseToggler";
 
 import { PLAYER_ACTION_TYPE } from "../../_types";
 import { PLAYER_CONTROLS, PLAYER_STATUS } from "../../../../utils/constants";
-import { handleScrubberChange } from "../../../../utils/helpers/audioPlayer";
-import useTransitionOnProgressBarWhenBuffered from "../../../../utils/hooks/useTransitionOnProgressBarWhenBuffered";
+import {
+  handleMouseDown,
+  handleMouseUp,
+  handleScrubberChange,
+} from "../../../../utils/helpers/audioPlayer";
 
 const AudioPlayer = () => {
   const [buffered, setBuffered] = useState(0);
   const [elapsed, setElapsed] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isTransitionOnProgressBar, setIsTransitionOnProgressBar] =
-    useState(false);
+    useState(true);
 
   const audioPlayerRef = useRef<HTMLAudioElement>();
   const progressBarRef = useRef<HTMLInputElement>();
@@ -46,11 +49,6 @@ const AudioPlayer = () => {
 
   const dispatchPlayerAction = useContext(PlayerDispatchContext);
 
-  useTransitionOnProgressBarWhenBuffered(
-    buffered,
-    setIsTransitionOnProgressBar
-  );
-
   usePlayPauseToggler(audioPlayerRef, player);
 
   useAudioPlayerEvents(
@@ -65,7 +63,7 @@ const AudioPlayer = () => {
   useBufferedAudioProgress(bufferedBarRef, buffered, duration, elapsed);
 
   const onScrubberChange = useCallback((e) => {
-    handleScrubberChange(e, audioPlayerRef, setIsTransitionOnProgressBar);
+    handleScrubberChange(e, audioPlayerRef);
   }, []);
 
   const handlePlayPauseClick = useCallback(() => {
@@ -94,7 +92,6 @@ const AudioPlayer = () => {
         });
 
         setSelectedTrackIndex(nextTrackIndex);
-        setIsTransitionOnProgressBar(false);
       }
     },
     [
@@ -137,6 +134,16 @@ const AudioPlayer = () => {
                 elapsedTime={elapsed}
                 duration={duration}
                 onScrubberChange={onScrubberChange}
+                onMouseUp={(e) => {
+                  handleMouseUp(
+                    e,
+                    audioPlayerRef,
+                    setIsTransitionOnProgressBar
+                  );
+                }}
+                onMouseDown={() => {
+                  handleMouseDown(setIsTransitionOnProgressBar);
+                }}
                 progressTransitionAnimation={isTransitionOnProgressBar}
                 ref={progressBarRef}
               />

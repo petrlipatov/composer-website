@@ -5,13 +5,22 @@ import { TRANSITION } from "../../../../../utils/constants";
 type Props = {
   elapsedTime: number;
   duration: number;
-  onScrubberChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onScrubberChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  onMouseDown?: () => void;
+  onMouseUp?: (e) => void;
   progressTransitionAnimation: boolean;
 };
 
 const Scrubber = forwardRef<HTMLInputElement, Props>(
   (
-    { progressTransitionAnimation, elapsedTime, duration, onScrubberChange },
+    {
+      progressTransitionAnimation,
+      elapsedTime,
+      duration,
+      onMouseDown,
+      onMouseUp,
+      onScrubberChange,
+    },
     ref
   ) => {
     return (
@@ -21,7 +30,11 @@ const Scrubber = forwardRef<HTMLInputElement, Props>(
         value={elapsedTime}
         min={0}
         max={duration}
-        onChange={onScrubberChange}
+        onInput={onScrubberChange}
+        onMouseDown={onMouseDown}
+        onMouseUp={onMouseUp}
+        onTouchStart={onMouseDown}
+        onTouchEnd={onMouseUp}
         ref={ref}
         style={{
           transition: progressTransitionAnimation

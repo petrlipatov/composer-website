@@ -32,18 +32,19 @@ import { formatTime } from "../../../../../utils/helpers/formatTime";
 import useElapsedTimeProgress from "../../../../../utils/hooks/useElapsedTimeProgress";
 import useBufferedAudioProgress from "../../../../../utils/hooks/useBufferedAudioProgress";
 import {
+  handleMouseDown,
+  handleMouseUp,
   handleScrubberChange,
   updateBufferedAndElapsedTime,
 } from "../../../../../utils/helpers/audioPlayer";
 import usePlayPauseToggler from "../../../../../utils/hooks/usePlayPauseToggler";
-import useTransitionOnProgressBarWhenBuffered from "../../../../../utils/hooks/useTransitionOnProgressBarWhenBuffered";
 
 const DesktopAudioPlayer = () => {
   const [buffered, setBuffered] = useState(0);
   const [elapsed, setElapsed] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isTransitionProgressBar, setIsTransitionOnProgressBar] =
-    useState(false);
+    useState(true);
 
   const { player, setVideoID, setIsVideoPopupOpened, setSelectedProjectIndex } =
     useContext(FeaturedWorkContext);
@@ -110,13 +111,8 @@ const DesktopAudioPlayer = () => {
   useElapsedTimeProgress(progressBarRef, elapsed, duration);
   useBufferedAudioProgress(bufferedBarRef, buffered, duration, elapsed);
 
-  useTransitionOnProgressBarWhenBuffered(
-    buffered,
-    setIsTransitionOnProgressBar
-  );
-
   const onScrubberChange = useCallback((e) => {
-    handleScrubberChange(e, audioPlayerRef, setIsTransitionOnProgressBar);
+    handleScrubberChange(e, audioPlayerRef);
   }, []);
 
   const handlePlayPauseClick = () => {
@@ -140,7 +136,6 @@ const DesktopAudioPlayer = () => {
       type: EXTENDED_PLAYER_ACTION_TYPE.TRACK_SELECTED,
       payload: nextTrackIndex,
     });
-    setIsTransitionOnProgressBar(false);
   };
 
   const handleCloseClick = () => {
@@ -174,10 +169,10 @@ const DesktopAudioPlayer = () => {
           isAudioPlaying={player.status === PLAYER_STATUS.PLAYING}
         />
 
-        <div className={s.progressBarContainer} key={player.data.name}>
+        <div className={s.progressBarContainer} key={player.selectedTrackIndex}>
           <TimeValue> {formatTime(elapsed)}</TimeValue>
 
-          <div className={s.progressBar} key={player.selectedTrackIndex}>
+          <div className={s.progressBar}>
             <ScrubberLoader
               isLoading={player.status === PLAYER_STATUS.LOADING}
             />
@@ -185,6 +180,12 @@ const DesktopAudioPlayer = () => {
               elapsedTime={elapsed}
               duration={duration}
               onScrubberChange={onScrubberChange}
+              onMouseUp={(e) => {
+                handleMouseUp(e, audioPlayerRef, setIsTransitionOnProgressBar);
+              }}
+              onMouseDown={() => {
+                handleMouseDown(setIsTransitionOnProgressBar);
+              }}
               progressTransitionAnimation={isTransitionProgressBar}
               ref={progressBarRef}
             />

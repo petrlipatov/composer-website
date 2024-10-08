@@ -27,11 +27,12 @@ import { formatTime } from "../../../../../utils/helpers/formatTime";
 import useElapsedTimeProgress from "../../../../../utils/hooks/useElapsedTimeProgress";
 import useBufferedAudioProgress from "../../../../../utils/hooks/useBufferedAudioProgress";
 import {
+  handleMouseDown,
+  handleMouseUp,
   handleScrubberChange,
   updateBufferedAndElapsedTime,
 } from "../../../../../utils/helpers/audioPlayer";
 import useScrollSelectedTrackIntoView from "../../../../../utils/hooks/useScrollSelectedTrackIntoView";
-import useTransitionOnProgressBarWhenBuffered from "../../../../../utils/hooks/useTransitionOnProgressBarWhenBuffered";
 import usePlayPauseToggler from "../../../../../utils/hooks/usePlayPauseToggler";
 
 import s from "./MobileAudioPlayer.module.css";
@@ -41,7 +42,7 @@ const MobileAudioPlayer = () => {
   const [elapsed, setElapsed] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isTransitionProgressBar, setIsTransitionOnProgressBar] =
-    useState(false);
+    useState(true);
 
   const { setVideoID, setIsVideoPopupOpened, player } =
     useContext(FeaturedWorkContext);
@@ -110,11 +111,6 @@ const MobileAudioPlayer = () => {
   useElapsedTimeProgress(progressBarRef, elapsed, duration);
   useBufferedAudioProgress(bufferedBarRef, buffered, duration, elapsed);
 
-  useTransitionOnProgressBarWhenBuffered(
-    buffered,
-    setIsTransitionOnProgressBar
-  );
-
   useScrollSelectedTrackIntoView(
     player.selectedTrackIndex,
     tracksRefs,
@@ -122,7 +118,7 @@ const MobileAudioPlayer = () => {
   );
 
   const onScrubberChange = useCallback((e) => {
-    handleScrubberChange(e, audioPlayerRef, setIsTransitionOnProgressBar);
+    handleScrubberChange(e, audioPlayerRef);
   }, []);
 
   const isTrackPlaying = (i) => {
@@ -150,7 +146,6 @@ const MobileAudioPlayer = () => {
       type: EXTENDED_PLAYER_ACTION_TYPE.TRACK_SELECTED,
       payload: nextTrackIndex,
     });
-    setIsTransitionOnProgressBar(false);
   };
 
   const handleTrackClick = (index: number) => {
@@ -206,7 +201,7 @@ const MobileAudioPlayer = () => {
           isAudioPlaying={player.status === PLAYER_STATUS.PLAYING}
         />
 
-        <div className={s.progressBarContainer} key={player.data.name}>
+        <div className={s.progressBarContainer} key={player.selectedTrackIndex}>
           <TimeValue> {formatTime(elapsed)}</TimeValue>
 
           <div className={s.progressBar}>
@@ -217,6 +212,12 @@ const MobileAudioPlayer = () => {
               elapsedTime={elapsed}
               duration={duration}
               onScrubberChange={onScrubberChange}
+              onMouseUp={(e) => {
+                handleMouseUp(e, audioPlayerRef, setIsTransitionOnProgressBar);
+              }}
+              onMouseDown={() => {
+                handleMouseDown(setIsTransitionOnProgressBar);
+              }}
               progressTransitionAnimation={isTransitionProgressBar}
               ref={progressBarRef}
             />

@@ -25,16 +25,27 @@ export function updateBufferedAndElapsedTime(
 
 export const handleScrubberChange = (
   e,
-  audioPlayerRef: MutableRefObject<HTMLAudioElement>,
-  progressBarTransitionSetter: Dispatch<SetStateAction<boolean>>
+  audioPlayerRef: MutableRefObject<HTMLAudioElement>
 ) => {
-  progressBarTransitionSetter(false);
   const newTime = e.target.value;
+
   if (audioPlayerRef.current) {
     audioPlayerRef.current.currentTime = newTime;
   }
+};
 
-  setTimeout(() => {
-    progressBarTransitionSetter(true);
-  }, 300);
+export const handleMouseDown = (
+  progressBarTransitionSetter: Dispatch<SetStateAction<boolean>>
+) => {
+  console.log("yo1");
+  progressBarTransitionSetter(false);
+};
+
+export const handleMouseUp = (
+  e,
+  audioPlayerRef: MutableRefObject<HTMLAudioElement>,
+  progressBarTransitionSetter: Dispatch<SetStateAction<boolean>>
+) => {
+  console.log("yo2");
+  progressBarTransitionSetter(true);
 };

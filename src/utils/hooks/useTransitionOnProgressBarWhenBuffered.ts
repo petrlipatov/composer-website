@@ -6,7 +6,7 @@ const useTransitionOnProgressBarWhenBuffered = (
 ) => {
   useEffect(() => {
     if (buffered !== 0) {
-      setProgressTransitionAnimation(true);
+      // setProgressTransitionAnimation(true);
     }
   }, [buffered, setProgressTransitionAnimation]);
 };
