@@ -37,7 +37,6 @@ export const handleScrubberChange = (
 export const handleMouseDown = (
   progressBarTransitionSetter: Dispatch<SetStateAction<boolean>>
 ) => {
-  console.log("yo1");
   progressBarTransitionSetter(false);
 };
 
@@ -46,6 +45,7 @@ export const handleMouseUp = (
   audioPlayerRef: MutableRefObject<HTMLAudioElement>,
   progressBarTransitionSetter: Dispatch<SetStateAction<boolean>>
 ) => {
-  console.log("yo2");
-  progressBarTransitionSetter(true);
+  requestAnimationFrame(() => {
+    progressBarTransitionSetter(true);
+  });
 };
