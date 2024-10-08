@@ -408,3 +408,6 @@ export const PROJECT_TOP_MARGIN_DESKTOP = 16;
 
 export const PROJECT_ASPECT_RATIO_MOBILE = 0.65;
 export const PROJECT_ASPECT_RATIO_DESKTOP = 0.7;
+
+export const SCROLL_WIDTH_MOBILE = 0;
+export const SCROLL_WIDTH_DESKTOP = 15;

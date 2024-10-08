@@ -23,6 +23,8 @@ import {
   PROJECT_ASPECT_RATIO_DESKTOP,
   PROJECT_TOP_MARGIN_MOBILE,
   PROJECT_TOP_MARGIN_DESKTOP,
+  SCROLL_WIDTH_MOBILE,
+  SCROLL_WIDTH_DESKTOP,
 } from "../../_constants";
 
 import s from "./Projects.module.css";
@@ -65,7 +67,7 @@ export default function Projects() {
     ? PROJECT_TOP_MARGIN_MOBILE
     : PROJECT_TOP_MARGIN_DESKTOP;
 
-  const scrollWidth = isMobile ? 0 : 13;
+  const scrollWidth = isMobile ? SCROLL_WIDTH_MOBILE : SCROLL_WIDTH_DESKTOP;
 
   const sectionWidthWithoutScroll = sectionWidth - scrollWidth;
 
