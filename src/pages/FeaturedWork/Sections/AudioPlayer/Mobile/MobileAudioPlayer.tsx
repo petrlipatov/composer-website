@@ -28,7 +28,7 @@ import useElapsedTimeProgress from "../../../../../utils/hooks/useElapsedTimePro
 import useBufferedAudioProgress from "../../../../../utils/hooks/useBufferedAudioProgress";
 import {
   handleMouseDown,
-  handleMouseUp,
+  // handleMouseUp,
   handleScrubberChange,
   updateBufferedAndElapsedTime,
 } from "../../../../../utils/helpers/audioPlayer";
@@ -118,7 +118,7 @@ const MobileAudioPlayer = () => {
   );
 
   const onScrubberChange = useCallback((e) => {
-    handleScrubberChange(e, audioPlayerRef);
+    handleScrubberChange(e, audioPlayerRef, setIsTransitionOnProgressBar);
   }, []);
 
   const isTrackPlaying = (i) => {
@@ -212,9 +212,9 @@ const MobileAudioPlayer = () => {
               elapsedTime={elapsed}
               duration={duration}
               onScrubberChange={onScrubberChange}
-              onMouseUp={(e) => {
-                handleMouseUp(e, audioPlayerRef, setIsTransitionOnProgressBar);
-              }}
+              // onMouseUp={() => {
+              //   handleMouseUp(setIsTransitionOnProgressBar);
+              // }}
               onMouseDown={() => {
                 handleMouseDown(setIsTransitionOnProgressBar);
               }}
