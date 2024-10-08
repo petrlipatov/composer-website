@@ -53,7 +53,7 @@
   }
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 1000px) {
   .about {
     width: 900px;
     margin-top: 48px;

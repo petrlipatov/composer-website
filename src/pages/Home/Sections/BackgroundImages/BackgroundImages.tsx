@@ -1,13 +1,6 @@
 import useIsMobile from "../../../../utils/hooks/useIsMobile";
+import { IMAGES_DESKTOP, IMAGES_MOBILE } from "../../_constants";
 import s from "./BackgroundImages.module.css";
-
-const IMAGES_MOBILE = [
-  "/images/home/flower1_414x753.webp",
-  "/images/home/flower2_414x753.webp",
-  "/images/home/flower3_414x753.webp",
-];
-
-const IMAGES_DESKTOP = ["/images/home/img.png"];
 
 const BackgroundImages = () => {
   const isMobile = useIsMobile();
