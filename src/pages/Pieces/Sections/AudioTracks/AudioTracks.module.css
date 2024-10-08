@@ -4,15 +4,6 @@
   overflow-y: scroll;
 }
 
-/* .tracks::-webkit-scrollbar {
-  width: 5px;
-}
-
-.tracks::-webkit-scrollbar-thumb {
-  color: red;
-  width: 5px;
-} */
-
 @media (min-width: 1280px) {
   .tracks {
     width: 900px;

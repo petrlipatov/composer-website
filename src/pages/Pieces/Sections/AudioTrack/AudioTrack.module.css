@@ -9,6 +9,7 @@
 }
 
 .artwork {
+  aspect-ratio: 1 / 1;
   display: block;
   height: auto;
   width: 100%;
