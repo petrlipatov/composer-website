@@ -10,15 +10,11 @@ import { SoundSpecs } from "./Sections/SoundSpecs/SoundSpecs";
 import { Header } from "@/components/Header";
 import { Tag } from "@/components/Tags";
 import { PAGES } from "@/utils/constants";
+import { SECTION_TAGS } from "./_constants";
 
 import s from "./Info.module.css";
-
-enum SECTION_TAGS {
-  about,
-  contacts,
-  gallery,
-  specs,
-}
+import { Tags } from "./Sections/Tags/Tags";
+import { SectionsRouter } from "./Sections/SectionsRouter/SectionsRouter";
 
 function Info() {
   const [selectedTag, setSelectedTag] = useState(SECTION_TAGS.about);
@@ -27,43 +23,8 @@ function Info() {
     <Page>
       <Content>
         <Header>{PAGES.info}</Header>
-
-        <div className={s.tagsSection}>
-          <Tag
-            onClick={() => setSelectedTag(SECTION_TAGS.about)}
-            isSelected={selectedTag === SECTION_TAGS.about}
-          >
-            About
-          </Tag>
-
-          <Tag
-            onClick={() => setSelectedTag(SECTION_TAGS.contacts)}
-            isSelected={selectedTag === SECTION_TAGS.contacts}
-          >
-            Contacts
-          </Tag>
-
-          <Tag
-            onClick={() => setSelectedTag(SECTION_TAGS.gallery)}
-            isSelected={selectedTag === SECTION_TAGS.gallery}
-          >
-            Gallery
-          </Tag>
-
-          <Tag
-            onClick={() => setSelectedTag(SECTION_TAGS.specs)}
-            isSelected={selectedTag === SECTION_TAGS.specs}
-          >
-            Sound Specs
-          </Tag>
-        </div>
-
-        {selectedTag === SECTION_TAGS.about && <About />}
-        {selectedTag === SECTION_TAGS.contacts && <Contacts />}
-        {selectedTag === SECTION_TAGS.gallery && <Gallery />}
-        {selectedTag === SECTION_TAGS.specs && <SoundSpecs />}
-
-        <div className={s.gallerySection}></div>
+        <Tags selected={selectedTag} setSelectedTag={setSelectedTag} />
+        <SectionsRouter selected={selectedTag} />
       </Content>
     </Page>
   );

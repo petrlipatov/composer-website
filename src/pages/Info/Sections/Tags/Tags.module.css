@@ -1,0 +1,18 @@
+.tagsSection {
+  margin-top: 24px;
+  display: flex;
+  gap: 8px;
+}
+/* 
+.tag {
+  all: unset;
+  text-align: center;
+  border: 1px solid black;
+  font-size: 12px;
+  padding: 8px;
+  font-weight: 600;
+} */
+
+.tagSelected {
+  background-color: #e7397a;
+}

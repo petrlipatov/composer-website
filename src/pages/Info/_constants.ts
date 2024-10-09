@@ -1,3 +1,10 @@
+export const SECTION_TAGS = {
+  about: "About",
+  contacts: "Contacts",
+  gallery: "Gallery",
+  specs: "Sound Specs",
+};
+
 export const YOUTUBE_LINK = "https://www.youtube.com/@lizatikhonovamusic";
 
 export const GALLERY_IMAGES_COUNT_MOBILE = 6;
