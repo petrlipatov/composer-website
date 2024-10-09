@@ -1,16 +1,17 @@
 import { useCallback, useContext } from "react";
 
-import Tag from "../../../../components/Tags/Tag/Tag";
-import ClearButton from "../../../../components/Tags/ClearButton/ClearButton";
+import { Tag, ClearButton } from "@/components/Tags";
 
-import { PlayerContext, PlayerDispatchContext } from "../../Pieces";
-
+import {
+  PlayerContext,
+  PlayerDispatchContext,
+} from "../PiecesContext/PiecesContext";
 import { PIECES_GENRES } from "../../_constants";
 import { PLAYER_ACTION_TYPE } from "../../_types";
 
 import s from "./Tags.module.css";
 
-function Tags() {
+export function Tags() {
   const {
     selectedTags,
     filteredPieces,
@@ -67,5 +68,3 @@ function Tags() {
     </section>
   );
 }
-
-export default Tags;

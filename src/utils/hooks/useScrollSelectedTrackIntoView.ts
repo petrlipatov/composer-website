@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const useScrollSelectedTrackIntoView = (
+export const useScrollSelectedTrackIntoView = (
   selectedTrackIndex,
   tracksRefs,
   tracksContainerRef
@@ -23,5 +23,3 @@ const useScrollSelectedTrackIntoView = (
     }
   }, [selectedTrackIndex, tracksRefs, tracksContainerRef]);
 };
-
-export default useScrollSelectedTrackIntoView;

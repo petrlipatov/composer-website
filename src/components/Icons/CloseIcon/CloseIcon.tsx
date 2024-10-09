@@ -7,7 +7,7 @@ interface Props {
   className?: string;
 }
 
-const CloseIcon = ({ color = "#000000", className }: Props) => {
+export const CloseIcon = ({ color = "#000000", className }: Props) => {
   return (
     <svg
       viewBox="0 0 16 16"
@@ -36,5 +36,3 @@ const CloseIcon = ({ color = "#000000", className }: Props) => {
     </svg>
   );
 };
-
-export default CloseIcon;

@@ -2,7 +2,11 @@ import React from "react";
 import cn from "classnames";
 import s from "./PauseIcon.module.css";
 
-const PauseIcon = ({ isAudioPlaying, customStyles, isFilled = false }) => {
+export const PauseIcon = ({
+  isAudioPlaying,
+  customStyles,
+  isFilled = false,
+}) => {
   return (
     <svg
       viewBox="0 0 18 14"
@@ -20,5 +24,3 @@ const PauseIcon = ({ isAudioPlaying, customStyles, isFilled = false }) => {
     </svg>
   );
 };
-
-export default PauseIcon;

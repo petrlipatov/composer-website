@@ -6,7 +6,6 @@
 .player {
   visibility: hidden;
   display: flex;
-
   flex-direction: column;
   position: absolute;
   background-color: #e7397a;

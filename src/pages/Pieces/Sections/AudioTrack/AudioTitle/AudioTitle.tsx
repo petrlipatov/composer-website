@@ -1,5 +1,5 @@
 import s from "./AudioTitle.module.css";
-import Equalizer from "../../../../../components/Equalizer/Equalizer";
+import { Equalizer } from "@/components/Equalizer/Equalizer";
 
 type AudioTitleProps = {
   name: string;
@@ -8,7 +8,7 @@ type AudioTitleProps = {
   isPaused: boolean;
 };
 
-const AudioTitle = ({
+export const AudioTitle = ({
   isPlaying,
   isLoading,
   isPaused,
@@ -39,5 +39,3 @@ const AudioTitle = ({
     </div>
   );
 };
-
-export default AudioTitle;

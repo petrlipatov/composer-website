@@ -1,12 +1,11 @@
-import TvIcon from "../../../Icons/TvIcon/TvIcon";
-
+import { TvIcon } from "@/components/Icons";
 import s from "./VideoButton.module.css";
 
 type Props = {
   handleVideoClick: () => void;
 };
 
-function VideoButton({ handleVideoClick }: Props) {
+export function VideoButton({ handleVideoClick }: Props) {
   return (
     <div className={s.container} onClick={handleVideoClick}>
       <TvIcon className={s.videoIcon} />
@@ -14,5 +13,3 @@ function VideoButton({ handleVideoClick }: Props) {
     </div>
   );
 }
-
-export default VideoButton;

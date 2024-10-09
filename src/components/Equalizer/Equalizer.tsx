@@ -1,7 +1,7 @@
 import s from "./Equalizer.module.css";
 import cn from "classnames";
 
-function EqualizerIcon({ color }: { color?: string }) {
+export function Equalizer({ color }: { color?: string }) {
   let barColor;
 
   switch (color) {
@@ -31,5 +31,3 @@ function EqualizerIcon({ color }: { color?: string }) {
     </div>
   );
 }
-
-export default EqualizerIcon;

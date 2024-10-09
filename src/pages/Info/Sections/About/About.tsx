@@ -1,7 +1,7 @@
 import { PORTRAIT_IMAGE, YOUTUBE_LINK } from "../../_constants";
 import s from "./About.module.css";
 
-function About() {
+export function About() {
   return (
     <section className={s.about}>
       <div className={s.aboutText}>
@@ -89,5 +89,3 @@ function About() {
     </section>
   );
 }
-
-export default About;

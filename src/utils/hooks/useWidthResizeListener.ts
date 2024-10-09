@@ -5,7 +5,7 @@ import {
   useLayoutEffect,
 } from "react";
 
-function useWidthResizeListener(
+export function useWidthResizeListener(
   ref: MutableRefObject<HTMLDivElement>,
   setElementWidth: Dispatch<SetStateAction<number>>
 ) {
@@ -23,5 +23,3 @@ function useWidthResizeListener(
     };
   }, [ref, setElementWidth]);
 }
-
-export default useWidthResizeListener;

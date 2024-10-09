@@ -1,12 +1,10 @@
-import TvIcon from "../../../Icons/TvIcon/TvIcon";
-
-import { ProjectData } from "../../../../pages/FeaturedWork/_types";
-
+import { ProjectData } from "@/pages/FeaturedWork/_types";
+import { TvIcon } from "@/components/Icons";
 import s from "./Info.module.css";
 
 type Props = { data: ProjectData; handleVideoClick: (e: any) => void };
 
-function Info({ data, handleVideoClick }: Props) {
+export function Info({ data, handleVideoClick }: Props) {
   return (
     <div className={s.projectInfoSection}>
       <img className={s.artwork} src={data?.image} />
@@ -24,5 +22,3 @@ function Info({ data, handleVideoClick }: Props) {
     </div>
   );
 }
-
-export default Info;

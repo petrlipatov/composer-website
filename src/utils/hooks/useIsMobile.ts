@@ -1,6 +1,6 @@
 import { useState, useLayoutEffect } from "react";
 
-const useIsMobile = () => {
+export const useIsMobile = () => {
   const [isMobile, setIsMobile] = useState(null);
 
   useLayoutEffect(() => {
@@ -17,5 +17,3 @@ const useIsMobile = () => {
 
   return isMobile;
 };
-
-export default useIsMobile;

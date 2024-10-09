@@ -1,12 +1,12 @@
-import { ProjectData } from "../../../../pages/FeaturedWork/_types";
-import s from "./Title.module.css";
+import { ProjectData } from "@/pages/FeaturedWork/_types";
+import s from "./ExtendedTitle.module.css";
 
 type Props = {
   selectedTrackIndex: number;
   currentProject: ProjectData;
 };
 
-function Title({ selectedTrackIndex, currentProject }: Props) {
+export function ExtendedTitle({ selectedTrackIndex, currentProject }: Props) {
   return (
     <div className={s.title}>
       {selectedTrackIndex === undefined
@@ -15,5 +15,3 @@ function Title({ selectedTrackIndex, currentProject }: Props) {
     </div>
   );
 }
-
-export default Title;

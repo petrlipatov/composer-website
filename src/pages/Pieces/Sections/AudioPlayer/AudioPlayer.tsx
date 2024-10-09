@@ -1,34 +1,38 @@
 import { useCallback, useContext, useRef, useState } from "react";
-import { PlayerContext, PlayerDispatchContext } from "../../Pieces";
+import {
+  PlayerContext,
+  PlayerDispatchContext,
+} from "../PiecesContext/PiecesContext";
 
-import s from "./AudioPlayer.module.css";
-import ControlButtons from "../../../../components/AudioPlayer/Shared/ControlButtons/ControlButtons";
-import Title from "../../../../components/AudioPlayer/Simple/Title/Title";
-import Artwork from "../../../../components/AudioPlayer/Simple/Artwork/Artwork";
-import VideoButton from "../../../../components/AudioPlayer/Simple/VideoButton/VideoButton";
-import CloseButton from "../../../../components/AudioPlayer/Simple/CloseButton/CloseButton";
-import HTMLAudioTag from "../../../../components/HTMLAudioTag/HTMLAudioTag";
-import TimeValue from "../../../../components/AudioPlayer/Shared/ProgressBar/TimeValue/TimeValue";
-import BufferedBar from "../../../../components/AudioPlayer/Shared/ProgressBar/BufferedBar/BufferedBar";
-import DurationBar from "../../../../components/AudioPlayer/Shared/ProgressBar/DurationBar/DurationBar";
-import ScrubberLoader from "../../../../components/AudioPlayer/Shared/ProgressBar/ScrubberLoader/ScrubberLoader";
-import ScrubberBar from "../../../../components/AudioPlayer/Shared/ProgressBar/ScrubberBar/ScrubberBar";
+import { HTMLAudioTag } from "@/components/HTMLAudioTag";
+import {
+  Artwork,
+  ScrubberBar,
+  ScrubberLoader,
+  ControlButtons,
+  DurationBar,
+  BufferedBar,
+  TimeValue,
+  CloseButton,
+  VideoButton,
+  SimpleTitle,
+} from "@/components/AudioPlayer";
 
-import { formatTime } from "../../../../utils/helpers/formatTime";
-import useElapsedTimeProgress from "../../../../utils/hooks/useElapsedTimeProgress";
-import useBufferedAudioProgress from "../../../../utils/hooks/useBufferedAudioProgress";
-import useAudioPlayerEvents from "../../../../utils/hooks/useAudioPlayerEvents";
-import usePlayPauseToggler from "../../../../utils/hooks/usePlayPauseToggler";
-
-import { PLAYER_ACTION_TYPE } from "../../_types";
-import { PLAYER_CONTROLS, PLAYER_STATUS } from "../../../../utils/constants";
+import { formatTime } from "@/utils/helpers/formatTime";
+import { useElapsedTimeProgress } from "@/utils/hooks/useElapsedTimeProgress";
+import { useBufferedAudioProgress } from "@/utils/hooks/useBufferedAudioProgress";
+import { useAudioPlayerEvents } from "@/utils/hooks/useAudioPlayerEvents";
+import { usePlayPauseToggler } from "@/utils/hooks/usePlayPauseToggler";
+import { PLAYER_CONTROLS, PLAYER_STATUS } from "@/utils/constants";
 import {
   handleMouseDown,
-  // handleMouseUp,
   handleScrubberChange,
-} from "../../../../utils/helpers/audioPlayer";
+} from "@/utils/helpers/audioPlayer";
 
-const AudioPlayer = () => {
+import { PLAYER_ACTION_TYPE } from "../../_types";
+import s from "./AudioPlayer.module.css";
+
+export const AudioPlayer = () => {
   const [buffered, setBuffered] = useState(0);
   const [elapsed, setElapsed] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -46,12 +50,11 @@ const AudioPlayer = () => {
     setSelectedTrackIndex,
     setVideoID,
   } = useContext(PlayerContext);
-
   const dispatchPlayerAction = useContext(PlayerDispatchContext);
 
   usePlayPauseToggler(audioPlayerRef, player);
-
   useAudioPlayerEvents(
+    player.isOpened,
     audioPlayerRef,
     setDuration,
     setElapsed,
@@ -98,7 +101,7 @@ const AudioPlayer = () => {
       setSelectedTrackIndex,
       dispatchPlayerAction,
       filteredPieces,
-      player.data.index,
+      player.data?.index,
     ]
   );
 
@@ -115,15 +118,15 @@ const AudioPlayer = () => {
   return (
     <div className={s.player}>
       <div className={s.content}>
-        <Artwork src={player.data.image} />
+        <Artwork src={player.data?.image} />
         <div className={s.playerControls}>
-          <Title>{player.data.name}</Title>
+          <SimpleTitle>{player.data?.name}</SimpleTitle>
           <ControlButtons
             handlePlayPauseClick={handlePlayPauseClick}
             handlePlayNextClick={handlePlayNextClick}
             isAudioPlaying={player.status === PLAYER_STATUS.PLAYING}
           />
-          <div className={s.progressBarContainer} key={player.data.name}>
+          <div className={s.progressBarContainer} key={player.data?.name}>
             <TimeValue> {formatTime(elapsed)}</TimeValue>
 
             <div className={s.progressBar}>
@@ -160,5 +163,3 @@ const AudioPlayer = () => {
     </div>
   );
 };
-
-export default AudioPlayer;

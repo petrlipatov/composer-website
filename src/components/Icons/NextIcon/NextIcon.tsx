@@ -1,14 +1,10 @@
-// import React from "react";
-// import cn from "classnames";
-// import s from "./PauseIcon.module.css";
-
 type Props = {
   className?: string;
   isFilled?: boolean;
   isRotated?: boolean;
 };
 
-const NextIcon = ({
+export const NextIcon = ({
   className,
   isRotated = false,
   isFilled = false,
@@ -30,5 +26,3 @@ const NextIcon = ({
     </svg>
   );
 };
-
-export default NextIcon;

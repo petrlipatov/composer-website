@@ -1,16 +1,15 @@
 import { useState } from "react";
 
-import Logo from "../../components/Logo/Logo";
-import VideoPopup from "../../components/VideoPopup/VideoPopup";
+import { Menu } from "./Sections/Menu";
+import { Page } from "./Sections/Page";
+import { Content } from "./Sections/Content";
+import { BackgroundImages } from "./Sections/BackgroundImages";
 
-import Menu from "./Sections/Menu/Menu";
-import BackgroundImages from "./Sections/BackgroundImages/BackgroundImages";
+import { Logo } from "@/components/Logo";
+import { VideoPopup } from "@/components/VideoPopup";
+import { SHOWREEL_YT_ID } from "@/utils/constants";
 
-import { SHOWREEL_YT_ID } from "../../utils/constants";
-
-import s from "./Home.module.css";
-
-function Home() {
+export default function Home() {
   const [isPopupOpened, setPopupState] = useState(false);
 
   function openPopup() {
@@ -18,8 +17,8 @@ function Home() {
   }
 
   return (
-    <div className={s.page}>
-      <div className={s.content}>
+    <Page>
+      <Content>
         <Logo />
         <Menu openPopup={openPopup} />
         <BackgroundImages />
@@ -30,9 +29,7 @@ function Home() {
             setIsVideoPopupOpened={setPopupState}
           />
         )}
-      </div>
-    </div>
+      </Content>
+    </Page>
   );
 }
-
-export default Home;

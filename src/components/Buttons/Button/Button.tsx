@@ -6,12 +6,10 @@ type Props = {
   className: string;
 };
 
-function Button({ className, onClick, children }: Props) {
+export function Button({ className, onClick, children }: Props) {
   return (
     <button type="button" className={className} onClick={onClick}>
       {children}
     </button>
   );
 }
-
-export default Button;

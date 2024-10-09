@@ -1,29 +1,21 @@
 import { useContext } from "react";
 import cn from "classnames";
 
-import Artwork from "../../../../../components/Project/Artwork/Artwork";
-import Title from "../../../../../components/Project/Title/Title";
-import Description from "../../../../../components/Project/Description/Description";
-
-import Info from "../../../../../components/AudioPlayer/Extended/Info/Info";
-import Scrollbar from "../../../../../components/AudioPlayer/Extended/Scrollbar/Scrollbar";
-import AudioTrack from "../../../../../components/AudioPlayer/Extended/AudioTrack/AudioTrack";
+import { Title, Description, Artwork } from "@/components/Project";
+import { AudioTrack, Scrollbar, Info } from "@/components/AudioPlayer";
 
 import {
   FeaturedWorkContext,
   FeaturedWorkDispatchContext,
-} from "../../../FeaturedWork";
+} from "../../FeaturedWorkContext";
 
 import { ProjectProps } from "../types";
 
 import s from "./DesktopProject.module.css";
-import {
-  FIRST_TRACK_INDEX,
-  PLAYER_STATUS,
-} from "../../../../../utils/constants";
+import { FIRST_TRACK_INDEX, PLAYER_STATUS } from "@/utils/constants";
 import { EXTENDED_PLAYER_ACTION_TYPE } from "../../../_types";
 
-const DesktopProject = ({
+export const DesktopProject = ({
   index: projectIndex,
   data,
   isSelected,
@@ -130,5 +122,3 @@ const DesktopProject = ({
     </div>
   );
 };
-
-export default DesktopProject;

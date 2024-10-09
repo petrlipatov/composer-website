@@ -1,4 +1,4 @@
-const TvIcon = ({ className, isFilled = false }) => {
+export const TvIcon = ({ className, isFilled = false }) => {
   return (
     <svg
       viewBox="1 0 22 18"
@@ -17,5 +17,3 @@ const TvIcon = ({ className, isFilled = false }) => {
     </svg>
   );
 };
-
-export default TvIcon;

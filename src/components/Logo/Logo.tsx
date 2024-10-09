@@ -1,8 +1,8 @@
-import s from "./Logo.module.css";
 import { Link } from "react-router-dom";
 import cn from "classnames";
+import s from "./Logo.module.css";
 
-export default function Logo({ noTitle = false }) {
+export function Logo({ noTitle = false }) {
   return (
     <Link to="/" className={s.titleContainer}>
       <div className={s.name}>Liza Tikhonova</div>

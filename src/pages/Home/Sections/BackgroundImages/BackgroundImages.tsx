@@ -1,8 +1,8 @@
-import useIsMobile from "../../../../utils/hooks/useIsMobile";
+import { useIsMobile } from "@/utils/hooks/useIsMobile";
 import { IMAGES_DESKTOP, IMAGES_MOBILE } from "../../_constants";
 import s from "./BackgroundImages.module.css";
 
-const BackgroundImages = () => {
+export const BackgroundImages = () => {
   const isMobile = useIsMobile();
 
   const images = isMobile ? IMAGES_MOBILE : IMAGES_DESKTOP;
@@ -15,5 +15,3 @@ const BackgroundImages = () => {
     />
   ));
 };
-
-export default BackgroundImages;

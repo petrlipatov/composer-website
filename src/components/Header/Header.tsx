@@ -1,16 +1,16 @@
+import {
+  DesktopNavigationMenu,
+  MobileNavigationMenu,
+} from "@/components/NavigationMenu";
+import { Logo } from "@/components/Logo";
 import s from "./Header.module.css";
-import Logo from "../Logo/Logo";
-import DesktopNavigation from "../NavigationMenu/Desktop/DesktopNavigationMenu";
-import MobileNavigation from "../NavigationMenu/Mobile/MobileNavigationMenu";
 
-function Header({ children }) {
+export function Header({ children }) {
   return (
     <header className={s.header}>
-      <MobileNavigation>{children}</MobileNavigation>
-      <DesktopNavigation>{children}</DesktopNavigation>
+      <DesktopNavigationMenu>{children}</DesktopNavigationMenu>
+      <MobileNavigationMenu>{children}</MobileNavigationMenu>
       <Logo />
     </header>
   );
 }
-
-export default Header;

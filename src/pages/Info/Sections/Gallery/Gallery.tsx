@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 
-import Modal from "../../../../components/Modal/Modal.tsx";
+import Modal from "@/components/Modal/Modal.tsx";
+import LazyImage from "@/components/LazyImage/LazyImage.tsx";
 
+import { useIsMobile } from "@/utils/hooks/useIsMobile.ts";
 import {
   GALLERY_IMAGES,
   GALLERY_IMAGES_COUNT_MOBILE,
@@ -9,10 +11,8 @@ import {
 } from "../../_constants.ts";
 
 import s from "./Gallery.module.css";
-import useIsMobile from "../../../../utils/hooks/useIsMobile.ts";
-import LazyImage from "../../../../components/LazyImage/LazyImage.tsx";
 
-function Gallery() {
+export function Gallery() {
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [imagesSlice, setImagesSlice] = useState<typeof GALLERY_IMAGES>([]);
   const [isPopupOpened, setIsPopupOpened] = useState<boolean>();
@@ -94,5 +94,3 @@ function Gallery() {
     </section>
   );
 }
-
-export default Gallery;

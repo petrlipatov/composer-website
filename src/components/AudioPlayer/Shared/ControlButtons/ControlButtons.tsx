@@ -1,8 +1,6 @@
-import useIsMobile from "../../../../utils/hooks/useIsMobile";
-import PlayIcon from "../../../Icons/PlayIcon/PlayIcon";
-import PauseIcon from "../../../Icons/PauseIcon/PauseIcon";
-import NextIcon from "../../../Icons/NextIcon/NextIcon";
-import { PLAYER_CONTROLS } from "../../../../utils/constants";
+import { useIsMobile } from "@/utils/hooks/useIsMobile";
+import { NextIcon, PauseIcon, PlayIcon } from "@/components/Icons";
+import { PLAYER_CONTROLS } from "@/utils/constants";
 import s from "./ControlButtons.module.css";
 
 type Props = {
@@ -11,7 +9,7 @@ type Props = {
   isAudioPlaying: boolean;
 };
 
-function ControlButtons({
+export function ControlButtons({
   handlePlayPauseClick,
   handlePlayNextClick,
   isAudioPlaying,
@@ -60,5 +58,3 @@ function ControlButtons({
     </div>
   );
 }
-
-export default ControlButtons;

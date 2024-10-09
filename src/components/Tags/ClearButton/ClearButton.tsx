@@ -1,9 +1,6 @@
 import cn from "classnames";
-
-import CloseIcon from "../../Icons/CloseIcon/CloseIcon";
-
-import { DISABLED_COLOR, PRIMARY_ACCENT_COLOR } from "../../../utils/constants";
-
+import { CloseIcon } from "@/components/Icons";
+import { DISABLED_COLOR, PRIMARY_ACCENT_COLOR } from "@/utils/constants";
 import s from "./ClearButton.module.css";
 
 type Props = {
@@ -11,7 +8,7 @@ type Props = {
   handleClearTagsClick: () => void;
 };
 
-function ClearButton({ isDisabled, handleClearTagsClick }: Props) {
+export function ClearButton({ isDisabled, handleClearTagsClick }: Props) {
   const color = isDisabled ? DISABLED_COLOR : PRIMARY_ACCENT_COLOR;
 
   return (
@@ -25,5 +22,3 @@ function ClearButton({ isDisabled, handleClearTagsClick }: Props) {
     </button>
   );
 }
-
-export default ClearButton;

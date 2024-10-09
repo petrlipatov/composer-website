@@ -1,18 +1,16 @@
 import { useCallback, useContext, useMemo, useRef, useState } from "react";
 
-import AudioTrack from "../AudioTrack/AudioTrack";
+import { AudioTrack } from "../AudioTrack";
+import { PlayerContext } from "../PiecesContext/PiecesContext";
 
-import { PlayerContext } from "../../Pieces";
-
-import useElementWidthListener from "../../../../utils/hooks/useWidthResizeListener";
-import useIsMobile from "../../../../utils/hooks/useIsMobile";
-
+import { useWidthResizeListener } from "@/utils/hooks/useWidthResizeListener";
+import { useIsMobile } from "@/utils/hooks/useIsMobile";
 import {
   generateElementsForSingleRow,
   getContentHeight,
   getElementHeight,
   getElementWidth,
-} from "../../../../utils/helpers/virtualizedList";
+} from "@/utils/helpers/virtualizedList";
 
 import {
   TABLE_COLUMNS_MOBILE,
@@ -28,7 +26,7 @@ import {
 
 import s from "./AudioTracks.module.css";
 
-const AudioTracks = () => {
+export const AudioTracks = () => {
   const [sectionWidth, setSectionWidth] = useState(0);
   const [scrollTop, setScrollTop] = useState(0);
 
@@ -37,7 +35,7 @@ const AudioTracks = () => {
 
   const sectionRef = useRef<HTMLDivElement>(null);
 
-  useElementWidthListener(sectionRef, setSectionWidth);
+  useWidthResizeListener(sectionRef, setSectionWidth);
 
   // Determine table configuration based on device type
 
@@ -172,5 +170,3 @@ const AudioTracks = () => {
     </section>
   );
 };
-
-export default AudioTracks;

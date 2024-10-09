@@ -1,21 +1,18 @@
 import { Dispatch, SetStateAction, useContext, useEffect, memo } from "react";
 import cn from "classnames";
 
-import AudioTitle from "./AudioTitle/AudioTitle";
-import { PlayerContext, PlayerDispatchContext } from "../../Pieces";
-import { PLAYER_ACTION_TYPE, trackData } from "../../_types";
+import { TvIcon, HeadphonesIcon } from "@/components/Icons";
+import { HorizontalOverlayButton } from "@/components/Buttons";
 
+import {
+  PlayerContext,
+  PlayerDispatchContext,
+} from "../PiecesContext/PiecesContext";
+import { AudioTitle } from "./AudioTitle/AudioTitle";
+
+import { PLAYER_STATUS } from "@/utils/constants";
+import { PLAYER_ACTION_TYPE, trackData } from "../../_types";
 import s from "./AudioTrack.module.css";
-import TvIcon from "../../../../components/Icons/TvIcon/TvIcon";
-import HeadphonesIcon from "../../../../components/Icons/HeadphonesIcon/HeadphonesIcon";
-import HorizontalOverlayButton from "../../../../components/Buttons/HorizontalOverlayButton/HorizontalOverlayButton";
-import { PLAYER_STATUS } from "../../../../utils/constants";
-// import {
-//   terminatePlayer,
-//   setTrack,
-//   openPlayer,
-//   setPlaying,
-// } from "../../../../utils/helpers/piecesPlayer";
 
 type AudioTrackProps = {
   index: number;
@@ -25,7 +22,7 @@ type AudioTrackProps = {
   setSelectedTrackIndex: Dispatch<SetStateAction<number>>;
 };
 
-const AudioTrack = memo(
+export const AudioTrack = memo(
   ({
     index,
     data,
@@ -123,5 +120,3 @@ const AudioTrack = memo(
     );
   }
 );
-
-export default AudioTrack;

@@ -1,6 +1,6 @@
 import s from "./SoundSpecs.module.css";
 
-function SoundSpecs() {
+export function SoundSpecs() {
   return (
     <section className={s.specs}>
       <div className={""}>
@@ -48,5 +48,3 @@ function SoundSpecs() {
     </section>
   );
 }
-
-export default SoundSpecs;

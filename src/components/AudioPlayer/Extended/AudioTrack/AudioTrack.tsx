@@ -1,8 +1,6 @@
 import { SyntheticEvent, forwardRef } from "react";
 import cn from "classnames";
-
-import Equalizer from "../../../Equalizer/Equalizer";
-
+import { Equalizer } from "@/components/Equalizer";
 import s from "./AudioTrack.module.css";
 
 type Props = {
@@ -17,7 +15,7 @@ type Props = {
   handleTrackClick: (index: number) => void;
 };
 
-const AudioTrack = forwardRef<HTMLDivElement, Props>(
+export const AudioTrack = forwardRef<HTMLDivElement, Props>(
   (
     { index, track, isTrackPlaying, isTrackSelected, handleTrackClick },
     ref
@@ -45,5 +43,3 @@ const AudioTrack = forwardRef<HTMLDivElement, Props>(
     );
   }
 );
-
-export default AudioTrack;

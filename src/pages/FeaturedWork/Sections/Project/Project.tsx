@@ -1,15 +1,13 @@
 import { memo } from "react";
 
-import MobileProject from "./Mobile/MobileProject";
-import DesktopProject from "./Desktop/DesktopProject";
-
-import useIsMobile from "../../../../utils/hooks/useIsMobile";
-
+import { useIsMobile } from "@/utils/hooks/useIsMobile";
+import { MobileProject } from "./Mobile/MobileProject";
+import { DesktopProject } from "./Desktop/DesktopProject";
 import { ProjectProps } from "./types";
 
 import s from "./Project.module.css";
 
-const Project = memo(
+export const Project = memo(
   ({
     index,
     data,
@@ -40,5 +38,3 @@ const Project = memo(
     );
   }
 );
-
-export default Project;

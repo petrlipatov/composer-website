@@ -1,27 +1,22 @@
 import { useEffect, useContext } from "react";
 import cn from "classnames";
 
-import Title from "../../../../../components/Project/Title/Title";
-import Description from "../../../../../components/Project/Description/Description";
-import Artwork from "../../../../../components/Project/Artwork/Artwork";
-import TvIcon from "../../../../../components/Icons/TvIcon/TvIcon";
-import HeadphonesIcon from "../../../../../components/Icons/HeadphonesIcon/HeadphonesIcon";
+import { Title, Description, Artwork } from "@/components/Project";
+import { TvIcon, HeadphonesIcon } from "@/components/Icons";
+import { HorizontalOverlayButton } from "@/components/Buttons";
 
 import {
   FeaturedWorkContext,
   FeaturedWorkDispatchContext,
-} from "../../../FeaturedWork";
+} from "../../FeaturedWorkContext";
 
-import { FIRST_TRACK_INDEX } from "../../../../../utils/constants";
-
+import { FIRST_TRACK_INDEX } from "@/utils/constants";
 import { ProjectProps } from "../types";
-
-import s from "./MobileProject.module.css";
-import HorizontalOverlayButton from "../../../../../components/Buttons/HorizontalOverlayButton/HorizontalOverlayButton";
-
 import { EXTENDED_PLAYER_ACTION_TYPE } from "../../../_types";
 
-const MobileProject = ({
+import s from "./MobileProject.module.css";
+
+export const MobileProject = ({
   index,
   data,
   isSelected,
@@ -91,5 +86,3 @@ const MobileProject = ({
     </>
   );
 };
-
-export default MobileProject;

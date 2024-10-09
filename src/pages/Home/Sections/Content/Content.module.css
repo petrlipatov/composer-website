@@ -1,0 +1,10 @@
+.content {
+  margin-top: 16px;
+  width: 94%;
+}
+
+@media (min-width: 720px) {
+  .content {
+    margin-top: 24px;
+  }
+}

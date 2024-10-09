@@ -1,8 +1,11 @@
-import React from "react";
 import cn from "classnames";
 import s from "./PlayIcon.module.css";
 
-const PlayIcon = ({ isAudioPlaying, customStyles, isFilled = false }) => {
+export const PlayIcon = ({
+  isAudioPlaying,
+  customStyles,
+  isFilled = false,
+}) => {
   return (
     <svg
       viewBox="5 2 14 20"
@@ -20,5 +23,3 @@ const PlayIcon = ({ isAudioPlaying, customStyles, isFilled = false }) => {
     </svg>
   );
 };
-
-export default PlayIcon;

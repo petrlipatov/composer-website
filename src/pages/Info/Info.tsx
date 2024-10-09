@@ -1,14 +1,17 @@
 import { useState } from "react";
 
-import About from "./Sections/About/About";
-import Contacts from "./Sections/Contacts/Contacts";
+import { Content } from "./Sections/Content";
+import { Page } from "./Sections/Page";
+import { About } from "./Sections/About";
+import { Contacts } from "./Sections/Contacts";
+import { Gallery } from "./Sections/Gallery/Gallery";
+import { SoundSpecs } from "./Sections/SoundSpecs/SoundSpecs";
+
+import { Header } from "@/components/Header";
+import { Tag } from "@/components/Tags";
+import { PAGES } from "@/utils/constants";
 
 import s from "./Info.module.css";
-import Gallery from "./Sections/Gallery/Gallery";
-import Header from "../../components/Header/Header";
-import SoundSpecs from "./Sections/SoundSpecs/SoundSpecs";
-import Tag from "../../components/Tags/Tag/Tag";
-import { PAGES } from "../../utils/constants";
 
 enum SECTION_TAGS {
   about,
@@ -21,8 +24,8 @@ function Info() {
   const [selectedTag, setSelectedTag] = useState(SECTION_TAGS.about);
 
   return (
-    <div className={s.page}>
-      <div className={s.content}>
+    <Page>
+      <Content>
         <Header>{PAGES.info}</Header>
 
         <div className={s.tagsSection}>
@@ -61,8 +64,8 @@ function Info() {
         {selectedTag === SECTION_TAGS.specs && <SoundSpecs />}
 
         <div className={s.gallerySection}></div>
-      </div>
-    </div>
+      </Content>
+    </Page>
   );
 }
 

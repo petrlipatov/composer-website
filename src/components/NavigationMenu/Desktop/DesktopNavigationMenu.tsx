@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import s from "./DesktopNavigationMenu.module.css";
 import cn from "classnames";
-import { PAGES } from "../../../utils/constants";
+import { PAGES } from "@/utils/constants";
+import s from "./DesktopNavigationMenu.module.css";
 
-const DesktopNavigationMenu = ({ children }) => {
+export const DesktopNavigationMenu = ({ children }) => {
   let currentPage: PAGES;
 
   switch (children) {
@@ -54,5 +54,3 @@ const DesktopNavigationMenu = ({ children }) => {
     </nav>
   );
 };
-
-export default DesktopNavigationMenu;

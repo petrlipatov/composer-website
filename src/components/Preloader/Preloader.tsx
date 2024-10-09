@@ -1,8 +1,8 @@
-import style from "./Preloader.module.css";
+import s from "./Preloader.module.css";
 
-export default function Preloader({ content }) {
+export function Preloader({ content }) {
   return (
-    <h1 className={style.emoji}>
+    <h1 className={s.emoji}>
       <p>{content}</p>
     </h1>
   );

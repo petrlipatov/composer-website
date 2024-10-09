@@ -1,10 +1,7 @@
 import { PlayerAction, PlayerState } from "../../pages/Pieces/_types";
 import { PLAYER_STATUS } from "../constants";
 
-export default function piecesReducer(
-  state: PlayerState,
-  action: PlayerAction
-) {
+export function piecesReducer(state: PlayerState, action: PlayerAction) {
   switch (action.type) {
     case "AUDIO_PLAYED": {
       return {

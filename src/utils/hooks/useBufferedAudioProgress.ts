@@ -1,6 +1,6 @@
 import { MutableRefObject, useEffect } from "react";
 
-const useBufferedAudioProgress = (
+export const useBufferedAudioProgress = (
   bufferedBarRef: MutableRefObject<HTMLDivElement>,
   buffered: number,
   duration: number,
@@ -28,5 +28,3 @@ const useBufferedAudioProgress = (
     };
   }, [buffered, bufferedBarRef, duration, currentTime]);
 };
-
-export default useBufferedAudioProgress;

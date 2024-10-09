@@ -1,16 +1,25 @@
 import { Dispatch, MutableRefObject, SetStateAction, useEffect } from "react";
 import { updateBufferedAndElapsedTime } from "../helpers/audioPlayer";
-import { PLAYER_ACTION_TYPE, PlayerAction } from "../../pages/Pieces/_types";
+import {
+  PLAYER_ACTION_TYPE,
+  PlayerAction,
+  PlayerState,
+} from "../../pages/Pieces/_types";
+import { ExtendedPlayerAction } from "../../pages/FeaturedWork/_types";
 
-const useAudioPlayerEvents = (
+type PlayerActions = PlayerAction | ExtendedPlayerAction;
+
+export const useAudioPlayerEvents = (
+  isPlayerOpen: boolean,
   audioPlayerRef: MutableRefObject<HTMLAudioElement>,
   setDuration: Dispatch<SetStateAction<number>>,
   setElapsed: Dispatch<SetStateAction<number>>,
   setBuffered: Dispatch<SetStateAction<number>>,
-  dispatchPlayerAction: Dispatch<PlayerAction>
+  dispatchPlayerAction: Dispatch<PlayerActions>
 ) => {
   useEffect(() => {
     const audioPlayer = audioPlayerRef.current;
+
     if (audioPlayer) {
       audioPlayer.onloadedmetadata = () => {
         setElapsed(0);
@@ -26,9 +35,6 @@ const useAudioPlayerEvents = (
         dispatchPlayerAction({ type: PLAYER_ACTION_TYPE.AUDIO_PLAYED });
       audioPlayer.onpause = () =>
         dispatchPlayerAction({ type: PLAYER_ACTION_TYPE.AUDIO_PAUSED });
-      // audioPlayer.onstalled = () => setIsLoading(false);
-      // audioPlayer.onerror = () => setIsLoading(false);
-      // audioPlayer.onended = () => setElapsed(0);
     }
 
     return () => {
@@ -37,18 +43,13 @@ const useAudioPlayerEvents = (
         audioPlayer.ontimeupdate = null;
         audioPlayer.onwaiting = null;
         audioPlayer.onplaying = null;
-        audioPlayer.onstalled = null;
-        audioPlayer.onerror = null;
-        audioPlayer.onended = null;
       }
     };
   }, [
-    audioPlayerRef,
+    isPlayerOpen,
     setDuration,
     setElapsed,
     setBuffered,
     dispatchPlayerAction,
   ]);
 };
-
-export default useAudioPlayerEvents;

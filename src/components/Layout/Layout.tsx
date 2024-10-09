@@ -1,11 +1,11 @@
 import { Outlet } from "react-router-dom";
-import styles from "./Layout.module.css";
 import { useState, useRef, RefObject, createContext } from "react";
-import { useTrackViewportSize } from "../../utils/hooks/useTrackViewportSize";
+import { useTrackViewportSize } from "@/utils/hooks/useTrackViewportSize";
+import s from "./Layout.module.css";
 
 export const ScreenSizeContext = createContext(null);
 
-function Layout() {
+export function Layout() {
   const [screenSize, setScreenSize] = useState({
     height: window.innerHeight,
     width: window.innerWidth,
@@ -17,7 +17,7 @@ function Layout() {
 
   return (
     <div
-      className={styles.layoutContainer}
+      className={s.layout}
       style={{
         height: `${screenSize.height}px`,
         width: `${screenSize.width}px`,
@@ -30,5 +30,3 @@ function Layout() {
     </div>
   );
 }
-
-export default Layout;

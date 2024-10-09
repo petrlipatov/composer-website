@@ -1,19 +1,16 @@
-import { BLACK_COLOR } from "../../../../utils/constants";
-import Button from "../../../Buttons/Button/Button";
-import CloseIcon from "../../../Icons/CloseIcon/CloseIcon";
-
+import { Button } from "@/components/Buttons";
+import { CloseIcon } from "@/components/Icons";
+import { BLACK_COLOR } from "@/utils/constants";
 import s from "./CloseButton.module.css";
 
 type Props = {
   onClick: () => void;
 };
 
-function CloseButton({ onClick }: Props) {
+export function CloseButton({ onClick }: Props) {
   return (
     <Button className={s.closeButton} onClick={onClick}>
       <CloseIcon className={s.closeIcon} color={BLACK_COLOR} />
     </Button>
   );
 }
-
-export default CloseButton;

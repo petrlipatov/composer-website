@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import s from "./Menu.module.css";
 
-const Menu = ({ openPopup }: { openPopup: () => void }) => {
+export const Menu = ({ openPopup }: { openPopup: () => void }) => {
   return (
     <div className={s.nav}>
       <div className={s.link} onClick={openPopup}>
@@ -19,5 +19,3 @@ const Menu = ({ openPopup }: { openPopup: () => void }) => {
     </div>
   );
 };
-
-export default Menu;

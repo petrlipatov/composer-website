@@ -1,6 +1,6 @@
 import s from "./Contacts.module.css";
 
-function Contacts() {
+export function Contacts() {
   return (
     <section className={s.contacts}>
       <button
@@ -87,5 +87,3 @@ function Contacts() {
     </section>
   );
 }
-
-export default Contacts;

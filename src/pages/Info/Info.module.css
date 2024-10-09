@@ -1,21 +1,3 @@
-.page {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-}
-
-.content {
-  margin-top: 16px;
-  display: flex;
-  flex-direction: column;
-  width: 94%;
-  flex-grow: 1;
-  overflow: hidden;
-}
-
 .nav {
   align-items: center;
   display: flex;
@@ -48,10 +30,6 @@
 }
 
 @media (min-width: 720px) {
-  .content {
-    margin-top: 24px;
-  }
-
   .tag {
     font-size: 16px;
   }

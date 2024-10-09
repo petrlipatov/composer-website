@@ -3,16 +3,14 @@ import { useContext } from "react";
 import {
   FeaturedWorkContext,
   FeaturedWorkDispatchContext,
-} from "../../FeaturedWork";
-
+} from "../FeaturedWorkContext";
+import { Tag, ClearButton } from "@/components/Tags";
 import { PROJECTS_GENRES } from "../../_constants";
-
-import s from "./Tags.module.css";
-import Tag from "../../../../components/Tags/Tag/Tag";
-import ClearButton from "../../../../components/Tags/ClearButton/ClearButton";
 import { EXTENDED_PLAYER_ACTION_TYPE } from "../../_types";
 
-function Tags() {
+import s from "./Tags.module.css";
+
+export function Tags() {
   const {
     selectedTags,
     filteredProjects,
@@ -72,5 +70,3 @@ function Tags() {
     </section>
   );
 }
-
-export default Tags;

@@ -1,6 +1,6 @@
+import { ReactNode } from "react";
 import cn from "classnames";
 import s from "./Tag.module.css";
-import { ReactNode } from "react";
 
 type TagProps = {
   children: ReactNode;
@@ -9,7 +9,12 @@ type TagProps = {
   onClick: () => void;
 };
 
-function Tag({ children, isSelected, isDisabled = false, onClick }: TagProps) {
+export function Tag({
+  children,
+  isSelected,
+  isDisabled = false,
+  onClick,
+}: TagProps) {
   return (
     <button
       type="button"
@@ -25,5 +30,3 @@ function Tag({ children, isSelected, isDisabled = false, onClick }: TagProps) {
     </button>
   );
 }
-
-export default Tag;

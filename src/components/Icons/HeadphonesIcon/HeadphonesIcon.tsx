@@ -1,4 +1,4 @@
-const HeadphonesIcon = ({ className, isFilled = false }) => {
+export const HeadphonesIcon = ({ className, isFilled = false }) => {
   return (
     <svg
       viewBox="0 0 24 23"
@@ -16,5 +16,3 @@ const HeadphonesIcon = ({ className, isFilled = false }) => {
     </svg>
   );
 };
-
-export default HeadphonesIcon;

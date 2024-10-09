@@ -1,4 +1,4 @@
-import { Dispatch, MutableRefObject, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { PLAYER_STATUS } from "../../utils/constants";
 
 export type ProjectData = {
@@ -44,9 +44,9 @@ export interface ContextTypes {
   videoID: string;
   selectedTags: string[];
   filteredProjects: ProjectData[];
-  audioPlayerRef: MutableRefObject<HTMLAudioElement>;
   selectedProjectIndex: number;
   player: ExtendedPlayerState;
+  isVideoPopupOpened: boolean;
   setSelectedTags: Dispatch<SetStateAction<string[]>>;
   setVideoID: Dispatch<SetStateAction<string>>;
   setIsVideoPopupOpened: Dispatch<SetStateAction<boolean>>;

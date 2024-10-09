@@ -1,18 +1,16 @@
 import { useCallback, useContext, useMemo, useRef, useState } from "react";
 
-import Project from "../Project/Project";
-
-import useIsMobile from "../../../../utils/hooks/useIsMobile";
-import useWidthResizeListener from "../../../../utils/hooks/useWidthResizeListener";
+import { Project } from "../Project";
+import { FeaturedWorkContext } from "../FeaturedWorkContext";
 
 import {
   generateElementsForSingleRow,
   getContentHeight,
   getElementHeight,
   getElementWidth,
-} from "../../../../utils/helpers/virtualizedList";
-
-import { FeaturedWorkContext } from "../../FeaturedWork";
+} from "@/utils/helpers/virtualizedList";
+import { useIsMobile } from "@/utils/hooks/useIsMobile";
+import { useWidthResizeListener } from "@/utils/hooks/useWidthResizeListener";
 
 import {
   PROJECT_LEFT_MARGIN_MOBILE,
@@ -28,9 +26,8 @@ import {
 } from "../../_constants";
 
 import s from "./Projects.module.css";
-// import PlayIcon from "../../../../components/Icons/PlayIcon/PlayIcon";
 
-export default function Projects() {
+export function Projects() {
   const [sectionWidth, setSectionWidth] = useState(0);
   const [scrollTop, setScrollTop] = useState(0);
 

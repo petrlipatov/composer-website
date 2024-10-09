@@ -1,8 +1,8 @@
-import useIsMobile from "../../../../utils/hooks/useIsMobile";
+import { useIsMobile } from "@/utils/hooks/useIsMobile";
 import DesktopAudioPlayer from "./Desktop/DesktopAudioPlayer";
 import MobileAudioPlayer from "./Mobile/MobileAudioPlayer";
 
-function AudioPlayer() {
+export function AudioPlayer() {
   const isMobile = useIsMobile();
 
   if (isMobile === null) {
@@ -11,5 +11,3 @@ function AudioPlayer() {
 
   return isMobile ? <MobileAudioPlayer /> : <DesktopAudioPlayer />;
 }
-
-export default AudioPlayer;

@@ -1,8 +1,8 @@
-import { createPortal } from "react-dom";
-import s from "./Modal.module.css";
 import { Dispatch, SetStateAction, ReactNode, SyntheticEvent } from "react";
-import CloseIcon from "../Icons/CloseIcon/CloseIcon";
-import { PRIMARY_ACCENT_COLOR } from "../../utils/constants";
+import { createPortal } from "react-dom";
+import { CloseIcon } from "@/components/Icons";
+import { PRIMARY_ACCENT_COLOR } from "@/utils/constants";
+import s from "./Modal.module.css";
 
 type ModalProps = {
   setPopupState: Dispatch<SetStateAction<boolean>>;

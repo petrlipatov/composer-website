@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, Suspense, lazy } from "react";
 
 import Modal from "../Modal/Modal";
-import Preloader from "../Preloader/Preloader";
+import { Preloader } from "../Preloader/Preloader";
 
 const YouTubePlayer = lazy(() => import("./YoutubePlayer/YoutubePlayer"));
 
@@ -10,7 +10,7 @@ type Props = {
   setIsVideoPopupOpened: Dispatch<SetStateAction<boolean>>;
 };
 
-function VideoPopup({ videoID, setIsVideoPopupOpened }: Props) {
+export function VideoPopup({ videoID, setIsVideoPopupOpened }: Props) {
   return (
     <Modal setPopupState={setIsVideoPopupOpened}>
       <Suspense fallback={<Preloader content={"🐥"} />}>
@@ -19,5 +19,3 @@ function VideoPopup({ videoID, setIsVideoPopupOpened }: Props) {
     </Modal>
   );
 }
-
-export default VideoPopup;

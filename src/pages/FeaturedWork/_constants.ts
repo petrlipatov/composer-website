@@ -1,4 +1,4 @@
-import { MutableRefObject } from "react";
+// import { MutableRefObject } from "react";
 import { ContextTypes } from "./_types";
 import { PLAYER_STATUS, SHOWREEL_YT_ID } from "../../utils/constants";
 
@@ -386,11 +386,11 @@ export const DEFAULT_CONTEXT: ContextTypes = {
     isOpened: false,
   },
   filteredProjects: [],
-  audioPlayerRef: {
-    current: null,
-  } as MutableRefObject<HTMLAudioElement | null>,
+  // audioPlayerRef: {
+  //   current: null,
+  // } as MutableRefObject<HTMLAudioElement | null>,
   selectedProjectIndex: null,
-
+  isVideoPopupOpened: false,
   setSelectedTags: () => {},
   setVideoID: () => {},
   setIsVideoPopupOpened: () => {},

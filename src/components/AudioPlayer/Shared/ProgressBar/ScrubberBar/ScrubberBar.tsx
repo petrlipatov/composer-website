@@ -1,6 +1,6 @@
 import { ChangeEvent, forwardRef } from "react";
+import { TRANSITION } from "@/utils/constants";
 import s from "./ScrubberBar.module.css";
-import { TRANSITION } from "../../../../../utils/constants";
 
 type Props = {
   elapsedTime: number;
@@ -11,7 +11,7 @@ type Props = {
   progressTransitionAnimation: boolean;
 };
 
-const Scrubber = forwardRef<HTMLInputElement, Props>(
+export const ScrubberBar = forwardRef<HTMLInputElement, Props>(
   (
     {
       progressTransitionAnimation,
@@ -45,5 +45,3 @@ const Scrubber = forwardRef<HTMLInputElement, Props>(
     );
   }
 );
-
-export default Scrubber;

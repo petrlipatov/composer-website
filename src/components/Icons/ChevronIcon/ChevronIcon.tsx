@@ -3,7 +3,7 @@ interface Props {
   className?: string;
 }
 
-const ChevronIcon = ({ className, isFilled = false }: Props) => {
+export const ChevronIcon = ({ className, isFilled = false }: Props) => {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -19,5 +19,3 @@ const ChevronIcon = ({ className, isFilled = false }: Props) => {
     </svg>
   );
 };
-
-export default ChevronIcon;

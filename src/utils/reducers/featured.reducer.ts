@@ -6,7 +6,7 @@ import {
 } from "../../pages/FeaturedWork/_types";
 import { PLAYER_STATUS } from "../constants";
 
-export default function featuredReducer(
+export function featuredReducer(
   state: ExtendedPlayerState,
   action: ExtendedPlayerAction
 ) {
