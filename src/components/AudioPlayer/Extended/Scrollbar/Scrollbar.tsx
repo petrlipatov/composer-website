@@ -7,7 +7,6 @@ import {
 } from "react";
 import cn from "classnames";
 import { throttle } from "../../../../utils/helpers/throttle";
-
 import { ChevronIcon } from "@/components/Icons";
 import s from "./Scrollbar.module.css";
 

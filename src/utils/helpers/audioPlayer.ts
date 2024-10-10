@@ -33,10 +33,6 @@ export const handleScrubberChange = async (
   if (audioPlayerRef.current) {
     audioPlayerRef.current.currentTime = newTime;
   }
-
-  await new Promise((resolve) => requestAnimationFrame(resolve));
-
-  progressBarTransitionSetter(true);
 };
 
 export const handleMouseDown = (
@@ -45,10 +41,10 @@ export const handleMouseDown = (
   progressBarTransitionSetter(false);
 };
 
-// export const handleMouseUp = (
-//   progressBarTransitionSetter: Dispatch<SetStateAction<boolean>>
-// ) => {
-//   requestAnimationFrame(() => {
-//     progressBarTransitionSetter(true);
-//   });
-// };
+export const handleMouseUp = (
+  progressBarTransitionSetter: Dispatch<SetStateAction<boolean>>
+) => {
+  requestAnimationFrame(() => {
+    progressBarTransitionSetter(true);
+  });
+};

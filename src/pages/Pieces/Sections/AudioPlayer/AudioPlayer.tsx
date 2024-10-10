@@ -26,6 +26,7 @@ import { usePlayPauseToggler } from "@/utils/hooks/usePlayPauseToggler";
 import { PLAYER_CONTROLS, PLAYER_STATUS } from "@/utils/constants";
 import {
   handleMouseDown,
+  handleMouseUp,
   handleScrubberChange,
 } from "@/utils/helpers/audioPlayer";
 
@@ -137,9 +138,9 @@ export const AudioPlayer = () => {
                 elapsedTime={elapsed}
                 duration={duration}
                 onScrubberChange={onScrubberChange}
-                // onMouseUp={() => {
-                //   handleMouseUp(setIsTransitionOnProgressBar);
-                // }}
+                onMouseUp={() => {
+                  handleMouseUp(setIsTransitionOnProgressBar);
+                }}
                 onMouseDown={() => {
                   handleMouseDown(setIsTransitionOnProgressBar);
                 }}
