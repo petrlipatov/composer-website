@@ -1,20 +1,12 @@
 import { useState } from "react";
 
+import { Tags } from "./Sections/Tags/Tags";
 import { Content } from "./Sections/Content";
 import { Page } from "./Sections/Page";
-import { About } from "./Sections/About";
-import { Contacts } from "./Sections/Contacts";
-import { Gallery } from "./Sections/Gallery/Gallery";
-import { SoundSpecs } from "./Sections/SoundSpecs/SoundSpecs";
-
+import { SectionsRouter } from "./Sections/SectionsRouter";
 import { Header } from "@/components/Header";
-import { Tag } from "@/components/Tags";
 import { PAGES } from "@/utils/constants";
 import { SECTION_TAGS } from "./_constants";
-
-import s from "./Info.module.css";
-import { Tags } from "./Sections/Tags/Tags";
-import { SectionsRouter } from "./Sections/SectionsRouter/SectionsRouter";
 
 function Info() {
   const [selectedTag, setSelectedTag] = useState(SECTION_TAGS.about);
