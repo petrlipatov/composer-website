@@ -15,11 +15,12 @@ export function updateBufferedAndElapsedTime(
     if (currentTime <= bufferedEndTime) {
       setBuffered(bufferedEndTime);
       setElapsed(currentTime);
-    } else {
-      audioPlayer.currentTime = bufferedEndTime;
-      setElapsed(bufferedEndTime);
-      setBuffered(bufferedEndTime);
     }
+    // else {
+    //   audioPlayer.currentTime = bufferedEndTime;
+    //   setElapsed(bufferedEndTime);
+    //   setBuffered(bufferedEndTime);
+    // }
   }
 }
 
