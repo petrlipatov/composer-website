@@ -25,8 +25,8 @@ import { useAudioPlayerEvents } from "@/utils/hooks/useAudioPlayerEvents";
 import { usePlayPauseToggler } from "@/utils/hooks/usePlayPauseToggler";
 import { PLAYER_CONTROLS, PLAYER_STATUS } from "@/utils/constants";
 import {
-  handleMouseDown,
-  handleMouseUp,
+  // handleMouseDown,
+  // handleMouseUp,
   handleScrubberChange,
 } from "@/utils/helpers/audioPlayer";
 
@@ -67,7 +67,7 @@ export const AudioPlayer = () => {
   useBufferedAudioProgress(bufferedBarRef, buffered, duration, elapsed);
 
   const onScrubberChange = useCallback((e) => {
-    handleScrubberChange(e, audioPlayerRef, setIsTransitionOnProgressBar);
+    handleScrubberChange(e, audioPlayerRef);
   }, []);
 
   const handlePlayPauseClick = useCallback(() => {
@@ -138,12 +138,12 @@ export const AudioPlayer = () => {
                 elapsedTime={elapsed}
                 duration={duration}
                 onScrubberChange={onScrubberChange}
-                onMouseUp={() => {
-                  handleMouseUp(setIsTransitionOnProgressBar);
-                }}
-                onMouseDown={() => {
-                  handleMouseDown(setIsTransitionOnProgressBar);
-                }}
+                // onMouseUp={() => {
+                //   handleMouseUp(setIsTransitionOnProgressBar);
+                // }}
+                // onMouseDown={() => {
+                //   handleMouseDown(setIsTransitionOnProgressBar);
+                // }}
                 progressTransitionAnimation={isTransitionOnProgressBar}
                 ref={progressBarRef}
               />

@@ -16,18 +16,12 @@ export function updateBufferedAndElapsedTime(
       setBuffered(bufferedEndTime);
       setElapsed(currentTime);
     }
-    // else {
-    //   audioPlayer.currentTime = bufferedEndTime;
-    //   setElapsed(bufferedEndTime);
-    //   setBuffered(bufferedEndTime);
-    // }
   }
 }
 
 export const handleScrubberChange = async (
   e,
-  audioPlayerRef: MutableRefObject<HTMLAudioElement>,
-  progressBarTransitionSetter
+  audioPlayerRef: MutableRefObject<HTMLAudioElement>
 ) => {
   const newTime = e.target.value;
 
@@ -36,16 +30,16 @@ export const handleScrubberChange = async (
   }
 };
 
-export const handleMouseDown = (
-  progressBarTransitionSetter: Dispatch<SetStateAction<boolean>>
-) => {
-  progressBarTransitionSetter(false);
-};
+// export const handleMouseDown = (
+//   progressBarTransitionSetter: Dispatch<SetStateAction<boolean>>
+// ) => {
+//   progressBarTransitionSetter(false);
+// };
 
-export const handleMouseUp = (
-  progressBarTransitionSetter: Dispatch<SetStateAction<boolean>>
-) => {
-  requestAnimationFrame(() => {
-    progressBarTransitionSetter(true);
-  });
-};
+// export const handleMouseUp = (
+//   progressBarTransitionSetter: Dispatch<SetStateAction<boolean>>
+// ) => {
+//   requestAnimationFrame(() => {
+//     progressBarTransitionSetter(true);
+//   });
+// };

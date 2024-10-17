@@ -6,19 +6,19 @@ type Props = {
   elapsedTime: number;
   duration: number;
   onScrubberChange?: (e: ChangeEvent<HTMLInputElement>) => void;
-  onMouseDown?: () => void;
-  onMouseUp?: (e) => void;
+  // onMouseDown?: () => void;
+  // onMouseUp?: (e) => void;
   progressTransitionAnimation: boolean;
 };
 
 export const ScrubberBar = forwardRef<HTMLInputElement, Props>(
   (
     {
-      progressTransitionAnimation,
+      // progressTransitionAnimation,
       elapsedTime,
       duration,
-      onMouseDown,
-      onMouseUp,
+      // onMouseDown,
+      // onMouseUp,
       onScrubberChange,
     },
     ref
@@ -31,10 +31,10 @@ export const ScrubberBar = forwardRef<HTMLInputElement, Props>(
         min={0}
         max={duration}
         onInput={onScrubberChange}
-        onMouseDown={onMouseDown}
-        onTouchStart={onMouseDown}
-        onMouseUp={onMouseUp}
-        onTouchEnd={onMouseUp}
+        // onMouseDown={onMouseDown}
+        // onTouchStart={onMouseDown}
+        // onMouseUp={onMouseUp}
+        // onTouchEnd={onMouseUp}
         ref={ref}
         // style={{
         //   transition: progressTransitionAnimation
