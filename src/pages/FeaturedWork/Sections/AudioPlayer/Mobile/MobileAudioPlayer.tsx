@@ -28,10 +28,7 @@ import { useElapsedTimeProgress } from "@/utils/hooks/useElapsedTimeProgress";
 import { useBufferedAudioProgress } from "@/utils/hooks/useBufferedAudioProgress";
 import { useScrollSelectedTrackIntoView } from "@/utils/hooks/useScrollSelectedTrackIntoView";
 import { usePlayPauseToggler } from "@/utils/hooks/usePlayPauseToggler";
-import {
-  handleMouseDown,
-  handleScrubberChange,
-} from "@/utils/helpers/audioPlayer";
+import { handleScrubberChange } from "@/utils/helpers/audioPlayer";
 
 import { EXTENDED_PLAYER_ACTION_TYPE } from "../../../_types";
 import s from "./MobileAudioPlayer.module.css";
@@ -75,7 +72,7 @@ const MobileAudioPlayer = () => {
   );
 
   const onScrubberChange = useCallback((e) => {
-    handleScrubberChange(e, audioPlayerRef, setIsTransitionOnProgressBar);
+    handleScrubberChange(e, audioPlayerRef);
   }, []);
 
   const isTrackPlaying = (i) => {
@@ -172,9 +169,9 @@ const MobileAudioPlayer = () => {
               // onMouseUp={() => {
               //   handleMouseUp(setIsTransitionOnProgressBar);
               // }}
-              onMouseDown={() => {
-                handleMouseDown(setIsTransitionOnProgressBar);
-              }}
+              // onMouseDown={() => {
+              //   handleMouseDown(setIsTransitionOnProgressBar);
+              // }}
               progressTransitionAnimation={isTransitionProgressBar}
               ref={progressBarRef}
             />
