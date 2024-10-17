@@ -36,11 +36,11 @@ export const ScrubberBar = forwardRef<HTMLInputElement, Props>(
         onMouseUp={onMouseUp}
         onTouchEnd={onMouseUp}
         ref={ref}
-        style={{
-          transition: progressTransitionAnimation
-            ? TRANSITION.smooth
-            : TRANSITION.none,
-        }}
+        // style={{
+        //   transition: progressTransitionAnimation
+        //     ? TRANSITION.smooth
+        //     : TRANSITION.none,
+        // }}
       />
     );
   }
