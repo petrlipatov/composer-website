@@ -32,7 +32,7 @@ export function Gallery() {
 
   const pagesCount = Math.ceil(GALLERY_IMAGES.length / imagesCount);
 
-  const goToPreviousPage = () => {
+  const goToPrevPage = () => {
     if (pageNumber > 1) {
       setPageNumber((prevPageNumber) => prevPageNumber - 1);
     }
@@ -55,12 +55,11 @@ export function Gallery() {
         {imagesSlice.map((el) => (
           <div
             className={s.container}
-            key={el.image}
-            onClick={() => handleImageClick(el.image, el.desc)}
+            key={el.hires}
+            onClick={() => handleImageClick(el.hires, el.desc)}
           >
-            {/* <img className={s.image} src={el.image} /> */}
             <LazyImage
-              src={el.image}
+              src={el.lowres}
               containerClassName={s.imageContainer}
               className={s.image}
               alt={"album image"}
@@ -70,7 +69,7 @@ export function Gallery() {
         ))}
       </div>
       <div className={s.pagesCountContainer}>
-        <button className={s.button} onClick={goToPreviousPage}>
+        <button className={s.button} onClick={goToPrevPage}>
           &lt;
         </button>
         <div className={s.pagesCount}>{`${pageNumber} / ${Math.ceil(
@@ -83,12 +82,10 @@ export function Gallery() {
 
       {isPopupOpened && (
         <Modal setPopupState={setIsPopupOpened}>
-          {/* <Suspense fallback={<Preloader content={"🐥"} />}> */}
           <div>
             <img className={s.popupImage} src={selectedImage.img} />
             <div className={s.popupCaption}>{selectedImage.desc}</div>
           </div>
-          {/* </Suspense> */}
         </Modal>
       )}
     </section>
