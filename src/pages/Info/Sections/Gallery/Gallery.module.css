@@ -1,6 +1,6 @@
 .gallery {
   flex-grow: 1;
-  margin-top: 20px;
+  margin-top: 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
