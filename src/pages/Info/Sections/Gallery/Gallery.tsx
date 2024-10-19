@@ -82,7 +82,7 @@ export function Gallery() {
 
       {isPopupOpened && (
         <Modal setPopupState={setIsPopupOpened}>
-          <div>
+          <div className={s.popupImageContainer}>
             <img className={s.popupImage} src={selectedImage.img} />
             <div className={s.popupCaption}>{selectedImage.desc}</div>
           </div>

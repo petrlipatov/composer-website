@@ -71,6 +71,20 @@
   height: auto;
 }
 
+.popupCaption {
+  padding-left: 4px;
+}
+
+@media (min-width: 720px) {
+  .popupImage {
+    width: auto;
+    max-height: 640px;
+  }
+  .popupCaption {
+    padding-left: 0;
+  }
+}
+
 @media (min-width: 1280px) {
   .gallery {
     width: 900px;
