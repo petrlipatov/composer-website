@@ -16,7 +16,7 @@ export function Gallery() {
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [imagesSlice, setImagesSlice] = useState<typeof GALLERY_IMAGES>([]);
   const [isPopupOpened, setIsPopupOpened] = useState<boolean>();
-  const [selectedImage, setSelectedImage] = useState({ img: "", desc: "" });
+  const [selectedImageIndex, setSelectedImageIndex] = useState<number>(null);
 
   const isMobile = useIsMobile();
 
@@ -44,19 +44,40 @@ export function Gallery() {
     }
   };
 
-  const handleImageClick = (img, desc) => {
-    setSelectedImage({ img, desc });
+  const handleImageClick = (index: number) => {
+    setSelectedImageIndex(index);
     setIsPopupOpened(true);
+  };
+
+  let touchStartX = 0;
+
+  const handleTouchStart = (e) => {
+    touchStartX = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e) => {
+    const touchEndX = e.changedTouches[0].clientX;
+    const distance = touchStartX - touchEndX;
+
+    if (distance > 50) {
+      selectedImageIndex < GALLERY_IMAGES.length - 1
+        ? setSelectedImageIndex(selectedImageIndex + 1)
+        : setSelectedImageIndex(0);
+    } else if (distance < -50) {
+      selectedImageIndex > 0
+        ? setSelectedImageIndex(selectedImageIndex - 1)
+        : setSelectedImageIndex(GALLERY_IMAGES.length - 1);
+    }
   };
 
   return (
     <section className={s.gallery}>
       <div className={s.imagesGrid}>
-        {imagesSlice.map((el) => (
+        {imagesSlice.map((el, i) => (
           <div
             className={s.container}
             key={el.hires}
-            onClick={() => handleImageClick(el.hires, el.desc)}
+            onClick={() => handleImageClick(i)}
           >
             <LazyImage
               src={el.lowres}
@@ -82,9 +103,18 @@ export function Gallery() {
 
       {isPopupOpened && (
         <Modal setPopupState={setIsPopupOpened}>
-          <div className={s.popupImageContainer}>
-            <img className={s.popupImage} src={selectedImage.img} />
-            <div className={s.popupCaption}>{selectedImage.desc}</div>
+          <div
+            className={s.popupImageContainer}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+          >
+            <img
+              className={s.popupImage}
+              src={GALLERY_IMAGES[selectedImageIndex].hires}
+            />
+            <div className={s.popupCaption}>
+              {GALLERY_IMAGES[selectedImageIndex].desc}
+            </div>
           </div>
         </Modal>
       )}
