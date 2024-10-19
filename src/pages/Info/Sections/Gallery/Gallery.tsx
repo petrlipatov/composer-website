@@ -70,6 +70,13 @@ export function Gallery() {
     }
   };
 
+  const handlePopupImageClick = (e) => {
+    e.stopPropagation();
+    selectedImageIndex < GALLERY_IMAGES.length - 1
+      ? setSelectedImageIndex(selectedImageIndex + 1)
+      : setSelectedImageIndex(0);
+  };
+
   return (
     <section className={s.gallery}>
       <div className={s.imagesGrid}>
@@ -111,6 +118,7 @@ export function Gallery() {
             <img
               className={s.popupImage}
               src={GALLERY_IMAGES[selectedImageIndex].hires}
+              onClick={handlePopupImageClick}
             />
             <div className={s.popupCaption}>
               {GALLERY_IMAGES[selectedImageIndex].desc}
