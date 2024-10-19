@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 
+import { ChevronIcon } from "@/components/Icons/index.ts";
 import Modal from "@/components/Modal/Modal.tsx";
-import LazyImage from "@/components/LazyImage/LazyImage.tsx";
+import { ImagesGrid } from "./ImagesGrid/ImagesGrid.tsx";
 
 import { useIsMobile } from "@/utils/hooks/useIsMobile.ts";
 import {
@@ -79,32 +80,20 @@ export function Gallery() {
 
   return (
     <section className={s.gallery}>
-      <div className={s.imagesGrid}>
-        {imagesSlice.map((el, i) => (
-          <div
-            className={s.container}
-            key={el.hires}
-            onClick={() => handleImageClick(i)}
-          >
-            <LazyImage
-              src={el.lowres}
-              containerClassName={s.imageContainer}
-              className={s.image}
-              alt={"album image"}
-            />
-            <div className={s.caption}>{el.desc}</div>
-          </div>
-        ))}
-      </div>
+      <ImagesGrid
+        handleImageClick={handleImageClick}
+        imagesSlice={imagesSlice}
+      />
+
       <div className={s.pagesCountContainer}>
         <button className={s.button} onClick={goToPrevPage}>
-          &lt;
+          <ChevronIcon className={s.chevron} />
         </button>
-        <div className={s.pagesCount}>{`${pageNumber} / ${Math.ceil(
-          pagesCount
-        )}`}</div>
+        <div className={s.pagesCount}>
+          {`${pageNumber} / ${Math.ceil(pagesCount)}`}
+        </div>
         <button className={s.button} onClick={goToNextPage}>
-          &gt;
+          <ChevronIcon className={`${s.chevron} ${s.chevronRight}`} />
         </button>
       </div>
 
