@@ -37,11 +37,12 @@
 
 .linkButton {
   all: unset;
-  padding: 8px;
-  padding-top: 14px;
-  padding-bottom: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-weight: 600;
   font-size: 12px;
+  line-height: 12px;
   flex-grow: 1;
   text-align: center;
   cursor: pointer;

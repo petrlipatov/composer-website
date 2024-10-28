@@ -23,7 +23,6 @@ function Modal({ setPopupState, children }: ModalProps) {
         <button className={s.closeButton} onClick={handlePopupClick}>
           <CloseIcon color={PRIMARY_ACCENT_COLOR} />
         </button>
-
         {children}
       </div>
     </div>,

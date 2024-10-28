@@ -62,7 +62,6 @@ export function About() {
             href={YOUTUBE_LINK}
             className={s.linkButton}
             style={{ backgroundColor: "#FF0101" }}
-            target="_blank"
           >
             YouTube
           </a>
