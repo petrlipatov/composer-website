@@ -1,21 +1,30 @@
 .tracks {
+  width: 100%;
   position: relative;
   margin-top: 24px;
   overflow-y: scroll;
+  display: flex;
+  justify-content: center;
 }
 
 @media (min-width: 1280px) {
   .tracks {
-    width: 900px;
-    justify-self: center;
     margin-top: 48px;
+  }
+
+  .tracksContainer {
+    width: 900px;
   }
 }
 
 @media (min-width: 1440px) {
-  .tracks {
+  .tracksContainer {
     width: 1000px;
-    justify-self: center;
-    margin-top: 48px;
+  }
+}
+
+@media (min-width: 1700px) {
+  .tracksContainer {
+    width: 1200px;
   }
 }

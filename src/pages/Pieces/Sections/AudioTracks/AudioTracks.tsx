@@ -158,12 +158,13 @@ export const AudioTracks = () => {
   }
 
   return (
-    <section className={s.tracks} onScroll={onScroll} ref={sectionRef}>
+    <section className={s.tracks} onScroll={onScroll}>
       <div
         className={s.tracksContainer}
         style={{
           height: `${contentHeight}px`,
         }}
+        ref={sectionRef}
       >
         {displayedTracks}
       </div>

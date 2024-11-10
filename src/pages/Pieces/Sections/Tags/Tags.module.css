@@ -23,6 +23,11 @@
 @media (min-width: 1440px) {
   .tags {
     width: 1000px;
-    margin-top: 48px;
+  }
+}
+
+@media (min-width: 1700px) {
+  .tags {
+    width: 1200px;
   }
 }
