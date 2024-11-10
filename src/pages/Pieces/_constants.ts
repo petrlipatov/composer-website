@@ -43,6 +43,27 @@ export const PIECES = [
     video: "7Xg8likIl5k",
   },
   {
+    name: "Death And Stuff",
+    tags: ["Lyrics", "Piano", "Smooth", "Vibrant"],
+    image: "/images/pieces/death-and-stuff.webp",
+    audio: "/audio/death-and-stuff.mp3",
+    video: SHOWREEL_YT_ID,
+  },
+  {
+    name: "Dumb Go Down",
+    tags: ["Lyrics", "Piano", "Smooth", "Vibrant"],
+    image: "/images/pieces/dumb-go-down.webp",
+    audio: "/audio/dumb-go-down.mp3",
+    video: SHOWREEL_YT_ID,
+  },
+  {
+    name: "Eldorado",
+    tags: ["Lyrics", "Piano", "Smooth", "Vibrant"],
+    image: "/images/pieces/eldorado.webp",
+    audio: "/audio/eldorado.mp3",
+    video: SHOWREEL_YT_ID,
+  },
+  {
     name: "Everyman's Thoughts",
     tags: ["No lyrics", "Misty", "Smooth", "Piano"],
     image: "/images/pieces/everymans-thoughts.webp",
@@ -55,13 +76,6 @@ export const PIECES = [
     image: "/images/pieces/full-of-wondering.webp",
     audio: "/audio/full-of-wodering.mp3",
     video: SHOWREEL_YT_ID,
-  },
-  {
-    name: "Functional",
-    tags: ["Electronic", "Lyrics", "Eccentric", "Intense", "Vibrant", "Dark"],
-    image: "/images/pieces/functional.webp",
-    audio: "/audio/functional.mp3",
-    video: "-AgpIzB6b0A",
   },
   {
     name: "Going Far Away",
@@ -97,6 +111,13 @@ export const PIECES = [
     image: "/images/pieces/piano-play.webp",
     audio: "/audio/piano-play.mp3",
     video: SHOWREEL_YT_ID,
+  },
+  {
+    name: "Places",
+    tags: ["No lyrics", "Intense", "Dark", "Misty", "Piano", "Orchestral"],
+    image: "/images/pieces/places.webp",
+    audio: "/audio/places.mp3",
+    video: "9u8eCQSS-qk",
   },
   {
     name: "Plavno",
@@ -144,6 +165,13 @@ export const PIECES = [
     image: "/images/pieces/pulse.webp",
     audio: "/audio/pulse.mp3",
     video: "2gngOKKHxFs",
+  },
+  {
+    name: "Rain And Wind",
+    tags: ["No lyrics", "Intense", "Dark", "Misty", "Piano", "Orchestral"],
+    image: "/images/pieces/rain-and-wind.webp",
+    audio: "/audio/rain-and-wind.mp3",
+    video: SHOWREEL_YT_ID,
   },
   {
     name: "Revival Of The Unknown",
