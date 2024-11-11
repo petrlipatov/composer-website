@@ -2,12 +2,12 @@
   position: relative;
   margin-top: 24px;
   overflow-y: scroll;
-  display: flex;
-  justify-content: center;
 }
 
 @media (min-width: 1280px) {
   .tracks {
+    display: flex;
+    justify-content: center;
     margin-top: 48px;
   }
 
