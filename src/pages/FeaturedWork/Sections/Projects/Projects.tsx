@@ -173,15 +173,15 @@ export function Projects() {
     <section
       className={s.projects}
       onScroll={handleScroll}
-      ref={sectionRef}
       style={isMobile && player.isOpened ? { display: "none" } : {}}
     >
       <div
-        className={s.contentContainer}
+        className={s.projectsContainer}
         style={{
           position: "relative",
           height: `${contentHeight}px`,
         }}
+        ref={sectionRef}
       >
         {displayedProjects}
       </div>

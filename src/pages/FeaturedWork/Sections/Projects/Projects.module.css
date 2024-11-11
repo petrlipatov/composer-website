@@ -1,20 +1,33 @@
 .projects {
   overflow-y: scroll;
-  width: 100%;
   flex-grow: 1;
   position: relative;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.projects::-webkit-scrollbar {
+  display: none;
 }
 
 @media (min-width: 1080px) {
   .projects {
+    margin-top: 48px;
+  }
+  .projectsContainer {
     width: 900px;
     justify-self: center;
-    margin-top: 32px;
   }
 }
 
 @media (min-width: 1440px) {
-  .projects {
+  .projectsContainer {
     width: 1000px;
+  }
+}
+
+@media (min-width: 1700px) {
+  .projectsContainer {
+    width: 1200px;
   }
 }

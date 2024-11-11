@@ -2,6 +2,12 @@
   position: relative;
   margin-top: 24px;
   overflow-y: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.tracks::-webkit-scrollbar {
+  display: none;
 }
 
 @media (min-width: 1280px) {

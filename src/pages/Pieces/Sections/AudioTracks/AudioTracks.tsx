@@ -33,9 +33,9 @@ export const AudioTracks = () => {
   const { filteredPieces, selectedTrackIndex, setSelectedTrackIndex } =
     useContext(PlayerContext);
 
-  const sectionRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  useWidthResizeListener(sectionRef, setSectionWidth);
+  useWidthResizeListener(containerRef, setSectionWidth);
 
   // Determine table configuration based on device type
 
@@ -164,7 +164,7 @@ export const AudioTracks = () => {
         style={{
           height: `${contentHeight}px`,
         }}
-        ref={sectionRef}
+        ref={containerRef}
       >
         {displayedTracks}
       </div>

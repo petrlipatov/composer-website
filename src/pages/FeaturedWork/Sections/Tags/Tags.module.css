@@ -30,3 +30,9 @@
     width: 1000px;
   }
 }
+
+@media (min-width: 1700px) {
+  .tags {
+    width: 1200px;
+  }
+}
